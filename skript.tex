@@ -1336,7 +1336,42 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     Weitere Eigenschaften der Fouriertransformation:
 
     \begin{enumerate}[label = \roman *)]
-        \item 1
+        \item $f \in L^1(\R^d) \Rightarrow \hat f$ stetig und $\underset{\abs{z} \to \infty}{lim} \hat f(z) = 0$
+        \item $\mathcal F: L^1(\R^d) \to C(\R^d)$ ist eine lineare Abbildung
+        \item $\mathcal F: L^1(\R^d) \to C(\R^d)$ ist eine beschränkte/stetige Abbildung
+        \item Verschiebung $\overset{\mathcal F}{\to}$ Modulation, d.h.
+        \begin{equation*}
+            g(x) = f(x+a) \Rightarrow \hat g(z) = e^{i \skprod{a}{z}} \hat f(z)
+        \end{equation*}
+        \item Modulation $\overset{\mathcal F}{\to}$ Verschiebung, d.h.
+        \begin{equation*}
+            g(x) = e^{i \skprod{x}{a}} f(x) \Rightarrow \hat g(z)= \hat f(z-a)
+        \end{equation*}
+        \item Skalierung $\overset{\mathcal F}{\to}$ inverse Skalierung, d.h.
+        \begin{equation*}
+            g(x)=f(cx) \Rightarrow \hat g(z) = \frac{1}{\abs c} \hat f(\frac{z}{\abs c})
+        \end{equation*}
+        \item Konjugation: $g(x) = \overline{f(x)} \Rightarrow \hat g(z) = \overline{\hat f (-z)}$\\
+        Folglich: $f$ reelwertig $\Rightarrow \hat f(z) = \overline{\hat f(-z)}$
+        \item
+        \begin{align*}
+            \text{Grundmode:} \ & \displaystyle \hat f(0) = \frac{1}{(2 \pi )^\frac{d}{2}} \int_{\R^d} f(x) dx\\
+            \text{Analog:} \ & \displaystyle f(0) = \frac{1}{(2 \pi )^\frac{d}{2}} \int_{\R^d} \hat f(x) dx
+        \end{align*}
+        \item Differentation $\overset{\mathcal F}{\to}$ Multiplikation mit Potenzen von z, d.h.
+        \begin{equation*}
+            g(x) = \frac{\partial^{\alpha_1 + \cdots + \alpha_d}}{\partial x_1^{\alpha_1} \cdots \partial x_d^{\alpha_d}} f(x) \Rightarrow \hat g(z) = i^{\alpha_1 + \cdots + \alpha_d} z_1^{\alpha_1} \cdots z_d^{\alpha_d} \hat f(z)
+        \end{equation*}
+        \item Unkehrung des letzten Punktes:
+        \begin{equation*}
+            g(x) = x_1^{\alpha_1} \cdots x_d^{\alpha_d} f(x) \Rightarrow \hat g(z) = i^{\alpha_1 + \cdots + \alpha_d}  \frac{\partial^{\alpha_1 + \cdots + \alpha_d}}{\partial x_1^{\alpha_1}} \hat f(z)
+        \end{equation*}
+        \item
+        \begin{align*}
+            \text{Faltungssatz:} \  & \mathcal F(f*g) = (2 \pi)^{\frac{d}{2}} \mathcal F(f) \cdot \mathcal F(g), \ \widehat{f*g}=(2 \pi)^{\frac{d}{2}} \hat f \cdot \hat g\\
+            \text{Analog:} \ & \mathcal F (f \cdot g) = \frac{1}{(2 \pi)^{\frac{d}{2}}} \mathcal F(f) * \mathcal F(g), \ \widehat{f \cdot g} = \frac{1}{(2\pi)^{\frac{d}{2}}} \hat f * \hat g
+        \end{align*}
+        d.h.: Faltung $\overset{\mathcal F}{\to}$ Multiplikation und umgekehrt
     \end{enumerate}
 
 
