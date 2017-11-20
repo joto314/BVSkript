@@ -149,7 +149,8 @@ breakatwhitespace=true,
 tabsize=3}
 
 %Font
-\usepackage{cmbright}
+%\usepackage{tgadventor}
+\renewcommand*\rmdefault{cmss}
 \makeindex
 
 \begin{document}
@@ -457,7 +458,7 @@ tabsize=3}
         \end{center}
 
         Zusammenhang zum vorherigen: $\displaystyle \mathcal H_u(A) = \sum_{k \in A} H_u(k)$.
-        Man sagt dann, dass $U_u$ eine \mim{Dichte} zum Maß $\mathcal H_u$ sei. Diese kann auch in kontinueirlichen existieren:
+        Man sagt dann, dass $U_u$ eine \mim{Dichte} zum Maß $\mathcal H_u$ sei. Diese kann auch im kontinuierlichen existieren:
 
         \begin{center}
             \begin{tikzpicture}
@@ -496,8 +497,8 @@ tabsize=3}
 
         \pa{1. Idee, Kontrastdehnung:}\\
         $T$ ''lineare'' Abbildung, so dass $T(k_{min})=0$ und $T(k_{max})=N$:
-        \[T(k) = \frac{k - k_{min}}{k_max} N \text{, Kontinuierlicher Farbraum}\]
-        \[T(k) = \left[\frac{k - k_{min}}{k_max} N \right] \text{, Diskreter Farbraum}\]
+        \[T(k) = \frac{k - k_{min}}{k_{max} - k_{min}} N \text{, Kontinuierlicher Farbraum}\]
+        \[T(k) = \left[\frac{k - k_{min}}{k_{max} - k_{min}} N \right] \text{, Diskreter Farbraum}\]
 
         \underline{Beispiel:}
 
@@ -551,12 +552,12 @@ tabsize=3}
             \end{center}
         $T$ lässt sich auch alternativ ausdrücken durch:
         \[ T(k)=\left[ \mathcal H_u(\{0,...,k\}) \right] \]
-        Und somit folg dass für den kontinueirlichen Fall $T$ durch
+        Und somit folgt dass für den kontinuierlichen Fall $T$ durch
         \[ T(k) = \frac{N}{\abs{\Omega}} \mathcal H_u((0,k))\]
-        definiert werden kann. Allgemein heißt der Prozess \mim{Histogramm - equalisation}.
+        definiert werden kann. Allgemein heißt der Prozess \mim{Histogramm - equalization}.
     \subsection{Anwendung: SW-Konvertierung}
         Aufgabe: Graustufenbild $\to$ SW-Bild.\\
-        Nüzlich etwa bei Objekterkennung/Segmentierung.
+        Nützlich etwa bei Objekterkennung/Segmentierung.
 
         Idee: Das Histogramm an einem gewissen \mim{Schwellenwert} $t$ spalten:
 
@@ -733,7 +734,7 @@ imshow(I2);
 
         Es ist schnell zu erkennen das $A \neq (A+B)-B$, deshalb wird eine neue Operation eingeführt:
         \[A \bullet B := (A+B)-B\]
-        Dieses wird \mim{schließen} gennant und wird etwa genutzt um Löcher, z.b. Rauschen, in einem Bild zu entfernen. Im Beispiel Bild ist zu sehen, dass das obere Fenster nicht mehr vorhanden ist.
+        Dieses wird \mim{schließen} genannt und wird etwa genutzt um Löcher, z.b. Rauschen, in einem Bild zu entfernen. Im Beispiel Bild ist zu sehen, dass das obere Fenster nicht mehr vorhanden ist.
         \begin{center}
             \begin{tikzpicture}
                 \draw (0,0) node[left] {$A \bullet B=$} node[right] {\includegraphics[scale = 0.2]{Bild1close.png}};
@@ -751,7 +752,7 @@ imshow(I3);
 
         Es existiert auch die Umgekehrt Operation:
         \[ A \circ B := (A-B)+B\]
-        Diese wird \mim{öffnen} gennant.
+        Diese wird \mim{öffnen} genannt.
 
         Diesmal mit einem neuen Beispiel:
 
@@ -1090,7 +1091,7 @@ imshow(I3);
     $\forall f \in L^1 : d * f = f$\\
     $\forall x \in \R :\displaystyle \int_{\R^d} \underbrace{\delta(x-y)}_{=0 \forall x \neq y} f(y) dy = f(x)$
 
-    Diese Funktion wird \mim{Dirac-Impuls} gennant ist aber kein Element von $L^1$.
+    Diese Funktion wird \mim{Dirac-Impuls} genannt ist aber kein Element von $L^1$.
 
     \pa{Nun zu Masken in 2D:}
 
@@ -1245,7 +1246,7 @@ imshow(I3);
 
     Man hat also $\mathcal F^{-1} \mathcal F f$, d.h.
 
-    \[f(x) = \frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} (\frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} f(y) e^{-i \skprod{z}{y}} dy) e^{i \skprod{z}{x}} dz\]
+    \[f(x) = \frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} \left(\frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} f(y) e^{-i \skprod{z}{y}} dy\right) e^{i \skprod{z}{x}} dz\]
 
     Sei nun $e_z(x) := e^{i \skprod{z}{x}}, \ x \in \R^d$ mit Parameter
 $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
@@ -1319,7 +1320,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         \item ein Skalarproduktraum mit $\displaystyle \skprod{f}{g} := \int_{\R^d} f \bar g dx$, wobei $\norm{f}_2^2=\skprod{f}{f}$
         \item ein vollständiger Raum, also \mim{Banachraum}
     \end{enumerate}
-    Ein vollständiger normierter Banachraum mit Skalarproduk heißt \mim{Hilbertraum}.
+    Ein vollständiger normierter Banachraum mit Skalarprodukt heißt \mim{Hilbertraum}.
 
     $\mathcal F$ kann auch als Abbildung auf $L^2(\R^d)$ betrachtet werden. Dann gilt:\\
     \[\hat f = \mathcal F f \in L^2(\R^d)\]
@@ -1358,11 +1359,11 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             \text{Grundmode:} \ & \displaystyle \hat f(0) = \frac{1}{(2 \pi )^\frac{d}{2}} \int_{\R^d} f(x) dx\\
             \text{Analog:} \ & \displaystyle f(0) = \frac{1}{(2 \pi )^\frac{d}{2}} \int_{\R^d} \hat f(x) dx
         \end{align*}
-        \item Differentation $\overset{\mathcal F}{\to}$ Multiplikation mit Potenzen von z, d.h.
+        \item Differentiation $\overset{\mathcal F}{\to}$ Multiplikation mit Potenzen von z, d.h.
         \begin{equation*}
             g(x) = \frac{\partial^{\alpha_1 + \cdots + \alpha_d}}{\partial x_1^{\alpha_1} \cdots \partial x_d^{\alpha_d}} f(x) \Rightarrow \hat g(z) = i^{\alpha_1 + \cdots + \alpha_d} z_1^{\alpha_1} \cdots z_d^{\alpha_d} \hat f(z)
         \end{equation*}
-        \item Unkehrung des letzten Punktes:
+        \item Umkehrung des letzten Punktes:
         \begin{equation*}
             g(x) = x_1^{\alpha_1} \cdots x_d^{\alpha_d} f(x) \Rightarrow \hat g(z) = i^{\alpha_1 + \cdots + \alpha_d}  \frac{\partial^{\alpha_1 + \cdots + \alpha_d}}{\partial x_1^{\alpha_1}} \hat f(z)
         \end{equation*}
@@ -1483,7 +1484,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         = & \underbrace{ \left(\frac{1}{2 \pi} \int_{-r}^r e^{i z_1 x_1} dz_1\right) }_{\frac{1}{\pi x_1} sin(\pi x_1)} \underbrace{ \left( \frac{1}{2 \pi} \int_{-r}^r e^{iz_2 x_2} dz_2 \right)}_{\frac{1}{\pi x_2} sin(\pi x_2)}\\
     \end{align*}
 
-    Es ist zu bemerken, dass $g$ eine Art Tensor Struktur besitzt, was in etwa bedeutet das sich die Funktion in belibigen Dimensionen als Produkt der Funktion in einer Dimensionen darstellen lässt.
+    Es ist zu bemerken, dass $g$ eine Art Tensor Struktur besitzt, was in etwa bedeutet das sich die Funktion in beliebigen Dimensionen als Produkt der Funktion in einer Dimensionen darstellen lässt.
 
     \mim{Gauß-Kern}:
     \begin{align*}
@@ -1493,6 +1494,111 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
 
     \subsection{Filterbreite und Glättung}
 
+    \begin{center}
+        \begin{tikzpicture}
+            \foreach \i in {0,...,4}
+                \foreach \j in {0,...,4}
+                    \draw (0.5*\i + 0.25,0.5*\j + 0.25) node[] {\small 1};
+            \draw[step = 0.5] (0,0) grid (2.5,2.5);
+            \draw (0,1.25) node[left] {klar ist: $\frac{1}{25}$};
+            \draw (3,1.25) node[right] {'glättet mehr als': $\frac{1}{9}$};
+            \draw[step = 0.5, shift = {(6.5,0.5)}] (0,0) grid (1.5,1.5);
+            \foreach \i in {0,...,2}
+                \foreach \j in {0,...,2}
+                    \draw (0.5*\i + 6.75,0.5*\j + 0.75) node[] {\small 1};
+        \end{tikzpicture}
+    \end{center}
+
+    Im Kontinuierlichen: Sei $m \in L^1(\R^d)$ und $s > 0$.
+    Setze 
+        $$ m_s(x) := \frac{1}{s^d} m (\frac{x}{s}), \quad x\in \R^d$$
+    
+    Bsp (in $d =1 $):
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[->] (-2.2,0) -- (2.2,0) node[right] {\small x};
+            \draw[->] (0,-0.1) -- (0,2.2) node[above] {\small y};
+            \draw (-2,0.1) -- (-2,-0.1) node[below] {\small $-1$};
+            \draw (2,0.1) -- (2,-0.1) node[below] {\small $-1$};
+            \draw (0.1,2) -- (-0.1,2) node[left] {\small $1$};
+            \draw[thick] (-2,0) -- (0,2) -- (2,0);
+            \draw (1.2,1.2) node[rotate = -45] {\small $y=m(x)$};
+            \draw[->] (3.8,0) -- (12.2,0) node[right] {\small x};
+            \draw[->] (8,-0.1) -- (8,1.2) node[above] {\small y};
+            \draw (4,0.1) -- (4,-0.1) node[below] {\small $-1$};
+            \draw (2,0.1) -- (2,-0.1) node[below] {\small $-1$};
+            \draw (8.1,1) -- (7.9,1) node[left, xshift = -9, yshift = 4] {\small $\frac{1}{2}$};
+            \draw[thick] (4,0) -- (8,1) --(12,0);
+            \draw (10,0.8) node[rotate = -12.5] {\small $y=m(x)$};
+            \draw[->,double] (2,1.5) -- node[above] {\small $s=2$} (4,1.5);
+        \end{tikzpicture}
+    \end{center}
+    
+    Bsp: Gauß-Kern $G(x) = \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-\abs{x}^2}{2}}$\\
+    Skalierung mit Faktor $s > 0$
+    $$ \Rightarrow G_s(x) = \frac{1}{s^d} G\left( \frac {x} {s} \right) = \frac{1}{s^d} \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-\abs{x}}{2}} = \frac{1}{(2 \pi s^2)^{\frac{d}{2}}} e^{\frac{-\abs{x}^2}{2s^2}}$$
+
+    Skalierung $s \hat = $ Standardabweichung $\sigma$:
+
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[scale=1,domain=-2.5:2.5,smooth,variable=\x]  plot ({\x},{(e^((-(\x)^2)/2)});
+            \draw[scale=1,domain=-2.5:2.5,smooth,variable=\x,shift={(6,0)}]  plot ({\x},{(1/(2*pi)^(1/2))*e^((-(\x)^2)/2)});
+            \draw[->,double] (2.5,0.5) -- (3.5,0.5);
+        \end{tikzpicture}
+    \end{center}
+
+    \subsection{Differenzenfilter}
+
+    Bisher: Glättung $\widehat =$ Mittelwert bilden $\widehat =$ Summe/Integrale\\
+    Jetzt: Schärfen $\widehat =$ Differenzen/Kontraste hervorheben $\widehat =$ Differenzen/Ableitungen\\
+
+    \mtitle{Diskretisierung von Ableitungen durch Differenzenquotienten}
+    \ \\
+    \begin{minipage}[c]{0.25\linewidth}
+        \begin{center}
+            \begin{tikzpicture}
+                
+                \draw[scale=1,domain=-0.75:1.5,smooth,variable=\x]  plot ({\x},{(\x * \x)});
+                \draw[] (-1,-0.3) -- (2,-0.3);
+                \draw[dotted] (-0.5,-0.3) node[] {\small \textbullet} node[below] {\small $x_{k-1}$} -- (-0.5,0.25) node[] {\small \textbullet};
+                \draw[dotted] (0.25,-0.3) node[] {\small \textbullet} node[below] {\small $x_{k}$} -- (0.25,0.0125) node[] {\small \textbullet};
+                \draw[dotted] (1,-0.3) node[] {\small \textbullet} node[below] {\small $x_{k+1}$} -- (1,1) node[] {\small \textbullet};
+                \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (-0.5,-0.7) -- node[below] {\small $h$} (0.25,-0.7);
+                \draw[dotted] (1,-0.3) node[] {\small \textbullet} node[below] {\small $x_{k+1}$} -- (1,1) node[] {\small \textbullet};
+                \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (0.25,-0.7) -- node[below] {\small $h$} (1,-0.7);
+            \end{tikzpicture}
+        \end{center}
+    \end{minipage}
+    \hfill\vrule\hfill
+    \begin{minipage}[c]{0.4\linewidth}
+        (hier bedeutet $f(k) = f(x_k)$)\\
+        Vorwärts: $\displaystyle u(h)= \frac{f(k+1) - f(k)}{h}$
+        Rückwärts: $\displaystyle u(h)= \frac{f(k) - f(k-1)}{h}$
+        Zentral: $\displaystyle u(h)= \frac{f(k+1) - f(k-1)}{2h}$
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{0.3\linewidth}
+        \ \\
+        $u=\displaystyle \frac{1}{h}\begin{tabular}{|c|c|c|}
+            \hline
+            0 & -1 & 1\\
+            \hline
+        \end{tabular} \boxast f$\\
+        \ \\
+        $u=\displaystyle \frac{1}{h}\begin{tabular}{|c|c|c|}
+            \hline
+            0 & -1 & 1\\
+            \hline
+        \end{tabular} \boxast f$\\
+        \ \\
+        $u=\displaystyle \frac{1}{2h}\begin{tabular}{|c|c|c|}
+            \hline
+            0 & -1 & 1\\
+            \hline
+            \end{tabular} \boxast f$\\
+    \end{minipage}
+    \ \\
 
 
     \printindex
