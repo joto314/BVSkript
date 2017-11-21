@@ -1781,7 +1781,60 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \begin{equation}\label{eq:5.12}
         \frac{\partial u}{\partial t} = \Delta u
     \end{equation}
-    Bekannt als \mim{Wärmegleichung} oder \mim{Diffusionsgleichung}
+    Bekannt als \mim{Wärmegleichung} oder \mim{Diffusionsgleichung}.\\
+    Zum Zeitpunkt $t=0$ möge die Anfangsbedingung
+    \begin{equation}\label{eq:5.13}
+        u(x,0)=u^{(0)}=f(x)
+    \end{equation}
+    gelten. Vorranschreiten der Zeit $t$ repräsentiert Diffusion.\\
+    Für einen stationären Zustand, also keine Änderung $\frac{\partial u}{\partial t}$ dann muss auch $\Delta u =0$ gelten.\\
+    Diese wird unteranderem von konstanten Funktionen oder linearen Funktionen $u(x_1,x_2) = ax_1 + bx_2$ erfüllt.\\
+    \ \\
+    Es existiert auch einen explizite Formel für die Lösung der Diffusionsgleichung \eqref{eq:5.12} mit Anfangsbedingung \eqref{eq:5.13}:
+    \[u(x,t) = \left( G_{\sqrt{2t}} * u^{(0)} \right)(x)\]
+    Wobei $\sqrt{2t}$ für eine Skalierung um diesen Wert steht.\\
+    Zu zeigen ist: $\displaystyle \frac{\partial u}{\partial t} = \Delta u$
+    \[\frac{\partial}{\partial t}  \left( G_{\sqrt{2t}} * u^{(0)} \right) = \Delta  \left( G_{\sqrt{2t}} * u^{(0)} \right)\]
+    \[\overset{\text{mit Satz}}{\Longrightarrow}  \left( \frac{\partial}{\partial t} G_{\sqrt{2t}} \right)* u^{(0)} =  \left( \Delta G_{\sqrt{2t}} \right) * u^{(0)}\]
+    Es bleibt somit z.z.: $\frac{\partial}{\partial t} G_{\sqrt{2t}} = \Delta G_{\sqrt{2t}}$.
+
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,1.5) node[left] {$t=0$:};
+            \draw (0,0) -- (3,0) node[below] {\small a} -- (3,1) -- (4,1) -- (4,0) node[below] {\small b} -- (7,0);
+            \draw (0,-2) node[left] {$t>0$:};
+            \draw[shift={(0,-3.5)}] plot [smooth, tension = 0.1] coordinates {(0,0) (2.95,0.05) (3.05,1) (3.95,1) (4.05,0.05) (7,0)};
+        \end{tikzpicture}
+    \end{center}
+    Bemerkenswert ist das, für $t=0$ die Funktion nicht stetig ist, aber für alle $t>0$ die Funktion beliebig oft differenzierbar ist.\\
+    \ \\
+    Insgesamt lässt sich die Idee darstellen als:
+
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[->] (0,0) node[left] {\small kontinueirlich:} -- (10,0) node[right] {\small t};
+
+            \draw (1,-0.5) rectangle (2,-1.5);
+            \draw (1.5,-1) node {\large $u^{(0)}$};
+            \draw (1.5,-1.5) node[below] {\small $u(\cdot,0)$};
+            \draw[->] (1.5,-2) -- (1.5,-2.5) -- node[above] {\small $G_{\sqrt{2t}}*$} (8.5,-2.5) -- (8.5,-2);
+            \draw (8,-0.5) rectangle (9,-1.5);
+            \draw (8.5,-1.5) node[below] {\small $u(\cdot,t)$};
+
+            \draw (0,-4) node[left] {\small diskret:};
+            \draw (1,-4) rectangle (2,-5);
+            \draw (1.5,-4.5) node[] {\large $u^{(0)}$};
+            \draw[->] (2.1,-4.5) -- node[above] {\small $m \boxast$} (2.9,-4.5);
+            \draw[shift={(2,0)}] (1,-4) rectangle (2,-5);
+            \draw[shift={(2,0)}] (1.5,-4.5) node[] {\large $u^{(1)}$};
+            \draw[->,shift={(2,0)}] (2.1,-4.5) -- node[above] {\small $m \boxast$} (2.9,-4.5);
+            \draw (6,-4.5) node[] {\LARGE ...};
+
+            \draw[shift={(7,0)}] (1,-4) rectangle (2,-5);
+            \draw[shift={(7,0)}] (1.5,-4.5) node[] {\large $u^{(n)}$};
+            \draw[->,shift={(5,0)}] (2.1,-4.5) -- node[above] {\small $m \boxast$} (2.9,-4.5);
+        \end{tikzpicture}
+    \end{center}
 
     \printindex
 
