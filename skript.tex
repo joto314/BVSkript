@@ -125,6 +125,13 @@
     \draw[thick] (#1-0.1,#3) -- (#1+0.1,#3);
 }
 
+\newcommand{\filter}[1] {
+\begin{tabular}{|c|c|c|}
+    \hline
+    #1\\
+    \hline
+\end{tabular}
+}
 
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -1600,6 +1607,181 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \end{minipage}
     \ \\
 
+    \mtitle{2. Abbleitung:}
+
+    \begin{align*}
+        u(h) \approx & \frac{f'(k+1) - f'(k)}{h} \text{(vorwärts)}\\
+        \approx & \frac{\frac{f(k+1) - f(k)}{h} - \frac{f(k) - f(k-1)}{h}}{h} \text{(rückwärts)} \\
+        = & \frac{f(k+1) -2 f(k) + f(k+1)}{h^2}
+    \end{align*}
+
+    Also folgt $\displaystyle u:=\begin{tabular}{|c|c|c|}
+        \hline
+        1 & -2 & 1\\
+        \hline
+        \end{tabular} \boxast f$ und $\displaystyle \frac{1}{h^2}\begin{tabular}{|c|c|c|}
+            \hline
+            1 & -2 & 1\\
+            \hline
+            \end{tabular} = \frac{1}{h}\begin{tabular}{|c|c|c|}
+                \hline
+                0 & -1 & 1\\
+                \hline
+                \end{tabular} * \frac{1}{h}\begin{tabular}{|c|c|c|}
+                    \hline
+                    -1 & 1 & 0\\
+                    \hline
+                    \end{tabular}$\\
+    Denn:
+
+    \begin{align*}
+         & \frac{1}{h} \filter{-1 & 1 & 0}\\
+        =& \frac{1}{h} \filter{0 & 1 & -1} * \left(\frac{1}{h} \filter{1 & -1 & 0} * f\right)\\
+        =& \left(\frac{1}{h} \filter{ 0 & 1 & -1} * \frac{1}{h} \filter{1 & -1 & 0}\right)*f\\
+        =& \left(\frac{1}{h} \filter{ -1 & 1 & 0} \boxast \frac{1}{h} \filter{1 & -1 & 0}\right)*f\\
+        =& \frac{1}{h^2} \filter{1 & -2 & 1} * f \\
+        =&\frac{1}{h^2} \filter{1 & -2 & 1} \boxast f 
+    \end{align*}
+
+    In 2D: $\displaystyle \frac{\partial}{\partial x} \widehat = \ \begin{tabular}{|c|c|c|}
+        \hline
+        0 & -1 & 1\\
+        \hline
+    \end{tabular}, \ \frac{\partial}{\partial y} \widehat = \begin{tabular}{|c|}
+        \hline
+        0\\
+        \hline
+        -1\\
+        \hline
+        1\\
+        \hline
+    \end{tabular}, \ \frac{\partial^2}{\partial x^2} \widehat = \begin{tabular}{|c|c|c|}
+        \hline
+        1 & -2 & 1\\
+        \hline
+    \end{tabular}, \ \frac{\partial^2}{\partial y^2} \widehat = \begin{tabular}{|c|}
+        \hline
+        1\\
+        \hline
+        -2\\
+        \hline
+        1\\
+        \hline
+    \end{tabular}$.\\
+    \ \\
+    \mim{Diskreter Laplace Operator}:
+    \[\Delta = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} \widehat = \ \begin{tabular}{|c|c|c|}
+        \hline
+        1 & -2 & 1\\
+        \hline
+    \end{tabular} + \begin{tabular}{|c|}
+        \hline
+        1\\
+        \hline
+        -2\\
+        \hline
+        1\\
+        \hline
+    \end{tabular} = \begin{tabular}{|c|c|c|}
+        \hline
+         0 & 1 & 0\\
+        \hline
+        1 & -4 & 1\\
+        \hline
+         0 & 1 & 0\\
+        \hline
+    \end{tabular}\]
+
+    \subsection{Glättungsfilter und partielle Differentialgleichungen}
+
+    Wir haben gesehen: $\displaystyle m = \frac{1}{5}\begin{tabular}{|c|c|c|}
+        \hline
+        0 & 1 & 0\\
+        \hline
+        1 & 1 & 1\\
+        \hline
+        0 & 1 & 0\\
+        \hline
+    \end{tabular}$ ist unter allen 5-Punkt Filtern der am besten glättende.\\
+    Idee: Rauschen weiter verringern indem man $m \boxast$ wiederholt anwendet $\Rightarrow$ Folge von Bildern:\\
+    
+    \begin{center}
+        \begin{tikzpicture}
+            \draw (0,0) rectangle (1,1);
+            \draw (0.5,0.5) node {\small $f$};
+            \draw (0.5,0.2) node {\tiny $:= u ^{(0)}$};
+            \draw[->] (1.1,0.5) -- node[above] {\small $m \boxast$}(1.9,0.5);
+            \draw (2,0) rectangle (3,1);
+            \draw (2.5,0.5) node {\small $u^{(1)}$};
+            \draw[->] (3.1,0.5) -- node[above] {\small $m \boxast$}(3.9,0.5);
+            \draw (4,0) rectangle (5,1);
+            \draw (4.5,0.5) node {\small $u^{(2)}$};
+            \draw (5,0.5) node[right] {\LARGE ...};
+        \end{tikzpicture}
+    \end{center}
+    
+    \begin{align*}
+        \Rightarrow u^{(n+1)} - u^{(n)} & = \text{(Unterschied zwischen 'Zeit' Punkt $n$ und $n+1$)}\\
+        &= \underbrace{m \boxast u^{(n)}}_{u^{n+1}} - \underbrace{\delta \boxast u^{(n)}}_{u^{(n)}} \text{mit } \delta = \begin{tabular}{|c|c|c|}
+            \hline
+            0 & 0 & 0\\
+            \hline
+            0 & 1 & 0\\
+            \hline
+            0 & 0 & 0\\
+            \hline
+        \end{tabular}\\
+        &=(m - \delta) \boxast u^{(n)}\\
+        &=\left( \frac{1}{5}\begin{tabular}{|c|c|c|}
+            \hline
+            0 & 1 & 0\\
+            \hline
+            1 & 1 & 1\\
+            \hline
+            0 & 1 & 0\\
+            \hline
+        \end{tabular} - \frac{1}{5} \begin{tabular}{|c|c|c|}
+            \hline
+            0 & 0 & 0\\
+            \hline
+            0 & 5 & 0\\
+            \hline
+            0 & 0 & 0\\
+            \hline
+        \end{tabular}\right) \boxast u^{(n)}\\
+        &= \frac{1}{5} \begin{tabular}{|c|c|c|}
+            \hline
+            0 & 1 & 0\\
+            \hline
+            1 & -4 & 1\\
+            \hline
+            0 & 1 & 0\\
+            \hline
+        \end{tabular} u^{(n)}
+    \end{align*}
+
+    Somit gilt insgesamt:
+
+    \begin{equation}\label{eq:5.11}
+        \underbrace{u^{(n+1)} - u^{(n)}}_{\widehat = \frac{\partial u}{\partial t}} = \underbrace{\frac{1}{5} \begin{tabular}{|c|c|c|}
+            \hline
+            0 & 1 & 0\\
+            \hline
+            1 & -4 & 1\\
+            \hline
+            0 & 1 & 0\\
+            \hline
+        \end{tabular}}_{\widehat = \Delta u}
+    \end{equation}
+
+    Kontinuierlich: Funktion $u$
+    \[u(x,t) \quad x \in \R^2, \ t \text{ Zeit} \]
+
+    \eqref{eq:5.11} ist eine Diskretisierung (1 Zeitschritt im Eulerverfahren) der partiellen Differentialgleichungen
+    \begin{equation}\label{eq:5.12}
+        \frac{\partial u}{\partial t} = \Delta u
+    \end{equation}
+    Bekannt als \mim{Wärmegleichung} oder \mim{Diffusionsgleichung}
 
     \printindex
 
