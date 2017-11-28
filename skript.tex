@@ -1834,7 +1834,122 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             \draw[shift={(7,0)}] (1.5,-4.5) node[] {\large $u^{(n)}$};
             \draw[->,shift={(5,0)}] (2.1,-4.5) -- node[above] {\small $m \boxast$} (2.9,-4.5);
         \end{tikzpicture}
-    \end{center}
+      \end{center}
+ 
+
+      % TODO ???
+
+      \subsection{Isotrope und anisoptrope Diffusion}
+
+      
+      Wir haben gesehen: Glättung/Diffusion verringert Rauschen.\\
+      Aber: Auch Kanten/Details werden verwischt.\\
+      Ausweg: Diffusion steuern, so dass sie an Kanten (also Stellen mit großer Änderungsrate) weniger stark glättet.\\
+      
+      Der Plan lautet also:
+      \[\nabla u = \norm{\srmatrix{\frac{\partial u}{\partial x}\\ \frac{\partial u}{\partial y}}}^2 = \begin{cases}
+          \text{groß} & \Rightarrow \text{wenig Diffusion}\\
+          \text{klein} & \Rightarrow \text{Diffusion normal}
+      \end{cases}\]
+
+      Diffusionsgleichung:
+
+      \begin{equation}
+          \frac{\partial u}{\partial t} = \Delta u = \frac{\partial}{\partial x} \frac{\partial}{\partial x} u + \frac{\partial}{\partial y} \frac{\partial}{\partial y} u = \underbrace{\srmatrix{ \frac{\partial }{\partial x } \frac{\partial}{\partial y}}}_{div} \srmatrix{\frac{\partial}{\partial x} u \\ \frac{\partial}{\partial y} u} = div(\nabla u)
+      \end{equation}
+
+      Um diese Gleichung zu regulieren setzen wir einen \mim{Diffusionstensor} $M$ in die Gleichung in.
+
+      \[\Delta u = div(M \nabla u) = div(\srmatrix{* & * \\ * & *} \nabla u)\]
+
+      Ansätze für $M$:
+
+      \begin{enumerate}[label=\alph*)]
+          \item $M=I=\srmatrix{1 & 0 \\ 0 & 1} \Rightarrow$ übliche Diffusion
+          \item $M=g(\norm{\nabla u(x,y)}) * I$
+          \begin{center}
+              \begin{tikzpicture}
+                  \draw[shift={(-0.75,0.75)}] (0,0) node[left] {$\displaystyle g_\kappa(s) = \frac{1}{1+\left(\frac{s}{\kappa}\right)^2}$};
+                  \draw[scale=1.5,domain=0:3,smooth,variable=\x] plot ({\x},{(1/(1+\x*\x)});
+                  \draw (0,1.5) node[left] {\small 1};
+                  \draw[->] (0,-0.5) -- (0,2);
+                  \draw[->] (0,0) -- (5,0) node[right] {\small $s$};
+                  \draw[dotted] (1.5,0) node [below] {\small $\kappa$} -- (1.5,0.75);
+                  \draw[dotted] (0,0.75) node[left] {\small $\frac{1}{2}$} -- (1.5,0.75);
+              \end{tikzpicture}
+          \end{center}
+          Diese Methode geht zurück auf Perona \& Malik.
+          \begin{enumerate}[label=\textbullet]
+              \item Kanten mit $\norm{\nabla u} < \kappa$ werden mehr geglättet
+              \item Kanten mit $\norm{\nabla u} \geq \kappa$ werden weniger geglättet
+          \end{enumerate}
+          Diese Art der Glättung ist \mim{Isotrop} $\widehat = $ in alle Richtungen gleich starker Fluss.
+          \item M= $\begin{pmatrix}
+              g(\abs{\frac{\partial u}{\partial x}(x,y)}) & 0 \\
+              0 & g(\abs{\frac{\partial u}{\partial y}(x,y)}) 
+          \end{pmatrix}$\\
+          Diese art der Diffusionstensoren ist \mim{anisoptrop} also richtungsabhängig.\\
+          \ \\
+          \underline{\textbf{Im Diskreten Fall}} gilt:\\
+          \newcommand{\x}[0] {
+            \boldsymbol{x} 
+            }
+          Für $\x \in \Z^2$ und $\x_W = \x + \srmatrix{-1 \\ 0}$ usw.\\
+          \begin{center}
+              \begin{tikzpicture}
+                  \draw (0,0) rectangle node[] {$\x$} (0.5,0.5);
+                  \draw[->] (0.25,0.5) -- ++(0,1);
+                  \draw (0,1.5) rectangle node[] {$\x_N$} (0.5,2);
+                  \draw[->] (0.25,0) -- ++(0,-1);
+                  \draw (0,-1) rectangle node[] {$\x_S$} (0.5,-1.5);
+                  \draw[->] (0.5,0.25) -- ++(1,0);
+                  \draw (1.5,0) rectangle node[] {$\x_O$} (2,0.5);
+                  \draw[->] (0,0.25) -- ++(-1,0);
+                  \draw (-1,0) rectangle node[] {$\x_W$} (-1.5,0.5);
+                  \draw[->] (-1,-0.25) -- ++(0.75,0) node[right] {\small $x$};
+                  \draw[->] (-1,-0.25) -- ++(0,-0.75) node[below] {\small $y$};
+              \end{tikzpicture}
+        \end{center}
+        \[\text{Für} \ M=\begin{pmatrix}
+            c_1(\x) & 0\\
+            0 & c_2(\x)
+        \end{pmatrix} \ \text{gilt:}\]
+
+        \begin{align*}div(M \cdot \nabla u(\x)) =& \begin{pmatrix}
+            \frac{\partial}{\partial x} & \frac{\partial}{\partial y}
+        \end{pmatrix}
+        \left[ \begin{pmatrix}
+        c_1(\x) & 0\\
+        0 & c_2(\x)
+        \end{pmatrix}
+        \begin{pmatrix}
+            \frac{\partial u}{\partial x} (\x)\\
+            \ \\
+            \frac{\partial u}{\partial y} (\x)
+        \end{pmatrix}
+        \right]
+        = \begin{pmatrix}
+        \frac{\partial}{\partial x} & \frac{\partial}{\partial y}
+        \end{pmatrix}
+        \begin{pmatrix}
+            c_1(\x) \frac{\partial u}{\partial x} (\x)\\
+            \ \\
+            c_2(\x) \frac{\partial u}{\partial y} (\x)
+        \end{pmatrix}\\
+        \approx & \begin{pmatrix}
+        \frac{\partial}{\partial x} & \frac{\partial}{\partial y}
+        \end{pmatrix}
+        \begin{pmatrix}
+            c_1(\x) (u(\x_O) - u(\x)) \\
+            \ \\
+            c_2(\x) (u(\x_S) - u(\x)) 
+        \end{pmatrix}\\
+        \approx & c_1(\x) (u(\x_O) - u(\x)) - c_1(\x_W)(u(\x_N) - u(\x_W))\\
+        +&c_2(\x) (u(\x_S) - u(\x)) - c_2(\x_N)(u(\x) - u(\x_N))
+        \end{align*}
+      \end{enumerate}
+
+      
 
     \printindex
 
