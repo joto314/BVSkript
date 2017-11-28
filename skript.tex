@@ -133,6 +133,14 @@
 \end{tabular}
 }
 
+\underline{\textbf{Im Diskreten Fall}} gilt:\\
+\newcommand{\x}[0] {
+  \boldsymbol{x} 
+}
+\newcommand{\y}[0] {
+    \boldsymbol{y} 
+}
+
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -1890,10 +1898,6 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
           \end{pmatrix}$\\
           Diese art der Diffusionstensoren ist \mim{anisoptrop} also richtungsabhängig.\\
           \ \\
-          \underline{\textbf{Im Diskreten Fall}} gilt:\\
-          \newcommand{\x}[0] {
-            \boldsymbol{x} 
-            }
           Für $\x \in \Z^2$ und $\x_W = \x + \srmatrix{-1 \\ 0}$ usw.\\
           \begin{center}
               \begin{tikzpicture}
@@ -1949,7 +1953,9 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         \end{align*}
       \end{enumerate}
 
-      
+      %\subsection{Bilaterale Filter}
+      %Es existiert auch ein anderer Ansatz für das selbe Problem.
+      %\[u(\x) = \text{ gewichtetes Mittel aus allen } f(\y)\]
 
     \printindex
 
