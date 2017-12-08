@@ -133,7 +133,6 @@
 \end{tabular}
 }
 
-\underline{\textbf{Im Diskreten Fall}} gilt:\\
 \newcommand{\x}[0] {
   \boldsymbol{x} 
 }
@@ -1892,7 +1891,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
               \item Kanten mit $\norm{\nabla u} \geq \kappa$ werden weniger geglättet
           \end{enumerate}
           Diese Art der Glättung ist \mim{Isotrop} $\widehat = $ in alle Richtungen gleich starker Fluss.
-          \item M= $\begin{pmatrix}
+          \item $M= \begin{pmatrix}
               g(\abs{\frac{\partial u}{\partial x}(x,y)}) & 0 \\
               0 & g(\abs{\frac{\partial u}{\partial y}(x,y)}) 
           \end{pmatrix}$\\
@@ -1953,9 +1952,155 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         \end{align*}
       \end{enumerate}
 
-      %\subsection{Bilaterale Filter}
-      %Es existiert auch ein anderer Ansatz für das selbe Problem.
-      %\[u(\x) = \text{ gewichtetes Mittel aus allen } f(\y)\]
+      \subsection{Bilaterale Filter}
+      Es existiert auch ein anderer Ansatz für das selbe Problem.
+      \[u(\x) = \text{ gewichtetes Mittel aus allen } f(\y) \text{ mit}\]
+
+      \begin{enumerate}[label= \alph*)]
+          \item $\y$ ist nahe bei $\x$ \underline{und}
+          \item $f(\y)$ ist nahe bei $f(\x)$
+      \end{enumerate}
+
+      \[u(\x) = \frac{1}{w(\x)} \int_\Omega \underbrace{g(\x - \y)}_{a)} \underbrace{h(f(\x) - f(\y))}_{\text{neu }b)} f(\y) d\y\]
+      Heißt \mim{Bilateraler Filter}, wobei
+
+      \[w(\x) = \int_\Omega g(\x - \y) h(f(\x) - f(\y)) d\y\]
+
+      \begin{enumerate}
+          \item[Oft:] $g,h$ Gauß-Kerne ($\Rightarrow$ nichtlineare Gaußfilter)
+          \item[Manchmal:] $g,h$ charakteristische Funktionen ($\Rightarrow$ SUSAN-Filter)
+          \begin{enumerate}
+              \item[Effekt] Falls Höhe der Kante $>$ Filterradius $\Rightarrow$ Kante bleibt
+          \end{enumerate}
+          \item[Manchmal:] $f \overset{log}{\mapsto} log \ f \overset{\small \text{Bil. Filter}}{\mapsto} log \ u \overset{exp}{\mapsto} u$
+      \end{enumerate}
+      Diese Verfahren ist jedoch sehr aufwendig, denn
+      \begin{enumerate}[label=\textbullet]
+          \item keine Reine Filterung ($\Rightarrow$ keine FFT-Implementierung möglich)
+          \item Normalisierung $w(\x)$ in jedem Punkt berechnen
+      \end{enumerate}
+
+      \subsection{Entrauschen mittels Variationsrechnung}
+      Erinnerung:
+      \begin{center}
+          \begin{tikzpicture}
+              \draw (0,0) rectangle node[] {\large $f$} (1,1);
+              \draw (0.5,0) node[below] {\small entrauschtes Bild};
+              \draw[->] (1,0.5) -- node[above] {\Large ?} (2,0.5);
+              \draw (2,0) rectangle node[] {\large $u$} (3,1);
+              \draw (2.5,0) node[below] {\small Resultat};
+          \end{tikzpicture}
+      \end{center}
+
+      Wünsche an $u$:
+      \begin{enumerate}
+          \item $u \approx f$ (Datenkonsistenz)
+          \item $u$ ist 'glatt'. (Regularitätsbedingung)
+      \end{enumerate}
+
+      Mathematische Umsetzung der Wünsche:
+      \begin{enumerate}
+          \item $\displaystyle \norm{u-f}_2 = \sqrt{\int_\Omega \abs{u(\x) - f(\x)}^2 dx}$ sei klein
+          \item $\displaystyle \norm{\nabla u}_2 = \sqrt{\int_\Omega \abs{\nabla u(\x)}^2 dx} = \sqrt{\int_\Omega \left( \frac{\partial u}{\partial x} (\x) \right)^2 + \left( \frac{\partial u}{\partial x} (\x) \right)^2 d\x} $ sei klein
+      \end{enumerate}
+
+      Kombination:
+      \begin{equation}\label{eq:5.15}
+          J(u) := \norm{u-f}_2^2 + \lambda \norm{\nabla u}_2^2 \overset{u \in U}{\rightarrow} \text{min}
+      \end{equation}
+      Für einen geeigneten Funktionen Raum $U$ und \mim{Kopplungskonstante} $\lambda > 0$.\\
+      In diesem Beispiel empfiehlt sich als Suchraum:
+
+      \[U=\{ u : \norm{u} < \infty, \ \nabla \text{ existiert }, \ \norm{\nabla}_2<\infty  \}=W^{1,2}\]
+      ein so genannter \mim{Sobolev-Räume}. Diese Suchproblem is jedoch $\infty$-dimensional und somit schwer zu lösen.\\
+      
+      Im obigen Ansatz \eqref{eq:5.15} stellt man fest, dass der Regularitätsterm
+      \[\norm{\nabla u}_2^2 = \int_\Omega \abs{\nabla u(\x)}^2 d\x =
+      \int_\Omega \left( \frac{\partial u}{\partial x} (\x) \right)^2 + \left( \frac{\partial u}{\partial x} (\x) \right)^2 d\x \]
+      die großen Gradienten an (gewolleten) Kanten zu stark bestraft. ($\Rightarrow$ optimales $u$ glättet Kanten)\\
+      
+      Ausweg: Wähle $\norm{\nabla u}_2$ oder $\displaystyle \norm{\nabla u}_1 =\int_\Omega \abs{\nabla u(\x)} d\x = \int_\Omega \abs{\frac{\partial u}{\partial x} (\x)} + \abs{\frac{\partial u}{\partial y} (\x)} d\x$ als Regularitätsterme.
+
+      \begin{equation}\label{eq:5.16}
+        J(u):= \norm{u-f}_2^2 + \lambda \norm{\nabla u}_1 \to \ \text{min}
+      \end{equation}
+      Genannt \mim{Rudin–Osher–Fatemi-Funktional} (ROF)
+
+      \textbf{Allgemeiner Ansatz bei Variationsproblemen:}
+
+      \[J(u):=\underbrace{D(u,f)}_{\text{Datenkern}} + \lambda \underbrace{R(u)}_{\text{Regularitätsterm}} \overset{u \in U}{\to} \text{min}\]
+
+      Notwendiges Kriterium:\\
+      Falls $J:U \to \R$ in $u \in U$ ein lokales Minimum besutzt, dann gilt für jede Richtung $v \in U$:
+
+      \begin{equation}\label{eq:5.17}
+        \underset{\epsilon \nearrow 0}{lim} \frac{J(u+\epsilon v) - J(u)}{\epsilon}=0
+      \end{equation}
+      Dies ist die Verallgemeinerte Richtungsableitung (Gateux-Ableitung).\\
+      
+      Häufig ist $J$ in Integralform gegeben, z.b.:
+
+      \[J(u)= \int_\Omega g(x,u(x),\nabla(x)) dx\]
+
+      Dann führt Bedingung \eqref{eq:5.17} auf Gleichungen für bestimmte partielle Ableitungen von $g$ und $u$, die sogenannte \mim{Euler-Lagrange-Gleichung} für \eqref{eq:5.17}.\\
+      $\Rightarrow$ partielle Differentialgleichung $u$.
+      Fazit:
+
+      \begin{center}
+          \begin{tikzpicture}
+              \draw (0,0) rectangle node[] {Filter} (2,1);
+              \draw[->] (2.1,0.5) -- node[above, text width=2cm] {\small \begin{center}
+                wiederholte Anwendung
+              \end{center}} (3.9,0.5);
+              \draw (4,0) rectangle node[yshift=-12,above,text width=3cm] {\begin{center}
+                partielle Differentialgleichung
+              \end{center}} (7,1);
+              \draw[->] (8.9,0.5) -- node[above,text width=2cm] {\small \begin{center}
+                Euler-Lagrange
+              \end{center}} (7.1,0.5);
+              \draw (9,0) rectangle node[] {\small Variationsrechnung} (12,1);
+          \end{tikzpicture}
+      \end{center}
+
+    \section{Kantenerkennung}
+        \subsection{\mim{Gradientenfilter}}
+            Wir suchen Stellen $\x$ mit großem Gradienten:
+            \[\nabla u(\x) = \srmatrix{\frac{\partial u}{\partial x}(\x)\\\frac{\partial u}{\partial y}(\x)}\]
+            Approximation der Gradienten über zentrale Differenzen:
+            \begin{equation}\label{eq:6.1}
+                \frac{\partial}{\partial x} \approx \frac{1}{2} \begin{tabular}{|c|c|c|}\hline
+                    -1 & 0 & 1\\
+                    \hline
+                \end{tabular} \text{ bzw. } \frac{\partial}{\partial y} \approx \frac{1}{2} \begin{tabular}{|c|c|c|}\hline
+                    -1\\
+                    0\\
+                    1\\
+                    \hline
+                \end{tabular}
+            \end{equation}
+
+            Um Rauschen zu verringern wird auch ein entrauschen Filter simultan angewendet:
+
+            \begin{center}
+                \begin{tikzpicture}
+                    \draw[left color=black!20!white, right color=black!60,color=white] (0,0) rectangle (2,5);
+                    \draw (1.8,2.5) node[] {$\frac{1}{2} \begin{tabular}{|c|c|c|}\hline
+                        -1 & 0 & 1\\
+                        \hline
+                    \end{tabular}$};
+                    \draw[->,double] (3,2.5) -- node[above] {\small gegen Rauschen}(5.4,2.5);
+                    \draw (5.5,2.5) node[right] {$\frac{\partial }{\partial x} \approx  \frac{1}{6} \begin{tabular}{|c|c|c|}\hline
+                        -1 & 0 & 1\\
+                        \hline
+                        -1 & 0 & 1\\
+                        \hline
+                        -1 & 0 & 1\\
+                        \hline
+                    \end{tabular}$};
+                    \draw[->] (6.7,1.7) -- node[below] {Differenzeiren} (8.7,1.7);
+                    \draw[<->] (8.8,3.2) -- node[right] {Glättung} (8.8,1.7);
+                \end{tikzpicture}
+            \end{center}
 
     \printindex
 
