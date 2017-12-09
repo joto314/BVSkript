@@ -17,6 +17,8 @@
 \usepackage{graphicx}
 \usepackage{accents}
 \usepackage{stmaryrd}
+\usepackage{pgfplots}
+
 
 \usetikzlibrary{positioning, calc}
 \usetikzlibrary{decorations.pathreplacing,angles,quotes}
@@ -134,10 +136,10 @@
 }
 
 \newcommand{\x}[0] {
-  \boldsymbol{x} 
+  \boldsymbol{x}
 }
 \newcommand{\y}[0] {
-    \boldsymbol{y} 
+    \boldsymbol{y}
 }
 
 
@@ -310,7 +312,7 @@ tabsize=3}
                             \draw (-0.35,4) -- (-0.15,4);
                             \draw (-0.35,0) -- (-0.15,0);
                             \draw (0,-0.35) -- (0,-0.15);
-                            \draw (4,-0.35) -- (4,-0.15);                            
+                            \draw (4,-0.35) -- (4,-0.15);
                             \draw[step=0.5,thin,draw=black] (0,0) grid (4,4);
                             \foreach \x in {0.25,0.75,..., 3.75}{
                                 \foreach \y in {0.25,0.75,..., 3.75}{
@@ -420,7 +422,7 @@ tabsize=3}
                     %TODO Images
                     \draw[line width = 0.5cm] (0,0) -- (4,0);
                     \draw[->] (4.3,-0.4) -- node[sloped,below] {Bilinear} (7,-2);
-                    \draw[->] (4.3,0.4) -- node[sloped,above] {Nearest neighbour} (7,2);                    
+                    \draw[->] (4.3,0.4) -- node[sloped,above] {Nearest neighbour} (7,2);
                 \end{tikzpicture}
             \end{center}
 
@@ -458,7 +460,7 @@ tabsize=3}
                 \thmark{4}{0.75}{2}
                 \draw (5,0.75) node {\textbullet};
                 \draw (6,-0.25) node {\textbullet};
-                \draw (7,-0.25) node {\textbullet};                
+                \draw (7,-0.25) node {\textbullet};
             \end{tikzpicture}
         \end{center}
 
@@ -681,7 +683,7 @@ imshow(v);
             Und wie zuvor: $\sigma_1^2 + ... + \sigma_M^2 \to $ min
             \item \pa{Median}:\\
             Zerteile $F$ in M Quantile gleicher Masse.
-            \item \pa{Isodata}:\\ 
+            \item \pa{Isodata}:\\
             Hierzu existiert keine Bekannte Verallgemeinerung auf $M$ Farbklassen.
         \end{enumerate}
 
@@ -822,7 +824,7 @@ imshow(I3);
                 \draw (5,0) node[below] {\small Gestörtes Bild};
                 \draw (5,1) node[] {\LARGE $f$};
                 \draw[->] (6.1,1) -- node[above] {\small Entrauschen} (7.9,1);
-                \draw (8,0) rectangle (10,2);                
+                \draw (8,0) rectangle (10,2);
                 \draw (9,0) node[below] {\small Resultat};
                 \draw (9,1) node[] {\LARGE $u$};
             \end{tikzpicture}
@@ -835,7 +837,7 @@ imshow(I3);
         &\frac{\norm{u-f_o}}{\norm{f-f_0}}, \text{\mim{Relativer Fehler} im Vergleich zum Rauschen}\\
         &\frac{\norm{u-f_o}}{\norm{f_0}}, \text{Relativer Fehler im Vergleich zum Signal}
         \end{align*}
-        
+
         Typischerweise ist die gewählte Norm:
         \[\norm{f} = \norm{f}_2 = \sqrt{\int_{\Omega} \abs{f(x)}^2 dx}\]
         oder im diskreten:
@@ -850,7 +852,7 @@ imshow(I3);
                 \draw (0,0) node[left] {$f_0$:};
                 \draw[thick] plot [smooth, tension = 0.7] coordinates {(0,0) (1.75,1.5) (3.5,0.5) (6,2) (9,0) (11,0.5)};
                 \draw[->,thick] (-0.3,-0.5) -- node[left] {Rauschen} (-0.3,-2);
-                \draw (0,-2.5) node[left] {$f$:};                
+                \draw (0,-2.5) node[left] {$f$:};
                 \draw[thick, name path = P2,shift = {(0,-2.5)}] plot [smooth, tension = 0.7] coordinates {(0,0) (1.75,1.5) (3.5,0.5) (6,2) (9,0) (11,0.5)};
                 \draw[name path = P1, draw = none] (0,-1.1) -- (3,-1.1);
                 \draw[name intersections={of = P1 and P2},red,thick]
@@ -893,7 +895,7 @@ imshow(I3);
         \end{equation}
 
         Schematisch bedeutet \eqref{eq:5.1}:
-        
+
         \begin{center}
             \begin{tikzpicture}
                 \draw (0,-0.5) node[left] {\large f:};
@@ -932,8 +934,8 @@ imshow(I3);
                 \draw (0.5,0) node[above] {k};
                 \draw[thick] (-0.6,0) grid (1.6,-1);
                 \draw[->,red] (0.4,-1.1) -- node[left] {$\alpha$} (-0.5,-1.9);
-                \draw[->,black!40!green] (0.5,-1.1) -- node[left] {$\beta$} (0.5,-1.9); 
-                \draw[->,black!40!blue] (0.6,-1.1) -- node[right] {$\gamma$} (1.5,-1.9); 
+                \draw[->,black!40!green] (0.5,-1.1) -- node[left] {$\beta$} (0.5,-1.9);
+                \draw[->,black!40!blue] (0.6,-1.1) -- node[right] {$\gamma$} (1.5,-1.9);
                 \draw[thick] (-1.6,-2) grid (2.6,-3);
             \end{tikzpicture}
         \end{center}
@@ -952,12 +954,12 @@ imshow(I3);
                 \draw (0.5,0.5) node {\large \dots};
                 \draw (1.5,0.5) node {\large $\alpha$};
                 \draw (2.5,0.5) node {\large $\beta$};
-                \draw (3.5,0.5) node {\large $\gamma$};                
+                \draw (3.5,0.5) node {\large $\gamma$};
                 \draw (4.5,0.5) node {\large \dots};
                 \draw (0.5,1) node[above] {\large \dots};
                 \draw (1.5,1) node[above] {\large -1};
                 \draw (2.5,1) node[above] {\large 0};
-                \draw (3.5,1) node[above] {\large 1};                
+                \draw (3.5,1) node[above] {\large 1};
                 \draw (4.5,1) node[above] {\large \dots};
                 \draw (5,0.5) node[right] {gennant \mim{Maske}.};
             \end{tikzpicture}
@@ -1031,12 +1033,12 @@ imshow(I3);
             \item $f \boxast g = \tilde f * g \overset{\framebox{\small 2}}{=} g * \tilde f = \tilde{\tilde g} * \tilde f \overset{\framebox{\small 3}}{=} \widetilde{(\tilde g * f)} = \widetilde{g \boxast f} \neq g \boxast f$, nicht kommutativ!
             \item $\tilde f \boxast \tilde g = \tilde{\tilde f} * \tilde g \overset{\framebox{\small 3}}{=} \widetilde{(\tilde f * g)} = \widetilde{f \boxast g}$, Kompatibilität mit Spiegelung
         \end{enumerate}
-	
+
 	$\boxast$ und $*$ definiert man auf: $\ell^1(\Z^d):=\{f=(f_i)_{i \in \Z^d} : \underbrace{\sum_{i \in \Z^d}\abs{f_i}}_{:=\norm{f}_1} < \infty\}$
 
 	Man kann zeigen (Übung): $f,g \in \ell^1 \Rightarrow f * g \in \ell^1$ und $\norm{f * g}_1 \leq \norm{f}_1 \C \norm{g}_1$.
     Wobei oft die Gleichheit gilt.
-    
+
     Alles gilt auch in der Kontinuierlichen Version:
     \[L^1(\R^d) := \{f:\R^d \to \R | \underbrace{\int_{\R^d}\abs{f} dx}_{:=\norm{f}_1} < \infty\}\]
     \[f,g \in L^1(\R^d): (g*f)(x)=\int_{\R^d}g(x-y)f(y) dy, \ y,x \in \R^d\]
@@ -1165,7 +1167,7 @@ imshow(I3);
                 \draw (5,0) node[below] {\small Gestörtes Bild};
                 \draw (5,1) node[] {\LARGE $f$};
                 \draw[->] (6.1,1) -- node[above] {\small Entrauschen} (7.9,1);
-                \draw (8,0) rectangle (10,2);                
+                \draw (8,0) rectangle (10,2);
                 \draw (9,0) node[below] {\small Resultat};
                 \draw (9,1) node[] {\LARGE $u$};
             \end{tikzpicture}}
@@ -1174,7 +1176,7 @@ imshow(I3);
     Annahme: $f_{ij} = f_{ij} +r_{ij}$ mit $r_{ij} \sim N(0,\sigma^2)$ iid.
 
     z.z.: $Var(u_{ij}) \leq Var(f_{ij})$\\
-    
+
     \begin{equation*}
         Var(f_{ij}) = E(\underbrace{f_{ij} - \overbrace{E f_{ij}}^{f^0_{ij}}}_{r_{ij}})^2 = \sigma^2
     \end{equation*}
@@ -1193,7 +1195,7 @@ imshow(I3);
     \end{equation*}
 
     $\Rightarrow Var(u_{ij}) \leq Var(f_{ij})$ für $\alpha \in [0,\frac{1}{4}]$\\
-    
+
     Dabei gilt: $Var(u_{ij}) \overset{\alpha}{\to} d \text{min} \iff 1 - 8 \alpha + 20 \alpha^2 \overset{\alpha}{\to} \text{min} \iff -8 + 40 \alpha = 0 \iff \alpha = \frac{1}{5}$
 
     \begin{equation*}
@@ -1231,11 +1233,11 @@ imshow(I3);
                 \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (7.5,0.6) -- node[below] {\scriptsize \begin{tabular}{c} hohe \\ Frequenzen \end{tabular}} (9,0.6);
                 \draw[thick, name path = P2,shift = {(5,0)}]plot [smooth, tension = 0.8] coordinates {(6,1) (6.1,1.3) (6.4,1.1) (6.6,1.6) (7,1.1) (7.3,2.0) (7.5,1.1) (7.7,1.2) (7.8,1.9) (8.1,1.5) (8.5,1.9) (9,1)};
                 \draw[color = white,fill] (12.7,1) rectangle (14,2.5);
-                \draw (11,1) -- (14,1);                
+                \draw (11,1) -- (14,1);
                 \draw (11,-0.5) rectangle (14,2.5);
                 \draw (15,0) rectangle (17,2);
                 \draw[thick] (7.7,0.8) -- (7.7,2.3);
-                \draw[thick] (12.7,0.8) -- (12.7,2.3);                
+                \draw[thick] (12.7,0.8) -- (12.7,2.3);
                 \draw (16,1) node[] {\LARGE $u$};
                 \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (5.5,-1) -- node[below] {im Frequenzbereich} (14.5,-1);
                 \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (3,-1.5) -- node[below] {\mim{Frequenzraumfilter} (Tiefpass)} (17,-1.5);
@@ -1327,7 +1329,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             }
         \end{tikzpicture}
     \end{minipage}
-    
+
     $\displaystyle f \in L^2(\R^d) = \{f:\R^d \to \R | \int_{\R^d} \abs{f}^2 dx < \infty\}$ ist
     \begin{enumerate}[label = -]
         \item ein normierter Raum mit $+$, $\alpha \cdot$ und $\displaystyle \norm{\cdot}_2 := \sqrt{\int_{\R^d} \abs{f(x)}^2 dx}$
@@ -1524,9 +1526,9 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \end{center}
 
     Im Kontinuierlichen: Sei $m \in L^1(\R^d)$ und $s > 0$.
-    Setze 
+    Setze
         $$ m_s(x) := \frac{1}{s^d} m (\frac{x}{s}), \quad x\in \R^d$$
-    
+
     Bsp (in $d =1 $):
     \begin{center}
         \begin{tikzpicture}
@@ -1547,7 +1549,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             \draw[->,double] (2,1.5) -- node[above] {\small $s=2$} (4,1.5);
         \end{tikzpicture}
     \end{center}
-    
+
     Bsp: Gauß-Kern $G(x) = \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-\abs{x}^2}{2}}$\\
     Skalierung mit Faktor $s > 0$
     $$ \Rightarrow G_s(x) = \frac{1}{s^d} G\left( \frac {x} {s} \right) = \frac{1}{s^d} \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-\abs{x}}{2}} = \frac{1}{(2 \pi s^2)^{\frac{d}{2}}} e^{\frac{-\abs{x}^2}{2s^2}}$$
@@ -1572,7 +1574,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \begin{minipage}[c]{0.25\linewidth}
         \begin{center}
             \begin{tikzpicture}
-                
+
                 \draw[scale=1,domain=-0.75:1.5,smooth,variable=\x]  plot ({\x},{(\x * \x)});
                 \draw[] (-1,-0.3) -- (2,-0.3);
                 \draw[dotted] (-0.5,-0.3) node[] {\small \textbullet} node[below] {\small $x_{k-1}$} -- (-0.5,0.25) node[] {\small \textbullet};
@@ -1647,7 +1649,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         =& \left(\frac{1}{h} \filter{ 0 & 1 & -1} * \frac{1}{h} \filter{1 & -1 & 0}\right)*f\\
         =& \left(\frac{1}{h} \filter{ -1 & 1 & 0} \boxast \frac{1}{h} \filter{1 & -1 & 0}\right)*f\\
         =& \frac{1}{h^2} \filter{1 & -2 & 1} * f \\
-        =&\frac{1}{h^2} \filter{1 & -2 & 1} \boxast f 
+        =&\frac{1}{h^2} \filter{1 & -2 & 1} \boxast f
     \end{align*}
 
     In 2D: $\displaystyle \frac{\partial}{\partial x} \widehat = \ \begin{tabular}{|c|c|c|}
@@ -1711,7 +1713,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         \hline
     \end{tabular}$ ist unter allen 5-Punkt Filtern der am besten glättende.\\
     Idee: Rauschen weiter verringern indem man $m \boxast$ wiederholt anwendet $\Rightarrow$ Folge von Bildern:\\
-    
+
     \begin{center}
         \begin{tikzpicture}
             \draw (0,0) rectangle (1,1);
@@ -1726,7 +1728,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             \draw (5,0.5) node[right] {\LARGE ...};
         \end{tikzpicture}
     \end{center}
-    
+
     \begin{align*}
         \Rightarrow u^{(n+1)} - u^{(n)} & = \text{(Unterschied zwischen 'Zeit' Punkt $n$ und $n+1$)}\\
         &= \underbrace{m \boxast u^{(n)}}_{u^{n+1}} - \underbrace{\delta \boxast u^{(n)}}_{u^{(n)}} \text{mit } \delta = \begin{tabular}{|c|c|c|}
@@ -1842,17 +1844,17 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             \draw[->,shift={(5,0)}] (2.1,-4.5) -- node[above] {\small $m \boxast$} (2.9,-4.5);
         \end{tikzpicture}
       \end{center}
- 
+
 
       % TODO ???
 
       \subsection{Isotrope und anisoptrope Diffusion}
 
-      
+
       Wir haben gesehen: Glättung/Diffusion verringert Rauschen.\\
       Aber: Auch Kanten/Details werden verwischt.\\
       Ausweg: Diffusion steuern, so dass sie an Kanten (also Stellen mit großer Änderungsrate) weniger stark glättet.\\
-      
+
       Der Plan lautet also:
       \[\nabla u = \norm{\srmatrix{\frac{\partial u}{\partial x}\\ \frac{\partial u}{\partial y}}}^2 = \begin{cases}
           \text{groß} & \Rightarrow \text{wenig Diffusion}\\
@@ -1893,7 +1895,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
           Diese Art der Glättung ist \mim{Isotrop} $\widehat = $ in alle Richtungen gleich starker Fluss.
           \item $M= \begin{pmatrix}
               g(\abs{\frac{\partial u}{\partial x}(x,y)}) & 0 \\
-              0 & g(\abs{\frac{\partial u}{\partial y}(x,y)}) 
+              0 & g(\abs{\frac{\partial u}{\partial y}(x,y)})
           \end{pmatrix}$\\
           Diese art der Diffusionstensoren ist \mim{anisoptrop} also richtungsabhängig.\\
           \ \\
@@ -1945,7 +1947,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         \begin{pmatrix}
             c_1(\x) (u(\x_O) - u(\x)) \\
             \ \\
-            c_2(\x) (u(\x_S) - u(\x)) 
+            c_2(\x) (u(\x_S) - u(\x))
         \end{pmatrix}\\
         \approx & c_1(\x) (u(\x_O) - u(\x)) - c_1(\x_W)(u(\x_N) - u(\x_W))\\
         +&c_2(\x) (u(\x_S) - u(\x)) - c_2(\x_N)(u(\x) - u(\x_N))
@@ -2013,12 +2015,12 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
 
       \[U=\{ u : \norm{u} < \infty, \ \nabla \text{ existiert }, \ \norm{\nabla}_2<\infty  \}=W^{1,2}\]
       ein so genannter \mim{Sobolev-Räume}. Diese Suchproblem is jedoch $\infty$-dimensional und somit schwer zu lösen.\\
-      
+
       Im obigen Ansatz \eqref{eq:5.15} stellt man fest, dass der Regularitätsterm
       \[\norm{\nabla u}_2^2 = \int_\Omega \abs{\nabla u(\x)}^2 d\x =
       \int_\Omega \left( \frac{\partial u}{\partial x} (\x) \right)^2 + \left( \frac{\partial u}{\partial x} (\x) \right)^2 d\x \]
       die großen Gradienten an (gewolleten) Kanten zu stark bestraft. ($\Rightarrow$ optimales $u$ glättet Kanten)\\
-      
+
       Ausweg: Wähle $\norm{\nabla u}_2$ oder $\displaystyle \norm{\nabla u}_1 =\int_\Omega \abs{\nabla u(\x)} d\x = \int_\Omega \abs{\frac{\partial u}{\partial x} (\x)} + \abs{\frac{\partial u}{\partial y} (\x)} d\x$ als Regularitätsterme.
 
       \begin{equation}\label{eq:5.16}
@@ -2037,7 +2039,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         \underset{\epsilon \nearrow 0}{lim} \frac{J(u+\epsilon v) - J(u)}{\epsilon}=0
       \end{equation}
       Dies ist die Verallgemeinerte Richtungsableitung (Gateux-Ableitung).\\
-      
+
       Häufig ist $J$ in Integralform gegeben, z.b.:
 
       \[J(u)= \int_\Omega g(x,u(x),\nabla(x)) dx\]
@@ -2073,7 +2075,9 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                     \hline
                 \end{tabular} \text{ bzw. } \frac{\partial}{\partial y} \approx \frac{1}{2} \begin{tabular}{|c|c|c|}\hline
                     -1\\
+                    \hline
                     0\\
+                    \hline
                     1\\
                     \hline
                 \end{tabular}
@@ -2099,8 +2103,150 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                     \end{tabular}$};
                     \draw[->] (6.7,1.7) -- node[below] {Differenzeiren} (8.7,1.7);
                     \draw[<->] (8.8,3.2) -- node[right] {Glättung} (8.8,1.7);
+                    \draw (7.7,3.2) node[above] {\mim{Prewitt-Filter}:};
                 \end{tikzpicture}
             \end{center}
+
+            Alternative: $\frac{\partial }{\partial x} \approx \frac{1}{2} \begin{tabular}{|c|c|c|}\hline
+                -1 & 0 & 1\\
+                \hline
+            \end{tabular} \boxast \frac{1}{4}\begin{tabular}{|c|c|c|}\hline
+                -1\\
+                \hline
+                0\\
+                \hline
+                1\\
+                \hline
+            \end{tabular} = \frac{1}{8} \begin{tabular}{|c|c|c|}\hline
+            -1 & 0 & 1\\
+            \hline
+            -2 & 0 & 2\\
+            \hline
+            -1 & 0 & 1\\
+            \hline
+            \end{tabular}=:D_x$, genannt \mim{Sobel-Filter}.
+            Eine stärkere Glättung kann mittels anderer vertikaler Filter mit Binomialkoeffizienten erzeilt werden.\\
+
+            Entsprechen wird $\frac{\partial }{\partial y} D_y:=D_x^T$ definiert.\\
+
+            \begin{equation}\label{eq:6.2}
+                \nabla u(\x) = \srmatrix{\frac{\partial u}{\partial x}(\x)\\\frac{\partial u}{\partial y}(\x)} \approx \srmatrix{(D_x \boxast u)(\x)\\ (D_y \boxast u)(\x)}
+            \end{equation}
+
+            Zur Erinnerung der Gradienten steht senkrecht auf Kanten und zeigt in Richtung heller (hoher) Werte, die Intensität wird beschrieben von $\abs{\nabla u(\x)}$, also dem Betrag des Gradienten.
+
+            Ein typischer Algorithmus kann etwa folgende Form annehmen:
+            \begin{enumerate}
+                \item Gradienten mittels Prewitt oder Sobel approximieren und Richtung auf Vielfache von $45^\circ$ runden.
+                \item \mim{Non-maximum suppression} (edge thinning). Da es potentiell viele Punkte mit hoher Steigung gibt kann es dazu kommen, dass Kanten sehr breit werden, dieses wird durch das edge thinning verhindert.
+
+            \begin{center}
+                \begin{tikzpicture}
+                    \draw[left color=white, right color=black] (0,0) rectangle (1,1);
+                    \draw[fill] (1,0) rectangle (4,1);
+                    \draw[shift={(0,-1)}] plot [smooth, tension = 0.2] coordinates {(0,0.5) (0.65,0.5) (1,0) (4,0)};
+                    \draw (0.7,1.5) rectangle (0.9,-1.5);
+                    \draw (0.9,1.5) node[right] {\small Kante};
+                    \draw (0.8,1.7) -- (0.8,-1.7) node[below] {\small dünne Kante};
+                \end{tikzpicture}
+            \end{center}
+
+            Mathematisch: $\x$ wird Kantenpunkt falls:
+            \[\abs{\nabla u(\x)} \leq max(\abs{\nabla u(\x_+)},\abs{\nabla u(\x_-)})\]
+            wobei $\x_+$ und $\x_-$ Vorgänger und Nachfolger von $\x$ in Gradientenrichtung sind.
+            \item Kandidat $\x$ wird Kantenpunkt, falls:
+            \begin{center}
+                \begin{tikzpicture}
+                    \draw (0,0) -- (11,0);
+                    \draw[decorate,decoration={brace,amplitude=5pt}] (0.1,0.1) -- node[above] {\small Kein Kantenpunkt} (2.95,0.1);
+                    \draw[decorate,decoration={brace,amplitude=5pt}] (3.05,0.1) -- node[above] {\small Ja, falls Nachbar Kantenpunkt} (7.95,0.1);
+                    \draw[decorate,decoration={brace,amplitude=5pt}] (8.05,0.1) -- node[above] {\small Kantenpunkt} (10.95,0.1);
+                    \draw (3,0.2) -- (3,-0.2) node[below] {\small $t_1$};
+                    \draw (8,0.2) -- (8,-0.2) node[below] {\small $t_2$};
+                \end{tikzpicture}
+            \end{center}
+            wobei $t_1, \ t_2$ thresholds sind.\\
+            $\x$ ist also ein Kantenpunkt, falls $\abs{\nabla u(\x)} \geq t_2$ oder $\left( \abs{\nabla u(\x)} \in [t_1,t_2] \text{ und $\x$ ist Nachbar eines Kantenpunktes}  \right)$.
+            Dieses wird \mim{hysteresis thresholding} genannt und verhindert \mim{Abreißen} von Kantenzügen.
+            \end{enumerate}
+
+            Die am häufigsten verbreitete Version von 1) -3) ist der \mim{Canny-Algorithmus} (1986).
+
+            Matlab:
+            \begin{lstlisting}
+                BWimg=edge(u,'canny',[t_1, t_2],sigma);
+            \end{lstlisting}
+
+            \begin{enumerate}
+                \item[BWimg:] Binärbild
+                \item[u:] Graustufenbild
+                \item[canny:]Algorithmus
+                \item[$t_1, \ t_2$:] Sind gewählt wie oben
+                \item[sigma:] Parameter für den Gaußkern aus 1)
+            \end{enumerate}
+
+        \subsection{Die zweite Ableitung}
+
+            Zunächst in 1D:
+            %Wenn jemand eine bessere Idee hat, kann er das gerne aufräumen.
+            \begin{center}
+                \begin{tikzpicture}
+                    \draw[dotted] (-0.5,0) node[left] {\small $u$:}-- (8.5,0);
+                    \draw[scale=1,domain=-2:0,smooth,variable=\x,shift ={(2,0)}] plot ({\x},{(e^((-(\x)^2)/(0.2))}) -- (4,1) [scale=1,domain=0:2,smooth,variable=\x,shift ={(4,0)}] plot({\x},{(e^((-(\x)^2)/(0.2))});
+
+                    \draw[dotted] (-0.5,-2) node[left] {\small $u'$:}-- (8.5,-2);
+                    \draw[scale=1,domain=-1.5:1,smooth,variable=\x,shift ={(1.5,-2)}] plot ({\x},{(e^((-(\x)^2)/(0.05))}) -- (4,0) [scale=1,domain=-1:1.5,smooth,variable=\x,shift ={(5,0)}] plot({\x},{-(e^((-(\x)^2)/(0.05))});
+
+                    \draw[dotted] (-0.5,-4) node[left] {\small $u''$:}-- (8.5,-4);
+                    \draw[scale=1,domain=-1.5:1,smooth,variable=\x,shift ={(1.5,-4)}] plot ({\x},{5*\x*(e^((-(\x)^2)/(0.05))}) -- (4,0) [scale=1,domain=-1:1.5,smooth,variable=\x,shift ={(5,0)}] plot({\x},{-5*\x*(e^((-(\x)^2)/(0.05))});
+
+                    \draw(1.5,1.2)--(1.5,-4.5);
+                    \draw(6.5,1.2)--(6.5,-4.5);
+                    \draw[] (1.5,0.2865) node[circle,fill,inner sep=1pt] {};
+                    \draw (6.5,0.2865) node[circle,fill,inner sep=1pt] {};
+                    \draw (1.5,-1.02) node[circle,fill,inner sep=1pt] {};
+                    \draw (6.5,-2.98) node[circle,fill,inner sep=1pt] {};
+                    \draw (1.5,-4) node[circle,fill,inner sep=1pt] {};
+                    \draw (6.5,-4) node[circle,fill,inner sep=1pt] {};
+                \end{tikzpicture}
+            \end{center}
+
+            Test für kantenpunkte $u''(\x) = 0$ und $\abs{u'(\x)}>$ threshold.\\
+            Wichtig: Vorglätten!, da die 2. Ableitung noch anfälliger gegenüber Rauschen als die 1. Ableitung ist.\\
+            \ \\
+            In 2D. Laplace Operator $\Delta u = \frac{\partial^2 u}{\partial^2 x} + \frac{\partial^2 u}{\partial^2 y}$ (Richtungsunabhängige Messung der 2. Ableitung)\\
+            Vorglätten: $\Delta (G * u) = (\Delta G)*u$, wobei $\Delta G$ vorher berechnet werden kann.
+
+            In 1D:
+
+            \begin{center}
+                \begin{tikzpicture}
+                    
+                \end{tikzpicture}
+            \end{center}
+
+            In 2D:
+            \def\centerx{2}
+            \def\centery{-1}
+            \begin{center}
+                \begin{tikzpicture}
+                \pgfplotsset{
+                    colormap name=viridis,
+                }
+                    \begin{axis}[hide axis,scale=0.75,name=plot1,samples=60]
+                        \addplot3[surf,domain=-2:6,domain y=-3.7:3.7,samples=40]
+                            {exp(-( (x-\centerx)^2 + (y-\centery)^2)/3 )};
+                        \end{axis}
+                        \draw[->] (6,1.5)--(7,1.5);
+                        \draw (1.5,0) node[left] {\Large $G$};
+                        \draw (7.5,0) node[left] {\Large $\Delta G$};
+                    \begin{axis}[hide axis,scale=0.75,at={(8cm,1cm)}, anchor=center]
+                        \addplot3[surf,domain=-3:3,domain y=-5:5,samples=60]
+                        {x^2*exp(- x^2/2 - y^2/2) - 2*exp(- x^2/2 - y^2/2) + y^2*exp(- x^2/2 - y^2/2)};
+                    \end{axis}
+                \end{tikzpicture}
+            \end{center}
+
 
     \printindex
 
