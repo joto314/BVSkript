@@ -25,6 +25,7 @@
 \usetikzlibrary{decorations.pathmorphing,snakes}
 \usetikzlibrary{shapes.misc}
 \usetikzlibrary{intersections,through,backgrounds}
+\usetikzlibrary{matrix}
 
 
 \theoremstyle{plain}
@@ -142,6 +143,9 @@
     \boldsymbol{y}
 }
 
+\newcommand{\mat}[1] {
+\begin{pmatrix} #1 \end{pmatrix}
+}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -2198,7 +2202,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                     \draw[scale=1,domain=-1.5:1,smooth,variable=\x,shift ={(1.5,-2)}] plot ({\x},{(e^((-(\x)^2)/(0.05))}) -- (4,0) [scale=1,domain=-1:1.5,smooth,variable=\x,shift ={(5,0)}] plot({\x},{-(e^((-(\x)^2)/(0.05))});
 
                     \draw[dotted] (-0.5,-4) node[left] {\small $u''$:}-- (8.5,-4);
-                    \draw[scale=1,domain=-1.5:1,smooth,variable=\x,shift ={(1.5,-4)}] plot ({\x},{5*\x*(e^((-(\x)^2)/(0.05))}) -- (4,0) [scale=1,domain=-1:1.5,smooth,variable=\x,shift ={(5,0)}] plot({\x},{-5*\x*(e^((-(\x)^2)/(0.05))});
+                    \draw[scale=1,domain=-1.5:1,smooth,variable=\x,shift ={(1.5,-4)}] plot ({\x},{-5*\x*(e^((-(\x)^2)/(0.05))}) -- (4,0) [scale=1,domain=-1:1.5,smooth,variable=\x,shift ={(5,0)}] plot({\x},{5*\x*(e^((-(\x)^2)/(0.05))});
 
                     \draw(1.5,1.2)--(1.5,-4.5);
                     \draw(6.5,1.2)--(6.5,-4.5);
@@ -2221,7 +2225,10 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
 
             \begin{center}
                 \begin{tikzpicture}
-                    
+                    \draw (0,0.2) node[left] {$G:$};
+                    \draw[scale=1,domain=-1.5:1.5,smooth,variable=\x,shift ={(2,0)}] plot ({\x},{(e^((-(\x)^2)/(0.2))});
+                    \draw (4.5,0.2) node[left] {$\Delta G:$};
+                    \draw[scale=0.5,domain=-4:4,smooth,variable=\x,shift ={(13,0)}] plot ({\x},{(\x*\x*(e^((-(\x)^2)/(2))) - (e^((-(\x)^2)/(2))});
                 \end{tikzpicture}
             \end{center}
 
@@ -2246,6 +2253,168 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                     \end{axis}
                 \end{tikzpicture}
             \end{center}
+
+            Dieses wird \mim{Laplacian of Gaußian method} genannt.\\
+            Matlab:
+            \begin{lstlisting}
+                BWimg=edge(u,'log',thresh,sigma);
+            \end{lstlisting}
+            $\Rightarrow$ alle $\x \in \Omega$ mit:
+            \begin{enumerate}
+                \item[] $\Delta (G_{sigma} * u)(\x) \approx u$, nicht auf Gleichheit sondern auf Vorzeichenwechsel testen.
+                \item[und:] $\abs{\nabla(G_{sigma}) * u}>\text{thresh}$
+            \end{enumerate} 
+
+            \section{Schärfen und Entfalten}
+            (Gegenteil von Kapitel 5)
+            \begin{enumerate}
+                \item[Gegeben:] unscharfes Bild
+                \item[Gesucht:] Version mit vielen erkennbaren Details 
+            \end{enumerate}
+        
+            \subsection{\mim{Laplace-Schärfen}}
+                Idee:
+        
+                \begin{center}
+                \begin{tikzpicture}
+                    \draw[dotted] (-0.5,0) node[left] {\small $u$:}-- (8.5,0);
+                    \draw[scale=1,domain=-2:0,smooth,variable=\x,shift ={(2,0)}] plot ({\x},{(e^((-(\x)^2)/(0.2))}) -- (4,1) [scale=1,domain=0:2,smooth,variable=\x,shift ={(4,0)}] plot({\x},{(e^((-(\x)^2)/(0.2))});
+        
+                    \draw[dotted] (-0.5,-2) node[left] {\small $u''$:}-- (8.5,-2);
+                    \draw[scale=1,domain=-1.5:1,smooth,variable=\x,shift ={(1.5,-2)}] plot ({\x},{-5*\x*(e^((-(\x)^2)/(0.05))}) -- (4,0) [scale=1,domain=-1:1.5,smooth,variable=\x,shift ={(5,0)}] plot({\x},{5*\x*(e^((-(\x)^2)/(0.05))});
+        
+                    \draw[dotted] (-0.5,-4) node[left] {\small $u - \tau u''$:}-- (8.5,-4);
+                    \draw[scale=1,domain=-2:0,smooth,variable=\x,shift ={(2,-4)}] plot ({\x},{(e^((-(\x)^2)/(0.2))+4*(\x+0.5)*(e^((-(\x+0.5)^2)/(0.07))}) -- (4,1.056) [scale=1,domain=0:2,smooth,variable=\x,shift ={(4,0)}] plot({\x},{(e^((-(\x)^2)/(0.2))-4*(\x-0.5)*(e^((-(\x-0.5)^2)/(0.07))});
+        
+                \end{tikzpicture}
+            \end{center}
+            Zu sehen ist, dass durch die Subtraktion von $u''$, skaliert mit einem Faktor $\tau > 0$ die Kanten hervorgehoben werden.\\
+            
+            Hinweise zur Umsetzung:
+            \begin{enumerate}[label=-]
+                \item $u - \tau u''$ reskalieren (Kontrast-stretching) falls der Farbraum verlassen wird.
+                \item $\tau$ kann auch sehr klein gewählt werden und der Vorgang dafür wiederholt iteriert werden.
+                \item In 2D $\Delta statt$ 2. Ableitung
+                \item Vorglätten: $u - \tau \C \Delta (G*u)$
+            \end{enumerate}
+        
+            \subsection{Kantenverstärkende Diffusion}
+                Verallgemeinerte Diffusionsgleichung: $\displaystyle \frac{\partial u}{\partial t} = div(M \nabla u)$.
+                Idee: $M$ so wählen, so dass der Fluss:
+                \begin{enumerate}[label=-]
+                    \item Parallel zum Gradienten (d.h. durch die Kante verläuft): $\displaystyle \lambda_1=\frac{1}{1+\frac{\abs{\nabla u (\x)}^2}{\kappa^2}}$
+                    \item senkrecht zu $\nabla u$ (entlang der Kante): $\Lambda_2=1$
+                \end{enumerate}
+        
+                $\Rightarrow M$ hat EW $\lambda_1$ zum EV $\displaystyle v_1= \frac{\nabla u}{\abs{\nabla u}}\srmatrix{\frac{\partial u}{\partial x}(\x)\\\frac{\partial u}{\partial y}(\x)}$ und EW $\lambda_2$ zum EV $\displaystyle v_2 = \frac{1}{\abs{\nabla u}} \srmatrix{-\frac{\partial u}{\partial y}(\x)\\\frac{\partial u}{\partial x}(\x)} \perp v_1$.\\
+                $\displaystyle \Rightarrow M \C \underbrace{\mat{v_1 & v_2}}_{\small \text{orthogonale Matrix}} = \mat{\lambda_1 v_1 & \lambda_2 v_2} = \mat{v_1 & v_2} \mat{\lambda_1 & \ \\ \ & \lambda_2} \Rightarrow M^{-1} = M^T$\\
+                $\Rightarrow M= \mat{v_1 & v_2} \mat{\lambda_1 & \ \\ \ & \lambda_2} \underbrace{\mat{v_1 & v_2}^T}_{=\mat{v_1^T \\ v_2^T}} = \frac{1}{\abs{\nabla u}^2} \mat{\lambda_1 \frac{\partial u}{\partial x}(\x)^2 + \lambda_2 \frac{\partial u}{\partial y}(\x)^2  & (\lambda_1 - \lambda_2)\frac{\partial u}{\partial x} \frac{\partial u}{\partial y}(\x)\\ (\lambda_1 - \lambda_2)\frac{\partial u}{\partial x} \frac{\partial u}{\partial y}(\x) & \lambda_2 \frac{\partial u}{\partial x}(\x)^2 + \lambda_1 \frac{\partial u}{\partial y}(\x)^2}$\\
+                falls $\nabla u(\x) \neq 0$, sonst $M= \mat{1 & 0 \\ 0 & 1}$.
+        
+            \subsection{\mim{Entfaltung}}
+                \begin{center}
+                    \begin{tikzpicture}
+                        \draw (0,0) rectangle node[] {$f$} node[above,yshift=27] {original} (2,2);
+                        \draw (4,0) rectangle node[] {$u$} node[above,yshift=27] {geglättet} (6,2);
+                        \draw[] (2.1,1) edge[bend left,->]  node[above] {$g*$} node[below] {\small Glättung} (3.9,1);
+                        \draw[] (1,-0.1) edge[bend right=40,<-]  node[above] {?} node[below] {\small Entfaltung} (5,-0.1);
+                    \end{tikzpicture}
+                \end{center}
+                Das heißt: $u=f * g$, wobei $u, \ g$ gegeben sind und $f$ gesucht ist.\\
+                Alternativ kann dies als die Invertierung des Faltungsoperator $f \mapsto g * f$ betrachtet werden.
+                \begin{enumerate}[label = \alph*)]
+                    \item Diskreter Fall: \begin{align*}
+                                            & g*f=u\\
+                                            &(g*f)(j)=u(j), \ j \in \Omega\\
+                                            &\sum_k g(j-k)f(k)=u(j), \ j \in \Omega\\
+                                            &\Rightarrow \Omega \times \Omega \text{ Gleichungsystem}
+                                            \end{align*}
+                        \begin{center}
+                            \begin{tikzpicture}
+                                \matrix [matrix of nodes, column sep=1mm, row sep=1mm,name=M,left delimiter={(},right delimiter={)}]
+                                {
+                                    {$g(0)$}& {$g(-1)$}& {}& {}& {}& {}& {}& {$g(-n)$}\\
+                                    {$g(1)$}& {$g(0)$}& {$g(-1)$}& {}& {}& {}& {}& {}\\
+                                    {}& {}& {}& {}& {}& {}& {}& {}\\
+                                    {}& {}& {}& {}& {}& {}& {}& {}\\
+                                    {}& {}& {}& {}& {}& {}& {}& {}\\
+                                    {}& {}& {}& {}& {}& {}& {}& {}\\
+                                    {}& {}& {}& {}& {}& {}& {}& {\phantom{g(-0)}}\\
+                                    {}& {}& {}& {}& {}& {}& {}& {\phantom{g(0)}}\\
+                                    {}& {}& {}& {}& {}& {}& {}& {\phantom{g(0)}}\\
+                                    {$g(n)$}& {}& {}& {}& {}& {}& {}& {}\\ 
+                                    };
+                                    \draw[dotted] (M-2-2)--(M-8-8);
+                                    \draw[dotted] (M-2-1)--(M-9-8);
+                                    \draw[dotted] (M-2-3)--(M-7-8);
+                                    \draw (M-1-1) node[left,xshift =-23] {$j=0$};
+                                    \draw (M-2-1) node[left,xshift =-23] {$j=1$};
+                                    \draw (M-10-1) node[left,xshift =-23] {$j=n$};
+                                    \draw (M-1-1) node[yshift =23] {$k=0$};
+                                    \draw (M-1-2) node[yshift =23] {$k=1$};
+                                    \draw (M-1-8) node[yshift =23] {$k=n$};
+                                    \draw[decorate,decoration={brace,amplitude=4pt,mirror}] (-3.3,-3) -- node[below] {\mim{Toeplitz-Matrix}} (3.5,-3);
+                                    \matrix [matrix of nodes, column sep=1mm, row sep=1mm,name=N,left delimiter={(},right delimiter={)},shift={(5,0)}]
+                                    {
+                                    {$f(0)$}\\
+                                    {$f(1)$}\\
+                                    {}\\
+                                    {}\\
+                                    {}\\
+                                    {}\\
+                                    {}\\
+                                    {}\\
+                                    {}\\
+                                    {}\\
+                                    {}\\
+                                    {}\\
+                                    {$f(n)$}\\ 
+                                    };
+                                \draw[dotted] (N-2-1) -- (N-13-1);
+                                \draw (6.9,0) node[] {\Large $=$};
+                                \matrix [matrix of nodes, column sep=1mm, row sep=1mm,name=O,left delimiter={(},right delimiter={)},shift={(8.5,0)}]
+                                {
+                                    {$u(0)$}\\
+                                    {$u(1)$}\\
+                                    {}\\
+                                    {}\\
+                                    {}\\
+                                    {}\\
+                                    {}\\
+                                    {}\\
+                                    {}\\
+                                    {}\\
+                                    {}\\
+                                    {}\\
+                                    {$u(n)$}\\ 
+                                    };
+                                \draw[dotted] (O-2-1) -- (O-13-1);
+                            \end{tikzpicture}
+                        \end{center}
+                        \item Kontinuierlicher Fall: \begin{align*}
+                                                        &(g*f)(x)=u(x),\ x \in \Omega\\
+                                                        &\int g(x-y) f(y) dy = u(x), \ x \in \Omega\\
+                                                        &\text{Integralgleichung für die gesuchte Funktion $f$}
+                                                        \end{align*}
+                        $\Rightarrow$ Kontinuierliche Matrix:
+    
+                        \begin{center}
+                            \begin{tikzpicture}
+                                \draw (0,0) rectangle (5,5);
+                                \draw[->] (-0.2,5.1) -- (-0.2,-0.1) node[below] {$x$};
+                                \draw[->] (-0.1,5.2) -- (5.1,5.2) node[right] {$y$};
+                                \draw[] (2.5,5.5) node {\Large $g$};
+                                \draw[dotted] (0.2,4.8) -- node[sloped,above] {$g(x-y)$} (4.8,0.2);
+                                \draw (5.5,5) node[above,xshift=7] {\Large $f$} rectangle (6,0);
+                                \draw[<->] (6.2,4.9) node[above] {\small $a$} -- (6.2,0.1)  node[below] {\small $b$};
+                                \draw (6.5,2.5) node[] {\Large $=$};
+                                \draw (7,5) node[above,xshift=7] {\Large $u$} rectangle (7.5,0);
+                                \draw[->] (7.7,4.9) -- (7.7,0.1) node[above] {\small $x$};
+                            \end{tikzpicture}
+                        \end{center}
+                        Wobei $[a,b]$ die das Definitionsgebiet von $f$ ist.
+                        Diese Problem is jedoch schlecht gestellt, da der Operator kompakt ist. ($\nearrow$ Datei im Studip)
+                \end{enumerate}
 
 
     \printindex
