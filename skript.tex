@@ -88,6 +88,10 @@
     \mathbb N
 }
 
+\newcommand{\F}[0]{
+    \mathcal F
+}
+
 \newcommand{\srmatrix}[1] {
 \left( \begin{smallmatrix} #1 \end{smallmatrix} \right)
 }
@@ -2416,6 +2420,131 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                         Diese Problem is jedoch schlecht gestellt, da der Operator kompakt ist. ($\nearrow$ Datei im Studip)
                 \end{enumerate}
 
+                Wir versuchen es trotzdem zu lösen:
+                \begin{align*}
+                    g*f&=u & &|\cdot \F\\
+                    \F(g * f)&= \F u \\
+                    (2 \pi)^\frac{d}{2}(\F g)\cdot (\F f)&= \F u & &| \div (2 \pi)^\frac{d}{2}(\F g)\\
+                    \F f &= \frac{\F u}{(2 \pi)^\frac{d}{2} \F g} & &| \F^{-1}
+                \end{align*}
+                Und erhalten:
+                \begin{equation}
+                    f= (2 \pi)^\frac{d}{2} \F^{-1}\left(\frac{\F u}{\F g}\right)
+                \end{equation}
+                Dieses kann jedoch zu Problemen führen, da etwa $g \approx 0$ werden kann.
+                Je glatter $g$ ist, desto stärker klingt $(\F g)(z)$ ab für $z \to \infty$.\\
+                \ \\
+                Anders betrachtet:\\
+                Wenn $\abs{\hat g(z)}$ für hohe Frequenzen klein ist, dann ist:
+                \[A:f \mapsto g +f\]
+                ein Tiefpassfilter. Nimmt man nun eine Funktion $h$ mit hoher Frequenz und großer Amplitude, dann gilt:
+                \[A(f + h) = Af + \underbrace{Ah}_{\approx 0} \approx Af\]
+                
+                \underline{Problembehebung:}
+                \begin{enumerate}[label = \arabic*. Ansatz:]
+                    \item \ \\
+                    \begin{minipage}[c]{0.55\textwidth}
+                        \begin{center}
+                            Approximiere die Funktion $\frac{1}{x}$ durch\\
+                            \[R_\alpha = \begin{cases}
+                                \frac{1}{x}, & \abs{x} > \alpha\\
+                                \frac{1}{\alpha}, & x \in [0,\alpha]\\
+                                \frac{1}{-\alpha}, & x \in [-\alpha,0]
+                            \end{cases}\]
+                            wobei $\alpha > 0$.
+                        \end{center}
+                        und ersetze $\displaystyle f=(2 \pi)^\frac{d}{2} \F^{-1}\left(\frac{\hat u (z)}{\hat g(z)}\right)$ durch:\\
+                        \[f=(2 \pi)^\frac{d}{2} \F^{-1}\left(\hat u (z) R_\alpha(\hat g(z)) \right)\]
+                        und lasse $\alpha \to 0$.
+                    \end{minipage}
+                    %\hfill\vrule\hfill
+                    \begin{minipage}[c]{0.4\textwidth}
+                        \begin{center}
+                            \begin{tikzpicture}
+                                \draw[->] (-2,0) -- (2,0);
+                                \draw[<-] (0,2) -- (0,-2);
+                                \draw[scale=0.4,domain=0.22:4.7,smooth,variable=\x,shift ={(0,0)}] plot ({\x},{1/\x});
+                                \draw[scale=0.4,domain=-0.22:-4.7,smooth,variable=\x,shift ={(0,0)}] plot ({\x},{1/\x});
+                                \draw[scale=0.4,domain=0.5:4.7,smooth,variable=\x,shift ={(0,0)},dashed,red,thick] plot ({\x},{1/\x});
+                                \draw[scale=0.4,domain=-0.5:-4.7,smooth,variable=\x,shift ={(0,0)},dashed,red,thick] plot ({\x},{1/\x});
+                                \draw (0.2,0.1) -- (0.2,-0.1) node[below] {\tiny $\alpha$};
+                                \draw (-0.2,0.1) -- (-0.2,-0.1) node[below] {\tiny $-\alpha$};
+                                \draw[color=red,thick] (0,0.81818) -- (0.2,0.81818);
+                                \draw[color=red,thick] (0,-0.81818) -- (-0.2,-0.81818);
+                                \draw (-1.9,1.9) rectangle node[align=right,left,xshift = 2] {\small $\frac{1}{x}$:\\$R_\alpha$:} (-0.6,1);
+                                \draw (-1.2,1.62)--(-0.7,1.62);
+                                \draw[thick,red] (-1.2,1.22)--(-0.7,1.22);
+                            \end{tikzpicture}
+                        \end{center}
+                    \end{minipage}
+                    \item Variationsrechnung:
+                        \begin{enumerate}[label = \arabic*. Wunsch:]
+                            \item $g *f \approx u$
+                            \item $\norm{f}_2$ klein
+                        \end{enumerate}
+                        Minimiere nun:
+                        \[\Rightarrow J(f) := \norm{g * f - u}_2^2 + \lambda \norm{f}_2^2 \to min\]
+                        \[\iff \int_{\R^d} ((g*f)(x) - u(x))^2 + \lambda f(x)^2 dx \to min\]
+                        über die Wahl von $f \in U:= L^2(\R^d)$.\\
+                        Idee: $\F$ anwenden $\Rightarrow *$ wird zu $\C$ \underline{und} $\norm{\C}_2$ bleibt unverändert.
+                        \begin{align*}
+                            \Rightarrow J(f)&=\norm{g*f-u}_2^2 + \lambda\norm{f}_2^2\\
+                            &=||\widehat{g*f-u}||_2^2 + \lambda ||\hat f||_2^2\\
+                            &=||(2 \pi)^\frac{d}{2} \hat g \hat f -\hat u||_2^2 + \lambda||\hat f||_2^2\\
+                            &=\int_{\R^d}\left[ \left((2 \pi)^\frac{d}{2} \hat g(z) \hat f(z) - \hat u(z)\right)^2 + \lambda |\hat f(z)|^2 \right] dz \overset{f \in U}{\longrightarrow} min
+                        \end{align*}
+                    Strategie: Integral für jedes einzelne $z$ minimieren. Daraus erhalten wir ein optimales $\hat f$ und somit auch ein optimales $f$.\\
+                    Also minimiere für jedes $z \in \R^d$
+                    \[I(t):=|(2 \pi)^\frac{d}{2} \hat g(z)t - \hat u(z)|^2 + \lambda |t|^2 \overset{t \in \mathbb C}{\longrightarrow}min\]
+                    Später setzen wir $\hat f(z):=t_{min}$, nun zur minimierung:
+                    \begin{align*}
+                        I(t)&=((2 \pi)^\frac{d}{2} \hat g(z) t - \hat u(z))((2 \pi)^\frac{d}{2} \ \overline{\hat g(z)} \ \overline t -\overline{\hat u (z)}) + \lambda t \overline t\\
+                        &=(2 \pi)^\frac{d}{2} \hat g(z) \ \overline{\hat g(z)} \ t \ \overline t + \lambda t \overline t - (2 \pi)^\frac{d}{2} (\hat g(z) \ \overline{\hat u(z)} \ t + \overline{\hat g(z)} \ \hat u(z) \ \overline{t}) + \hat u(z) \ \overline{\hat u(z)}\\
+                        &=((2 \pi)^\frac{d}{2} |\hat g(z)|^2 + \lambda)|t|^2 - (2 \pi)^\frac{d}{2} (2 \C Re(\underbrace{\hat g(z) \ \overline{\hat u(z)}t}_{\circledast})) + |\hat u(z)|^2 \overset{t \in \mathbb C}{\longrightarrow} min\\
+                    \end{align*}
+                    Das Argument (Winkel) taucht nur in $\circledast$ auf\\
+                    \begin{align*}
+                        &\Rightarrow \text{So wählen, das $\circledast$ auf die positive reele Achse fällt}\\
+                        &\Rightarrow 0=arg(\circledast)= arg(\hat g(z) \ \overline{\hat u(z)}) + arg(t)\\
+                        &\Rightarrow arg(t)=-arg(\hat g(z) \ \overline{\hat u(z)})=arg(\overline{\hat g(z)} \ \hat u(z))\\
+                        &\Rightarrow I(t) = ((2\pi)^\frac{d}{2} |\hat g(z)|^2 + \lambda)|t|^2 - (2\pi)^\frac{d}{2} 2 \C |\overline{\hat g(z)} \ \hat u(z)| \ |t| + |\hat u (z)|^2 \overset{|t| \in \R}{\longrightarrow}min
+                    \end{align*}
+                    Dieses ist nun ein Polynom in $|t|$, sodass das minimum einfach bestimmt werden kann.\\
+                    \begin{align*}
+                        &0=\frac{d}{d|t|}...=2\C((2\pi)^\frac{d}{2}|\hat g(z)|^2 + \lambda)|t| - (2\pi)^\frac{d}{2} \C 2 \C |\overline{\hat g(z)} \ \hat u(z)|\\
+                        &\Rightarrow |t| = \frac{(2\pi)^\frac{d}{2} \C 2 \C |\overline{\hat g(z)} \ \hat u(z)|}{2\C((2\pi)^\frac{d}{2}|\hat g(z)|^2 + \lambda)} = \frac{(2\pi)^\frac{d}{2}\C |\overline{\hat g(z)} \ \hat u(z)|}{(2\pi)^\frac{d}{2}|\hat g(z)|^2 + \lambda} \text{ und } arg(u)=arg(\overline{\hat g(z)} \ \hat u(z))\\
+                        &\Rightarrow t =  \frac{(2\pi)^\frac{d}{2} \ \overline{\hat g(z)} \ \hat u(z)}{(2\pi)^\frac{d}{2}|\hat g(z)|^2 + \lambda}=:\hat f(z)
+                    \end{align*}
+                    Wegen
+                    \[\hat f(z) = (2\pi)^\frac{d}{2} \frac{\overline{\hat g(z)}}{(2\pi)^\frac{d}{2}|\hat g(z)|^2 + \lambda} \hat u(z)\]
+                    gilt
+                    \begin{equation}
+                        f(z) = \F^{-1}\left( \frac{\overline{\hat g(z)}}{(2\pi)^\frac{d}{2}|\hat g(z)|^2 + \lambda} \right) * u
+                    \end{equation}
+                    Dieses Verfahren wird \mim{$L^2$ deblurring} gennant.
+                    Es gibt auch einen alternativen, algebraischen Zugang:
+                
+                    \[I(f) = \norm{g*f-u}_2^2 + \lambda \norm{f}_2^2 \overset{f}{\to} min\]
+                    \[\iff \norm{\mat{g*f-u\\ \sqrt{\lambda} f}} \overset{f}{\to} min\]
+                    \[\iff \norm{\mat{Af \\ \sqrt{\lambda}f} - \mat{u\\0}} = \norm{\mat{A \\ \sqrt{\lambda}}f - \mat{u\\0}} \overset{f}{\to} min \quad (A= f \mapsto g*f)\]
+                    $\Rightarrow$ lineares Ausgleichsproblem.
+                    \[\Rightarrow \mat{A^* &\sqrt{\lambda} I^*} \mat{A \\ \sqrt{\lambda}I}f = \mat{A^* & \sqrt{\lambda}I} \mat{u \\ 0} \quad \text{(Normalengleichung)}\]
+                    \[\Rightarrow \mat{A^*A + \abs{\lambda}I}f=A^*u\]
+                    \[\Rightarrow f= \mat{A^*A + \abs{\lambda}I}^{-1}A^*u\]
+                    Die Inverse existiert, da $-\abs{\lambda}$ nicht im Spektrum von $A^*A$ sein kann, denn das Spektrum von $A^*A$ ist positiv und reel.
+                    \item noch einmal Variationsrechnung, diesmal mit anderen Wünschen
+                    \item Variationsrechnung:
+                    \begin{enumerate}[label = \arabic*. Wunsch:]
+                        \item $g *f \approx u$
+                        \item $\norm{\nabla f}$ klein
+                    \end{enumerate}
+                    Nach analoger Rechnung wie oben erhält man: 
+                    \begin{equation}
+                        f=\F \left( \frac{\overline{\hat g(z)}}{(2\pi)^\frac{d}{2} \ |\hat g(z)|^2 + \lambda |z|^2} \right) * u
+                    \end{equation}
+                    $\Rightarrow$ Dämpfung höher wenn Frequenz höher.\\
+                    Dieses Verfahren nennt sich \mim{$H^1$ deblurring}
+                \end{enumerate}
 
     \printindex
 
