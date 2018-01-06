@@ -199,7 +199,7 @@ tabsize=3}
             \item Kantendetektion
             \item Schärfen
             \item Inpainting
-            \item Segmentierung (Einzlene Objekte detektieren)
+            \item Segmentierung (Einzelne Objekte detektieren)
             \item Registrierung (Bilder des selben Objektes in Einklang bringen)
         \end{enumerate}
 
@@ -210,7 +210,7 @@ tabsize=3}
 
     \subsection{Verwandte Vorlesungen}
         \begin{enumerate}[label=\textbullet]
-            \item 3D computervision
+            \item 3D Computervision
             \item Digitale Bildanalyse
             \item Mustererkennung und Datenkompression
             \item Medical imaging
@@ -307,7 +307,7 @@ tabsize=3}
                         \item $\Omega$ in Gitter zerlegen
                         \item Jede Box durch nur einen Farbwert approximieren
                         \item Etwa durch den Funktionswert im Mittelpunkt der Box
-                        \item oder durch den Mittlewert in der Box:\\ $\displaystyle \frac{1}{\abs{B_i}} \C \int_{B_i}u(x)dx$
+                        \item oder durch den Mittelwert in der Box:\\ $\displaystyle \frac{1}{\abs{B_i}} \C \int_{B_i}u(x)dx$
                     \end{enumerate}
                 \end{center}
             \end{minipage}
@@ -342,7 +342,7 @@ tabsize=3}
                     \
                     \begin{center}
                         \begin{enumerate}
-                            \item[1.] Idee: Jeder Punkt der Box $B_i$ erhält den Funktionswert von $B_i$ aus als diskretem Pixel $\Rightarrow$ \mim{Nearest neighbour interpolation}.
+                            \item[1.] Idee: Jeder Punkt der Box $B_i$ erhält den Funktionswert von $B_i$ aus als diskretem Pixel $\Rightarrow$ \mim{Nearest neighbour Interpolation}.
                             \item[2.] Idee: Mittelpunkt von Box $B_i$ erhält den Wert von Pixel $B_i$ sonst wird interpoliert.\\
                             Grauwert $g:=$ Gewichtetes Mittel aus Grauwerten $a,b,c,d$.\\
                         \end{enumerate}
@@ -372,7 +372,7 @@ tabsize=3}
                             \end{center}
 
                             \small{$g=(1-\alpha) \C (1-\beta) \C a + \alpha \C (1- \beta) \C b + (1-\alpha) \C \beta \C c + \alpha \C \beta \C d$}\\
-                            Dieses wird \mim{Bilinear interpolation} genannt.
+                            Dieses wird \mim{Bilineare Interpolation} genannt.
                     \end{center}
                 \end{minipage}
 
@@ -445,7 +445,7 @@ tabsize=3}
         Sei $u:\Omega \to F$ ein diskretes Bild, dann heißt die Abbildung
         \[H_u : F \to \N_0\]
         \[F \ni k \mapsto \# \{x \in \Omega | u(x) = k\}\]
-        \mim{Histogramm} des Bildes $u$. Dieses gibt an, wie often die Farbe $k$ im Bild vorhanden ist.\\
+        \mim{Histogramm} des Bildes $u$. Dieses gibt an, wie oft die Farbe $k$ im Bild vorhanden ist.\\
         Damit gilt auch:
         \[\sum_{k \in F}H_u(k)=\abs{\Omega} \text{, also die Anzahl der Pixel}\]
         \begin{bemerkung*}
@@ -561,7 +561,7 @@ tabsize=3}
         \end{center}
 
         \pa{2. Idee nicht-lineare Kontrastdehnung}\\
-            Diesesmal setzen wir $\displaystyle T(k) =\left[ \frac{N}{\abs{\Omega}} \sum_{l=0}^{k}H_u(l) \right]$ für einen diskreten Farbraum und erhalten:
+            Dieses mal setzen wir $\displaystyle T(k) =\left[ \frac{N}{\abs{\Omega}} \sum_{l=0}^{k}H_u(l) \right]$ für einen diskreten Farbraum und erhalten:
 
             \begin{center}
                 \begin{tikzpicture}
@@ -632,7 +632,7 @@ tabsize=3}
             Die \mim{Masse}:
             \[m_{\text{schwarz}} := \sum_{k \in \text{schwarz}} H_u(k)\]
             \[m_{\text{weiß}} := \sum_{k \in \text{weiß}} H_u(k)\]
-            Der \mim{Mittlewert}:
+            Der \mim{Mittelwert}:
             \[\mu_{\text{schwarz}} := \frac{\displaystyle \sum_{k_ \in \text{schwarz}} k \C H_u(k) }{\displaystyle \sum_{k_ \in \text{schwarz}}H_u(k)} = \frac{\displaystyle \sum_{k_ \in \text{schwarz}} k \C H_u(k) }{m_{\text{schwarz}}}\]
             \[\mu_{\text{weiß}} := \frac{\displaystyle \sum_{k_ \in \text{weiß}} k \C H_u(k) }{\displaystyle \sum_{k_ \in \text{weiß}}H_u(k)} = \frac{\displaystyle \sum_{k_ \in \text{weiß}} k \C H_u(k) }{m_{\text{weiß}}}\]
             Die \mim{Varianz}:
@@ -729,7 +729,7 @@ imshow(w);
     \subsection{Verknüpfungen von A und B}
         \[A+B := \{a + b : a \in A, b \in B\}\]
         Diese wird \mim{dilation} genannt.\\
-        Anschaulich wird an jeden schwarzen Punkt des Bildes $A$ das Struktur element $B$ gelegt.
+        Anschaulich wird an jeden schwarzen Punkt des Bildes $A$ das Struktur Element $B$ gelegt.
         \begin{center}
             \begin{tikzpicture}
                 \draw (0,0) node[left] {$A+B=$} node[right] {\includegraphics[scale = 0.2]{Bild1dil.png}};
@@ -739,7 +739,7 @@ imshow(w);
         \begin{lstlisting}
 I=imread('Bild1.png');
 se=strel('disk',40,8);
-I2=imcomplement(imdilate(imcomplement(I),se));%Es wird das Komplement des Bildes gebildet, damit das Strukturelement auf den schwarzen bereich angewendet wird
+I2=imcomplement(imdilate(imcomplement(I),se));%Es wird das Komplement des Bildes gebildet, damit das Strukturelement auf den schwarzen Bereich angewendet wird
 imshow(I2);
         \end{lstlisting}
 
@@ -973,7 +973,7 @@ imshow(I3);
                 \draw (2.5,1) node[above] {\large 0};
                 \draw (3.5,1) node[above] {\large 1};
                 \draw (4.5,1) node[above] {\large \dots};
-                \draw (5,0.5) node[right] {gennant \mim{Maske}.};
+                \draw (5,0.5) node[right] {genannt \mim{Maske}.};
             \end{tikzpicture}
         \end{center}
 
@@ -982,7 +982,7 @@ imshow(I3);
             \framebox{$\displaystyle (m \boxast f)(k) = \sum_{i \in supp(m)} m(j-k) f(j)$}
         \end{equation}
 
-        Um die Abbildung auf den Rand anzuwenden wird das Bild gespiegel, in 1D:
+        Um die Abbildung auf den Rand anzuwenden wird das Bild gespiegelt, in 1D:
         \begin{center}
             \begin{tikzpicture}
                 \draw[step = 0.5] (0,0) grid (2.2,-0.5);
@@ -1055,7 +1055,7 @@ imshow(I3);
     \[L^1(\R^d) := \{f:\R^d \to \R | \underbrace{\int_{\R^d}\abs{f} dx}_{:=\norm{f}_1} < \infty\}\]
     \[f,g \in L^1(\R^d): (g*f)(x)=\int_{\R^d}g(x-y)f(y) dy, \ y,x \in \R^d\]
 
-    Beispiel für den kontinueirlichen Fall:
+    Beispiel für den kontinuierlichen Fall:
     \begin{center}
         \begin{tikzpicture}
             \draw[dotted] (0,1) node[left] {$\frac{1}{2a}$} -- (8,1);
@@ -1461,7 +1461,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             \draw[] (2.5,-6) edge[bend right=-15,->] node[above, pos = 0.5] {\small $n \cdot log(n)$} node[below, pos = 0.5] {$\mathcal F^{-1}$} (-2.5,-6);
             \draw (-3,-6) node[] {$u$};
             \draw (-3,-6) node[left] {\small $f*g=$};
-            \draw (-3,-1.5) edge[bend left=-15,->] node[right,pos = 0.5] {\small $n^2$} node[left, pos = 0.5] {\small Falltung, $*g$} (-3,-5.5);
+            \draw (-3,-1.5) edge[bend left=-15,->] node[right,pos = 0.5] {\small $n^2$} node[left, pos = 0.5] {\small Faltung, $*g$} (-3,-5.5);
             \draw [thick, name path = P2,->]plot [smooth, tension = 0.9]coordinates {(-2.5,-1.5) (1.5,-1.5) (1.5,-5) (-2.5,-5.5)};
             \draw (2,-3.5) node[left] {\small $n \cdot log(n)$};
         \end{tikzpicture}
@@ -1628,7 +1628,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \end{minipage}
     \ \\
 
-    \mtitle{2. Abbleitung:}
+    \mtitle{2. Ableitung:}
 
     \begin{align*}
         u(h) \approx & \frac{f'(k+1) - f'(k)}{h} \text{(vorwärts)}\\
@@ -1807,9 +1807,9 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \begin{equation}\label{eq:5.13}
         u(x,0)=u^{(0)}=f(x)
     \end{equation}
-    gelten. Vorranschreiten der Zeit $t$ repräsentiert Diffusion.\\
+    gelten. Voranschreiten der Zeit $t$ repräsentiert Diffusion.\\
     Für einen stationären Zustand, also keine Änderung $\frac{\partial u}{\partial t}$ dann muss auch $\Delta u =0$ gelten.\\
-    Diese wird unteranderem von konstanten Funktionen oder linearen Funktionen $u(x_1,x_2) = ax_1 + bx_2$ erfüllt.\\
+    Diese wird unter anderem von konstanten Funktionen oder linearen Funktionen $u(x_1,x_2) = ax_1 + bx_2$ erfüllt.\\
     \ \\
     Es existiert auch einen explizite Formel für die Lösung der Diffusionsgleichung \eqref{eq:5.12} mit Anfangsbedingung \eqref{eq:5.13}:
     \[u(x,t) = \left( G_{\sqrt{2t}} * u^{(0)} \right)(x)\]
@@ -1833,7 +1833,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
 
     \begin{center}
         \begin{tikzpicture}
-            \draw[->] (0,0) node[left] {\small kontinueirlich:} -- (10,0) node[right] {\small t};
+            \draw[->] (0,0) node[left] {\small kontinuierlich:} -- (10,0) node[right] {\small t};
 
             \draw (1,-0.5) rectangle (2,-1.5);
             \draw (1.5,-1) node {\large $u^{(0)}$};
@@ -1909,7 +1909,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
               g(\abs{\frac{\partial u}{\partial x}(x,y)}) & 0 \\
               0 & g(\abs{\frac{\partial u}{\partial y}(x,y)})
           \end{pmatrix}$\\
-          Diese art der Diffusionstensoren ist \mim{anisoptrop} also richtungsabhängig.\\
+          Diese Art der Diffusionstensoren ist \mim{anisoptrop} also richtungsabhängig.\\
           \ \\
           Für $\x \in \Z^2$ und $\x_W = \x + \srmatrix{-1 \\ 0}$ usw.\\
           \begin{center}
@@ -2031,7 +2031,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
       Im obigen Ansatz \eqref{eq:5.15} stellt man fest, dass der Regularitätsterm
       \[\norm{\nabla u}_2^2 = \int_\Omega \abs{\nabla u(\x)}^2 d\x =
       \int_\Omega \left( \frac{\partial u}{\partial x} (\x) \right)^2 + \left( \frac{\partial u}{\partial x} (\x) \right)^2 d\x \]
-      die großen Gradienten an (gewolleten) Kanten zu stark bestraft. ($\Rightarrow$ optimales $u$ glättet Kanten)\\
+      die großen Gradienten an (gewollten) Kanten zu stark bestraft. ($\Rightarrow$ optimales $u$ glättet Kanten)\\
 
       Ausweg: Wähle $\norm{\nabla u}_2$ oder $\displaystyle \norm{\nabla u}_1 =\int_\Omega \abs{\nabla u(\x)} d\x = \int_\Omega \abs{\frac{\partial u}{\partial x} (\x)} + \abs{\frac{\partial u}{\partial y} (\x)} d\x$ als Regularitätsterme.
 
@@ -2045,7 +2045,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
       \[J(u):=\underbrace{D(u,f)}_{\text{Datenkern}} + \lambda \underbrace{R(u)}_{\text{Regularitätsterm}} \overset{u \in U}{\to} \text{min}\]
 
       Notwendiges Kriterium:\\
-      Falls $J:U \to \R$ in $u \in U$ ein lokales Minimum besutzt, dann gilt für jede Richtung $v \in U$:
+      Falls $J:U \to \R$ in $u \in U$ ein lokales Minimum besitzt, dann gilt für jede Richtung $v \in U$:
 
       \begin{equation}\label{eq:5.17}
         \underset{\epsilon \nearrow 0}{lim} \frac{J(u+\epsilon v) - J(u)}{\epsilon}=0
@@ -2113,7 +2113,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                         -1 & 0 & 1\\
                         \hline
                     \end{tabular}$};
-                    \draw[->] (6.7,1.7) -- node[below] {Differenzeiren} (8.7,1.7);
+                    \draw[->] (6.7,1.7) -- node[below] {Differenzieren} (8.7,1.7);
                     \draw[<->] (8.8,3.2) -- node[right] {Glättung} (8.8,1.7);
                     \draw (7.7,3.2) node[above] {\mim{Prewitt-Filter}:};
                 \end{tikzpicture}
@@ -2137,7 +2137,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             -1 & 0 & 1\\
             \hline
             \end{tabular}=:D_x$, genannt \mim{Sobel-Filter}.
-            Eine stärkere Glättung kann mittels anderer vertikaler Filter mit Binomialkoeffizienten erzeilt werden.\\
+            Eine stärkere Glättung kann mittels anderer vertikaler Filter mit Binomialkoeffizienten erzielt werden.\\
 
             Entsprechen wird $\frac{\partial }{\partial y} D_y:=D_x^T$ definiert.\\
 
@@ -2223,7 +2223,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                 \end{tikzpicture}
             \end{center}
 
-            Test für kantenpunkte $u''(\x) = 0$ und $\abs{u'(\x)}>$ threshold.\\
+            Test für Kantenpunkte $u''(\x) = 0$ und $\abs{u'(\x)}>$ threshold.\\
             Wichtig: Vorglätten!, da die 2. Ableitung noch anfälliger gegenüber Rauschen als die 1. Ableitung ist.\\
             \ \\
             In 2D. Laplace Operator $\Delta u = \frac{\partial^2 u}{\partial^2 x} + \frac{\partial^2 u}{\partial^2 y}$ (Richtungsunabhängige Messung der 2. Ableitung)\\
@@ -2500,7 +2500,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                     Strategie: Integral für jedes einzelne $z$ minimieren. Daraus erhalten wir ein optimales $\hat f$ und somit auch ein optimales $f$.\\
                     Also minimiere für jedes $z \in \R^d$
                     \[I(t):=|(2 \pi)^\frac{d}{2} \hat g(z)t - \hat u(z)|^2 + \lambda |t|^2 \overset{t \in \mathbb C}{\longrightarrow}min\]
-                    Später setzen wir $\hat f(z):=t_{min}$, nun zur minimierung:
+                    Später setzen wir $\hat f(z):=t_{min}$, nun zur Minimierung:
                     \begin{align*}
                         I(t)&=((2 \pi)^\frac{d}{2} \hat g(z) t - \hat u(z))((2 \pi)^\frac{d}{2} \ \overline{\hat g(z)} \ \overline t -\overline{\hat u (z)}) + \lambda t \overline t\\
                         &=(2 \pi)^\frac{d}{2} \hat g(z) \ \overline{\hat g(z)} \ t \ \overline t + \lambda t \overline t - (2 \pi)^\frac{d}{2} (\hat g(z) \ \overline{\hat u(z)} \ t + \overline{\hat g(z)} \ \hat u(z) \ \overline{t}) + \hat u(z) \ \overline{\hat u(z)}\\
@@ -2513,7 +2513,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                         &\Rightarrow arg(t)=-arg(\hat g(z) \ \overline{\hat u(z)})=arg(\overline{\hat g(z)} \ \hat u(z))\\
                         &\Rightarrow I(t) = ((2\pi)^\frac{d}{2} |\hat g(z)|^2 + \lambda)|t|^2 - (2\pi)^\frac{d}{2} 2 \C |\overline{\hat g(z)} \ \hat u(z)| \ |t| + |\hat u (z)|^2 \overset{|t| \in \R}{\longrightarrow}min
                     \end{align*}
-                    Dieses ist nun ein Polynom in $|t|$, sodass das minimum einfach bestimmt werden kann.\\
+                    Dieses ist nun ein Polynom in $|t|$, sodass das Minimum einfach bestimmt werden kann.\\
                     \begin{align*}
                         &0=\frac{d}{d|t|}...=2\C((2\pi)^\frac{d}{2}|\hat g(z)|^2 + \lambda)|t| - (2\pi)^\frac{d}{2} \C 2 \C |\overline{\hat g(z)} \ \hat u(z)|\\
                         &\Rightarrow |t| = \frac{(2\pi)^\frac{d}{2} \C 2 \C |\overline{\hat g(z)} \ \hat u(z)|}{2\C((2\pi)^\frac{d}{2}|\hat g(z)|^2 + \lambda)} = \frac{(2\pi)^\frac{d}{2}\C |\overline{\hat g(z)} \ \hat u(z)|}{(2\pi)^\frac{d}{2}|\hat g(z)|^2 + \lambda} \text{ und } arg(u)=arg(\overline{\hat g(z)} \ \hat u(z))\\
@@ -2525,7 +2525,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                     \begin{equation}
                         f(z) = \F^{-1}\left( \frac{\overline{\hat g(z)}}{(2\pi)^\frac{d}{2}|\hat g(z)|^2 + \lambda} \right) * u
                     \end{equation}
-                    Dieses Verfahren wird \mim{$L^2$ deblurring} gennant.
+                    Dieses Verfahren wird \mim{$L^2$ deblurring} genannt.
                     Es gibt auch einen alternativen, algebraischen Zugang:
                 
                     \[I(f) = \norm{g*f-u}_2^2 + \lambda \norm{f}_2^2 \overset{f}{\to} min\]
@@ -2558,7 +2558,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \item Defekt in der Kamera
     \item Bewusst entferntes Objekt
   \end{enumerate}
-  sollen sinvoll und unauffällig geschlossen werden.
+  sollen sinnvoll und unauffällig geschlossen werden.
 
   Sei $f: \Omega \to F$ unser Bild jedoch mit Defekt, d.h. fehlenden Funktionswerten in $D \subset \Omega$.
 
@@ -2664,7 +2664,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \hfill
     \begin{minipage}[c]{0.65\linewidth}
         \begin{enumerate}
-          \item[Idee:] Informationen aus $\Omega \backslash D$ nach $D$ ''hineintragen''.
+          \item[Idee:] Informationen aus $\Omega \backslash D$ nach $D$ ''hineinragen''.
           \item[Referenzen:] \begin{enumerate}
             \item[\textbullet] Weichert 1998
             \item[\textbullet] Bornemann \& März 2007
@@ -2677,7 +2677,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \textbf{Skalierung der Diffusion:}
     \[\frac{\partial u}{\partial t} = div(M \nabla u)\]
     \[\text{mit } M = \srmatrix{ | & |\\ v_1 & v_2\\ | & |} \mat{\lambda_1 & \ \\ & \lambda_2} \srmatrix{- & v_1^T & -\\ \\- & v_2^T & -} \in R^{2 \times 2}\]
-    Wobei $v_1 \perp v_2$ die Eigenvektoren des sogenannten \underline{doppelt geglätteten Strukturrensors} \index{doppelt geglätteter Strukturrensor}
+    Wobei $v_1 \perp v_2$ die Eigenvektoren des sogenannten \underline{doppelt geglätteten Strukturtensors} \index{doppelt geglätteter Strukturtensor}
     \[J= G_\rho * \biggl[ \underbrace{\srmatrix{| \\ \nabla (G_\sigma * u)\\ |}}_{2 \times 1} \cdot \underbrace{\srmatrix{- & \nabla^T(G_\sigma * u) & -}}_{1 \times 2} \biggr] \]
     sind.\\
     \begin{enumerate}
@@ -2810,7 +2810,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \section{Segmentierung}
 
 Dieses ist die Zerlegung eines Bildes in verschiedene Objekt.\\
-Eine einfach methode hierfür ist das \mim{Historgramm thresholding}:
+Eine einfache Methode hierfür ist das \mim{Histogramm thresholding}:
 \begin{center}
   \begin{tikzpicture}
     \draw (1,0) -- (2,0) -- (2,1) -- (3,1) -- (3,0) -- (4,0) -- (4,1) -- (5.5,1) -- (5.5,0) -- (7,0);
@@ -2823,13 +2823,13 @@ Eine einfach methode hierfür ist das \mim{Historgramm thresholding}:
   \end{tikzpicture}
 \end{center}
 So kann ein Bild in mehrere Objekte zerlegt werden.\\
-Hierbei können jedoch diverse Probleme auftreten, die durch preprocessing vermindert werden sollten. Einige der preprocessing methoden sind:
+Hierbei können jedoch diverse Probleme auftreten, die vor der Zerlegung durch preprocessing behoben werden sollten. Einige der preprocessing Methoden sind:
 \begin{enumerate}
   \item[-] Entrauschen $\nearrow$ 5.7
   \item[-] Farbraum optimal ausnutzen $\nearrow$ 3.2
   \item[-] \mim{Beleuchtungsausgleich}
 \end{enumerate}
-Dieser Beleuchtungsausgleich wurde nohc nicht vorher besprochen, das Problem:
+Dieser Beleuchtungsausgleich wurde noch nicht vorher besprochen, das Problem:
 
 \begin{center}
   \begin{tikzpicture}
@@ -2838,7 +2838,7 @@ Dieser Beleuchtungsausgleich wurde nohc nicht vorher besprochen, das Problem:
   \end{tikzpicture}
 \end{center}
 
-Anstatt eines \quo{geraden} Bildes ist das Bild, etwa durch Beleuchtung, \quo{gekippt} und der Ansatz mittels Histogramthresholding würde nicht das gewünschte Ergebniss erzielen.\\
+Anstatt eines \quo{geraden} Bildes ist das Bild, etwa durch Beleuchtung, \quo{gekippt} und der Ansatz mittels Histogramthresholding würde nicht das gewünschte Ergebnis erzielen.\\
 
 In 2D könnte dies so aus sehen.
 
@@ -2862,7 +2862,7 @@ In 2D könnte dies so aus sehen.
   \end{tikzpicture}
 \end{center}
 
-Rechts ist das Bild, das durch das Beschreibene Histogramm thresholding dargestellt wurde zu sehen. Methoden um durch preprocessing den gesuchten Gradienten zu entfernen werden im folgenden beschrieben.
+Rechts ist das Bild, das durch das Beschriebene Histogramm thresholding dargestellt wurde zu sehen. Methoden um durch preprocessing den gesuchten Gradienten zu entfernen werden im folgenden beschrieben.
 
 \subsection{Beleuchtungsausgleich}
 
@@ -2895,27 +2895,27 @@ Rechts ist das Bild, das durch das Beschreibene Histogramm thresholding dargeste
     \end{minipage}
     Dazu soll gelten
     \[\forall (x,y) \in \Omega : ax+by+c \approx f(x,y)\]
-    um dieses zu erfüllen wird eine Stichprobe von endlich vielen Punkten $(x_i,y_i)$ aus $\Omega$ gewählt und durch diese ein Gleichungs System gebildet.
+    um dieses zu erfüllen wird eine Stichprobe von endlich vielen Punkten $(x_i,y_i)$ aus $\Omega$ gewählt und durch diese ein Gleichungssystem gebildet.
     
     \begin{gather*} 
     ax_1+by_1+c \approx f(x_1,y_1)\\
     \vdots \\
     ax_n+by_n+c \approx f(x_n,y_n)
     \end{gather*}
-    In Matrix form ergibt sich:
+    In Matrix Form ergibt sich:
     
     \[\underbrace{\mat{x_1 & y_1 & 1 \\ \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots \\ x_n & y_n & 1}}_{A} \underbrace{\mat{a \\ b \\ c}}_{w} \approx \underbrace{\mat{f(x_1,y_1 \\ \vdots \\ \vdots \\ \vdots \\ f(x_n,y_n)}}_{z}\]
     Die optimale Lösung dieses Problems kann über die \mim{Normalengleichung} berechnet werden.
     
     \[A^T A w = A^T z\]
     
-    Dauraus erhält man $w$, somit auch $a$, $b$, $c$ und schlussendlich $v \Rightarrow u = f-v$.\\
-    Anschließend wird noch ein Histogram stretching durchgeführt um das finale Bild zu erhalten.
+    Daraus erhält man $w$, somit auch $a$, $b$, $c$ und schlussendlich $v \Rightarrow u = f-v$.\\
+    Anschließend wird noch ein Histogramm stretching durchgeführt um das finale Bild zu erhalten.
     
     \item \mim{Polynomiale Regression}:
-    Ähnlich zur linearen Regression nun wird hierbei keine affin-lineare Funktion, sondern ein polynom genutzt. Für ein Polynom zwieten gerades kann etwa die Funktion
+    Ähnlich zur linearen Regression nun wird hierbei keine affin-lineare Funktion, sondern ein Polynom genutzt. Für ein Polynom zweiten gerades kann etwa die Funktion
     \[v(x,y) = ax^2 by^2 cxy+ dx +ey +f\]
-    gewählt werden. Wieder entsteht ein Gleichungssytem:
+    gewählt werden. Wieder entsteht ein Gleichungssystem:
     
     \[\underbrace{\mat{x_1^2 & y_1^2 & x_1y_1 & x_1 & y_1 & 1 \\ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\ x_n^2 & y_n^2 & x_ny_n & x_n & y_n & 1}}_{A} \underbrace{\mat{a \\ b \\ c \\ d \\e \\ f}}_{w} \approx \underbrace{\mat{f(x_1,y_1 \\ \vdots \\ \vdots \\ \vdots \\ f(x_n,y_n)}}_{z}\]
 
@@ -2956,7 +2956,7 @@ Rechts ist das Bild, das durch das Beschreibene Histogramm thresholding dargeste
       \draw (3.25,0) node[below] {$...$};
       \draw (1.25,0.25) node[] {\footnotesize$\cdots$};
       \draw (3.75,0) node[below] {\footnotesize $n-1$};
-      \draw[<->] (0.75,-0.5) -- (0.75,-0.75) -- node[below] {\footnotesize komplex conjugiert} (3.75,-0.75) -- (3.75,-0.5);
+      \draw[<->] (0.75,-0.5) -- (0.75,-0.75) -- node[below] {\footnotesize komplex konjugiert} (3.75,-0.75) -- (3.75,-0.5);
       \draw[<->] (0.5, 0.75) to[bend left] node [above] {\footnotesize niedrige Frequenzen} (3.5,0.75);
       \draw[<-] (2,0.75) to[bend left=10] (3.5,1) node[right] {\footnotesize hohe Frequenzen};
     \end{tikzpicture}
