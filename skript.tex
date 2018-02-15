@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[ngerman]{article}
 
 \usepackage{amsmath,amsfonts,amssymb,amsthm}
 \usepackage{enumitem}
@@ -22,7 +22,13 @@
 \usepackage{mathtools}
 
 
-
+\definecolor{dgreen}{rgb}{0.0, 0.3, 0.15}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linktoc=all,
+    linkcolor=dgreen,
+}
 \usetikzlibrary{positioning, calc}
 \usetikzlibrary{decorations.pathreplacing,angles,quotes}
 \usetikzlibrary{decorations.pathmorphing,snakes}
@@ -2275,33 +2281,33 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             \begin{enumerate}
                 \item[] $\Delta (G_{sigma} * u)(\x) \approx u$, nicht auf Gleichheit sondern auf Vorzeichenwechsel testen.
                 \item[und:] $\abs{\nabla(G_{sigma}) * u}>\text{thresh}$
-            \end{enumerate} 
+            \end{enumerate}
 
             \section{Schärfen und Entfalten}
             (Gegenteil von Kapitel 5)
             \begin{enumerate}
                 \item[Gegeben:] unscharfes Bild
-                \item[Gesucht:] Version mit vielen erkennbaren Details 
+                \item[Gesucht:] Version mit vielen erkennbaren Details
             \end{enumerate}
-        
+
             \subsection{\mim{Laplace-Schärfen}}
                 Idee:
-        
+
                 \begin{center}
                 \begin{tikzpicture}
                     \draw[dotted] (-0.5,0) node[left] {\small $u$:}-- (8.5,0);
                     \draw[scale=1,domain=-2:0,smooth,variable=\x,shift ={(2,0)}] plot ({\x},{(e^((-(\x)^2)/(0.2))}) -- (4,1) [scale=1,domain=0:2,smooth,variable=\x,shift ={(4,0)}] plot({\x},{(e^((-(\x)^2)/(0.2))});
-        
+
                     \draw[dotted] (-0.5,-2) node[left] {\small $u''$:}-- (8.5,-2);
                     \draw[scale=1,domain=-1.5:1,smooth,variable=\x,shift ={(1.5,-2)}] plot ({\x},{-5*\x*(e^((-(\x)^2)/(0.05))}) -- (4,0) [scale=1,domain=-1:1.5,smooth,variable=\x,shift ={(5,0)}] plot({\x},{5*\x*(e^((-(\x)^2)/(0.05))});
-        
+
                     \draw[dotted] (-0.5,-4) node[left] {\small $u - \tau u''$:}-- (8.5,-4);
                     \draw[scale=1,domain=-2:0,smooth,variable=\x,shift ={(2,-4)}] plot ({\x},{(e^((-(\x)^2)/(0.2))+4*(\x+0.5)*(e^((-(\x+0.5)^2)/(0.07))}) -- (4,1.056) [scale=1,domain=0:2,smooth,variable=\x,shift ={(4,0)}] plot({\x},{(e^((-(\x)^2)/(0.2))-4*(\x-0.5)*(e^((-(\x-0.5)^2)/(0.07))});
-        
+
                 \end{tikzpicture}
             \end{center}
             Zu sehen ist, dass durch die Subtraktion von $u''$, skaliert mit einem Faktor $\tau > 0$ die Kanten hervorgehoben werden.\\
-            
+
             Hinweise zur Umsetzung:
             \begin{enumerate}[label=-]
                 \item $u - \tau u''$ reskalieren (Kontrast-stretching) falls der Farbraum verlassen wird.
@@ -2309,7 +2315,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                 \item In 2D $\Delta statt$ 2. Ableitung
                 \item Vorglätten: $u - \tau \C \Delta (G*u)$
             \end{enumerate}
-        
+
             \subsection{Kantenverstärkende Diffusion}
                 Verallgemeinerte Diffusionsgleichung: $\displaystyle \frac{\partial u}{\partial t} = div(M \nabla u)$.
                 Idee: $M$ so wählen, so dass der Fluss:
@@ -2317,12 +2323,12 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                     \item Parallel zum Gradienten (d.h. durch die Kante verläuft): $\displaystyle \lambda_1=\frac{1}{1+\frac{\abs{\nabla u (\x)}^2}{\kappa^2}}$
                     \item senkrecht zu $\nabla u$ (entlang der Kante): $\Lambda_2=1$
                 \end{enumerate}
-        
+
                 $\Rightarrow M$ hat EW $\lambda_1$ zum EV $\displaystyle v_1= \frac{\nabla u}{\abs{\nabla u}}\srmatrix{\frac{\partial u}{\partial x}(\x)\\\frac{\partial u}{\partial y}(\x)}$ und EW $\lambda_2$ zum EV $\displaystyle v_2 = \frac{1}{\abs{\nabla u}} \srmatrix{-\frac{\partial u}{\partial y}(\x)\\\frac{\partial u}{\partial x}(\x)} \perp v_1$.\\
                 $\displaystyle \Rightarrow M \C \underbrace{\mat{v_1 & v_2}}_{\small \text{orthogonale Matrix}} = \mat{\lambda_1 v_1 & \lambda_2 v_2} = \mat{v_1 & v_2} \mat{\lambda_1 & \ \\ \ & \lambda_2} \Rightarrow M^{-1} = M^T$\\
                 $\Rightarrow M= \mat{v_1 & v_2} \mat{\lambda_1 & \ \\ \ & \lambda_2} \underbrace{\mat{v_1 & v_2}^T}_{=\mat{v_1^T \\ v_2^T}} = \frac{1}{\abs{\nabla u}^2} \mat{\lambda_1 \frac{\partial u}{\partial x}(\x)^2 + \lambda_2 \frac{\partial u}{\partial y}(\x)^2  & (\lambda_1 - \lambda_2)\frac{\partial u}{\partial x} \frac{\partial u}{\partial y}(\x)\\ (\lambda_1 - \lambda_2)\frac{\partial u}{\partial x} \frac{\partial u}{\partial y}(\x) & \lambda_2 \frac{\partial u}{\partial x}(\x)^2 + \lambda_1 \frac{\partial u}{\partial y}(\x)^2}$\\
                 falls $\nabla u(\x) \neq 0$, sonst $M= \mat{1 & 0 \\ 0 & 1}$.
-        
+
             \subsection{\mim{Entfaltung}}
                 \begin{center}
                     \begin{tikzpicture}
@@ -2354,7 +2360,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                                     {}& {}& {}& {}& {}& {}& {}& {\phantom{g(-0)}}\\
                                     {}& {}& {}& {}& {}& {}& {}& {\phantom{g(0)}}\\
                                     {}& {}& {}& {}& {}& {}& {}& {\phantom{g(0)}}\\
-                                    {$g(n)$}& {}& {}& {}& {}& {}& {}& {}\\ 
+                                    {$g(n)$}& {}& {}& {}& {}& {}& {}& {}\\
                                     };
                                     \draw[dotted] (M-2-2)--(M-8-8);
                                     \draw[dotted] (M-2-1)--(M-9-8);
@@ -2380,7 +2386,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                                     {}\\
                                     {}\\
                                     {}\\
-                                    {$f(n)$}\\ 
+                                    {$f(n)$}\\
                                     };
                                 \draw[dotted] (N-2-1) -- (N-13-1);
                                 \draw (6.9,0) node[] {\Large $=$};
@@ -2398,7 +2404,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                                     {}\\
                                     {}\\
                                     {}\\
-                                    {$u(n)$}\\ 
+                                    {$u(n)$}\\
                                     };
                                 \draw[dotted] (O-2-1) -- (O-13-1);
                             \end{tikzpicture}
@@ -2409,7 +2415,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                                                         &\text{Integralgleichung für die gesuchte Funktion $f$}
                                                         \end{align*}
                         $\Rightarrow$ Kontinuierliche Matrix:
-    
+
                         \begin{center}
                             \begin{tikzpicture}
                                 \draw (0,0) rectangle (5,5);
@@ -2447,7 +2453,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                 \[A:f \mapsto g +f\]
                 ein Tiefpassfilter. Nimmt man nun eine Funktion $h$ mit hoher Frequenz und großer Amplitude, dann gilt:
                 \[A(f + h) = Af + \underbrace{Ah}_{\approx 0} \approx Af\]
-                
+
                 \underline{Problembehebung:}
                 \begin{enumerate}[label = \arabic*. Ansatz:]
                     \item \ \\
@@ -2531,7 +2537,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                     \end{equation}
                     Dieses Verfahren wird \mim{$L^2$ deblurring} genannt.
                     Es gibt auch einen alternativen, algebraischen Zugang:
-                
+
                     \[I(f) = \norm{g*f-u}_2^2 + \lambda \norm{f}_2^2 \overset{f}{\to} min\]
                     \[\iff \norm{\mat{g*f-u\\ \sqrt{\lambda} f}} \overset{f}{\to} min\]
                     \[\iff \norm{\mat{Af \\ \sqrt{\lambda}f} - \mat{u\\0}} = \norm{\mat{A \\ \sqrt{\lambda}}f - \mat{u\\0}} \overset{f}{\to} min \quad (A= f \mapsto g*f)\]
@@ -2545,16 +2551,16 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                         \item $g *f \approx u$
                         \item $\norm{\nabla f}$ klein
                     \end{enumerate}
-                    Nach analoger Rechnung wie oben erhält man: 
+                    Nach analoger Rechnung wie oben erhält man:
                     \begin{equation}
                         f=\F \left( \frac{\overline{\hat g(z)}}{(2\pi)^\frac{d}{2} \ |\hat g(z)|^2 + \lambda |z|^2} \right) * u
                     \end{equation}
                     $\Rightarrow$ Dämpfung höher wenn Frequenz höher.\\
                     Dieses Verfahren nennt sich \mim{$H^1$ deblurring}.
                 \end{enumerate}
-                
+
                 \section{Restauration (Inpainting)}
-  Problem: Lücken im Bild, etwa 
+  Problem: Lücken im Bild, etwa
 
   \begin{enumerate}
     \item Kratzer
@@ -2594,9 +2600,9 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     Betrachte Umgebung $u \subset \Omega \backslash D$ und errechne den Mittelwert:
     \[ m:= \frac{1}{\abs{u}} \int_u f(x) dx\]
     von $f$ auf $u$.
-    
+
     \textbf{Algorithmus:}
-    
+
     \begin{tikzpicture}
         \node at (5, 10) {
     {\begin{varwidth}{\linewidth}\begin{enumerate}[label=]
@@ -2650,7 +2656,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
       \end{enumerate}\end{varwidth}}};
       \draw[->,thick] (0,5.5) -- (-1,5.5) -- node[sloped,above]  {Iteriere} node[sloped,below] {\footnotesize Abbruch falls $\norm{f-g}< \ threshold$} (-1,10.9) -- (-0.5,10.9);
     \end{tikzpicture}
-    
+
   \subsection{PDE-Transport-Diffusions-Ansatz}
     \begin{minipage}[c]{0.25\linewidth}
       \begin{center}
@@ -2689,7 +2695,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
       \item[] $v_2$ Richtung mit maximalem Kontrast mit EW $\mu_2$, genannt \mim{Kohärentsrichtung}.
       \item[] Hierbei ist $\mu_1 \geq \mu_2$.
     \end{enumerate}
-    
+
     \begin{center}
         \begin{tikzpicture}[scale=0.7]
           \draw[thick] (0,0) rectangle (5,5);
@@ -2703,10 +2709,10 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
           \draw[->,green!70!black,thick] (3.82,2.66) -- node[sloped,below] {\small $v_2$} ++(-125:1.5);
         \end{tikzpicture}
       \end{center}
-      
+
       Fälle:
       \begin{enumerate}
-        \item[] 
+        \item[]
         \begin{minipage}[c]{0.25\linewidth}
           $\mu_1 \gg \mu_2 \approx 0$
         \end{minipage}
@@ -2719,7 +2725,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
           \draw[->,green!70!black,thick] (3.82,2.66) -- node[sloped,below] {\small $v_2$} ++(-125:1.5);
           \end{tikzpicture}
         \end{minipage}
-                \item[] 
+                \item[]
         \begin{minipage}[c]{0.25\linewidth}
           $\mu_1 \approx \mu_2 \approx 0$
         \end{minipage}
@@ -2732,7 +2738,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         \begin{minipage}[c]{0.3\linewidth}
           Lokal keine Struktur.
         \end{minipage}
-        \item[] 
+        \item[]
         \begin{minipage}[c]{0.25\linewidth}
           $\mu_1 \approx \mu_2 \gg 0$
         \end{minipage}
@@ -2747,10 +2753,10 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
           Kanten.
         \end{minipage}
       \end{enumerate}
-      
+
       Die Werte $\lambda_1$ und $\lambda_2$ werden wie folgt gewählt:\\
       $\alpha \in (0,1)$ wird festgehalten.
-      
+
       \begin{center}
         \begin{tikzpicture}[scale = 1]
             \draw[] (0,0) -- (8,0);
@@ -2761,15 +2767,15 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             \draw[<-] (7.25,-0.1) to[in=0,out =-140] node[sloped,below] {\footnotesize falls $\mu_1 \gg \mu_2$} (4.8,-0.7) node[left] {\small $\lambda_2$};
           \end{tikzpicture}
       \end{center}
-      
+
       \[\lambda_1 := \alpha, \ \lambda_2 := \alpha + (1 - \alpha)(1-g(\mu_1 - \mu_2))\]
-      
+
       wobei $g$ wie bei Perona Malik gewählt wird, also:
-      
+
       \[g(x)=\frac{1}{1 + \frac{s^2}{\kappa^2}}\]
-      
+
       Dieses wird \mim{Kohärenz verstärkende Diffusion} genannt.
-      
+
       \subsection{Variationsansatz}
 
 
@@ -2794,15 +2800,15 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \end{minipage}\\
     \hfill\\ \hfill\\
     Daraus folgt:
-    
+
     \[ J(u):= \norm{\nabla u}_2^2 \to \text{min} \]
-    
+
     auf
-    
+
     \[U:=\{u \in W^{1,2}(\Omega) : u|_{\Omega \backslash D} = f\} \]
-    
+
     Angenommen, $u \in U$ minimiert $J$, dann folgt für beliebige $v \in W^{1,2} (\Omega)$ mit $v|_{\Omega \backslash D}=0$:
-    
+
     \begin{align*}
       0 &= \underset{t \to 0}{lim} \frac{J(u+tv) - J(u)}{t} = \underset{t \to 0}{lim} \frac{1}{t} \int_\Omega ||\underbrace{\nabla(u+tv)(x)}_{\nabla u(x) + t \nabla v(x)}||^2 - \norm{\nabla u(x)}^2 dx\\
       &=\underset{t \to 0}{lim} \frac{1}{t} \int_\Omega \skprod{\nabla u(x) + t \nabla v(x)}{\nabla u(x) + t \nabla v(x)} - \skprod{\nabla u (x)}{\nabla u (x)} dx\\
@@ -2810,7 +2816,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
       &=2 \int_D \skprod{\nabla u(x)}{\nabla v(x)} dx \overset{\text{Greensche Formel}}{=} 2 \biggl( \overbrace{\int_{\delta D} \frac{\partial u}{\partial n} \underbrace{v(x)}_{0} ds(x)}^{0} - \int_D \Delta u(x) v(x) dx \biggr)\\
       &=2 \int_D \Delta u(x) v(x) dx \Rightarrow \nabla u =0 \text{ in } D
     \end{align*}
-    
+
     \section{Segmentierung}
 
 Dieses ist die Zerlegung eines Bildes in verschiedene Objekt.\\
@@ -2880,7 +2886,7 @@ Rechts ist das Bild, das durch das Beschriebene Histogramm thresholding dargeste
   \begin{minipage}[c]{0.6\linewidth}
           \item[] Wir Unterstellen das der Verlauf \mim{affin-linear} ist, d.h.:
           \[v(x,y) = a x + b y + c\]
-          Diese Parameter $a$, $b$, $c$ gilt es nun zu schätzen. 
+          Diese Parameter $a$, $b$, $c$ gilt es nun zu schätzen.
     \end{minipage}
     \hfill
     \begin{minipage}[c]{0.35\linewidth}
@@ -2900,32 +2906,32 @@ Rechts ist das Bild, das durch das Beschriebene Histogramm thresholding dargeste
     Dazu soll gelten
     \[\forall (x,y) \in \Omega : ax+by+c \approx f(x,y)\]
     um dieses zu erfüllen wird eine Stichprobe von endlich vielen Punkten $(x_i,y_i)$ aus $\Omega$ gewählt und durch diese ein Gleichungssystem gebildet.
-    
-    \begin{gather*} 
+
+    \begin{gather*}
     ax_1+by_1+c \approx f(x_1,y_1)\\
     \vdots \\
     ax_n+by_n+c \approx f(x_n,y_n)
     \end{gather*}
     In Matrix Form ergibt sich:
-    
+
     \[\underbrace{\mat{x_1 & y_1 & 1 \\ \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots \\ x_n & y_n & 1}}_{A} \underbrace{\mat{a \\ b \\ c}}_{w} \approx \underbrace{\mat{f(x_1,y_1 \\ \vdots \\ \vdots \\ \vdots \\ f(x_n,y_n)}}_{z}\]
     Die optimale Lösung dieses Problems kann über die \mim{Normalengleichung} berechnet werden.
-    
+
     \[A^T A w = A^T z\]
-    
+
     Daraus erhält man $w$, somit auch $a$, $b$, $c$ und schlussendlich $v \Rightarrow u = f-v$.\\
     Anschließend wird noch ein Histogramm stretching durchgeführt um das finale Bild zu erhalten.
-    
+
     \item \mim{Polynomiale Regression}:
     Ähnlich zur linearen Regression nun wird hierbei keine affin-lineare Funktion, sondern ein Polynom genutzt. Für ein Polynom zweiten gerades kann etwa die Funktion
     \[v(x,y) = ax^2 by^2 cxy+ dx +ey +f\]
     gewählt werden. Wieder entsteht ein Gleichungssystem:
-    
+
     \[\underbrace{\mat{x_1^2 & y_1^2 & x_1y_1 & x_1 & y_1 & 1 \\ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\ x_n^2 & y_n^2 & x_ny_n & x_n & y_n & 1}}_{A} \underbrace{\mat{a \\ b \\ c \\ d \\e \\ f}}_{w} \approx \underbrace{\mat{f(x_1,y_1 \\ \vdots \\ \vdots \\ \vdots \\ f(x_n,y_n)}}_{z}\]
 
   \item \mim{Trigonometrisches Polynom}
   Hierbei wird $v$ in den niedrigfrequenten Anteilen von $f$ gesucht.
-  
+
   \begin{center}
     \begin{tikzpicture}
       \draw (0,0.25) node[left] {$f:$};
@@ -2939,11 +2945,11 @@ Rechts ist das Bild, das durch das Beschriebene Histogramm thresholding dargeste
       \draw (3.75,0) node[below] {\footnotesize $n-1$};
     \end{tikzpicture}
   \end{center}
-  
+
   Es ergibt sich $\hat f$:
-  
+
   \[\hat f_k = \sum_{m=0}^{n-1} f_k \bigl(\underbrace{e^{- i 2 \pi \frac{k}{n}}}_{w_k}\bigr)^m \quad , \ k= 0,1,...,n-1\]
-  
+
   Mittels der FFT (Fast Fourier Transformation) ergibt sich $\hat f$ zu:
 
   \begin{center}
@@ -3293,13 +3299,13 @@ Hierbei lautet das zu minimierende Funktional:
     \end{tabular}$, diese Zerreißung muss bestraft werden.
     Ansätze:
     \begin{enumerate}
-        \item Große Streckungen/Deformationen bestrafen 
+        \item Große Streckungen/Deformationen bestrafen
             \[R(d) := \int_\Omega\bigl( \abs{\nabla y_1(x)}^2 + \abs{\nabla y_2(x)}^2   \bigr) dx \]
             Hier werden Abbleitung 1. Ordnung benutzt.
         \item Große Krümmungen bestrafen
             \[R(d) := \int_\Omega\bigl( \abs{\Delta y_1(x)}^2 + \abs{\Delta y_2(x)}^2   \bigr) dx \]
             Hier werden Abbleitung 2. Ordnung benutzt.\\
-            
+
             Es können aber auch Ableitungen höherer Ordnungen sowie Kombinationen verwendet werden.
     \end{enumerate}
 \end{enumerate}
@@ -3376,14 +3382,14 @@ für alle abgeschlossenen und beschränkten Mengen $K \subset \R^d$ gilt.
         \draw (3,0.5) node[right] {$\in L^1$ und $\in L^1_{loc}$};
         \draw (-3,-2) -- (3,-2);
         \draw[thick] plot [smooth, tension = 0.8] coordinates {(-3,-1.3) (-2,-1.5) (-1,-1) (1,-1.5) (3,-1.2) };
-        \draw (3,-1.5) node[right] {$\not \in L^1$ aber $\in L^1_{loc}$}; 
+        \draw (3,-1.5) node[right] {$\not \in L^1$ aber $\in L^1_{loc}$};
         \draw[decorate,decoration={brace,amplitude=3pt,mirror}] (-2,-2.2) -- node[below] {$K$} (-0.5,-2.2);
     \end{tikzpicture}
 \end{center}
 
 Die Zweite Funktion ist nicht in $L^1$ da ihr Gesamtintegral nicht endlich ist jedoch ist das Integral über jede endlich Menge endlich, sie hat also keine Pole, somit sie in $L^1_{loc}$.
 
-Für jede Funktion $f \in L^1_{loc}(\R^d)$ bildet 
+Für jede Funktion $f \in L^1_{loc}(\R^d)$ bildet
 \begin{equation}\label{eq.11.1}
     \tilde f:\varphi \in \Omega \mapsto \int_{\R^d} f(x) \C \varphi(x) dx \in \R
 \end{equation}
@@ -3513,7 +3519,7 @@ Für folgende Spezialfälle wird  $TV(\varphi)$ etwas handlicher als in \eqref{e
     \[\frac{\partial f}{\partial r} = \skprod{\nabla f(x)}{r} \leq \norm{\nabla f(x)} \C \underbrace{\norm{r}}_{1} = \norm{\nabla f(x)}\]
 
     mit Gleichheit im Falle von $r = \frac{\nabla f(x)}{\norm{\nabla f(x)}}$.
-    
+
     Es ergibt sich:
 
     \begin{align}\label{eq.11.5}
@@ -3527,7 +3533,7 @@ Für folgende Spezialfälle wird  $TV(\varphi)$ etwas handlicher als in \eqref{e
     Dann gilt:
 
     \[\tilde{\nabla f}(\varphi) \overset{\eqref{eq.11.3}}{=} - \int \chi_D div(\varphi(x)) dx \overset{\text{\small{Gaußscher Integralsatz}}}{=} -\int_{\partial D} \skprod{\varphi(x)}{n(x)} ds(x)\]
-    
+
     wobei $n(x)$ der Normalenvektor an $\partial D$ ist.
 
     \begin{align}
@@ -3544,14 +3550,14 @@ Wann ist ein Minimierungsproblem:
 eindeutig lösbar?
 
 \begin{enumerate}[label= \alph*)]
-    \item Existenz 
+    \item Existenz
     \[J:U\to \R\]
     Wobei $U$ ein metrischer Raum ist.
 
     Aus der Analysis ist bekannt, dass stetige Funktionen auf kompakten Mengen ihr Maximum und Minimum annehmen.
 
     \begin{minipage}[c]{0.49\textwidth}
-        
+
         \begin{center}
             \begin{tikzpicture}
                 \draw (-1,0) -- (4,0);
@@ -3572,7 +3578,7 @@ eindeutig lösbar?
 
 
     \begin{minipage}[c]{0.49\textwidth}
-        
+
         \begin{center}
             \begin{tikzpicture}
                 \draw (-1,0) -- (4,0);
@@ -3599,10 +3605,10 @@ eindeutig lösbar?
     \[\forall \epsilon > 0 \ \exists \delta : J(U_\delta (u_0)) \subset U_\epsilon (J(u_0))\]
 
     Aber auch die Kompaktheit vun $U$ ist nicht oft erfüllt, deshalb definieren wir:
-    
+
     \[S_\alpha  \coloneqq \{ u \in U : J(u) \leq \alpha \}, \quad \text{\mim{Sub-Niveaumenge} zu Niveu $\alpha$} \]
 
-    \textbf{Existenzsatz}: Sei $U$ ein metrischer Raum und 
+    \textbf{Existenzsatz}: Sei $U$ ein metrischer Raum und
 
     \[J:U \to \R\]
     so dass:
@@ -3619,7 +3625,7 @@ eindeutig lösbar?
     \item Eindeutigkeit
 
     \begin{minipage}[c]{0.34\textwidth}
-        
+
         \begin{center}
             \begin{tikzpicture}
                 \draw (0,0) -- (5,0);
