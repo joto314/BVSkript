@@ -296,7 +296,7 @@ tabsize=3}
     \subsection{Umwandlung}
 
         \pa{Kontinuierlich $\to$ Diskret:}\\
-            \begin{minipage}[t]{0.49\linewidth}
+            \begin{minipage}[t]{0.4\linewidth}
                 \
                 \begin{center}
                     \begin{tikzpicture}
@@ -309,7 +309,7 @@ tabsize=3}
                 \end{center}
             \end{minipage}
             \hfill\vrule\hfill
-            \begin{minipage}[t]{0.49\linewidth}
+            \begin{minipage}[t]{0.59\linewidth}
                 \
                 \begin{center}
                     \begin{enumerate}[label=\textbullet]
@@ -323,7 +323,7 @@ tabsize=3}
 
                 \ \\
             \pa{Diskret $\to$ Kontinuierlich:}\\
-                \begin{minipage}[t]{0.49\linewidth}
+                \begin{minipage}[t]{0.4\linewidth}
                     \
                     \begin{center}
                         \begin{tikzpicture}
@@ -347,13 +347,14 @@ tabsize=3}
                     \end{center}
                 \end{minipage}
                 \hfill\vrule\hfill
-                \begin{minipage}[t]{0.49\linewidth}
+                \begin{minipage}[t]{0.59\linewidth}
                     \
                     \begin{center}
                         \begin{enumerate}
-                            \item[1.] Idee: Jeder Punkt der Box $B_i$ erhält den Funktionswert von $B_i$ aus als diskretem Pixel $\Rightarrow$ \mim{Nearest neighbour Interpolation}.
+                            \item[1.] Idee: Jeder Punkt der Box $B_i$ erhält den Funktionswert von $B_i$ als Farbwert\\
+                            $\Rightarrow$ \mim{Nearest neighbour Interpolation}.
                             \item[2.] Idee: Mittelpunkt von Box $B_i$ erhält den Wert von Pixel $B_i$ sonst wird interpoliert.\\
-                            Grauwert $g:=$ Gewichtetes Mittel aus Grauwerten $a,b,c,d$.\\
+                            Grauwert $g \coloneqq $ Gewichtetes Mittel aus Grauwerten $a,b,c,d$.\\
                         \end{enumerate}
 
                             \begin{center}
@@ -380,7 +381,7 @@ tabsize=3}
                                 \end{tikzpicture}
                             \end{center}
 
-                            \small{$g=(1-\alpha) \C (1-\beta) \C a + \alpha \C (1- \beta) \C b + (1-\alpha) \C \beta \C c + \alpha \C \beta \C d$}\\
+                            \small{$g=(1-\alpha)  (1-\beta)  a + \alpha  (1- \beta)  b + (1-\alpha)  \beta  c + \alpha  \beta  d$}\\
                             Dieses wird \mim{Bilineare Interpolation} genannt.
                     \end{center}
                 \end{minipage}
@@ -400,12 +401,12 @@ tabsize=3}
         \pa{1. Fall, kontinuierliches Bild}\\
             Sei $u$ das alte Bild und $v$ das neue Bild, dann ist die Drehung gegeben durch eine \mim{Drehmatrix}:
 
-            \[D_\varphi \in \R^{d \times d}, D_\varphi=\srmatrix{cos(\varphi) \ -sin(\varphi) \\ sin(\varphi) \ cos(\varphi)}\]
+            \[D_\varphi \in \R^{d \times d}, D_\varphi=\mat{cos(\varphi) \ -sin(\varphi) \\ sin(\varphi) \ cos(\varphi)}\]
 
             Damit folgt, dass $D(u)= D_\varphi \Omega$ und $v(x)=u(\underbrace{D_\varphi^{-1}x}_{\in \Omega}) = u(D_{-\varphi}x)$. ($D(u)$ ist die \mim{Domain} von $u$)
 
         \pa{2. Fall, diskretes Bild}\\
-            Dieses ist problematisch, denn I.A. $x \in \Z^d$, aber $D_\varphi x \not \in \Z^d$.
+            Dieses ist problematisch, denn i.A. $x \in \Z^d$, aber $D_\varphi x \not \in \Z^d$.
 
             \begin{center}
                 \begin{tikzpicture}
@@ -441,11 +442,18 @@ tabsize=3}
             \begin{center}
                 \begin{tikzpicture}
                     %TODO Images
-                    \draw[line width = 0.5cm] (0,0) -- (4,0);
+                    \draw[step=0.5, shift={(3,0.25)}] (0,0) grid (1,-0.5);
+                    \draw[fill] (3.25,0) circle[radius=2pt];
+                    \draw[] (3.75,0) circle[radius=2pt];
                     \draw[->] (4.3,-0.4) -- node[sloped,below] {Bilinear} (7,-2);
                     \draw[->] (4.3,0.4) -- node[sloped,above] {Nearest neighbour} (7,2);
+                    \draw[step=0.5, shift={(7.25,2.25)}] (0,0) grid (1,-0.5);
+                    \draw[fill] (7.25,2.25) rectangle (7.75,1.75);
+                    \fill[draw = white,left color = black, right color = white!100] (7.5,-2.25) rectangle (8,-1.75);
+                    \draw[fill,black] (7.25,-2.25) rectangle (7.51,-1.75);
+                    \draw[shift={(7.25,-1.75)}] (0,0) rectangle(1,-0.5);
                 \end{tikzpicture}
-            \end{center}
+            \end{center}            
 
 
 \section{Histogramme und deren Anwendungen}
@@ -488,7 +496,7 @@ tabsize=3}
         Für kontinuierliche Bilder wird  das allgemeinere Konzept von einem \mim{Maß} benötigt:
         \begin{center}
             \begin{tikzpicture}
-                \draw (0,0) node[left] {$A \subset F, \ \mathcal H_u := \abs{u^{-1}(A)}$};
+                \draw (0,0) node[left] {$A \subset F, \ \mathcal H_u  \coloneqq  \abs{u^{-1}(A)}$};
                 \draw[->,text width = 4.5cm] (0,0.1) -- (0.75,0.75) node[right] {\small \underline{Diskretes Bild:}\\ Anzahl der Elemente in $u^{-1}(A)$};
                 \draw[->,text width = 4.5cm] (0,-0.1) -- (0.75,-0.75) node[right] {\small \underline{Kontinuierliches Bild:}\\ Volumen von  $u^{-1}(A)$};
             \end{tikzpicture}
@@ -634,16 +642,16 @@ tabsize=3}
                 \end{tikzpicture}
             \end{center}
             hat, dann wähle:
-            \[t:=k_{min}\]
-            \[\text{oder} \ t:= \frac{k_{max 1} + k_{max 2}}{2}\]
+            \[t \coloneqq k_{min}\]
+            \[\text{oder} \ t \coloneqq  \frac{k_{max 1} + k_{max 2}}{2}\]
             \item \mim{Otsu's Verfahren} (1979):\\
             Vorher einige Definitionen.\\
             Die \mim{Masse}:
-            \[m_{\text{schwarz}} := \sum_{k \in \text{schwarz}} H_u(k)\]
-            \[m_{\text{weiß}} := \sum_{k \in \text{weiß}} H_u(k)\]
+            \[m_{\text{schwarz}}  \coloneqq  \sum_{k \in \text{schwarz}} H_u(k)\]
+            \[m_{\text{weiß}}  \coloneqq  \sum_{k \in \text{weiß}} H_u(k)\]
             Der \mim{Mittelwert}:
-            \[\mu_{\text{schwarz}} := \frac{\displaystyle \sum_{k_ \in \text{schwarz}} k \C H_u(k) }{\displaystyle \sum_{k_ \in \text{schwarz}}H_u(k)} = \frac{\displaystyle \sum_{k_ \in \text{schwarz}} k \C H_u(k) }{m_{\text{schwarz}}}\]
-            \[\mu_{\text{weiß}} := \frac{\displaystyle \sum_{k_ \in \text{weiß}} k \C H_u(k) }{\displaystyle \sum_{k_ \in \text{weiß}}H_u(k)} = \frac{\displaystyle \sum_{k_ \in \text{weiß}} k \C H_u(k) }{m_{\text{weiß}}}\]
+            \[\mu_{\text{schwarz}}  \coloneqq  \frac{\displaystyle \sum_{k_ \in \text{schwarz}} k \C H_u(k) }{\displaystyle \sum_{k_ \in \text{schwarz}}H_u(k)} = \frac{\displaystyle \sum_{k_ \in \text{schwarz}} k \C H_u(k) }{m_{\text{schwarz}}}\]
+            \[\mu_{\text{weiß}}  \coloneqq  \frac{\displaystyle \sum_{k_ \in \text{weiß}} k \C H_u(k) }{\displaystyle \sum_{k_ \in \text{weiß}}H_u(k)} = \frac{\displaystyle \sum_{k_ \in \text{weiß}} k \C H_u(k) }{m_{\text{weiß}}}\]
             Die \mim{Varianz}:
             \[\sigma^2_{\text{schwarz}} = \sum_{k \in \text{schwarz}} (k - \mu_{\text{schwarz}})^2 \C H_u(k)\]
             \[\sigma^2_{\text{weiß}} = \sum_{k \in \text{weiß}} (k - \mu_{\text{weiß}})^2 \C H_u(k)\]
@@ -652,7 +660,7 @@ tabsize=3}
             Wähle $t$ so dass $m_{\text{schwarz}} = m_{\text{weiß}}$.
             \item \mim{Isodata Algorithmus} (1970s):\\
             Wähle t so, dass $\displaystyle t = \frac{\mu_{\text{schwarz}} + \mu_{\text{weiß}}}{2} =: f(t)$.\\
-            Diese Gleichung ist bereits eine \mim{Fixpunktgleichung} und eine Lösung kann, etwa mit einer \mim{Fixpunktiteration} approximiert werden, das heißt $t_{n+1} := f(t_n)$.
+            Diese Gleichung ist bereits eine \mim{Fixpunktgleichung} und eine Lösung kann, etwa mit einer \mim{Fixpunktiteration} approximiert werden, das heißt $t_{n+1}  \coloneqq  f(t_n)$.
             \begin{center}
                 \begin{tikzpicture}%TODO fixpunkt iteration in Grafik?
                     \draw[->] (0,0) node[below] {0} -- (0,5) node[above] {y};
@@ -736,7 +744,7 @@ imshow(w);
         \end{center}
 
     \subsection{Verknüpfungen von A und B}
-        \[A+B := \{a + b : a \in A, b \in B\}\]
+        \[A+B  \coloneqq  \{a + b : a \in A, b \in B\}\]
         Diese wird \mim{dilation} genannt.\\
         Anschaulich wird an jeden schwarzen Punkt des Bildes $A$ das Struktur Element $B$ gelegt.
         \begin{center}
@@ -752,7 +760,7 @@ I2=imcomplement(imdilate(imcomplement(I),se));%Es wird das Komplement des Bildes
 imshow(I2);
         \end{lstlisting}
 
-        \[A-B := \{a : a + B \subset A\}\]
+        \[A-B  \coloneqq  \{a : a + B \subset A\}\]
         Diese wird \mim{erosion} genannt.\\
         Anschaulich werden die schwarzen Bereiche des Bildes gesucht, in die das Strukturelement hinein passt.
         \begin{center}
@@ -770,7 +778,7 @@ imshow(I2);
         \end{lstlisting}
 
         Es ist schnell zu erkennen das $A \neq (A+B)-B$, deshalb wird eine neue Operation eingeführt:
-        \[A \bullet B := (A+B)-B\]
+        \[A \bullet B  \coloneqq  (A+B)-B\]
         Dieses wird \mim{schließen} genannt und wird etwa genutzt um Löcher, z.b. Rauschen, in einem Bild zu entfernen. Im Beispiel Bild ist zu sehen, dass das obere Fenster nicht mehr vorhanden ist.
         \begin{center}
             \begin{tikzpicture}
@@ -788,7 +796,7 @@ imshow(I3);
         \end{lstlisting}
 
         Es existiert auch die Umgekehrt Operation:
-        \[ A \circ B := (A-B)+B\]
+        \[ A \circ B  \coloneqq  (A-B)+B\]
         Diese wird \mim{öffnen} genannt.
 
         Diesmal mit einem neuen Beispiel:
@@ -908,7 +916,7 @@ imshow(I3);
         \end{center}
 
         \begin{equation} \label{eq:5.1}
-            u(k):=\alpha \cdot f(k-1) + \beta \cdot f(k) + \gamma \cdot f(k+1)
+            u(k) \coloneqq \alpha \cdot f(k-1) + \beta \cdot f(k) + \gamma \cdot f(k+1)
         \end{equation}
         wobei:
         \begin{equation} \label{eq:5.2}
@@ -986,7 +994,7 @@ imshow(I3);
             \end{tikzpicture}
         \end{center}
 
-        Setzt man nun $j:= k + i$ in \eqref{eq:5.1}, so ist $i=j-k$, d.h.
+        Setzt man nun $j \coloneqq  k + i$ in \eqref{eq:5.1}, so ist $i=j-k$, d.h.
         \begin{equation}\label{eq:5.4}
             \framebox{$\displaystyle (m \boxast f)(k) = \sum_{i \in supp(m)} m(j-k) f(j)$}
         \end{equation}
@@ -1039,7 +1047,7 @@ imshow(I3);
             \framebox{$\displaystyle (g * f)(k) = \sum_{j \in \Z} g(\underbrace{k-j}_{\text{Anders als \eqref{eq:5.4}}}) \cdot f(j)$}
         \end{equation}
 
-        Setzt man also $g(i) := m(-i) =: \tilde m(i)$, was einer Spieglung der Maske entspricht, dann ist
+        Setzt man also $g(i)  \coloneqq  m(-i) =: \tilde m(i)$, was einer Spieglung der Maske entspricht, dann ist
         \[m \boxast f = g * f = \tilde m * f\]
 
         Eigenschaften der Faltung:
@@ -1055,13 +1063,13 @@ imshow(I3);
             \item $\tilde f \boxast \tilde g = \tilde{\tilde f} * \tilde g \overset{\framebox{\small 3}}{=} \widetilde{(\tilde f * g)} = \widetilde{f \boxast g}$, Kompatibilität mit Spiegelung
         \end{enumerate}
 
-	$\boxast$ und $*$ definiert man auf: $\ell^1(\Z^d):=\{f=(f_i)_{i \in \Z^d} : \underbrace{\sum_{i \in \Z^d}\abs{f_i}}_{:=\norm{f}_1} < \infty\}$
+	$\boxast$ und $*$ definiert man auf: $\ell^1(\Z^d) \coloneqq \{f=(f_i)_{i \in \Z^d} : \underbrace{\sum_{i \in \Z^d}\abs{f_i}}_{ \coloneqq \norm{f}_1} < \infty\}$
 
 	Man kann zeigen (Übung): $f,g \in \ell^1 \Rightarrow f * g \in \ell^1$ und $\norm{f * g}_1 \leq \norm{f}_1 \C \norm{g}_1$.
     Wobei oft die Gleichheit gilt.
 
     Alles gilt auch in der Kontinuierlichen Version:
-    \[L^1(\R^d) := \{f:\R^d \to \R | \underbrace{\int_{\R^d}\abs{f} dx}_{:=\norm{f}_1} < \infty\}\]
+    \[L^1(\R^d)  \coloneqq  \{f:\R^d \to \R | \underbrace{\int_{\R^d}\abs{f} dx}_{ \coloneqq \norm{f}_1} < \infty\}\]
     \[f,g \in L^1(\R^d): (g*f)(x)=\int_{\R^d}g(x-y)f(y) dy, \ y,x \in \R^d\]
 
     Beispiel für den kontinuierlichen Fall:
@@ -1144,7 +1152,7 @@ imshow(I3);
         \end{tikzpicture}}
     \end{equation*}
     wobei $\alpha + \beta +\gamma +\delta + \epsilon = 1$\\
-    Kurzschreibweise: $u_{ij}:=u(x)$ wobei $x = \begin{pmatrix}i\\j\end{pmatrix} \in \Z^2$, analog für $f_{ij}$.
+    Kurzschreibweise: $u_{ij} \coloneqq u(x)$ wobei $x = \begin{pmatrix}i\\j\end{pmatrix} \in \Z^2$, analog für $f_{ij}$.
 
     \[\Rightarrow u_{ij} = \alpha f_{i-1,j} + \beta f_{i,j-i} + \gamma f_{ij} + \delta f_{i,j+1} + \epsilon f_{i+1,j}\]
 
@@ -1285,7 +1293,7 @@ imshow(I3);
 
     \[f(x) = \frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} \left(\frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} f(y) e^{-i \skprod{z}{y}} dy\right) e^{i \skprod{z}{x}} dz\]
 
-    Sei nun $e_z(x) := e^{i \skprod{z}{x}}, \ x \in \R^d$ mit Parameter
+    Sei nun $e_z(x)  \coloneqq  e^{i \skprod{z}{x}}, \ x \in \R^d$ mit Parameter
 $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     Also $e_z(x) = e^{i\skprod{\srmatrix{z_1\\z_2}}{\srmatrix{x_1\\x_2}}} = e^{i (z_1 x_1 +z_2 x_2)}$\\
     Beispiele in $2D$:\\
@@ -1353,8 +1361,8 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
 
     $\displaystyle f \in L^2(\R^d) = \{f:\R^d \to \R | \int_{\R^d} \abs{f}^2 dx < \infty\}$ ist
     \begin{enumerate}[label = -]
-        \item ein normierter Raum mit $+$, $\alpha \cdot$ und $\displaystyle \norm{\cdot}_2 := \sqrt{\int_{\R^d} \abs{f(x)}^2 dx}$
-        \item ein Skalarproduktraum mit $\displaystyle \skprod{f}{g} := \int_{\R^d} f \bar g dx$, wobei $\norm{f}_2^2=\skprod{f}{f}$
+        \item ein normierter Raum mit $+$, $\alpha \cdot$ und $\displaystyle \norm{\cdot}_2  \coloneqq  \sqrt{\int_{\R^d} \abs{f(x)}^2 dx}$
+        \item ein Skalarproduktraum mit $\displaystyle \skprod{f}{g}  \coloneqq  \int_{\R^d} f \bar g dx$, wobei $\norm{f}_2^2=\skprod{f}{f}$
         \item ein vollständiger Raum, also \mim{Banachraum}
     \end{enumerate}
     Ein vollständiger normierter Banachraum mit Skalarprodukt heißt \mim{Hilbertraum}.
@@ -1460,7 +1468,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             \draw (-2.8,-1) edge[bend right=-15,->] node[above, pos = 0.5] {$\mathcal F$} node[below, pos = 0.5] {\small $n \C log(n)$} (2.8,-1);
             \draw (3,-1) node[] {$\hat f$};
             \draw[] (3,-1.5) edge[bend right=-15,->] node[right, pos = 0.5] {\small Mult. mit:} node[left, pos = 0.5] {\small $n$} (3,-5.5);
-            \draw (4.05,-4) node[left] {\footnotesize $\hat g:=$};
+            \draw (4.05,-4) node[left] {\footnotesize $\hat g \coloneqq $};
             \draw (4,-4.1) -- (4.3,-4.1) -- (4.3,-3.8) -- (5,-3.8) -- (5,-4.1) -- (5.3,-4.1) (4.65,-4.1) node[] {\tiny $0$};
             \draw[dotted] (4,-3.8) -- (5.3,-3.8) node[xshift=10] {\footnotesize $\frac{1}{(2 \pi)^\frac{d}{2}}$};
             \draw (3,-6) node[] {$\hat u$} (3,-6.25) node[right] {\small \begin{tabular}{c}
@@ -1548,7 +1556,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
 
     Im Kontinuierlichen: Sei $m \in L^1(\R^d)$ und $s > 0$.
     Setze
-        $$ m_s(x) := \frac{1}{s^d} m (\frac{x}{s}), \quad x\in \R^d$$
+        $$ m_s(x)  \coloneqq  \frac{1}{s^d} m (\frac{x}{s}), \quad x\in \R^d$$
 
     Bsp (in $d =1 $):
     \begin{center}
@@ -1645,7 +1653,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         = & \frac{f(k+1) -2 f(k) + f(k+1)}{h^2}
     \end{align*}
 
-    Also folgt $\displaystyle u:=\begin{tabular}{|c|c|c|}
+    Also folgt $\displaystyle u \coloneqq \begin{tabular}{|c|c|c|}
         \hline
         1 & -2 & 1\\
         \hline
@@ -1739,7 +1747,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         \begin{tikzpicture}
             \draw (0,0) rectangle (1,1);
             \draw (0.5,0.5) node {\small $f$};
-            \draw (0.5,0.2) node {\tiny $:= u ^{(0)}$};
+            \draw (0.5,0.2) node {\tiny $ \coloneqq  u ^{(0)}$};
             \draw[->] (1.1,0.5) -- node[above] {\small $m \boxast$}(1.9,0.5);
             \draw (2,0) rectangle (3,1);
             \draw (2.5,0.5) node {\small $u^{(1)}$};
@@ -2029,7 +2037,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
 
       Kombination:
       \begin{equation}\label{eq:5.15}
-          J(u) := \norm{u-f}_2^2 + \lambda \norm{\nabla u}_2^2 \overset{u \in U}{\rightarrow} \text{min}
+          J(u)  \coloneqq  \norm{u-f}_2^2 + \lambda \norm{\nabla u}_2^2 \overset{u \in U}{\rightarrow} \text{min}
       \end{equation}
       Für einen geeigneten Funktionen Raum $U$ und \mim{Kopplungskonstante} $\lambda > 0$.\\
       In diesem Beispiel empfiehlt sich als Suchraum:
@@ -2045,13 +2053,13 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
       Ausweg: Wähle $\norm{\nabla u}_2$ oder $\displaystyle \norm{\nabla u}_1 =\int_\Omega \abs{\nabla u(\x)} d\x = \int_\Omega \abs{\frac{\partial u}{\partial x} (\x)} + \abs{\frac{\partial u}{\partial y} (\x)} d\x$ als Regularitätsterme.
 
       \begin{equation}\label{eq:5.16}
-        J(u):= \norm{u-f}_2^2 + \lambda \norm{\nabla u}_1 \to \ \text{min}
+        J(u) \coloneqq  \norm{u-f}_2^2 + \lambda \norm{\nabla u}_1 \to \ \text{min}
       \end{equation}
       Genannt \mim{Rudin–Osher–Fatemi-Funktional} (ROF)
 
       \textbf{Allgemeiner Ansatz bei Variationsproblemen:}
 
-      \[J(u):=\underbrace{D(u,f)}_{\text{Datenkern}} + \lambda \underbrace{R(u)}_{\text{Regularitätsterm}} \overset{u \in U}{\to} \text{min}\]
+      \[J(u) \coloneqq \underbrace{D(u,f)}_{\text{Datenkern}} + \lambda \underbrace{R(u)}_{\text{Regularitätsterm}} \overset{u \in U}{\to} \text{min}\]
 
       Notwendiges Kriterium:\\
       Falls $J:U \to \R$ in $u \in U$ ein lokales Minimum besitzt, dann gilt für jede Richtung $v \in U$:
@@ -2148,7 +2156,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             \end{tabular}=:D_x$, genannt \mim{Sobel-Filter}.
             Eine stärkere Glättung kann mittels anderer vertikaler Filter mit Binomialkoeffizienten erzielt werden.\\
 
-            Entsprechen wird $\frac{\partial }{\partial y} D_y:=D_x^T$ definiert.\\
+            Entsprechen wird $\frac{\partial }{\partial y} D_y \coloneqq D_x^T$ definiert.\\
 
             \begin{equation}\label{eq:6.2}
                 \nabla u(\x) = \srmatrix{\frac{\partial u}{\partial x}(\x)\\\frac{\partial u}{\partial y}(\x)} \approx \srmatrix{(D_x \boxast u)(\x)\\ (D_y \boxast u)(\x)}
@@ -2496,9 +2504,9 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                             \item $\norm{f}_2$ klein
                         \end{enumerate}
                         Minimiere nun:
-                        \[\Rightarrow J(f) := \norm{g * f - u}_2^2 + \lambda \norm{f}_2^2 \to min\]
+                        \[\Rightarrow J(f)  \coloneqq  \norm{g * f - u}_2^2 + \lambda \norm{f}_2^2 \to min\]
                         \[\iff \int_{\R^d} ((g*f)(x) - u(x))^2 + \lambda f(x)^2 dx \to min\]
-                        über die Wahl von $f \in U:= L^2(\R^d)$.\\
+                        über die Wahl von $f \in U \coloneqq  L^2(\R^d)$.\\
                         Idee: $\F$ anwenden $\Rightarrow *$ wird zu $\C$ \underline{und} $\norm{\C}_2$ bleibt unverändert.
                         \begin{align*}
                             \Rightarrow J(f)&=\norm{g*f-u}_2^2 + \lambda\norm{f}_2^2\\
@@ -2508,8 +2516,8 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                         \end{align*}
                     Strategie: Integral für jedes einzelne $z$ minimieren. Daraus erhalten wir ein optimales $\hat f$ und somit auch ein optimales $f$.\\
                     Also minimiere für jedes $z \in \R^d$
-                    \[I(t):=|(2 \pi)^\frac{d}{2} \hat g(z)t - \hat u(z)|^2 + \lambda |t|^2 \overset{t \in \mathbb C}{\longrightarrow}min\]
-                    Später setzen wir $\hat f(z):=t_{min}$, nun zur Minimierung:
+                    \[I(t) \coloneqq |(2 \pi)^\frac{d}{2} \hat g(z)t - \hat u(z)|^2 + \lambda |t|^2 \overset{t \in \mathbb C}{\longrightarrow}min\]
+                    Später setzen wir $\hat f(z) \coloneqq t_{min}$, nun zur Minimierung:
                     \begin{align*}
                         I(t)&=((2 \pi)^\frac{d}{2} \hat g(z) t - \hat u(z))((2 \pi)^\frac{d}{2} \ \overline{\hat g(z)} \ \overline t -\overline{\hat u (z)}) + \lambda t \overline t\\
                         &=(2 \pi)^\frac{d}{2} \hat g(z) \ \overline{\hat g(z)} \ t \ \overline t + \lambda t \overline t - (2 \pi)^\frac{d}{2} (\hat g(z) \ \overline{\hat u(z)} \ t + \overline{\hat g(z)} \ \hat u(z) \ \overline{t}) + \hat u(z) \ \overline{\hat u(z)}\\
@@ -2597,7 +2605,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
       \end{tikzpicture}
     \end{center}
     Betrachte Umgebung $u \subset \Omega \backslash D$ und errechne den Mittelwert:
-    \[ m:= \frac{1}{\abs{u}} \int_u f(x) dx\]
+    \[ m \coloneqq  \frac{1}{\abs{u}} \int_u f(x) dx\]
     von $f$ auf $u$.
 
     \textbf{Algorithmus:}
@@ -2767,7 +2775,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
           \end{tikzpicture}
       \end{center}
 
-      \[\lambda_1 := \alpha, \ \lambda_2 := \alpha + (1 - \alpha)(1-g(\mu_1 - \mu_2))\]
+      \[\lambda_1  \coloneqq  \alpha, \ \lambda_2  \coloneqq  \alpha + (1 - \alpha)(1-g(\mu_1 - \mu_2))\]
 
       wobei $g$ wie bei Perona Malik gewählt wird, also:
 
@@ -2800,11 +2808,11 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \hfill\\ \hfill\\
     Daraus folgt:
 
-    \[ J(u):= \norm{\nabla u}_2^2 \to \text{min} \]
+    \[ J(u) \coloneqq  \norm{\nabla u}_2^2 \to \text{min} \]
 
     auf
 
-    \[U:=\{u \in W^{1,2}(\Omega) : u|_{\Omega \backslash D} = f\} \]
+    \[U \coloneqq \{u \in W^{1,2}(\Omega) : u|_{\Omega \backslash D} = f\} \]
 
     Angenommen, $u \in U$ minimiert $J$, dann folgt für beliebige $v \in W^{1,2} (\Omega)$ mit $v|_{\Omega \backslash D}=0$:
 
@@ -3005,10 +3013,10 @@ Rechts ist das Bild, das durch das Beschriebene Histogramm thresholding dargeste
 Setze dazu:
 
 \begin{equation}\label{eq.9.1}
-J(v):=-\int_\Omega (u(x) -t) \C v(x) dx \to \ min
+J(v) \coloneqq -\int_\Omega (u(x) -t) \C v(x) dx \to \ min
 \end{equation}
 
-mit $v \in U:= \bigl \{ v \in \Omega \to \{ 0,1\} \text{ \ (oder $[0,1]$)} \bigr\}$, dies ist jedoch kein Vektorraum.
+mit $v \in U \coloneqq  \bigl \{ v \in \Omega \to \{ 0,1\} \text{ \ (oder $[0,1]$)} \bigr\}$, dies ist jedoch kein Vektorraum.
 
 Die Lösung dieses Problems ist offenbar
 
@@ -3084,7 +3092,7 @@ Die Idee ist nun $TV(v)$ als Strafterm zu \ref{eq.9.1} hinzu zu addieren,
 
 
 \begin{equation}\label{eq.9.3}
-\widetilde J(v):= \underbrace{-\int_\Omega (u(x)-t) \C v(x) dx}_{J(x)} + \lambda \C TV(v) \to \ min
+\widetilde J(v) \coloneqq  \underbrace{-\int_\Omega (u(x)-t) \C v(x) dx}_{J(x)} + \lambda \C TV(v) \to \ min
 \end{equation}
 wobei $v \in U$ ist.
 Der Effekt dieser Herangehensweise wird nun illustriert.
@@ -3139,12 +3147,12 @@ Das heißt das kleine Segment $M$ wird durch \ref{eq.9.3} \quo{erkannt} falls se
 \end{center}
 \end{minipage}
 
-\[\Rightarrow J(v,\Gamma) := \underbrace{\norm{u-v}_{2,\Omega}^2}_{1. \text{ Wunsch}}  + \lambda \underbrace{\norm{\nabla v}_{2,\Omega \backslash \Gamma}^2}_{2. \text{ Wunsch}} \to \ min \]
+\[\Rightarrow J(v,\Gamma)  \coloneqq  \underbrace{\norm{u-v}_{2,\Omega}^2}_{1. \text{ Wunsch}}  + \lambda \underbrace{\norm{\nabla v}_{2,\Omega \backslash \Gamma}^2}_{2. \text{ Wunsch}} \to \ min \]
 
 Wie im letzten Abschnitt \ref{eq.9.2} soll nun noch die Segmentierung sehr kleiner Strukturen vermieden werden, indem man zu $J$ einen entsprechenden Strafterm addiert.
 
 \begin{equation*}
-\widetilde J(v,\Gamma) := \norm{u-v}_{2,\Gamma}^2 + \lambda \norm{\nabla v}_{2,\Omega \backslash \Gamma}^2 + \mu \ \text{Länge}(\Gamma) \to \ min
+\widetilde J(v,\Gamma)  \coloneqq  \norm{u-v}_{2,\Gamma}^2 + \lambda \norm{\nabla v}_{2,\Omega \backslash \Gamma}^2 + \mu \ \text{Länge}(\Gamma) \to \ min
 \end{equation*}
 
 Dieses wird \mim{Mumford-Shah-Funktional} (1989) genannt.
@@ -3158,11 +3166,11 @@ Die numerische Lösung dieses Problemes ist jedoch sehr kompliziert, da neben $v
 
 Mumford-Shah (1989):
 
-\[\widetilde J(v,\Gamma) := \norm{u-v}_{2,\Gamma}^2 + \lambda \norm{\nabla v}_{2,\Omega \backslash \Gamma}^2 + \mu \ \text{Länge}(\Gamma)\]
+\[\widetilde J(v,\Gamma)  \coloneqq  \norm{u-v}_{2,\Gamma}^2 + \lambda \norm{\nabla v}_{2,\Omega \backslash \Gamma}^2 + \mu \ \text{Länge}(\Gamma)\]
 
 Strekalovskiy \& Cremers (2014):
 
-\[\widetilde J(v,\Gamma) := \int_\Omega \left[ \abs{u(x) - v(x)}^2 + \text{min}(\lambda \abs{\nabla c(x)}^2, \mu) \right] dx \]
+\[\widetilde J(v,\Gamma)  \coloneqq  \int_\Omega \left[ \abs{u(x) - v(x)}^2 + \text{min}(\lambda \abs{\nabla c(x)}^2, \mu) \right] dx \]
 
 Die Minimierung und $\mu$ simulieren den Sprung an der Randkurve $\Gamma$.
 
@@ -3208,7 +3216,7 @@ Hierbei sollen endlich viele \mim{Landmarks}(\mim{Merkmale}) aus $u_0$ und $u$ p
 
 Beispiel.: $d:\R^2 \to \R^2$ linear + Translation, d.h.:
 
-\[ d:\underbrace{\mat{x_1 \\ x_2}}_{p} \mapsto \mat{a & b \\ c & d} \C \mat{x_1 \\ x_2}+ \mat{e\\f}:=\underbrace{\mat{y_1 \\ y_2}}_{q} = \mat{ax_1 + bx_2 +e\\ cy_1 + dx_2 + f} = \underbrace{\mat{x_1 & x_2 & 0 & 0 & 1 & 0\\ 0 & 0 & x_1 & x_2 & 0 & 1}}_{A_p}\C \mat{a\\b\\c\\d\\e\\f}\]
+\[ d:\underbrace{\mat{x_1 \\ x_2}}_{p} \mapsto \mat{a & b \\ c & d} \C \mat{x_1 \\ x_2}+ \mat{e\\f} \coloneqq \underbrace{\mat{y_1 \\ y_2}}_{q} = \mat{ax_1 + bx_2 +e\\ cy_1 + dx_2 + f} = \underbrace{\mat{x_1 & x_2 & 0 & 0 & 1 & 0\\ 0 & 0 & x_1 & x_2 & 0 & 1}}_{A_p}\C \mat{a\\b\\c\\d\\e\\f}\]
 
 Die zu lösende Gleichung ergibt sich somit zu:
 
@@ -3244,25 +3252,25 @@ Es gibt auch noch einen anderen Spezialfall der affin-linearen Deformationen, et
 \[d: \mat{x_1\\x_2} \mapsto r \C \mat{cos(\varphi) & -sin(\varphi)\\ sin(\varphi) & cos(\varphi)} + \mat{e\\f}=\mat{y_1\\y_2}\]
 
 \[\Rightarrow \mat{y_1\\y_2} = \mat{r \C cos(\varphi)x_1 -r \C sin(\varphi)x_2 + e\\ r \C sin(\varphi)x_1 + r \C cos(\varphi) x_2 + f} = \mat{x_1 & -x_2 & 1 & 0\\ x_2 & x_1 & 0 & 1} \mat{r \C cos(\varphi)\\ r \C sin(varphi)\\e \\ f} \begin{array}{c}
-    :=g\\:=h\\ \ \\ \
+     \coloneqq g\\ \coloneqq h\\ \ \\ \
 \end{array}\]
 
-Somit brauchen wir $n \geq 2$ Kontrollpunkte um $g,h,e,f$ zu bestimmen, hierraus können dann $r:=\sqrt{g^2+h^2}$ und $\varphi=arctan(\frac{h}{g})$ bestimmt werden.
+Somit brauchen wir $n \geq 2$ Kontrollpunkte um $g,h,e,f$ zu bestimmen, hierraus können dann $r \coloneqq \sqrt{g^2+h^2}$ und $\varphi=arctan(\frac{h}{g})$ bestimmt werden.
 
 \subsection{Globale Verfahren}
 
 Globale Verfahren benutzen keine Manuell bestimmten Kontrollpunkte und können somit komplett durch einen Computer durchgeführt werden, wiederum wird dieses Problem mittels der Variationsrechnung formuliert.
 Hierbei lautet das zu minimierende Funktional:
 
-\[J(d):=\underbrace{D(u_0,u \circ d)}_{\text{\small Datenterm}} + \lambda \underbrace{R(d)}_{\text{\small Regularitätsterm}} \to \ min\]
+\[J(d) \coloneqq \underbrace{D(u_0,u \circ d)}_{\text{\small Datenterm}} + \lambda \underbrace{R(d)}_{\text{\small Regularitätsterm}} \to \ min\]
 
 \begin{enumerate}
     \item Wahl des Datenterms $D$
     \begin{enumerate}
         \item Punktweise Differenz in der$L^1$-Norm:
-            \[D(f,g) := \norm{f-g}_2^2 = \int_\Omega \abs{f(x)-g(x)}^2 dx\]
+            \[D(f,g)  \coloneqq  \norm{f-g}_2^2 = \int_\Omega \abs{f(x)-g(x)}^2 dx\]
         \item Vergleich der GRauwert-Verläufe
-            \[\overline{f} :=\ \frac{1}{\abs{\Omega}} \int_\Omega f(x) dx, \quad \overline{g} := \frac{1}{\abs{\Omega}} \int_\Omega g(x) dx\]
+            \[\overline{f}  \coloneqq \ \frac{1}{\abs{\Omega}} \int_\Omega f(x) dx, \quad \overline{g}  \coloneqq  \frac{1}{\abs{\Omega}} \int_\Omega g(x) dx\]
             und dann Vergleich von
             \[\frac{f - \overline{f}}{\norm{f-\overline{f}}_2} \quad \text{und} \quad \frac{g - \overline{g}}{\norm{g-\overline{g}}_2}\]
             über:
@@ -3276,11 +3284,11 @@ Hierbei lautet das zu minimierende Funktional:
 
             Der sich ergebende Datenterm lautet:
 
-            \[D(f,g) := \skprod{\frac{f - \overline{f}}{\norm{f-\overline{f}}_2}}{\frac{g - \overline{g}}{\norm{g-\overline{g}}_2}}\]
+            \[D(f,g)  \coloneqq  \skprod{\frac{f - \overline{f}}{\norm{f-\overline{f}}_2}}{\frac{g - \overline{g}}{\norm{g-\overline{g}}_2}}\]
 
             Diese Verfahren nennt sich \mim{Normalized Crosscorrelation}.
             \item Punktweise Differenzen der Gradienten:
-                \[D(f,g) := \norm{f-g}_2^2 = \int_\Omega \abs{\nabla f - \nabla g}^2 dx\]
+                \[D(f,g)  \coloneqq  \norm{f-g}_2^2 = \int_\Omega \abs{\nabla f - \nabla g}^2 dx\]
 
             \item Vergleich der Gradientnverläufe, also NCC (wie in (b)) von $\nabla f$ und $\nabla g$.
     \end{enumerate}
@@ -3299,10 +3307,10 @@ Hierbei lautet das zu minimierende Funktional:
     Ansätze:
     \begin{enumerate}
         \item Große Streckungen/Deformationen bestrafen
-            \[R(d) := \int_\Omega\bigl( \abs{\nabla y_1(x)}^2 + \abs{\nabla y_2(x)}^2   \bigr) dx \]
+            \[R(d)  \coloneqq  \int_\Omega\bigl( \abs{\nabla y_1(x)}^2 + \abs{\nabla y_2(x)}^2   \bigr) dx \]
             Hier werden Abbleitung 1. Ordnung benutzt.
         \item Große Krümmungen bestrafen
-            \[R(d) := \int_\Omega\bigl( \abs{\Delta y_1(x)}^2 + \abs{\Delta y_2(x)}^2   \bigr) dx \]
+            \[R(d)  \coloneqq  \int_\Omega\bigl( \abs{\Delta y_1(x)}^2 + \abs{\Delta y_2(x)}^2   \bigr) dx \]
             Hier werden Abbleitung 2. Ordnung benutzt.\\
 
             Es können aber auch Ableitungen höherer Ordnungen sowie Kombinationen verwendet werden.
@@ -3320,7 +3328,7 @@ Aus mathematischer Sicht sind einige Fragen offen geblieben, etwa:
 \subsection{Verallgemeinerte Funktionen und Abbleitungen}
 Wie differenziert man unstetige Funktionen?
 
-Sei $\D := C_0^\infty(\R^d)$ die Menge (auch ein Vektorraum) der beliebig oft differenzierbaren Funktionen auf $\R^d$ mit beschränktem Träger. Etwa:
+Sei $\D  \coloneqq  C_0^\infty(\R^d)$ die Menge (auch ein Vektorraum) der beliebig oft differenzierbaren Funktionen auf $\R^d$ mit beschränktem Träger. Etwa:
 
 \begin{center}
     \begin{tikzpicture}
@@ -3340,7 +3348,7 @@ Diese Funktion ist:
 
 wobei
 
-\[g(t) := \begin{cases}
+\[g(t)  \coloneqq  \begin{cases}
     e^{\frac{-1}{t}} & ,t>0\\
     0 & ,t\leq 0
 \end{cases}\]
@@ -3423,7 +3431,7 @@ Nun zu den Abbleitungen, sein zunächst $d=1$ und $f \in C^1 \subset L^1_{loc}$,
 $\Rightarrow$ Für $f \in C^1 \subset L^1_{loc}$ gilt $\tilde f'(\varphi) = - \tilde f(\varphi'), \varphi \in \D$. Wir nehmen dies als Ansatz und setzen:
 
 \begin{equation}\label{eq.11.2}
-    F'(\varphi):=-F(\varphi'), \varphi \in \D
+    F'(\varphi) \coloneqq -F(\varphi'), \varphi \in \D
 \end{equation}
 
 für alle $F\in \D$, genannt Distributionen Abbleitung.
@@ -3438,7 +3446,7 @@ Beispiel:
         \draw (2,-0.1) -- (2,2.3);
     \end{tikzpicture}
 \end{center}
-Und $F:=\tilde f$ also:
+Und $F \coloneqq \tilde f$ also:
 
 \[F'(\varphi) = -F(\varphi) = - \int_{-a}^a \abs{x} \varphi'(x) dx = - \int_{-a}^0 -x \varphi'(x) dx - \int_0^a x \varphi'(x) dx \]
 
