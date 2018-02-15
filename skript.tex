@@ -22,12 +22,11 @@
 \usepackage{mathtools}
 
 
-\definecolor{dgreen}{rgb}{0.0, 0.3, 0.15}
-\usepackage{hyperref}
+\definecolor{lcolor}{rgb}{0.4, 0.6, 0.75}\usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
     linktoc=all,
-    linkcolor=dgreen,
+    linkcolor=lcolor,
 }
 \usetikzlibrary{positioning, calc}
 \usetikzlibrary{decorations.pathreplacing,angles,quotes}
@@ -652,7 +651,7 @@ tabsize=3}
             \item \mim{Median}:\\
             Wähle $t$ so dass $m_{\text{schwarz}} = m_{\text{weiß}}$.
             \item \mim{Isodata Algorithmus} (1970s):\\
-            Wähle t so, dass $\displaystyle t = \frac{\mu_{\text{schwarz}} - \mu_{\text{weiß}}}{2} =: f(t)$.\\
+            Wähle t so, dass $\displaystyle t = \frac{\mu_{\text{schwarz}} + \mu_{\text{weiß}}}{2} =: f(t)$.\\
             Diese Gleichung ist bereits eine \mim{Fixpunktgleichung} und eine Lösung kann, etwa mit einer \mim{Fixpunktiteration} approximiert werden, das heißt $t_{n+1} := f(t_n)$.
             \begin{center}
                 \begin{tikzpicture}%TODO fixpunkt iteration in Grafik?
