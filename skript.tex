@@ -1,4 +1,4 @@
-\documentclass[ngerman]{article}
+\documentclass{article}
 
 \usepackage{amsmath,amsfonts,amssymb,amsthm}
 \usepackage{enumitem}
@@ -20,14 +20,29 @@
 \usepackage{pgfplots}
 \usepackage{varwidth}
 \usepackage{mathtools}
+\usepackage{hyperref}
 
+\usepackage{fancyhdr}
+\pagestyle{fancy}
 
-\definecolor{lcolor}{rgb}{0.4, 0.6, 0.75}\usepackage{hyperref}
+\renewcommand{\subsectionmark}[1]{\markright{\normalfont \thesubsection \ #1 }}
+\renewcommand{\headrulewidth}{0.5pt}
+%\renewcommand{\footrulewidth}{0.5pt}
+
+\renewcommand{\sectionmark}[1]{%
+\markboth{\normalfont \textbf{#1}}{}}
+
+\fancyhead[LE,RO]{\textsl{\leftmark}}
+\fancyhead[LO,RE]{\textsl{\rightmark}}
+\pagestyle{fancy}
+
+\definecolor{lcolor}{rgb}{0.0, 0.18, 0.39}
 \hypersetup{
     colorlinks=true,
     linktoc=all,
     linkcolor=lcolor,
 }
+
 \usetikzlibrary{positioning, calc}
 \usetikzlibrary{decorations.pathreplacing,angles,quotes}
 \usetikzlibrary{decorations.pathmorphing,snakes}
@@ -441,7 +456,6 @@ tabsize=3}
 
             \begin{center}
                 \begin{tikzpicture}
-                    %TODO Images
                     \draw[step=0.5, shift={(3,0.25)}] (0,0) grid (1,-0.5);
                     \draw[fill] (3.25,0) circle[radius=2pt];
                     \draw[] (3.75,0) circle[radius=2pt];
@@ -503,7 +517,7 @@ tabsize=3}
         \end{center}
 
         Zusammenhang zum vorherigen: $\displaystyle \mathcal H_u(A) = \sum_{k \in A} H_u(k)$.
-        Man sagt dann, dass $U_u$ eine \mim{Dichte} zum Maß $\mathcal H_u$ sei. Diese kann auch im kontinuierlichen existieren:
+        Man sagt dann, dass $H_u$ eine \mim{Dichte} zum Maß $\mathcal H_u$ sei. Diese kann auch im kontinuierlichen existieren:
 
         \begin{center}
             \begin{tikzpicture}
@@ -540,8 +554,8 @@ tabsize=3}
             \end{tikzpicture}
         \end{center}
 
-        \pa{1. Idee, Kontrastdehnung:}\\
-        $T$ ''lineare'' Abbildung, so dass $T(k_{min})=0$ und $T(k_{max})=N$:
+        \pa{1. Idee: Kontrastdehnung}\\
+        $T$ \quo{lineare} Abbildung, so dass $T(k_{min})=0$ und $T(k_{max})=N$:
         \[T(k) = \frac{k - k_{min}}{k_{max} - k_{min}} N \text{, Kontinuierlicher Farbraum}\]
         \[T(k) = \left[\frac{k - k_{min}}{k_{max} - k_{min}} N \right] \text{, Diskreter Farbraum}\]
 
@@ -577,7 +591,9 @@ tabsize=3}
             \end{tikzpicture}
         \end{center}
 
-        \pa{2. Idee nicht-lineare Kontrastdehnung}\\
+        Dieses kann jedoch schiefgehen, falls das Histogramm bereits voll ausgedehnt ist, jedoch nur wenige Punkte an den Rändern liegen.
+
+        \pa{2. Idee: Nicht-lineare Kontrastdehnung}\\
             Dieses mal setzen wir $\displaystyle T(k) =\left[ \frac{N}{\abs{\Omega}} \sum_{l=0}^{k}H_u(l) \right]$ für einen diskreten Farbraum und erhalten:
 
             \begin{center}
@@ -760,7 +776,7 @@ I2=imcomplement(imdilate(imcomplement(I),se));%Es wird das Komplement des Bildes
 imshow(I2);
         \end{lstlisting}
 
-        \[A-B  \coloneqq  \{a : a + B \subset A\}\]
+        \[A-B  \coloneqq  \{a \in A: a + B \subset A\}\]
         Diese wird \mim{erosion} genannt.\\
         Anschaulich werden die schwarzen Bereiche des Bildes gesucht, in die das Strukturelement hinein passt.
         \begin{center}
@@ -863,8 +879,8 @@ imshow(I3);
 	    \begin{align*}
         &\norm{f-f_0}, \text{Rauschen}\\
         &\norm{u-f_0}, \text{\mim{Absoluter Fehler}}\\
-        &\frac{\norm{u-f_o}}{\norm{f-f_0}}, \text{\mim{Relativer Fehler} im Vergleich zum Rauschen}\\
-        &\frac{\norm{u-f_o}}{\norm{f_0}}, \text{Relativer Fehler im Vergleich zum Signal}
+        &\frac{\norm{u-f_0}}{\norm{f-f_0}}, \text{\mim{Relativer Fehler} im Vergleich zum Rauschen}\\
+        &\frac{\norm{u-f_0}}{\norm{f_0}}, \text{Relativer Fehler im Vergleich zum Signal}
         \end{align*}
 
         Typischerweise ist die gewählte Norm:
@@ -873,7 +889,7 @@ imshow(I3);
         \[\norm{f}_2=\sqrt{\sum_{x \in \Omega} \abs{f(x)}^2}\]
 
         Eng verwandt ist die \mim{Signal to noise ratio} (SNR):
-        \[log(\underbrace{\frac{\norm{f_0}_2}{\norm{u-f_0}_2}}_{\in \ [1,\infty)}) \in [0,+\infty), \text{ wobei $0$ schlecht und $+\infty$ gut ist.}\]
+        \[log\bigl(\underbrace{\frac{\norm{f_0}_2}{\norm{u-f_0}_2}}_{\in \ [1,\infty)}\bigr) \in [0,+\infty), \text{ wobei $0$ schlecht und $+\infty$ gut ist.}\]
     \subsection{Glättungsfilter}
         Grundidee: (zur Vereinfachung in 1D)
         \begin{center}
@@ -1069,7 +1085,7 @@ imshow(I3);
     Wobei oft die Gleichheit gilt.
 
     Alles gilt auch in der Kontinuierlichen Version:
-    \[L^1(\R^d)  \coloneqq  \{f:\R^d \to \R | \underbrace{\int_{\R^d}\abs{f} dx}_{ \coloneqq \norm{f}_1} < \infty\}\]
+    \[L^1(\R^d)  \coloneqq  \{f:\R^d \to \R : \underbrace{\int_{\R^d}\abs{f} dx}_{ \coloneqq \norm{f}_1} < \infty\}\]
     \[f,g \in L^1(\R^d): (g*f)(x)=\int_{\R^d}g(x-y)f(y) dy, \ y,x \in \R^d\]
 
     Beispiel für den kontinuierlichen Fall:
@@ -1126,7 +1142,7 @@ imshow(I3);
             \draw (3.5,-0.5) node {\LARGE 1};
             \draw (4.5,-0.5) node {\LARGE 0};
             \draw (5.5,-0.5) node {\LARGE 0};
-            \draw[->] (3.5,-1.4) node[below] {Pos $0$} -- (3.5,-1.1);
+            \draw[->] (3.5,-1.4) node[below] {Pos. $0$} -- (3.5,-1.1);
         \end{tikzpicture}
     \end{center}
     Ja!
@@ -1225,7 +1241,7 @@ imshow(I3);
 
     $\Rightarrow Var(u_{ij}) \leq Var(f_{ij})$ für $\alpha \in [0,\frac{1}{4}]$\\
 
-    Dabei gilt: $Var(u_{ij}) \overset{\alpha}{\to} d \text{min} \iff 1 - 8 \alpha + 20 \alpha^2 \overset{\alpha}{\to} \text{min} \iff -8 + 40 \alpha = 0 \iff \alpha = \frac{1}{5}$
+    Dabei gilt: $Var(u_{ij}) \overset{\alpha}{\to} \text{min} \iff 1 - 8 \alpha + 20 \alpha^2 \overset{\alpha}{\to} \text{min} \iff -8 + 40 \alpha = 0 \iff \alpha = \frac{1}{5}$
 
     \begin{equation*}
         \Rightarrow \text{bester Filter} : \ \raisebox{-0.9cm}{\begin{tikzpicture}[scale = 1.3]
@@ -1285,7 +1301,7 @@ imshow(I3);
 
     \[\mathcal F^{-1} : \hat f \mapsto f\]
     \begin{equation}
-        \boxed{\hat f(z) = \frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} f(x) e^{i \skprod{z}{x}} dx}
+        \boxed{f(z) = \frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} \hat f(x) e^{i \skprod{z}{x}} dx}
     \end{equation}
     Wobei $x \in \R^d$.\\
 
@@ -1362,8 +1378,8 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     $\displaystyle f \in L^2(\R^d) = \{f:\R^d \to \R | \int_{\R^d} \abs{f}^2 dx < \infty\}$ ist
     \begin{enumerate}[label = -]
         \item ein normierter Raum mit $+$, $\alpha \cdot$ und $\displaystyle \norm{\cdot}_2  \coloneqq  \sqrt{\int_{\R^d} \abs{f(x)}^2 dx}$
-        \item ein Skalarproduktraum mit $\displaystyle \skprod{f}{g}  \coloneqq  \int_{\R^d} f \bar g dx$, wobei $\norm{f}_2^2=\skprod{f}{f}$
-        \item ein vollständiger Raum, also \mim{Banachraum}
+        \item ein Skalarproduktraum mit $\displaystyle \skprod{f}{g}  \coloneqq  \int_{\R^d} f \bar g \ dx$, wobei $\norm{f}_2^2=\skprod{f}{f}$
+        \item ein vollständiger metrischer Raum, also ein \mim{Banachraum}
     \end{enumerate}
     Ein vollständiger normierter Banachraum mit Skalarprodukt heißt \mim{Hilbertraum}.
 
@@ -1371,11 +1387,11 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \[\hat f = \mathcal F f \in L^2(\R^d)\]
     und
     \begin{equation}
-        \norm{\hat f}_2 = \norm{f}_2
+        \bigl|\bigl|{\hat f}\bigr|\bigr|_2 = \norm{f}_2
     \end{equation}
     und sogar
     \begin{equation}
-        \skprod{\hat f}{\hat g}_2 = \skprod{f}{g}_2
+        \bigl\langle{\hat f}{\hat g} \bigr\rangle_2 = \skprod{f}{g}_2
     \end{equation}
     für alle $f,g \in L^2(\R^d)$.
 
@@ -1395,7 +1411,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         \end{equation*}
         \item Skalierung $\overset{\mathcal F}{\to}$ inverse Skalierung, d.h.
         \begin{equation*}
-            g(x)=f(cx) \Rightarrow \hat g(z) = \frac{1}{\abs c} \hat f(\frac{z}{\abs c})
+            g(x)=f(cx) \Rightarrow \hat g(z) = \frac{1}{\abs c} \hat f\left(\frac{z}{\abs c}\right)
         \end{equation*}
         \item Konjugation: $g(x) = \overline{f(x)} \Rightarrow \hat g(z) = \overline{\hat f (-z)}$\\
         Folglich: $f$ reelwertig $\Rightarrow \hat f(z) = \overline{\hat f(-z)}$
@@ -1485,26 +1501,20 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \end{center}
 
     Wie sieht $g$ aus?
-    \[g = \mathcal F^{-1} \left(\frac{1}{( 2 \pi)^{\frac{d}{2}}} \chi_{[-r,r]}\right)\]
-
-    \small
-    \[\left(
-    \chi_M(z) =
-    \begin{cases}
-         0, & z \not \in M\\
-         1, & z \in M
-    \end{cases}\right)\]
+    \[g = \mathcal F^{-1} \left(\frac{1}{( 2 \pi)^{\frac{d}{2}}} \chi_{[-r,r]}\right), \quad 
+        \chi_M(z) =
+        \begin{cases}
+             0, & z \not \in M\\
+             1, & z \in M
+        \end{cases}\]
 
     \normalsize
     \begin{align*}
         g(x) = & \frac{1}{( 2 \pi)^{\frac{d}{2}}}(\mathcal F^{-1} \chi_{[-r,r]^d})(x)\\
         = & \frac{1}{( 2 \pi)^{\frac{d}{2}}} \frac{1}{( 2 \pi)^{\frac{d}{2}}} \int_{\R^d} \chi_{[-r,r]^d}(z) e^{i \skprod{z}{x}} dz\\
-        (d=1) \to = & \frac{1}{2 \pi} \int_{-\infty}^{\infty} \chi_{[-r,r]}(z) e^{izx} dz\\
-        = & \frac{1}{2 \pi} \int_{r}^{-r} e^{izx} dz\\
-        = & \frac{1}{2 \pi}  \frac{e^{izx}}{ix} \Big|_{z=-r}^{r}\\
-        = & \frac{1}{2 \pi i x}\left( e^{irx} - e^{-irx} \right)\\
-        = & \frac{1}{\pi x} sin(rx)\\
-        = & sinc\left(\frac{rx}{\pi}\right) \cdot \frac{r}{\pi}
+        (d=1) \to = & \frac{1}{2 \pi} \int_{-\infty}^{\infty} \chi_{[-r,r]}(z) e^{izx} dz = \frac{1}{2 \pi} \int_{r}^{-r} e^{izx} dz\\
+        = & \frac{1}{2 \pi}  \frac{e^{izx}}{ix} \Big|_{z=-r}^{r} = \frac{1}{2 \pi i x}\left( e^{irx} - e^{-irx} \right)\\
+        = & \frac{1}{\pi x} sin(rx) = sinc\left(\frac{rx}{\pi}\right) \cdot \frac{r}{\pi}
     \end{align*}
 
     \[\text{Wobei:\ } sinc(\varphi)=
@@ -1515,7 +1525,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
 
     $g$ hat auch Masse $1$, denn mit den Eigenschaften der Fouriertransformation folgt:
 
-    \[\frac{1}{( 2 \pi)^{\frac{d}{2}}} = \hat g(0) = (\mathcal F g)(0) = \frac{1}{( 2 \pi)^{\frac{d}{2}}} \int_{R^d} g(x) \underbrace{e^{\underbrace{-\skprod{x}{0}}_0}}_1 dx = \frac{1}{( 2 \pi)^{\frac{d}{2}}} \int_{R^d} g(x) dx\]
+    \[\frac{1}{( 2 \pi)^{\frac{d}{2}}} = \hat g(0) = (\mathcal F g)(0) = \frac{1}{( 2 \pi)^{\frac{d}{2}}} \int_{R^d} g(x) \underbrace{e^{-\overbrace{\skprod{x}{0}}^0}}_1 dx = \frac{1}{( 2 \pi)^{\frac{d}{2}}} \int_{R^d} g(x) dx\]
 
     \[\Rightarrow \int_{\R^d} g(x) dx = 1\]
 
@@ -1533,7 +1543,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
 
     \mim{Gauß-Kern}:
     \begin{align*}
-        G(x) =& \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-\abs{x}^2}{2}} \Rightarrow G\left( \srmatrix{x_1\\\vdots\\x_d} \right) = \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-x_1^2-x_2^2 + \cdots + x_d^2}{2}}\\
+        G(x) =& \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-\abs{x}^2}{2}} \Rightarrow G\left( \srmatrix{x_1\\\vdots\\x_d} \right) = \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-x_1^2-x_2^2 - \cdots - x_d^2}{2}}\\
         =& \left( \frac{1}{(2 \pi)^\frac{1}{2}} e^{\frac{-x_1^2}{2}}\right) \cdot \ \cdots \ \cdot \left( \frac{1}{(2 \pi)^\frac{1}{2}} e^{\frac{-x_d^2}{2}}\right) = G(x_1) \cdot \ \cdots \ \cdot G(x_d)
     \end{align*}
 
@@ -1546,7 +1556,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                     \draw (0.5*\i + 0.25,0.5*\j + 0.25) node[] {\small 1};
             \draw[step = 0.5] (0,0) grid (2.5,2.5);
             \draw (0,1.25) node[left] {klar ist: $\frac{1}{25}$};
-            \draw (3,1.25) node[right] {'glättet mehr als': $\frac{1}{9}$};
+            \draw (3,1.25) node[right] {\quo{glättet mehr als}: $\frac{1}{9}$};
             \draw[step = 0.5, shift = {(6.5,0.5)}] (0,0) grid (1.5,1.5);
             \foreach \i in {0,...,2}
                 \foreach \j in {0,...,2}
@@ -1556,25 +1566,25 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
 
     Im Kontinuierlichen: Sei $m \in L^1(\R^d)$ und $s > 0$.
     Setze
-        $$ m_s(x)  \coloneqq  \frac{1}{s^d} m (\frac{x}{s}), \quad x\in \R^d$$
+        \[m_s(x)  \coloneqq  \frac{1}{s^d} \ m \left(\frac{x}{s}\right), \quad x\in \R^d\]
 
-    Bsp (in $d =1 $):
+    Bsp. (für $d =1 $):
     \begin{center}
         \begin{tikzpicture}
             \draw[->] (-2.2,0) -- (2.2,0) node[right] {\small x};
             \draw[->] (0,-0.1) -- (0,2.2) node[above] {\small y};
             \draw (-2,0.1) -- (-2,-0.1) node[below] {\small $-1$};
-            \draw (2,0.1) -- (2,-0.1) node[below] {\small $-1$};
+            \draw (2,0.1) -- (2,-0.1) node[below] {\small $1$};
             \draw (0.1,2) -- (-0.1,2) node[left] {\small $1$};
             \draw[thick] (-2,0) -- (0,2) -- (2,0);
             \draw (1.2,1.2) node[rotate = -45] {\small $y=m(x)$};
             \draw[->] (3.8,0) -- (12.2,0) node[right] {\small x};
             \draw[->] (8,-0.1) -- (8,1.2) node[above] {\small y};
-            \draw (4,0.1) -- (4,-0.1) node[below] {\small $-1$};
-            \draw (2,0.1) -- (2,-0.1) node[below] {\small $-1$};
+            \draw (4,0.1) -- (4,-0.1) node[below] {\small $-2$};
+            \draw (12,0.1) -- (12,-0.1) node[below] {\small $2$};
             \draw (8.1,1) -- (7.9,1) node[left, xshift = -9, yshift = 4] {\small $\frac{1}{2}$};
             \draw[thick] (4,0) -- (8,1) --(12,0);
-            \draw (10,0.8) node[rotate = -12.5] {\small $y=m(x)$};
+            \draw (10,0.8) node[rotate = -12.5] {\small $y=m_2(x)$};
             \draw[->,double] (2,1.5) -- node[above] {\small $s=2$} (4,1.5);
         \end{tikzpicture}
     \end{center}
@@ -1597,13 +1607,14 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
 
     Bisher: Glättung $\widehat =$ Mittelwert bilden $\widehat =$ Summe/Integrale\\
     Jetzt: Schärfen $\widehat =$ Differenzen/Kontraste hervorheben $\widehat =$ Differenzen/Ableitungen\\
+    \hfill
 
-    \mtitle{Diskretisierung von Ableitungen durch Differenzenquotienten}
-    \ \\
-    \begin{minipage}[c]{0.25\linewidth}
+    \textbf{\large{Diskretisierung von Ableitungen durch Differenzenquotienten:}}
+
+    \hfill
+    \begin{minipage}[c]{0.2\linewidth}
         \begin{center}
             \begin{tikzpicture}
-
                 \draw[scale=1,domain=-0.75:1.5,smooth,variable=\x]  plot ({\x},{(\x * \x)});
                 \draw[] (-1,-0.3) -- (2,-0.3);
                 \draw[dotted] (-0.5,-0.3) node[] {\small \textbullet} node[below] {\small $x_{k-1}$} -- (-0.5,0.25) node[] {\small \textbullet};
@@ -1616,44 +1627,37 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         \end{center}
     \end{minipage}
     \hfill\vrule\hfill
-    \begin{minipage}[c]{0.4\linewidth}
-        (hier bedeutet $f(k) = f(x_k)$)\\
-        Vorwärts: $\displaystyle u(h)= \frac{f(k+1) - f(k)}{h}$
-        Rückwärts: $\displaystyle u(h)= \frac{f(k) - f(k-1)}{h}$
-        Zentral: $\displaystyle u(h)= \frac{f(k+1) - f(k-1)}{2h}$
+    \begin{minipage}[c]{0.79\linewidth}
+        Hier bedeutet $f(k) = f(x_k)$\\
+        \begin{align*}
+            \text{Vorwärts:}& &u_V^{(1)}(k) & \eqqcolon \frac{f(k+1) - f(k)}{h} & \Rightarrow& &u_V^{(1)} &= \frac{1}{h}\begin{tabular}{|c|c|c|}
+                \hline
+                0 & -1 & 1\\
+                \hline
+            \end{tabular} \boxast f\\
+            \text{Rückwärts:}& &u_R^{(1)}(k) & \eqqcolon \frac{f(k) - f(k-1)}{h} & \Rightarrow& &u_R^{(1)} &= \frac{1}{h}\begin{tabular}{|c|c|c|}
+                \hline
+                -1 & 1 & 0\\
+                \hline
+            \end{tabular} \boxast f\\
+            \text{Zentral:}& &u_Z^{(1)}(k) & \eqqcolon \frac{f(k+1) - f(k-1)}{2h} & \Rightarrow& &u_Z^{(1)} &= \frac{1}{2h}\begin{tabular}{|c|c|c|}
+                \hline
+                -1 & 0 & 1\\
+                \hline
+                \end{tabular} \boxast f
+        \end{align*}
     \end{minipage}
+
     \hfill
-    \begin{minipage}[c]{0.3\linewidth}
-        \ \\
-        $u=\displaystyle \frac{1}{h}\begin{tabular}{|c|c|c|}
-            \hline
-            0 & -1 & 1\\
-            \hline
-        \end{tabular} \boxast f$\\
-        \ \\
-        $u=\displaystyle \frac{1}{h}\begin{tabular}{|c|c|c|}
-            \hline
-            -1 & 1 & 0\\
-            \hline
-        \end{tabular} \boxast f$\\
-        \ \\
-        $u=\displaystyle \frac{1}{2h}\begin{tabular}{|c|c|c|}
-            \hline
-            -1 & 0 & 1\\
-            \hline
-            \end{tabular} \boxast f$\\
-    \end{minipage}
-    \ \\
 
-    \mtitle{2. Ableitung:}
-
+    \textbf{\large{2. Ableitung:}}
     \begin{align*}
-        u(h) \approx & \frac{f'(k+1) - f'(k)}{h} \text{(vorwärts)}\\
+        u^{(2)}(k) \approx & \frac{f'(k+1) - f'(k)}{h} \text{(vorwärts)}\\
         \approx & \frac{\frac{f(k+1) - f(k)}{h} - \frac{f(k) - f(k-1)}{h}}{h} \text{(rückwärts)} \\
         = & \frac{f(k+1) -2 f(k) + f(k+1)}{h^2}
     \end{align*}
 
-    Also folgt $\displaystyle u \coloneqq \begin{tabular}{|c|c|c|}
+    Also folgt $\displaystyle u^{(2)} \coloneqq \begin{tabular}{|c|c|c|}
         \hline
         1 & -2 & 1\\
         \hline
@@ -1671,10 +1675,8 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                     \hline
                     \end{tabular}$\\
     Denn:
-
     \begin{align*}
-         & \frac{1}{h} \filter{-1 & 1 & 0}\\
-        =& \frac{1}{h} \filter{0 & 1 & -1} * \left(\frac{1}{h} \filter{1 & -1 & 0} * f\right)\\
+        \frac{1}{h} \filter{0 & 1 & -1} * \left(\frac{1}{h} \filter{1 & -1 & 0} * f\right)\\
         =& \left(\frac{1}{h} \filter{ 0 & 1 & -1} * \frac{1}{h} \filter{1 & -1 & 0}\right)*f\\
         =& \left(\frac{1}{h} \filter{ -1 & 1 & 0} \boxast \frac{1}{h} \filter{1 & -1 & 0}\right)*f\\
         =& \frac{1}{h^2} \filter{1 & -2 & 1} * f \\
@@ -1742,7 +1744,6 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         \hline
     \end{tabular}$ ist unter allen 5-Punkt Filtern der am besten glättende.\\
     Idee: Rauschen weiter verringern indem man $m \boxast$ wiederholt anwendet $\Rightarrow$ Folge von Bildern:\\
-
     \begin{center}
         \begin{tikzpicture}
             \draw (0,0) rectangle (1,1);
@@ -1757,10 +1758,9 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             \draw (5,0.5) node[right] {\LARGE ...};
         \end{tikzpicture}
     \end{center}
-
     \begin{align*}
-        \Rightarrow u^{(n+1)} - u^{(n)} & = \text{(Unterschied zwischen 'Zeit' Punkt $n$ und $n+1$)}\\
-        &= \underbrace{m \boxast u^{(n)}}_{u^{n+1}} - \underbrace{\delta \boxast u^{(n)}}_{u^{(n)}} \text{mit } \delta = \begin{tabular}{|c|c|c|}
+        \Rightarrow u^{(n+1)} - u^{(n)} & \hat = \text{\quo{Unterschied zwischen 'Zeit' Punkt $n$ und $n+1$}}\\
+        & \hat = \underbrace{m \boxast u^{(n)}}_{u^{n+1}} - \underbrace{\delta \boxast u^{(n)}}_{u^{(n)}} \text{mit } \delta = \begin{tabular}{|c|c|c|}
             \hline
             0 & 0 & 0\\
             \hline
@@ -1795,11 +1795,9 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             \hline
             0 & 1 & 0\\
             \hline
-        \end{tabular} u^{(n)}
-    \end{align*}
-
+        \end{tabular} \boxast u^{(n)}
+    \end{align*} 
     Somit gilt insgesamt:
-
     \begin{equation}\label{eq:5.11}
         \underbrace{u^{(n+1)} - u^{(n)}}_{\widehat = \frac{\partial u}{\partial t}} = \underbrace{\frac{1}{5} \begin{tabular}{|c|c|c|}
             \hline
@@ -1851,14 +1849,11 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \begin{center}
         \begin{tikzpicture}
             \draw[->] (0,0) node[left] {\small kontinuierlich:} -- (10,0) node[right] {\small t};
-
-            \draw (1,-0.5) rectangle (2,-1.5);
-            \draw (1.5,-1) node {\large $u^{(0)}$};
+            \draw (1,-0.5) rectangle node[] {\large $u^{(0)}$} (2,-1.5);
             \draw (1.5,-1.5) node[below] {\small $u(\cdot,0)$};
             \draw[->] (1.5,-2) -- (1.5,-2.5) -- node[above] {\small $G_{\sqrt{2t}}*$} (8.5,-2.5) -- (8.5,-2);
-            \draw (8,-0.5) rectangle (9,-1.5);
+            \draw (8,-0.5) rectangle  node[] {\large $u^{(t)}$}(9,-1.5);
             \draw (8.5,-1.5) node[below] {\small $u(\cdot,t)$};
-
             \draw (0,-4) node[left] {\small diskret:};
             \draw (1,-4) rectangle (2,-5);
             \draw (1.5,-4.5) node[] {\large $u^{(0)}$};
@@ -1873,13 +1868,8 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             \draw[->,shift={(5,0)}] (2.1,-4.5) -- node[above] {\small $m \boxast$} (2.9,-4.5);
         \end{tikzpicture}
       \end{center}
-
-
       % TODO ???
-
       \subsection{Isotrope und anisoptrope Diffusion}
-
-
       Wir haben gesehen: Glättung/Diffusion verringert Rauschen.\\
       Aber: Auch Kanten/Details werden verwischt.\\
       Ausweg: Diffusion steuern, so dass sie an Kanten (also Stellen mit großer Änderungsrate) weniger stark glättet.\\
@@ -1892,11 +1882,11 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
 
       Diffusionsgleichung:
 
-      \begin{equation}
+      \begin{equation}\label{eq.5.14}
           \frac{\partial u}{\partial t} = \Delta u = \frac{\partial}{\partial x} \frac{\partial}{\partial x} u + \frac{\partial}{\partial y} \frac{\partial}{\partial y} u = \underbrace{\srmatrix{ \frac{\partial }{\partial x } \frac{\partial}{\partial y}}}_{div} \srmatrix{\frac{\partial}{\partial x} u \\ \frac{\partial}{\partial y} u} = div(\nabla u)
       \end{equation}
 
-      Um diese Gleichung zu regulieren setzen wir einen \mim{Diffusionstensor} $M$ in die Gleichung in.
+      Um diese Gleichung zu regulieren setzen wir einen \mim{Diffusionstensor} $M$ in die Gleichung \eqref{eq.5.14} in.
 
       \[\Delta u = div(M \nabla u) = div(\srmatrix{* & * \\ * & *} \nabla u)\]
 
@@ -1904,7 +1894,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
 
       \begin{enumerate}[label=\alph*)]
           \item $M=I=\srmatrix{1 & 0 \\ 0 & 1} \Rightarrow$ übliche Diffusion
-          \item $M=g(\norm{\nabla u(x,y)}) * I$
+          \item $M=g_{\kappa}(\norm{\nabla u(x,y)}) \C I$
           \begin{center}
               \begin{tikzpicture}
                   \draw[shift={(-0.75,0.75)}] (0,0) node[left] {$\displaystyle g_\kappa(s) = \frac{1}{1+\left(\frac{s}{\kappa}\right)^2}$};
@@ -1923,8 +1913,8 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
           \end{enumerate}
           Diese Art der Glättung ist \mim{Isotrop} $\widehat = $ in alle Richtungen gleich starker Fluss.
           \item $M= \begin{pmatrix}
-              g(\abs{\frac{\partial u}{\partial x}(x,y)}) & 0 \\
-              0 & g(\abs{\frac{\partial u}{\partial y}(x,y)})
+              g\bigl(|\frac{\partial u}{\partial x}(x,y)|\bigr) & 0 \\
+              0 & g\bigl(|\frac{\partial u}{\partial y}(x,y)|\bigr)
           \end{pmatrix}$\\
           Diese Art der Diffusionstensoren ist \mim{anisoptrop} also richtungsabhängig.\\
           \ \\
@@ -2032,7 +2022,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
       Mathematische Umsetzung der Wünsche:
       \begin{enumerate}
           \item $\displaystyle \norm{u-f}_2 = \sqrt{\int_\Omega \abs{u(\x) - f(\x)}^2 dx}$ sei klein
-          \item $\displaystyle \norm{\nabla u}_2 = \sqrt{\int_\Omega \abs{\nabla u(\x)}^2 dx} = \sqrt{\int_\Omega \left( \frac{\partial u}{\partial x} (\x) \right)^2 + \left( \frac{\partial u}{\partial x} (\x) \right)^2 d\x} $ sei klein
+          \item $\displaystyle \norm{\nabla u}_2 = \sqrt{\int_\Omega \abs{\nabla u(\x)}^2 dx} = \sqrt{\int_\Omega \left( \frac{\partial u}{\partial x} (\x) \right)^2 + \left( \frac{\partial u}{\partial y} (\x) \right)^2 d\x} $ sei klein
       \end{enumerate}
 
       Kombination:
@@ -2041,13 +2031,11 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
       \end{equation}
       Für einen geeigneten Funktionen Raum $U$ und \mim{Kopplungskonstante} $\lambda > 0$.\\
       In diesem Beispiel empfiehlt sich als Suchraum:
-
-      \[U=\{ u : \norm{u} < \infty, \ \nabla \text{ existiert }, \ \norm{\nabla}_2<\infty  \}=W^{1,2}\]
+      \[U=\{ u : \norm{u}_2 < \infty, \ \nabla u \text{ existiert }, \ \norm{\nabla u}_2<\infty  \}=W^{1,2}\]
       ein so genannter \mim{Sobolev-Räume}. Diese Suchproblem is jedoch $\infty$-dimensional und somit schwer zu lösen.\\
-
       Im obigen Ansatz \eqref{eq:5.15} stellt man fest, dass der Regularitätsterm
       \[\norm{\nabla u}_2^2 = \int_\Omega \abs{\nabla u(\x)}^2 d\x =
-      \int_\Omega \left( \frac{\partial u}{\partial x} (\x) \right)^2 + \left( \frac{\partial u}{\partial x} (\x) \right)^2 d\x \]
+      \int_\Omega \left( \frac{\partial u}{\partial x} (\x) \right)^2 + \left( \frac{\partial u}{\partial y} (\x) \right)^2 d\x \]
       die großen Gradienten an (gewollten) Kanten zu stark bestraft. ($\Rightarrow$ optimales $u$ glättet Kanten)\\
 
       Ausweg: Wähle $\norm{\nabla u}_2$ oder $\displaystyle \norm{\nabla u}_1 =\int_\Omega \abs{\nabla u(\x)} d\x = \int_\Omega \abs{\frac{\partial u}{\partial x} (\x)} + \abs{\frac{\partial u}{\partial y} (\x)} d\x$ als Regularitätsterme.
@@ -2094,7 +2082,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
       \end{center}
 
     \section{Kantenerkennung}
-        \subsection{\mim{Gradientenfilter}}
+        \subsection{Gradientenfilter}\index{Gradientenfilter}
             Wir suchen Stellen $\x$ mit großem Gradienten:
             \[\nabla u(\x) = \srmatrix{\frac{\partial u}{\partial x}(\x)\\\frac{\partial u}{\partial y}(\x)}\]
             Approximation der Gradienten über zentrale Differenzen:
@@ -2140,9 +2128,9 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                 -1 & 0 & 1\\
                 \hline
             \end{tabular} \boxast \frac{1}{4}\begin{tabular}{|c|c|c|}\hline
-                -1\\
+                1\\
                 \hline
-                0\\
+                2\\
                 \hline
                 1\\
                 \hline
@@ -2186,7 +2174,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             \item Kandidat $\x$ wird Kantenpunkt, falls:
             \begin{center}
                 \begin{tikzpicture}
-                    \draw (0,0) -- (11,0);
+                    \draw[->] (0,0) -- (11,0) node[right] {$\abs{\nabla u}$};
                     \draw[decorate,decoration={brace,amplitude=5pt}] (0.1,0.1) -- node[above] {\small Kein Kantenpunkt} (2.95,0.1);
                     \draw[decorate,decoration={brace,amplitude=5pt}] (3.05,0.1) -- node[above] {\small Ja, falls Nachbar Kantenpunkt} (7.95,0.1);
                     \draw[decorate,decoration={brace,amplitude=5pt}] (8.05,0.1) -- node[above] {\small Kantenpunkt} (10.95,0.1);
@@ -2243,7 +2231,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             Test für Kantenpunkte $u''(\x) = 0$ und $\abs{u'(\x)}>$ threshold.\\
             Wichtig: Vorglätten!, da die 2. Ableitung noch anfälliger gegenüber Rauschen als die 1. Ableitung ist.\\
             \ \\
-            In 2D. Laplace Operator $\Delta u = \frac{\partial^2 u}{\partial^2 x} + \frac{\partial^2 u}{\partial^2 y}$ (Richtungsunabhängige Messung der 2. Ableitung)\\
+            In 2D. Laplace Operator $\Delta u = \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2}$ (Richtungsunabhängige Messung der 2. Ableitung)\\
             Vorglätten: $\Delta (G * u) = (\Delta G)*u$, wobei $\Delta G$ vorher berechnet werden kann.
 
             In 1D:
@@ -2265,8 +2253,8 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                 \pgfplotsset{
                     colormap name=viridis,
                 }
-                    \begin{axis}[hide axis,scale=0.75,name=plot1,samples=60]
-                        \addplot3[surf,domain=-2:6,domain y=-3.7:3.7,samples=40]
+                    \begin{axis}[hide axis,scale=0.75,name=plot1]
+                        \addplot3[surf,domain=-2:6,domain y=-3.7:3.7,samples=60]
                             {exp(-( (x-\centerx)^2 + (y-\centery)^2)/3 )};
                         \end{axis}
                         \draw[->] (6,1.5)--(7,1.5);
@@ -2319,7 +2307,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             \begin{enumerate}[label=-]
                 \item $u - \tau u''$ reskalieren (Kontrast-stretching) falls der Farbraum verlassen wird.
                 \item $\tau$ kann auch sehr klein gewählt werden und der Vorgang dafür wiederholt iteriert werden.
-                \item In 2D $\Delta statt$ 2. Ableitung
+                \item In 2D $\Delta$ statt 2. Ableitung
                 \item Vorglätten: $u - \tau \C \Delta (G*u)$
             \end{enumerate}
 
@@ -2328,7 +2316,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                 Idee: $M$ so wählen, so dass der Fluss:
                 \begin{enumerate}[label=-]
                     \item Parallel zum Gradienten (d.h. durch die Kante verläuft): $\displaystyle \lambda_1=\frac{1}{1+\frac{\abs{\nabla u (\x)}^2}{\kappa^2}}$
-                    \item senkrecht zu $\nabla u$ (entlang der Kante): $\Lambda_2=1$
+                    \item senkrecht zu $\nabla u$ (entlang der Kante): $\lambda_2=1$
                 \end{enumerate}
 
                 $\Rightarrow M$ hat EW $\lambda_1$ zum EV $\displaystyle v_1= \frac{\nabla u}{\abs{\nabla u}}\srmatrix{\frac{\partial u}{\partial x}(\x)\\\frac{\partial u}{\partial y}(\x)}$ und EW $\lambda_2$ zum EV $\displaystyle v_2 = \frac{1}{\abs{\nabla u}} \srmatrix{-\frac{\partial u}{\partial y}(\x)\\\frac{\partial u}{\partial x}(\x)} \perp v_1$.\\
@@ -2336,11 +2324,11 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                 $\Rightarrow M= \mat{v_1 & v_2} \mat{\lambda_1 & \ \\ \ & \lambda_2} \underbrace{\mat{v_1 & v_2}^T}_{=\mat{v_1^T \\ v_2^T}} = \frac{1}{\abs{\nabla u}^2} \mat{\lambda_1 \frac{\partial u}{\partial x}(\x)^2 + \lambda_2 \frac{\partial u}{\partial y}(\x)^2  & (\lambda_1 - \lambda_2)\frac{\partial u}{\partial x} \frac{\partial u}{\partial y}(\x)\\ (\lambda_1 - \lambda_2)\frac{\partial u}{\partial x} \frac{\partial u}{\partial y}(\x) & \lambda_2 \frac{\partial u}{\partial x}(\x)^2 + \lambda_1 \frac{\partial u}{\partial y}(\x)^2}$\\
                 falls $\nabla u(\x) \neq 0$, sonst $M= \mat{1 & 0 \\ 0 & 1}$.
 
-            \subsection{\mim{Entfaltung}}
+            \subsection{Entfaltung}\index{Entfaltung}
                 \begin{center}
                     \begin{tikzpicture}
-                        \draw (0,0) rectangle node[] {$f$} node[above,yshift=27] {original} (2,2);
-                        \draw (4,0) rectangle node[] {$u$} node[above,yshift=27] {geglättet} (6,2);
+                        \draw (0,0) rectangle node[] {\Large $f$} node[above,yshift=27] {original} (2,2);
+                        \draw (4,0) rectangle node[] {\Large $u$} node[above,yshift=27] {geglättet} (6,2);
                         \draw[] (2.1,1) edge[bend left,->]  node[above] {$g*$} node[below] {\small Glättung} (3.9,1);
                         \draw[] (1,-0.1) edge[bend right=40,<-]  node[above] {?} node[below] {\small Entfaltung} (5,-0.1);
                     \end{tikzpicture}
@@ -2418,7 +2406,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                         \end{center}
                         \item Kontinuierlicher Fall: \begin{align*}
                                                         &(g*f)(x)=u(x),\ x \in \Omega\\
-                                                        &\int g(x-y) f(y) dy = u(x), \ x \in \Omega\\
+                                                        &\int_\R g(x-y) f(y) dy = u(x), \ x \in \Omega\\
                                                         &\text{Integralgleichung für die gesuchte Funktion $f$}
                                                         \end{align*}
                         $\Rightarrow$ Kontinuierliche Matrix:
@@ -2434,7 +2422,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                                 \draw[<->] (6.2,4.9) node[above] {\small $a$} -- (6.2,0.1)  node[below] {\small $b$};
                                 \draw (6.5,2.5) node[] {\Large $=$};
                                 \draw (7,5) node[above,xshift=7] {\Large $u$} rectangle (7.5,0);
-                                \draw[->] (7.7,4.9) -- (7.7,0.1) node[above] {\small $x$};
+                                \draw[->] (7.7,4.9) -- (7.7,0.1) node[below] {\small $x$};
                             \end{tikzpicture}
                         \end{center}
                         Wobei $[a,b]$ die das Definitionsgebiet von $f$ ist.
@@ -2512,7 +2500,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                             \Rightarrow J(f)&=\norm{g*f-u}_2^2 + \lambda\norm{f}_2^2\\
                             &=||\widehat{g*f-u}||_2^2 + \lambda ||\hat f||_2^2\\
                             &=||(2 \pi)^\frac{d}{2} \hat g \hat f -\hat u||_2^2 + \lambda||\hat f||_2^2\\
-                            &=\int_{\R^d}\left[ \left((2 \pi)^\frac{d}{2} \hat g(z) \hat f(z) - \hat u(z)\right)^2 + \lambda |\hat f(z)|^2 \right] dz \overset{f \in U}{\longrightarrow} min
+                            &=\int_{\R^d}\left[ \left|(2 \pi)^\frac{d}{2} \hat g(z) \hat f(z) - \hat u(z)\right|^2 + \lambda |\hat f(z)|^2 \right] dz \overset{f \in U}{\longrightarrow} min
                         \end{align*}
                     Strategie: Integral für jedes einzelne $z$ minimieren. Daraus erhalten wir ein optimales $\hat f$ und somit auch ein optimales $f$.\\
                     Also minimiere für jedes $z \in \R^d$
@@ -2661,7 +2649,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             \end{tikzpicture}
           \end{center}
       \end{enumerate}\end{varwidth}}};
-      \draw[->,thick] (0,5.5) -- (-1,5.5) -- node[sloped,above]  {Iteriere} node[sloped,below] {\footnotesize Abbruch falls $\norm{f-g}< \ threshold$} (-1,10.9) -- (-0.5,10.9);
+      \draw[->,thick] (0,5.5) -- (-1,5.5) -- node[sloped,above]  {Iteriere} node[sloped,below] {\footnotesize Abbruch falls $\norm{f-g}<$ threshold} (-1,10.9) -- (-0.5,10.9);
     \end{tikzpicture}
 
   \subsection{PDE-Transport-Diffusions-Ansatz}
@@ -2693,13 +2681,13 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \hfill\\
     \textbf{Skalierung der Diffusion:}
     \[\frac{\partial u}{\partial t} = div(M \nabla u)\]
-    \[\text{mit } M = \srmatrix{ | & |\\ v_1 & v_2\\ | & |} \mat{\lambda_1 & \ \\ & \lambda_2} \srmatrix{- & v_1^T & -\\ \\- & v_2^T & -} \in R^{2 \times 2}\]
+    \[\text{mit } M = \srmatrix{ | & |\\ v_1 & v_2\\ | & |} \mat{\lambda_1 & \ \\ & \lambda_2} \srmatrix{- & v_1^T & -\\ \\- & v_2^T & -} \in \R^{2 \times 2}\]
     Wobei $v_1 \perp v_2$ die Eigenvektoren des sogenannten \underline{doppelt geglätteten Strukturtensors} \index{doppelt geglätteter Strukturtensor}
     \[J= G_\rho * \biggl[ \underbrace{\srmatrix{| \\ \nabla (G_\sigma * u)\\ |}}_{2 \times 1} \cdot \underbrace{\srmatrix{- & \nabla^T(G_\sigma * u) & -}}_{1 \times 2} \biggr] \]
     sind.\\
     \begin{enumerate}
       \item[$\Rightarrow$] $v_1$ Richtung mit maximalem Kontrast mit EW $\mu_1$
-      \item[] $v_2$ Richtung mit maximalem Kontrast mit EW $\mu_2$, genannt \mim{Kohärentsrichtung}.
+      \item[] $v_2$ Richtung mit minimalem Kontrast mit EW $\mu_2$, genannt \mim{Kohärentsrichtung}.
       \item[] Hierbei ist $\mu_1 \geq \mu_2$.
     \end{enumerate}
 
@@ -2786,7 +2774,16 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
       \subsection{Variationsansatz}
 
 
-        \begin{minipage}[c]{0.25\linewidth}
+      \begin{minipage}[c]{0.5\linewidth}
+        \begin{enumerate}
+          \item[geg.:] $f$ auf $\Omega \backslash D$
+          \item[ges.:] $u$ auf $\Omega$
+          \item[Wunsch 1:] $u=f$ auf $\Omega \backslash D$
+          \item[Wunsch 2:] $\norm{\nabla u}$ klein auf $\Omega$
+        \end{enumerate}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{0.35\linewidth}
       \begin{center}
         \begin{tikzpicture}[scale=0.7]
           \draw[thick] (0,0) rectangle (5,5);
@@ -2795,15 +2792,6 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
           \draw (1,4) node[] {\large $\Omega$};
         \end{tikzpicture}
       \end{center}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[c]{0.5\linewidth}
-        \begin{enumerate}
-          \item[geg.:] $f$ auf $\Omega \backslash D$
-          \item[ges.:] $u$ auf $\Omega$
-          \item[Wunsch 1:] $u=f$ auf $\Omega \backslash D$
-          \item[Wunsch 2:] $\norm{\nabla u}$ klein auf $\Omega$
-        \end{enumerate}
     \end{minipage}\\
     \hfill\\ \hfill\\
     Daraus folgt:
@@ -2821,7 +2809,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
       &=\underset{t \to 0}{lim} \frac{1}{t} \int_\Omega \skprod{\nabla u(x) + t \nabla v(x)}{\nabla u(x) + t \nabla v(x)} - \skprod{\nabla u (x)}{\nabla u (x)} dx\\
       &=\underset{t \to 0}{lim} \frac{1}{t} \int_\Omega t^2 \norm{\nabla v(x)}^2 + 2 t \skprod{\nabla u(x)}{\nabla v(x)} dx =  \underset{t \to 0}{lim} \int_\Omega t \norm{\nabla v(x)}^2 + 2 \skprod{\nabla u(x)}{\nabla v(x)} dx\\
       &=2 \int_D \skprod{\nabla u(x)}{\nabla v(x)} dx \overset{\text{Greensche Formel}}{=} 2 \biggl( \overbrace{\int_{\delta D} \frac{\partial u}{\partial n} \underbrace{v(x)}_{0} ds(x)}^{0} - \int_D \Delta u(x) v(x) dx \biggr)\\
-      &=2 \int_D \Delta u(x) v(x) dx \Rightarrow \nabla u =0 \text{ in } D
+      &=2 \int_D \Delta u(x) v(x) dx \Rightarrow \Delta u =0 \text{ in } D
     \end{align*}
 
     \section{Segmentierung}
@@ -2921,7 +2909,7 @@ Rechts ist das Bild, das durch das Beschriebene Histogramm thresholding dargeste
     \end{gather*}
     In Matrix Form ergibt sich:
 
-    \[\underbrace{\mat{x_1 & y_1 & 1 \\ \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots \\ x_n & y_n & 1}}_{A} \underbrace{\mat{a \\ b \\ c}}_{w} \approx \underbrace{\mat{f(x_1,y_1 \\ \vdots \\ \vdots \\ \vdots \\ f(x_n,y_n)}}_{z}\]
+    \[\underbrace{\mat{x_1 & y_1 & 1 \\ \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots \\ x_n & y_n & 1}}_{A} \underbrace{\mat{a \\ b \\ c}}_{w} \approx \underbrace{\mat{f(x_1,y_1) \\ \vdots \\ \vdots \\ \vdots \\ f(x_n,y_n)}}_{z}\]
     Die optimale Lösung dieses Problems kann über die \mim{Normalengleichung} berechnet werden.
 
     \[A^T A w = A^T z\]
@@ -3035,7 +3023,7 @@ illustiert hier:
         \draw (0.5,4.5) node[] {\LARGE $\Omega$};
         \draw[white] (0.3, 4.2) -- node[black,below,sloped,style={align=center},draw,fill=black!5] {\footnotesize $u(x) \leq t$ \\ \footnotesize $u(x) -t \leq 0$ \\ \footnotesize $v(x) = 0$} ++(0:3);
         \draw (1,0.8) node[] {$\Omega_0$};
-        \draw[] (5.5, 2.8)  node[black,below,sloped,style={align=center},draw,fill=black!5] {\footnotesize $u(x) \leq t$ \\ \footnotesize $u(x) -t \leq 0$ \\ \footnotesize $v(x) = 0$};
+        \draw[] (5.5, 2.8)  node[black,below,sloped,style={align=center},draw,fill=black!5] {\footnotesize $u(x) > t$ \\ \footnotesize $u(x) -t > 0$ \\ \footnotesize $v(x) = 1$};
         \draw (4.2,1.4) node[] {$\Omega_1$};
         \draw[fill, black!30, draw = black] (2.5,2) rectangle ++(0.11,0.08);
         \draw[fill, black!30, draw = black] (4,3.7) rectangle ++(0.08,0.11);
@@ -3170,7 +3158,7 @@ Mumford-Shah (1989):
 
 Strekalovskiy \& Cremers (2014):
 
-\[\widetilde J(v,\Gamma)  \coloneqq  \int_\Omega \left[ \abs{u(x) - v(x)}^2 + \text{min}(\lambda \abs{\nabla c(x)}^2, \mu) \right] dx \]
+\[\widetilde J(v)  \coloneqq  \int_\Omega \left[ \abs{u(x) - v(x)}^2 + \text{min}(\lambda \abs{\nabla c(x)}^2, \mu) \right] dx \]
 
 Die Minimierung und $\mu$ simulieren den Sprung an der Randkurve $\Gamma$.
 
@@ -3216,7 +3204,7 @@ Hierbei sollen endlich viele \mim{Landmarks}(\mim{Merkmale}) aus $u_0$ und $u$ p
 
 Beispiel.: $d:\R^2 \to \R^2$ linear + Translation, d.h.:
 
-\[ d:\underbrace{\mat{x_1 \\ x_2}}_{p} \mapsto \mat{a & b \\ c & d} \C \mat{x_1 \\ x_2}+ \mat{e\\f} \coloneqq \underbrace{\mat{y_1 \\ y_2}}_{q} = \mat{ax_1 + bx_2 +e\\ cy_1 + dx_2 + f} = \underbrace{\mat{x_1 & x_2 & 0 & 0 & 1 & 0\\ 0 & 0 & x_1 & x_2 & 0 & 1}}_{A_p}\C \mat{a\\b\\c\\d\\e\\f}\]
+\[ d:\underbrace{\mat{x_1 \\ x_2}}_{p} \mapsto \mat{a & b \\ c & d} \C \mat{x_1 \\ x_2}+ \mat{e\\f} \coloneqq \underbrace{\mat{y_1 \\ y_2}}_{q} = \mat{ax_1 + bx_2 +e\\ cx_1 + dx_2 + f} = \underbrace{\mat{x_1 & x_2 & 0 & 0 & 1 & 0\\ 0 & 0 & x_1 & x_2 & 0 & 1}}_{A_p}\C \mat{a\\b\\c\\d\\e\\f}\]
 
 Die zu lösende Gleichung ergibt sich somit zu:
 
@@ -3269,12 +3257,12 @@ Hierbei lautet das zu minimierende Funktional:
     \begin{enumerate}
         \item Punktweise Differenz in der$L^1$-Norm:
             \[D(f,g)  \coloneqq  \norm{f-g}_2^2 = \int_\Omega \abs{f(x)-g(x)}^2 dx\]
-        \item Vergleich der GRauwert-Verläufe
-            \[\overline{f}  \coloneqq \ \frac{1}{\abs{\Omega}} \int_\Omega f(x) dx, \quad \overline{g}  \coloneqq  \frac{1}{\abs{\Omega}} \int_\Omega g(x) dx\]
+        \item Vergleich der Grauwert-Verläufe
+            \[\bar{f}  \coloneqq \ \frac{1}{\abs{\Omega}} \int_\Omega f(x) dx, \quad \bar{g}  \coloneqq  \frac{1}{\abs{\Omega}} \int_\Omega g(x) dx\]
             und dann Vergleich von
-            \[\frac{f - \overline{f}}{\norm{f-\overline{f}}_2} \quad \text{und} \quad \frac{g - \overline{g}}{\norm{g-\overline{g}}_2}\]
+            \[\frac{f - \bar{f}}{\norm{f-\bar{f}}_2} \quad \text{und} \quad \frac{g - \bar{g}}{\norm{g-\bar{g}}_2}\]
             über:
-            \[\skprod{\frac{f - \overline{f}}{\norm{f-\overline{f}}_2}}{\frac{g - \overline{g}}{\norm{g-\overline{g}}_2}} \in [-1,1]\]
+            \[\skprod{\frac{f - \bar{f}}{\norm{f-\bar{f}}_2}}{\frac{g - \bar{g}}{\norm{g-\bar{g}}_2}} \in [-1,1]\]
 
             \begin{enumerate}
                 \item[1] bedeutet vollständige Korreliertheit mit gleicher Tendenz
@@ -3284,15 +3272,15 @@ Hierbei lautet das zu minimierende Funktional:
 
             Der sich ergebende Datenterm lautet:
 
-            \[D(f,g)  \coloneqq  \skprod{\frac{f - \overline{f}}{\norm{f-\overline{f}}_2}}{\frac{g - \overline{g}}{\norm{g-\overline{g}}_2}}\]
+            \[D(f,g)  \coloneqq  \skprod{\frac{f - \bar{f}}{\norm{f-\bar{f}}_2}}{\frac{g - \bar{g}}{\norm{g-\bar{g}}_2}}\]
 
             Diese Verfahren nennt sich \mim{Normalized Crosscorrelation}.
             \item Punktweise Differenzen der Gradienten:
-                \[D(f,g)  \coloneqq  \norm{f-g}_2^2 = \int_\Omega \abs{\nabla f - \nabla g}^2 dx\]
+                \[D(f,g)  \coloneqq  \norm{\nabla f - \nabla g}_2^2 = \int_\Omega \abs{\nabla f - \nabla g}^2 dx\]
 
-            \item Vergleich der Gradientnverläufe, also NCC (wie in (b)) von $\nabla f$ und $\nabla g$.
+            \item Vergleich der Gradientenverläufe, also NCC (wie in (b)) von $\nabla f$ und $\nabla g$.
     \end{enumerate}
-    Es ist zu bemerken das (a) keine Verschiebung um eine konstante Erkennt, (b) findet sogar Transformationen der Form f=a*g+c.
+    Es ist zu bemerken das (a) keine Verschiebung um eine konstante Erkennt, (b) findet sogar Transformationen der Form $f=a*g+c$.
 
     \item Notwendigkeit und Wahl des Regularitätsterms.
     Betrachte etwa $\begin{tabular}{|c|c|c|c|}
@@ -3305,6 +3293,7 @@ Hierbei lautet das zu minimierende Funktional:
         \hline
     \end{tabular}$, diese Zerreißung muss bestraft werden.
     Ansätze:
+    \[d: \mat{x_1 \\ x_2 } \mapsto \mat{y_1(x_1,x_2) \\ y_2(x_1,x_2)}\]
     \begin{enumerate}
         \item Große Streckungen/Deformationen bestrafen
             \[R(d)  \coloneqq  \int_\Omega\bigl( \abs{\nabla y_1(x)}^2 + \abs{\nabla y_2(x)}^2   \bigr) dx \]
@@ -3341,20 +3330,14 @@ Sei $\D  \coloneqq  C_0^\infty(\R^d)$ die Menge (auch ein Vektorraum) der belieb
         \draw[decorate,decoration={brace,amplitude=3pt,mirror}] (-2,-0.2) -- node[below] {\small $\neq0$, Träger} (2,-0.2);
     \end{tikzpicture}
 \end{center}
-
 Diese Funktion ist:
-
 \[\varphi(x)=g(1- \abs{x}^2)\]
-
 wobei
-
 \[g(t)  \coloneqq  \begin{cases}
     e^{\frac{-1}{t}} & ,t>0\\
     0 & ,t\leq 0
 \end{cases}\]
-
-Dieses Funktioniert auch im $\R^d$
-
+Dieses funktioniert auch im $\R^d$
 \def\centerx{2}
 \def\centery{-1}
 
@@ -3367,9 +3350,9 @@ Dieses Funktioniert auch im $\R^d$
         \pgfplotsset{
             colormap name=viridis,
         }
-            \begin{axis}[hide axis,scale=0.75,name=plot1,samples=10]
-                \addplot3[surf,domain=-1:1,domain y=-1:1,samples=60]
-                    {func(1 - abs(x) - abs(y)))};
+            \begin{axis}[hide axis,scale=0.75,name=plot1]
+                \addplot3[surf,domain=-1:1,domain y=-1:1,samples=80]
+                    {func(1 - (abs(x)^2 + abs(y)^2))};
                 \end{axis}
     \end{tikzpicture}
 \end{center}
@@ -3426,7 +3409,7 @@ Sei nun $\D'$ die Menge aller stetigen linearen Funktionale auf $\D$, also der \
 
 Nun zu den Abbleitungen, sein zunächst $d=1$ und $f \in C^1 \subset L^1_{loc}$, dann gilt für alle $\varphi \in \D$ wobei $[-a,a] \supset supp(\varphi)$:
 
-\[\underbrace{\int_{\R^1} f'(x) \varphi(x) dx}_{f'(\varphi)} = \int_{-a}^a f(x) \phi(x) dx = \underbrace{f(x)\varphi(x)|_{-a}^{a}}_{=0} - \int_{-a}^a f(x) \varphi'(x) dx = -\int_{\R^1} f(x) \varphi'(x) dx = -\tilde f(\varphi')\]
+\[\underbrace{\int_{\R^1} f'(x) \varphi(x) dx}_{f'(\varphi)} = \int_{-a}^a f(x) \varphi(x) dx = \underbrace{f(x)\varphi(x)|_{-a}^{a}}_{=0} - \int_{-a}^a f(x) \varphi'(x) dx = -\int_{\R^1} f(x) \varphi'(x) dx = -\tilde f(\varphi')\]
 
 $\Rightarrow$ Für $f \in C^1 \subset L^1_{loc}$ gilt $\tilde f'(\varphi) = - \tilde f(\varphi'), \varphi \in \D$. Wir nehmen dies als Ansatz und setzen:
 
@@ -3452,7 +3435,7 @@ Und $F \coloneqq \tilde f$ also:
 
 \[= \int_{-a}^0 x \varphi'(x) dx - \int_0^a x \varphi'(x) dx = \underbrace{x \varphi(x)|_{-a}^0}_{0} - \int_{-a}^0 1 \varphi(x) dx - \underbrace{x \varphi(x)|_0^a}_{0} + \int_0^a 1 \varphi(x) dx\]
 
-\[= \int_{-a}^a sing(x) \varphi(x) dx = \tilde{sign}(\varphi)\]
+\[= \int_{-a}^a sign(x) \varphi(x) dx = \tilde{sign}(\varphi)\]
 
 \begin{center}
     \begin{tikzpicture}
@@ -3478,7 +3461,7 @@ Nun leiten wir die $sign$ Funktion nocheinmal ab:
 Diese Abbleitung ist jedoch nicht mehr mit einem Element in $L^1_{loc}$ identifizierbar.
 Distributionen sind beliebig oft differenzierbar, somit folgt:
 
-\[F^{(k)}(\varphi) = (-1)^kF(\varphi^{(k)}\]
+\[F^{(k)}(\varphi) = (-1)^kF(\varphi^{(k)})\]
 
 Ein anderes Beispiel in mehr Dimensionen:
 
@@ -3552,7 +3535,7 @@ Für folgende Spezialfälle wird  $TV(\varphi)$ etwas handlicher als in \eqref{e
 \subsection{Existenz und Eindeutigkeit der Variationslösung}
 Wann ist ein Minimierungsproblem:
 
-\[J(u) \overset{u \in U}{\longrightarrow}\]
+\[J(u) \overset{u \in U}{\longrightarrow} min\]
 
 eindeutig lösbar?
 
