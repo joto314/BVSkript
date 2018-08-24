@@ -20,8 +20,11 @@
 \numberwithin{equation}{section}
 
 \newcommand{\norm}[1] {
-\left|\left| #1 \right|\right|
+\left\| #1 \right\|
 }
+%\newcommand{\norm}[1] {
+%\left|\left| #1 \right|\right|
+%}
 
 \newcommand{\hnorm}[1] {
 \left|\left|\left| #1 \right|\right|\right|
@@ -148,3 +151,19 @@ tabsize=3}
 %Font
 %\usepackage{tgadventor}
 \renewcommand*\rmdefault{cmss}
+
+%Differentialoperatoren
+\let\divsymb=\div % rename builtin command \div to \divsymb
+\renewcommand{\div}[1]{\mathrm{div\,} #1} % for divergence
+\renewcommand{\d}[1]{\ensuremath\, {\operatorname{d}\!{#1}}}
+\newcommand{\DD}{\ensuremath\,{\operatorname{D}}}
+
+%Konstanten 
+\newcommand{\ii}{\mathrm{i}} %imaginäre Einheit
+\newcommand{\GG}{\mathrm{G}} %Gauß-Kern
+\newcommand{\e}{\mathrm{e}}  %Eulersche Zahl
+
+%Funktionenräume
+\newcommand{\LL}{\mathrm{L}} %Lp
+\newcommand{\WW}{\mathrm{W}} %Sobolev
+\newcommand{\HH}{\mathrm{H}} %Sobolev W^{k,2}

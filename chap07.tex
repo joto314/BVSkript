@@ -1,6 +1,5 @@
-                \section{Restauration (Inpainting)}
+\section{Restauration (Inpainting)}
   Problem: Lücken im Bild, etwa
-
   \begin{enumerate}
     \item Kratzer
     \item Scannerzeile kaputt
@@ -11,10 +10,11 @@
 
   Sei $f: \Omega \to F$ unser Bild jedoch mit Defekt, d.h. fehlenden Funktionswerten in $D \subset \Omega$.
 
-  \begin{enumerate}
-    \item[1. Fall:] Jeder Punkt aus $D$ hat Nachbarn in $\Omega \backslash D$.\\
+
+  \begin{enumerate}[label=\arabic*. Fall:]
+    \item Jeder Punkt aus $D$ hat Nachbarn in $\Omega \backslash D$.\\
     $\Rightarrow$ Lücken mittels Interpolation aus benachbarten Werten in $\Omega \backslash D$ schließen.
-    \item[2. Fall:] $D$ hat innere Punkte. Diesen Fall werden wir im folgenden näher betrachten.
+    \item $D$ hat innere Punkte. Diesen Fall werden wir im folgenden näher betrachten.
   \end{enumerate}
 
   \subsection{Frequenzraum-Ansatz}
@@ -36,9 +36,9 @@
         \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (5,-0.15) -- node[below] {\small $u$} (5.3,-0.15);
       \end{tikzpicture}
     \end{center}
-    Betrachte Umgebung $u \subset \Omega \backslash D$ und errechne den Mittelwert:
-    \[ m \coloneqq  \frac{1}{\abs{u}} \int_u f(x) dx\]
-    von $f$ auf $u$.
+    Betrachte Umgebung $U \subset \Omega \backslash D$ und errechne den Mittelwert
+    \[ m \coloneqq  \frac{1}{\abs{U}} \int_U f(x) \d x\]
+    von $f$ auf $U$.
 
     \textbf{Algorithmus:}
 
@@ -62,7 +62,7 @@
             \end{tikzpicture}
           \end{center}
           $\Rightarrow$ Sprünge am Rand von $D$.\\
-          Idee: Sprünge $\widehat =$ hochfrequente Anteile $\Rightarrow$ wende Tiefpass filter an.
+          Idee: Sprünge $\widehat =$ hochfrequente Anteile $\Rightarrow$ wende Tiefpassfilter an.
         \item[\texttt{[2]}] $ f \xrightarrow{\F} \hat f \xrightarrow{\text{Lösche hohe Frequenzen}} \hat g \xrightarrow{\F^{-1}}g$
           \begin{center}
             \begin{tikzpicture}
@@ -124,14 +124,18 @@
     \ \\
     \hfill\\
     \textbf{Skalierung der Diffusion:}
-    \[\frac{\partial u}{\partial t} = div(M \nabla u)\]
-    \[\text{mit } M = \srmatrix{ | & |\\ v_1 & v_2\\ | & |} \mat{\lambda_1 & \ \\ & \lambda_2} \srmatrix{- & v_1^T & -\\ \\- & v_2^T & -} \in \R^{2 \times 2}\]
-    Wobei $v_1 \perp v_2$ die Eigenvektoren des sogenannten \underline{doppelt geglätteten Strukturtensors} \index{doppelt geglätteter Strukturtensor}
-    \[J= G_\rho * \biggl[ \underbrace{\srmatrix{| \\ \nabla (G_\sigma * u)\\ |}}_{2 \times 1} \cdot \underbrace{\srmatrix{- & \nabla^T(G_\sigma * u) & -}}_{1 \times 2} \biggr] \]
-    sind.\\
+    Betrachte die Diffusionsgleichung
+    \[\frac{\partial u}{\partial t} = \div(M \nabla u)\]
+    mit dem Diffusionstensor
+    \[M = \srmatrix{ | & |\\ v_1 & v_2\\ | & |} \mat{\lambda_1 & \ \\ & \lambda_2} \srmatrix{- & v_1^T & -\\ \\- & v_2^T & -} \in \R^{2 \times 2},\]
+    wobei $v_1 \perp v_2$ die Eigenvektoren des sogenannten \underline{doppelt geglätteten Strukturtensors} \index{doppelt geglätteter Strukturtensor}
+    \[J= \GG_\rho * \biggl[ \, \underbrace{\srmatrix{| \\ \nabla (\GG_\sigma * u)\\ |}}_{2 \times 1} \cdot \underbrace{\vphantom{\srmatrix{| \\ \nabla (\GG_\sigma * u)\\ |}} \srmatrix{- & \nabla^T(\GG_\sigma * u) & -}}_{1 \times 2} \, \biggr] \]
+    sind. 
+    Hierbei bezeichnet ist $\ast$-Symbol komponentenweise zu verstehen.
+    Die Faltungskerne $\GG_\sigma$ und $\GG_\rho$ sind Gauß-Kerne für die innere bzw. äußere Glättung.
     \begin{enumerate}
       \item[$\Rightarrow$] $v_1$ Richtung mit maximalem Kontrast mit EW $\mu_1$
-      \item[] $v_2$ Richtung mit minimalem Kontrast mit EW $\mu_2$, genannt \mim{Kohärentsrichtung}.
+      \item[] $v_2$ Richtung mit minimalem Kontrast mit EW $\mu_2$, genannt \mim{Kohärenzrichtung}.
       \item[] Hierbei ist $\mu_1 \geq \mu_2$.
     \end{enumerate}
 
@@ -193,9 +197,7 @@
         \end{minipage}
       \end{enumerate}
 
-      Die Werte $\lambda_1$ und $\lambda_2$ werden wie folgt gewählt:\\
-      $\alpha \in (0,1)$ wird festgehalten.
-
+      Die Werte $\lambda_1$ und $\lambda_2$ werden wie folgt gewählt: 
       \begin{center}
         \begin{tikzpicture}[scale = 1]
             \draw[] (0,0) -- (8,0);
@@ -206,24 +208,22 @@
             \draw[<-] (7.25,-0.1) to[in=0,out =-140] node[sloped,below] {\footnotesize falls $\mu_1 \gg \mu_2$} (4.8,-0.7) node[left] {\small $\lambda_2$};
           \end{tikzpicture}
       \end{center}
-
-      \[\lambda_1  \coloneqq  \alpha, \ \lambda_2  \coloneqq  \alpha + (1 - \alpha)(1-g(\mu_1 - \mu_2))\]
-
+      wobei $\alpha \in (0,1)$ festgehalten wird.
+      \[\lambda_1  \coloneqq  \alpha, \ \lambda_2  \coloneqq  \alpha + (1 - \alpha)(1-g(\mu_1 - \mu_2)),\]
       wobei $g$ wie bei Perona Malik gewählt wird, also:
-
-      \[g(x)=\frac{1}{1 + \frac{s^2}{\kappa^2}}\]
-
+      \[
+      g(s)=\frac{1}{1 + \frac{s^2}{\kappa^2}}
+      \]
       Dieses wird \mim{Kohärenz verstärkende Diffusion} genannt.
 
       \subsection{Variationsansatz}
 
-
       \begin{minipage}[c]{0.5\linewidth}
-        \begin{enumerate}
-          \item[geg.:] $f$ auf $\Omega \backslash D$
-          \item[ges.:] $u$ auf $\Omega$
-          \item[Wunsch 1:] $u=f$ auf $\Omega \backslash D$
-          \item[Wunsch 2:] $\norm{\nabla u}$ klein auf $\Omega$
+          \begin{enumerate}[label= ]
+          \item geg.: $f$ auf $\Omega \backslash D$
+          \item ges.:  $u$ auf $\Omega$
+          \item Wunsch 1:  $u=f$ auf $\Omega \backslash D$
+          \item Wunsch 2:  $\norm{\nabla u}$ klein auf $\Omega$
         \end{enumerate}
     \end{minipage}
     \hfill
@@ -236,23 +236,24 @@
           \draw (1,4) node[] {\large $\Omega$};
         \end{tikzpicture}
       \end{center}
-    \end{minipage}\\
-    \hfill\\ \hfill\\
-    Daraus folgt:
+    \end{minipage}
 
-    \[ J(u) \coloneqq  \norm{\nabla u}_2^2 \to \text{min} \]
-
-    auf
-
-    \[U \coloneqq \{u \in W^{1,2}(\Omega) : u|_{\Omega \backslash D} = f\} \]
-
-    Angenommen, $u \in U$ minimiert $J$, dann folgt für beliebige $v \in W^{1,2} (\Omega)$ mit $v|_{\Omega \backslash D}=0$:
-
+    Daraus folgt
+    \[ 
+    J(u) \coloneqq  \norm{\nabla u}_2^2 \to \min \quad\text{auf}\quad 
+    \coloneqq \{u \in \WW^{1,2}(\Omega) : u|_{\Omega \backslash D} = f\} 
+    \]
+    Angenommen, $u \in U$ minimiere $J$, dann folgt für beliebige $v \in \WW^{1,2} (\Omega)$ mit $v|_{\Omega \backslash D}=0$, d.h. $v \in \HH_0^1(D)$, dass
     \begin{align*}
-      0 &= \underset{t \to 0}{lim} \frac{J(u+tv) - J(u)}{t} = \underset{t \to 0}{lim} \frac{1}{t} \int_\Omega ||\underbrace{\nabla(u+tv)(x)}_{\nabla u(x) + t \nabla v(x)}||^2 - \norm{\nabla u(x)}^2 dx\\
-      &=\underset{t \to 0}{lim} \frac{1}{t} \int_\Omega \skprod{\nabla u(x) + t \nabla v(x)}{\nabla u(x) + t \nabla v(x)} - \skprod{\nabla u (x)}{\nabla u (x)} dx\\
-      &=\underset{t \to 0}{lim} \frac{1}{t} \int_\Omega t^2 \norm{\nabla v(x)}^2 + 2 t \skprod{\nabla u(x)}{\nabla v(x)} dx =  \underset{t \to 0}{lim} \int_\Omega t \norm{\nabla v(x)}^2 + 2 \skprod{\nabla u(x)}{\nabla v(x)} dx\\
-      &=2 \int_D \skprod{\nabla u(x)}{\nabla v(x)} dx \overset{\text{Greensche Formel}}{=} 2 \biggl( \overbrace{\int_{\delta D} \frac{\partial u}{\partial n} \underbrace{v(x)}_{0} ds(x)}^{0} - \int_D \Delta u(x) v(x) dx \biggr)\\
-      &=2 \int_D \Delta u(x) v(x) dx \Rightarrow \Delta u =0 \text{ in } D
+        0 &= \lim_{t \to 0} \frac{J(u+tv) - J(u)}{t} = \lim_{t \to 0} \frac{1}{t} \int_\Omega ||\underbrace{\nabla(u+tv)(x)}_{\nabla u(x) + t \nabla v(x)}||^2 - \norm{\nabla u(x)}^2 \d x\\
+      &={\lim}_{t \to 0} \frac{1}{t} \int_\Omega \skprod{\nabla u(x) + t \nabla v(x)}{\nabla u(x) + t \nabla v(x)} - \skprod{\nabla u (x)}{\nabla u (x)} \d x\\
+      &={\lim}_{t \to 0} \frac{1}{t} \int_\Omega t^2 \norm{\nabla v(x)}^2 + 2 t \skprod{\nabla u(x)}{\nabla v(x)} \d x 
+       =  \lim_{t \to 0} \int_\Omega t \norm{\nabla v(x)}^2 + 2 \skprod{\nabla u(x)}{\nabla v(x)} \d x\\
+      &=2 \int_D \skprod{\nabla u(x)}{\nabla v(x)} \d x \overset{\text{Greensche Formel}}{=} 2 \biggl( \overbrace{\int_{\delta D} \frac{\partial u}{\partial n} \underbrace{v(x)}_{0} \d s(x)}^{0} - \int_D \Delta u(x) v(x) \d x \biggr)\\
+      &=2 \int_D \Delta u(x) v(x) \d x. 
     \end{align*}
+    Daraus folgt mit dem Fundamentallemma der Variationsrechnung $ \Delta u =0$ in $D$.
+    Insbesondere ist $u$ die harmonische Fortsetzung von $f$ nach $D$ (harmonisches Impainting).
+    Als harmonische Funktion unterliegt $u$ auf $D$ dem Maximumsprinzip und dem Mittelwertprinzip (s. \ref{5.6}). 
+    Es gibt also keine scharfen Kanten in $D$, anders als z.B. bei kohärenzverstärkender Diffusion.
 
