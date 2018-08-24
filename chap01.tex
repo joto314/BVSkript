@@ -17,21 +17,19 @@
             \mtitle{\underline{Kontinuierlich/analoge Sicht}}
             \begin{center}
                 \begin{tikzpicture}
-                    \draw[thick,->] (0,0) -- (3,0) node[anchor=west] {X};
-                    \draw[thick,->] (0,0) -- (0,3) node[anchor=south] {Y};
+                    \draw[thick,->] (0,0) -- (3,0) ;%node[anchor=west] {X};
+                    \draw[thick,->] (0,0) -- (0,3) ;%node[anchor=south] {Y};
                     \draw[thick] (0.2,0.2) rectangle (2.8,2.8);
                     \draw (1.5,2) node[] {\tiny{\textbullet}} node[anchor=west] {\small$(x,y)$};
-                    \draw[] (1.5,0.1) -- node[anchor=north] {\small x} (1.5,-0.1);
-                    \draw[] (0.1,2) -- node[anchor=east] {\small y} (-0.1,2);
-                    \draw[|-|] (0.2,-0.4) node[anchor=north] {\small a} -- (2.8,-0.4) node[anchor=north] {\small b};
-                    \draw[|-|] (-0.4,0.2) node[anchor=east] {\small c} -- (-0.4,2.8) node[anchor=east] {\small d};
+                    \draw[] (1.5,0.1) -- node[anchor=north] {$x$} (1.5,-0.1);
+                    \draw[] (0.1,2) -- node[anchor=east] {$y$} (-0.1,2);
+                    \draw[|-|] (0.2,-0.4) node[anchor=north] {$a$} -- (2.8,-0.4) node[anchor=north] {$b$};
+                    \draw[|-|] (-0.4,0.2) node[anchor=east] {$c$} -- (-0.4,2.8) node[anchor=east] {$d$};
                 \end{tikzpicture}
                 \captionof{figure}{Kontinuierliches Bild}
                 Darstelllung als Funktion in zwei Veränderlichen
             \end{center}
         \end{minipage}
-
-        \ \\
 
         \begin{minipage}[t]{0.47\linewidth}
             \pa{Werkzeuge:} Lineare Algebra
