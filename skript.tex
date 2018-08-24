@@ -2,6 +2,7 @@
 \documentclass{article}
 
 \usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{adjustbox}
 \usepackage{enumitem}
 \usepackage{a4wide}
 \usepackage[document]{ragged2e}
@@ -208,26 +209,62 @@ tabsize=3}
 \makeindex
 
 \begin{document}
-\title{Mathematische Bildverarbeitung}
+%\title{Mathematische Bildverarbeitung}
 %\author{Jonas Sattler}
-\date{}
-\maketitle
+\pagestyle{empty}
+\adjustbox{valign=t}{
+    \begin{minipage}[t]{0.65\linewidth}
+    {\LARGE \bf Mathematische Bildverarbeitung}\\[1em]
+    {\Large \bf Vorlesungsskript}
+    \end{minipage}
+}
+\hfill
+\adjustbox{valign=t}{
+    \begin{minipage}[t]{0.35\linewidth}
+    \begin{flushright}
+    \includegraphics[width=1.0\textwidth]{office_grau_de.pdf}
+    \end{flushright}
+    \end{minipage}
+}
+
+\vspace{2em}
+\adjustbox{valign=t}{
+    \begin{minipage}[t]{0.65\linewidth}
+    {\small Institut für Mathematik}\hfill\\
+    {\small Vorlesung von Prof. Dr. Marko Lindner}\\
+    {\small In \LaTeX gesetzt durch Jonas Sattler}\\[1em]
+    {\small Fehlermeldungen an \href{mailto:fabian.gabel@tuhh.de}{fabian.gabel@tuhh.de}}
+    \end{minipage}
+}
+\hfill
+\adjustbox{valign=t}{
+    \begin{minipage}[t]{0.3\linewidth}
+    \begin{flushright}
+        {\small Wintersemester 2018/19}\\
+    \end{flushright}
+    \end{minipage}
+}
+
+\vspace{1em}
+\par\noindent\rule{\textwidth}{0.4pt}
+
 
 \tableofcontents
-
 \newpage
 
+\pagestyle{fancy}
+
 \input{chap00}    
-\input{chap01}    
-\input{chap02}    
-\input{chap03}    
-\input{chap04}    
-\input{chap05}    
-\input{chap06}    
-\input{chap07}    
-\input{chap08}    
-\input{chap09}    
-\input{chap10}    
+%\input{chap01}    
+%\input{chap02}    
+%\input{chap03}    
+%\input{chap04}    
+%\input{chap05}    
+%\input{chap06}    
+%\input{chap07}    
+%\input{chap08}    
+%\input{chap09}    
+%\input{chap10}    
 
 \printindex
 
