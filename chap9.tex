@@ -57,6 +57,16 @@ Rechts ist das Bild, das durch das Beschriebene Histogramm thresholding dargeste
 
 \subsection{Beleuchtungsausgleich}
 
+\begin{enumerate}[label = ]
+    \item Geg.: inhomogen ausgeleuchtetes Bild $f$.
+    \item Ges.: Zerlegung $f = u + v$, wobei
+        \begin{enumerate}[label = ]
+            \item $u$ erwünschter Anteil,
+            \item $v$ Inhomogenität .
+        \end{enumerate}
+\end{enumerate}
+Gilt $f = u \cdot v$ (multiplikative Verknüpfung) so erhält man den obigen Fall durch Betrachtung des Logarithmus $\log(f)$.
+
 \begin{enumerate}
   \item[Einfachster Fall:] $v$ konstant. In diesem Fall kann man etwa eine \quo{Leeraufnahme} machen, $v=f$ setzen und dieses $v$ in allen folgenden Aufnahmen subtrahieren.
   \item[Normalfall:] $v$ ändert sich bei Jeder Aufnahme. Hierbei gibt es mehrere Ansätze:
@@ -65,9 +75,9 @@ Rechts ist das Bild, das durch das Beschriebene Histogramm thresholding dargeste
 \begin{enumerate}[label = \alph*)]
   \item \mim{Lineare Regression}: \\
   \begin{minipage}[c]{0.6\linewidth}
-          \item[] Wir Unterstellen das der Verlauf \mim{affin-linear} ist, d.h.:
+          \item[] Wir unterstellen, dass der Verlauf \mim{affin-linear} ist, d.h.:
           \[v(x,y) = a x + b y + c\]
-          Diese Parameter $a$, $b$, $c$ gilt es nun zu schätzen.
+          Diese Parameter $a$, $b$, $c$ gilt es nun so zu schätzen.
     \end{minipage}
     \hfill
     \begin{minipage}[c]{0.35\linewidth}
@@ -85,33 +95,38 @@ Rechts ist das Bild, das durch das Beschriebene Histogramm thresholding dargeste
       \end{center}
     \end{minipage}
     Dazu soll gelten
-    \[\forall (x,y) \in \Omega : ax+by+c \approx f(x,y)\]
-    um dieses zu erfüllen wird eine Stichprobe von endlich vielen Punkten $(x_i,y_i)$ aus $\Omega$ gewählt und durch diese ein Gleichungssystem gebildet.
-
+    \[\forall (x,y) \in \Omega \colon\quad ax+by+c \approx f(x,y).\]
+    Um dies zu erfüllen wird eine Stichprobe von endlich vielen Punkten $(x_i,y_i)$ aus $\Omega$ gewählt und durch diese ein Gleichungssystem gebildet:
     \begin{gather*}
     ax_1+by_1+c \approx f(x_1,y_1)\\
     \vdots \\
     ax_n+by_n+c \approx f(x_n,y_n)
     \end{gather*}
     In Matrix Form ergibt sich:
-
     \[\underbrace{\mat{x_1 & y_1 & 1 \\ \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots \\ x_n & y_n & 1}}_{A} \underbrace{\mat{a \\ b \\ c}}_{w} \approx \underbrace{\mat{f(x_1,y_1) \\ \vdots \\ \vdots \\ \vdots \\ f(x_n,y_n)}}_{z}\]
-    Die optimale Lösung dieses Problems kann über die \mim{Normalengleichung} berechnet werden.
-
-    \[A^T A w = A^T z\]
-
+    Wir erhalten also ein lineares Ausgleichsproblem (überbestimmtes Gleichungssystem).
+    Die optimale Lösung dieses Problems kann über die \mim{Normalengleichung} berechnet werden:
+    \[A^T A w = A^T z.\]
     Daraus erhält man $w$, somit auch $a$, $b$, $c$ und schlussendlich $v \Rightarrow u = f-v$.\\
-    Anschließend wird noch ein Histogramm stretching durchgeführt um das finale Bild zu erhalten.
+    Eventuell wird durch die Subtraktion bei $u$ der Farbraum verlassen.
+    Anschließend wird daher noch ein Histogramm stretching durchgeführt, um das finale Bild zu erhalten.
 
     \item \mim{Polynomiale Regression}:
-    Ähnlich zur linearen Regression nun wird hierbei keine affin-lineare Funktion, sondern ein Polynom genutzt. Für ein Polynom zweiten gerades kann etwa die Funktion
+    Ähnlich zur linearen Regression wird hierbei keine affin-lineare Funktion, sondern ein Polynom genutzt. Für ein Polynom zweiten Grades kann etwa die Funktion
     \[v(x,y) = ax^2 by^2 cxy+ dx +ey +f\]
     gewählt werden. Wieder entsteht ein Gleichungssystem:
+    \[
+    \underbrace{\mat{x_1^2 & y_1^2 & x_1y_1 & x_1 & y_1 & 1 \\ 
+                    \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\ 
+                    \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\ 
+                    \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\ 
+                    x_n^2 & y_n^2 & x_ny_n & x_n & y_n & 1}}_{A} 
+        \underbrace{\vphantom{\mat{f(x_1,y_1 \\ \vdots \\ \vdots \\ \vdots \\ f(x_n,y_n)}}
+    \mat{a \\ b \\ c \\ d \\e \\ f}}_{w} 
+\approx \underbrace{\mat{f(x_1,y_1) \\ \vdots \\ \vdots \\ \vdots \\ f(x_n,y_n)}}_{z}\]
 
-    \[\underbrace{\mat{x_1^2 & y_1^2 & x_1y_1 & x_1 & y_1 & 1 \\ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\ x_n^2 & y_n^2 & x_ny_n & x_n & y_n & 1}}_{A} \underbrace{\mat{a \\ b \\ c \\ d \\e \\ f}}_{w} \approx \underbrace{\mat{f(x_1,y_1 \\ \vdots \\ \vdots \\ \vdots \\ f(x_n,y_n)}}_{z}\]
-
-  \item \mim{Trigonometrisches Polynom}
-  Hierbei wird $v$ in den niedrigfrequenten Anteilen von $f$ gesucht.
+  \item \mim{Trigonometrisches Polynom}:
+      Hierbei wird $v$ in den niedrigfrequenten Anteilen von $f$ (großflächiger Verlauf, keine Details) gesucht.
 
   \begin{center}
     \begin{tikzpicture}
@@ -177,7 +192,7 @@ Rechts ist das Bild, das durch das Beschriebene Histogramm thresholding dargeste
 \subsection{Thresholding als Variationsproblem}
 
 \begin{enumerate}
-\item[geg:] Bild $u: \Omega \to F=[0,1]$ und Schwellenwert $t \in (0,1)$
+\item[geg:] Bild $u: \Omega \to F=[0,1]$ und Schwellenwert $t \in (0,1)$.
 \item[$\Rightarrow$:]   $\begin{array}{lr}
                             \Omega_0 = \{x \in \Omega : u(x) \leq t \} \to \text{schwarz}  \\
                             \Omega_1 = \{x \in \Omega : u(x) > t \} \to \text{weiß}
@@ -185,20 +200,17 @@ Rechts ist das Bild, das durch das Beschriebene Histogramm thresholding dargeste
 \end{enumerate}
 
 Setze dazu:
-
 \begin{equation}\label{eq.9.1}
-J(v) \coloneqq -\int_\Omega (u(x) -t) \C v(x) dx \to \ min
+J(v) \coloneqq -\int_\Omega (u(x) -t) \C v(x) \d x \to \min
 \end{equation}
 
 mit $v \in U \coloneqq  \bigl \{ v \in \Omega \to \{ 0,1\} \text{ \ (oder $[0,1]$)} \bigr\}$, dies ist jedoch kein Vektorraum.
 
 Die Lösung dieses Problems ist offenbar
-
-\[v = \chi_{\Omega_1}, \ \text{d.h.} \begin{cases}
+\[v(x) = \chi_{\Omega_1}(x) =  \begin{cases}
 0, & x \in \Omega_0 \\
 1, & x \in \Omega_1
 \end{cases} \]
-
 illustiert hier:
 
 
@@ -217,18 +229,16 @@ illustiert hier:
     \end{tikzpicture}
 \end{center}
 
-Diese Herangehensweise ist jedoch kompliziert, um sie zu begründen betrachten wir die Flecken die neben der großen Masse in der obing Illustration zu sehen sind und etwa durch Rauschen entstanden seien könnten. Durch Verallgemeinerung des in \ref{eq.9.1} gegebenen Funktionals können wir die Zerlegung von $\Omega$ in $\Omega_0$ und $\Omega_1$ weniger Anfällig gegenüber Rauschen und sonstigen kleinen Strukturen machen.
+Diese Herangehensweise ist jedoch kompliziert, um sie zu begründen betrachten wir die Flecken die neben der großen Masse in der obigen Illustration zu sehen sind und etwa durch Rauschen entstanden seien könnten. Durch Verallgemeinerung des in \ref{eq.9.1} gegebenen Funktionals können wir die Zerlegung von $\Omega$ in $\Omega_0$ und $\Omega_1$ weniger anfällig gegenüber Rauschen und sonstigen kleinen Strukturen machen.
 
 Dazu sei
-
 \begin{equation}\label{eq.9.2}
-TV(v) = \int_\Omega \abs{\nabla v(x)} dx
+\TV(v) \coloneqq \int_\Omega \abs{\nabla v(x)} \d x
 \end{equation}
 
-die sogennate \mim{Totalvariation} einer Funktion auf $\Omega$.
+die sogennate \mim{Totalvariation} einer Funktion $v$ auf $\Omega$.
 
 Illustration in 1D:
-
 \begin{center}
     \begin{tikzpicture}
         \draw (0,0) -- (9,0);
@@ -237,20 +247,19 @@ Illustration in 1D:
         \draw[red] plot[smooth,tension=0.9] coordinates {(1,2.85) (2,2.7) (3,2.5) (4.5,1.8)  (6.5, 1.3) (7.25,0.9) (8,0.5)} node[black,right] {\small $v_2$ monoton};
         \draw[thick] (1,0.1) -- (1,-0.1) node[below] {\small $a$};
         \draw[thick] (8,0.1) -- (8,-0.1) node[below] {\small $b$};
-        \draw (9,1.7) node[style={align=left},right] {\small $TV(v_1) = v_1(b) -v_1(a)$ \\ \small $TV(v_2) = \abs{v_2(b) - v_2(a)}$};
+        \draw (9,1.7) node[style={align=left},right] {\small $\TV(v_1) = v_1(b) -v_1(a)$ \\ \small $\TV(v_2) = \abs{v_2(b) - v_2(a)}$};
         \draw (0,-4) -- (9,-4);
         \draw plot[smooth,tension=0.8] coordinates {(1,-3.8) (2,-2.3) (3, -2.7) (4,-1.5) (5,-3.8) (6,-2) (7,-2.2) (8,-2)};
         \draw[thick] (1,-3.9) -- (1,-4.1) node[below] {\small $a$};
         \draw[thick] (8,-3.9) -- (8,-4.1) node[below] {\small $b$};
         \draw (9,-2.3) node[style={align=left},right] {\small Hier ist die Totalvariation die Summe \\ \small aller Höhenanstiege, wobei sowohl \\
-        \small ab- und anstiege positiv gezählt werden.};
+        \small Ab- und Anstiege positiv gezählt werden.};
     \end{tikzpicture}
 \end{center}
 
-In Abschnitt 11.2 werden wir weiterhin sehen, dass die Totalvariation sich auch auf nicht stetigen Funktionen etwa $\chi_{(0,\infty)}$ berechnen lässt, obwohl für diese der Gradient nicht definiert ist. Für die eben genannte Funktion beträgt die Totalvariationetwa $1$.
+In Abschnitt \ref{11.2} werden wir weiterhin sehen, dass die Totalvariation sich auch auf nicht stetigen Funktionen etwa $\chi_{(0,\infty)}$ berechnen lässt, obwohl für diese der Gradient nicht definiert ist. Für die eben genannte Funktion etwa beträgt die Totalvariation $1$.
 
 Nun in 2D:
-
 \begin{center}
     \begin{tikzpicture}
         \draw[thick] (0,0) rectangle (5,3);
@@ -260,17 +269,14 @@ Nun in 2D:
         \draw (2.45,1.15) node[] {\small $v$};
     \end{tikzpicture}
 \end{center}
-
-$TV(v)$ ist hier die Länge der Kante die $\Omega_1$ von $\Omega_0$ trennt.\\
+$\TV(v)$ ist hier die Länge der Kante die $\Omega_1$ von $\Omega_0$ trennt.
 Die Idee ist nun $TV(v)$ als Strafterm zu \ref{eq.9.1} hinzu zu addieren,
-
-
 \begin{equation}\label{eq.9.3}
-\widetilde J(v) \coloneqq  \underbrace{-\int_\Omega (u(x)-t) \C v(x) dx}_{J(x)} + \lambda \C TV(v) \to \ min
+\widetilde J(v) \coloneqq  \underbrace{-\int_\Omega (u(x)-t) \C v(x) \d x}_{J(x)} + \lambda \C TV(v) \to \min
 \end{equation}
 wobei $v \in U$ ist.
-Der Effekt dieser Herangehensweise wird nun illustriert.
 
+Der Effekt dieser Herangehensweise wird nun illustriert:
 \begin{center}
     \begin{tikzpicture}
         \draw[thick] (0,0) rectangle (8,5);
@@ -321,29 +327,24 @@ Das heißt das kleine Segment $M$ wird durch \ref{eq.9.3} \quo{erkannt} falls se
 \end{center}
 \end{minipage}
 
-\[\Rightarrow J(v,\Gamma)  \coloneqq  \underbrace{\norm{u-v}_{2,\Omega}^2}_{1. \text{ Wunsch}}  + \lambda \underbrace{\norm{\nabla v}_{2,\Omega \backslash \Gamma}^2}_{2. \text{ Wunsch}} \to \ min \]
+\[\Rightarrow J(v,\Gamma)  \coloneqq  \underbrace{\norm{u-v}_{2,\Omega}^2}_{1. \text{ Wunsch}}  + \lambda \underbrace{\norm{\nabla v}_{2,\Omega \backslash \Gamma}^2}_{2. \text{ Wunsch}} \to \min \]
 
 Wie im letzten Abschnitt \ref{eq.9.2} soll nun noch die Segmentierung sehr kleiner Strukturen vermieden werden, indem man zu $J$ einen entsprechenden Strafterm addiert.
 
 \begin{equation*}
-\widetilde J(v,\Gamma)  \coloneqq  \norm{u-v}_{2,\Gamma}^2 + \lambda \norm{\nabla v}_{2,\Omega \backslash \Gamma}^2 + \mu \ \text{Länge}(\Gamma) \to \ min
+\widetilde J(v,\Gamma)  \coloneqq  \norm{u-v}_{2,\Gamma}^2 + \lambda \norm{\nabla v}_{2,\Omega \backslash \Gamma}^2 + \mu \ \text{Länge}(\Gamma) \to \min
 \end{equation*}
 
 Dieses wird \mim{Mumford-Shah-Funktional} (1989) genannt.
-
 \begin{enumerate}
 \item[$\lambda$] bestimmt die \quo{Flachheit} von $v$ auf $\Omega \backslash \Gamma$
 \item[$\mu$] ist proportional zur Größe der kleinsten zu segmentierenden Struktur.
 \end{enumerate}
-
 Die numerische Lösung dieses Problemes ist jedoch sehr kompliziert, da neben $v$ auch die Kurve $\Gamma$ variiert wird, desßhalb existert eine \quo{vereinfachte} Version das dieses Problem approximiert.
 
 Mumford-Shah (1989):
-
 \[\widetilde J(v,\Gamma)  \coloneqq  \norm{u-v}_{2,\Gamma}^2 + \lambda \norm{\nabla v}_{2,\Omega \backslash \Gamma}^2 + \mu \ \text{Länge}(\Gamma)\]
 
 Strekalovskiy \& Cremers (2014):
-
-\[\widetilde J(v)  \coloneqq  \int_\Omega \left[ \abs{u(x) - v(x)}^2 + \text{min}(\lambda \abs{\nabla c(x)}^2, \mu) \right] dx \]
-
+\[\widetilde J(v)  \coloneqq  \int_\Omega \left[ \abs{u(x) - v(x)}^2 + \min(\lambda \abs{\nabla c(x)}^2, \mu) \right] \d x \]
 Die Minimierung und $\mu$ simulieren den Sprung an der Randkurve $\Gamma$.
