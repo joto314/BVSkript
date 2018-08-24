@@ -76,10 +76,13 @@
                 \
                 \begin{center}
                     \begin{enumerate}[label=\textbullet]
-                        \item $\Omega$ in Gitter zerlegen
-                        \item Jede Box durch nur einen Farbwert approximieren
-                        \item Etwa durch den Funktionswert im Mittelpunkt der Box
-                        \item oder durch den Mittelwert in der Box:\\ $\displaystyle \frac{1}{\abs{B_i}} \C \int_{B_i}u(x)dx$
+                        \item $\Omega$ in Gitter zerlegen.
+                        \item Jede Box durch nur einen Farbwert approximieren.
+                        \item Etwa durch den Funktionswert im Mittelpunkt der Box.
+                        \item oder durch den Mittelwert in der Box: 
+                            \[
+                                \displaystyle \frac{1}{\abs{B_i}} \C \int_{B_i}u(x)\d x.
+                            \]
                     \end{enumerate}
                 \end{center}
             \end{minipage}
@@ -164,7 +167,7 @@
         \pa{1. Fall, kontinuierliches Bild}\\
             Sei $u$ das alte Bild und $v$ das neue Bild, dann ist die Drehung gegeben durch eine \mim{Drehmatrix}:
 
-            \[D_\varphi \in \R^{d \times d}, D_\varphi=\mat{cos(\varphi) \ -sin(\varphi) \\ sin(\varphi) \ cos(\varphi)}\]
+            \[D_\varphi \in \R^{d \times d}, D_\varphi=\mat{\cos(\varphi) \ -\sin(\varphi) \\ \sin(\varphi) \ \cos(\varphi)}\]
 
             Damit folgt, dass $D(u)= D_\varphi \Omega$ und $v(x)=u(\underbrace{D_\varphi^{-1}x}_{\in \Omega}) = u(D_{-\varphi}x)$. ($D(u)$ ist die \mim{Domain} von $u$)
 
