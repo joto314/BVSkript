@@ -9,7 +9,7 @@ Aus mathematischer Sicht sind einige Fragen offen geblieben, etwa:
 \subsection{Verallgemeinerte Funktionen und Abbleitungen}
 Wie differenziert man unstetige Funktionen?
 
-Sei $\D  \coloneqq  C_0^\infty(\R^d)$ die Menge (auch ein Vektorraum) der beliebig oft differenzierbaren Funktionen auf $\R^d$ mit beschränktem Träger. Etwa:
+Sei $\D  \coloneqq  \CC_0^\infty(\R^d)$ die Menge (auch ein Vektorraum) der beliebig oft differenzierbaren Funktionen auf $\R^d$ mit beschränktem Träger. Etwa:
 
 \begin{center}
     \begin{tikzpicture}
@@ -49,9 +49,9 @@ Dieses funktioniert auch im $\R^d$
     \end{tikzpicture}
 \end{center}
 
-ist $C_0^\infty(\R^d)$ und hat kompakten Träger.
+ist $\CC_0^\infty(\R^d)$ und hat kompakten Träger.
 
-Sei nun $L^1_{loc}(\R^d)$ die Menge aller Funktionen auf $\R^d$ mit kompaktem Träger für die:
+Sei nun $\Ell^1_{\loc}(\R^d)$ die Menge aller Funktionen auf $\R^d$ mit kompaktem Träger für die:
 
 \[\int_K \abs{f(x)} dx < \infty\]
 
@@ -61,29 +61,29 @@ für alle abgeschlossenen und beschränkten Mengen $K \subset \R^d$ gilt.
     \begin{tikzpicture}
         \draw (-3,0) -- (3,0);
         \draw[thick] plot [smooth, tension = 0.8] coordinates {(-2.5,0) (-2,1)  (-1,0.7) (1,0.5) (2.5,0)};
-        \draw (3,0.5) node[right] {$\in L^1$ und $\in L^1_{loc}$};
+        \draw (3,0.5) node[right] {$\in \Ell^1$ und $\in \Ell^1_{loc}$};
         \draw (-3,-2) -- (3,-2);
         \draw[thick] plot [smooth, tension = 0.8] coordinates {(-3,-1.3) (-2,-1.5) (-1,-1) (1,-1.5) (3,-1.2) };
-        \draw (3,-1.5) node[right] {$\not \in L^1$ aber $\in L^1_{loc}$};
+        \draw (3,-1.5) node[right] {$\not \in \Ell^1$ aber $\in \Ell^1_{loc}$};
         \draw[decorate,decoration={brace,amplitude=3pt,mirror}] (-2,-2.2) -- node[below] {$K$} (-0.5,-2.2);
     \end{tikzpicture}
 \end{center}
 
-Die Zweite Funktion ist nicht in $L^1$ da ihr Gesamtintegral nicht endlich ist jedoch ist das Integral über jede endlich Menge endlich, sie hat also keine Pole, somit sie in $L^1_{loc}$.
+Die Zweite Funktion ist nicht in $\Ell^1$ da ihr Gesamtintegral nicht endlich ist jedoch ist das Integral über jede endlich Menge endlich, sie hat also keine Pole, somit sie in $\Ell^1_{loc}$.
 
-Für jede Funktion $f \in L^1_{loc}(\R^d)$ bildet
+Für jede Funktion $f \in \Ell^1_{loc}(\R^d)$ bildet
 \begin{equation}\label{eq.11.1}
     \tilde f:\varphi \in \Omega \mapsto \int_{\R^d} f(x) \C \varphi(x) dx \in \R
 \end{equation}
 
 ein stetiges lineares Funktional auf $\D$.
 
-Sei nun $\D'$ die Menge aller stetigen linearen Funktionale auf $\D$, also der \mim{Dualraum}. Also ist für jedes $f \in L^1_{loc}$ das Funktional $\tilde f$ aus \eqref{eq.11.1} in $\D'$.
+Sei nun $\D'$ die Menge aller stetigen linearen Funktionale auf $\D$, also der \mim{Dualraum}. Also ist für jedes $f \in \Ell^1_{\loc}$ das Funktional $\tilde f$ aus \eqref{eq.11.1} in $\D'$.
 
 \begin{center}
     \begin{tikzpicture}
         \draw (0,0) rectangle (4,4);
-        \draw (1,3) node[] {\Large $L^1_{loc}$};
+        \draw (1,3) node[] {\Large $\Ell^1_{\loc}$};
         \draw (3,1) node[] {$f$};
         \draw (5,-1) rectangle (10,5);
         \draw (6,0) rectangle (8,3);
@@ -99,11 +99,11 @@ Sei nun $\D'$ die Menge aller stetigen linearen Funktionale auf $\D$, also der \
     \end{tikzpicture}
 \end{center}
 
-Nun zu den Abbleitungen, sein zunächst $d=1$ und $f \in C^1 \subset L^1_{loc}$, dann gilt für alle $\varphi \in \D$ wobei $[-a,a] \supset supp(\varphi)$:
+Nun zu den Abbleitungen, sein zunächst $d=1$ und $f \in \CC^1 \subset \Ell^1_{\loc}$, dann gilt für alle $\varphi \in \D$ wobei $[-a,a] \supset supp(\varphi)$:
 
 \[\underbrace{\int_{\R^1} f'(x) \varphi(x) dx}_{f'(\varphi)} = \int_{-a}^a f(x) \varphi(x) dx = \underbrace{f(x)\varphi(x)|_{-a}^{a}}_{=0} - \int_{-a}^a f(x) \varphi'(x) dx = -\int_{\R^1} f(x) \varphi'(x) dx = -\tilde f(\varphi')\]
 
-$\Rightarrow$ Für $f \in C^1 \subset L^1_{loc}$ gilt $\tilde f'(\varphi) = - \tilde f(\varphi'), \varphi \in \D$. Wir nehmen dies als Ansatz und setzen:
+$\Rightarrow$ Für $f \in \CC^1 \subset \Ell^1_{\loc}$ gilt $\tilde f'(\varphi) = - \tilde f(\varphi'), \varphi \in \D$. Wir nehmen dies als Ansatz und setzen:
 
 \begin{equation}\label{eq.11.2}
     F'(\varphi) \coloneqq -F(\varphi'), \varphi \in \D
@@ -150,7 +150,7 @@ Nun leiten wir die $sign$ Funktion nocheinmal ab:
     \Rightarrow & \tilde{sign}'=2\delta
 \end{align*}
 
-Diese Abbleitung ist jedoch nicht mehr mit einem Element in $L^1_{loc}$ identifizierbar.
+Diese Abbleitung ist jedoch nicht mehr mit einem Element in $\Ell^1_{\loc}$ identifizierbar.
 Distributionen sind beliebig oft differenzierbar, somit folgt:
 
 \[F^{(k)}(\varphi) = (-1)^kF(\varphi^{(k)})\]
@@ -187,7 +187,7 @@ Mit \eqref{eq.11.2} ergibt sich:
 
 genannt \mim{Distributioneller Gradient}. Das heißt $\tilde{\nabla f}$ ist eine lineare Abbildung von $\D^d \to \R$.
 
-Die Totalvariation von $f \in L^1_{loc}$ ist die Operatornorm dieses Funktionals $\tilde{\nabla f}:(\D^d,\norm{\cdot}_\infty) \to \R$
+Die Totalvariation von $f \in \Ell^1_{\loc}$ ist die Operatornorm dieses Funktionals $\tilde{\nabla f}:(\D^d,\norm{\cdot}_\infty) \to \R$
 
 \begin{equation}\label{eq.11.4}
     TV(f) \coloneqq \underset{\varphi \in \D^d, \norm{\varphi}_\infty = 1}{sup} \bigl| \tilde{\nabla f}(\varphi)\bigr| \overset{\eqref{eq.11.3}}{=} TV(f) \coloneqq \underset{\varphi \in \D^d, \norm{\varphi}_\infty = 1}{sup} \tilde{f}(div(\varphi))
@@ -196,7 +196,7 @@ Die Totalvariation von $f \in L^1_{loc}$ ist die Operatornorm dieses Funktionals
 Für folgende Spezialfälle wird  $TV(\varphi)$ etwas handlicher als in \eqref{eq.11.4}:
 
 \begin{enumerate}
-    \item Sei $f \in C^1(\Omega)$, d.h. stetig differenzierbar auf $\Omega \subset \R^d$ und $r \in \R^d$ mit $\norm{r}=1$. Für die Richtungsabbleitung $\frac{\partial f}{\partial r}$ gilt:
+    \item Sei $f \in \CC^1(\Omega)$, d.h. stetig differenzierbar auf $\Omega \subset \R^d$ und $r \in \R^d$ mit $\norm{r}=1$. Für die Richtungsabbleitung $\frac{\partial f}{\partial r}$ gilt:
 
     \[\frac{\partial f}{\partial r} = \skprod{\nabla f(x)}{r} \leq \norm{\nabla f(x)} \C \underbrace{\norm{r}}_{1} = \norm{\nabla f(x)}\]
 
