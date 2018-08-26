@@ -3,10 +3,10 @@
     \subsection{Histogramme}
         Sei $u:\Omega \to F$ ein diskretes Bild, dann heißt die Abbildung
         \[H_u : F \to \N_0\]
-        \[F \ni k \mapsto \# \{x \in \Omega | u(x) = k\}\]
+        \[F \ni k \mapsto \# \{x \in \Omega \mid u(x) = k\}\]
         \mim{Histogramm} des Bildes $u$. Dieses gibt an, wie oft die Farbe $k$ im Bild vorhanden ist.\\
         Damit gilt auch:
-        \[\sum_{k \in F}H_u(k)=\abs{\Omega} \text{, also die Anzahl der Pixel}\]
+        \[\sum_{k \in F}H_u(k)=\abs{\Omega} \text{, also die Anzahl der Pixel}.\]
         \begin{bemerkung*}
             Manchmal betrachtet man die relative Häufigkeit $\displaystyle \tilde H_u(k) = \frac{H_u(k)}{\abs{\Omega}}$.
         \end{bemerkung*}
@@ -25,7 +25,7 @@
                 \draw[->] (4,-1.25) -- (8,-1.25) node[right] {$F$};
                 \draw[->] (4,-1.25) -- (4,1.5);
                 \tvmark{5}{-1.25}{black}
-                \tvmark{6}{-1.25}{grey}
+                \tvmark{6}{-1.25}{\vphantom{b}grey}
                 \tvmark{7}{-1.25}{white}
                 \thmark{4}{-0.25}{1}
                 \thmark{4}{0.75}{2}
@@ -38,15 +38,14 @@
         Für kontinuierliche Bilder wird  das allgemeinere Konzept von einem \mim{Maß} benötigt:
         \begin{center}
             \begin{tikzpicture}
-                \draw (0,0) node[left] {$A \subset F, \ \mathcal H_u  \coloneqq  \abs{u^{-1}(A)}$};
+                \draw (0,0) node[left] {$A \subset F, \ \mathcal H_u(A)  \coloneqq  \abs{u^{-1}(A)}$};
                 \draw[->,text width = 4.5cm] (0,0.1) -- (0.75,0.75) node[right] {\small \underline{Diskretes Bild:}\\ Anzahl der Elemente in $u^{-1}(A)$};
                 \draw[->,text width = 4.5cm] (0,-0.1) -- (0.75,-0.75) node[right] {\small \underline{Kontinuierliches Bild:}\\ Volumen von  $u^{-1}(A)$};
             \end{tikzpicture}
         \end{center}
 
         Zusammenhang zum vorherigen: $\displaystyle \mathcal H_u(A) = \sum_{k \in A} H_u(k)$.
-        Man sagt dann, dass $H_u$ eine \mim{Dichte} zum Maß $\mathcal H_u$ sei. Diese kann auch im kontinuierlichen existieren:
-
+        Man sagt dann, dass $H_u$ eine \mim{Dichte} zum Maß $\mathcal H_u$ sei. Diese kann auch im kontinuierlichen Sinne existieren:
         \begin{center}
             \begin{tikzpicture}
                \draw[->] (0,0) -- (8,0) node[right] {$F$};
