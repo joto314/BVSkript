@@ -6,10 +6,11 @@ Aus mathematischer Sicht sind einige Fragen offen geblieben, etwa:
 \mathcal{D}
 }
 
-\subsection{Verallgemeinerte Funktionen und Abbleitungen}
+\subsection{Verallgemeinerte Funktionen und Ableitungen}
 Wie differenziert man unstetige Funktionen?
 
-Sei $\D  \coloneqq  \CC_0^\infty(\R^d)$ die Menge (auch ein Vektorraum) der beliebig oft differenzierbaren Funktionen auf $\R^d$ mit beschränktem Träger. Etwa:
+Sei $\D  \coloneqq  \CC_0^\infty(\R^d)$ die Menge (auch ein Vektorraum) der beliebig oft differenzierbaren Funktionen auf $\R^d$ mit beschränktem Träger. 
+Etwa:
 
 \begin{center}
     \begin{tikzpicture}
@@ -22,14 +23,14 @@ Sei $\D  \coloneqq  \CC_0^\infty(\R^d)$ die Menge (auch ein Vektorraum) der beli
         \draw[decorate,decoration={brace,amplitude=3pt,mirror}] (-2,-0.2) -- node[below] {\small $\neq0$, Träger} (2,-0.2);
     \end{tikzpicture}
 \end{center}
-Diese Funktion ist:
-\[\varphi(x)=g(1- \abs{x}^2)\]
+Für diese Funktion gilt
+\[\varphi(x) \coloneqq g(1- \abs{x}^2) \in \D,\]
 wobei
 \[g(t)  \coloneqq  \begin{cases}
     e^{\frac{-1}{t}} & ,t>0\\
     0 & ,t\leq 0
 \end{cases}\]
-Dieses funktioniert auch im $\R^d$
+Dieses funktioniert auch im $\R^d$.
 \def\centerx{2}
 \def\centery{-1}
 
@@ -43,39 +44,36 @@ Dieses funktioniert auch im $\R^d$
             colormap name=viridis,
         }
             \begin{axis}[hide axis,scale=0.75,name=plot1]
-                \addplot3[surf,domain=-1:1,domain y=-1:1,samples=80]
+                \addplot3[surf,domain=-1:1,domain y=-1:1,samples=10]
                     {func(1 - (abs(x)^2 + abs(y)^2))};
                 \end{axis}
     \end{tikzpicture}
 \end{center}
+ist in $\CC_0^\infty(\R^d)$ und hat kompakten Träger.
 
-ist $\CC_0^\infty(\R^d)$ und hat kompakten Träger.
-
-Sei nun $\Ell^1_{\loc}(\R^d)$ die Menge aller Funktionen auf $\R^d$ mit kompaktem Träger für die:
-
-\[\int_K \abs{f(x)} dx < \infty\]
-
+Sei nun $\Ell^1_{\loc}(\R^d)$ die Menge aller Funktionen auf $\R^d$ mit kompaktem Träger für die
+\[\int_K \abs{f(x)} \d x < \infty\]
 für alle abgeschlossenen und beschränkten Mengen $K \subset \R^d$ gilt.
 
 \begin{center}
     \begin{tikzpicture}
         \draw (-3,0) -- (3,0);
         \draw[thick] plot [smooth, tension = 0.8] coordinates {(-2.5,0) (-2,1)  (-1,0.7) (1,0.5) (2.5,0)};
-        \draw (3,0.5) node[right] {$\in \Ell^1$ und $\in \Ell^1_{loc}$};
+        \draw (3,0.5) node[right] {$\in \Ell^1$ und $\in \Ell^1_{\loc}$};
         \draw (-3,-2) -- (3,-2);
         \draw[thick] plot [smooth, tension = 0.8] coordinates {(-3,-1.3) (-2,-1.5) (-1,-1) (1,-1.5) (3,-1.2) };
-        \draw (3,-1.5) node[right] {$\not \in \Ell^1$ aber $\in \Ell^1_{loc}$};
+        \draw (3,-1.5) node[right] {$\not \in \Ell^1$ aber $\in \Ell^1_{\loc}$};
         \draw[decorate,decoration={brace,amplitude=3pt,mirror}] (-2,-2.2) -- node[below] {$K$} (-0.5,-2.2);
     \end{tikzpicture}
 \end{center}
 
-Die Zweite Funktion ist nicht in $\Ell^1$ da ihr Gesamtintegral nicht endlich ist jedoch ist das Integral über jede endlich Menge endlich, sie hat also keine Pole, somit sie in $\Ell^1_{loc}$.
+Die zweite Funktion ist nicht in $\Ell^1$, da ihr Gesamtintegral nicht endlich ist
+Jedoch ist das Integral über jede kompakte Menge endlich, sie hat also keine Pole, somit ist sie in $\Ell^1_{\loc}$.
 
-Für jede Funktion $f \in \Ell^1_{loc}(\R^d)$ bildet
+Für jede Funktion $f \in \Ell^1_{\loc}(\R^d)$ bildet
 \begin{equation}\label{eq.11.1}
-    \tilde f:\varphi \in \Omega \mapsto \int_{\R^d} f(x) \C \varphi(x) dx \in \R
+    \tilde f:\varphi \in \D \mapsto \int_{\R^d} f(x) \C \varphi(x) \d x \in \R
 \end{equation}
-
 ein stetiges lineares Funktional auf $\D$.
 
 Sei nun $\D'$ die Menge aller stetigen linearen Funktionale auf $\D$, also der \mim{Dualraum}. Also ist für jedes $f \in \Ell^1_{\loc}$ das Funktional $\tilde f$ aus \eqref{eq.11.1} in $\D'$.
@@ -92,27 +90,29 @@ Sei nun $\D'$ die Menge aller stetigen linearen Funktionale auf $\D$, also der \
         \draw[->] (3.2,1) -- node[above]{\small \eqref{eq.11.1} \ \ \ \ \ } (6.5,0.8) node[right] {$\tilde f$};
         \draw (9,4) node[] {\Large $\D'$};
         \draw[<-] (7.5,1.3) -- (6,-2) node[below]{reguläre Distributionen};
-        \draw[<-] (8.5,3) -- (7,5.5) node[above]{\mim{Distributionen} oder Verallgemeinerte Funktionen};
+        \draw[<-] (8.5,3) -- (7,5.5) node[above]{\mim{Distributionen} oder verallgemeinerte Funktionen};
         \draw (-1,-1.5) node[right] {\small $\delta:\varphi \in \D \mapsto \varphi(0) \in \R$ ist etwa in  aber nicht in};
         \draw[<-] (6.3,0.3) -- (5.5,-1.5);
         \draw[<-] (5.5,0.5) -- (3.7,-1.5);
     \end{tikzpicture}
 \end{center}
 
-Nun zu den Abbleitungen, sein zunächst $d=1$ und $f \in \CC^1 \subset \Ell^1_{\loc}$, dann gilt für alle $\varphi \in \D$ wobei $[-a,a] \supset supp(\varphi)$:
-
-\[\underbrace{\int_{\R^1} f'(x) \varphi(x) dx}_{f'(\varphi)} = \int_{-a}^a f(x) \varphi(x) dx = \underbrace{f(x)\varphi(x)|_{-a}^{a}}_{=0} - \int_{-a}^a f(x) \varphi'(x) dx = -\int_{\R^1} f(x) \varphi'(x) dx = -\tilde f(\varphi')\]
-
-$\Rightarrow$ Für $f \in \CC^1 \subset \Ell^1_{\loc}$ gilt $\tilde f'(\varphi) = - \tilde f(\varphi'), \varphi \in \D$. Wir nehmen dies als Ansatz und setzen:
-
+Nun zu den Ableitungen.
+Sei zunächst $d=1$ und $f \in \CC^1 \subset \Ell^1_{\loc}$.
+Dann gilt für alle $\varphi \in \D$ wobei $[-a,a] \supset \supp(\varphi)$:
+\[
+    \underbrace{\int_{\R^1} f'(x) \varphi(x) \d x}_{f'(\varphi)} 
+    = \int_{-a}^a f(x) \varphi(x) \d x 
+    = \underbrace{\vphantom{\int_{\R^1}} f(x)\varphi(x)|_{-a}^{a}}_{=0} - \int_{-a}^a f(x) \varphi'(x) \d x 
+    = -\int_{\R^1} f(x) \varphi'(x) \d x = -\tilde f(\varphi').
+\]
+Für $f \in \CC^1 \subset \Ell^1_{\loc}$ folgt daraus $\tilde f'(\varphi) = - \tilde f(\varphi'), \varphi \in \D$. Wir nehmen dies als Ansatz und setzen:
 \begin{equation}\label{eq.11.2}
-    F'(\varphi) \coloneqq -F(\varphi'), \varphi \in \D
+    F'(\varphi) \coloneqq -F(\varphi'), \quad\varphi \in \D
 \end{equation}
-
-für alle $F\in \D$, genannt Distributionen Abbleitung.
+für alle $F\in \D$, genannt Distributionen Ableitung.
 
 Beispiel:
-
 \begin{center}
     \begin{tikzpicture}
         \draw (-0.4,0) node[left] {$f(x) = \abs{x}$};
@@ -122,113 +122,108 @@ Beispiel:
     \end{tikzpicture}
 \end{center}
 Und $F \coloneqq \tilde f$ also:
-
-\[F'(\varphi) = -F(\varphi) = - \int_{-a}^a \abs{x} \varphi'(x) dx = - \int_{-a}^0 -x \varphi'(x) dx - \int_0^a x \varphi'(x) dx \]
-
-\[= \int_{-a}^0 x \varphi'(x) dx - \int_0^a x \varphi'(x) dx = \underbrace{x \varphi(x)|_{-a}^0}_{0} - \int_{-a}^0 1 \varphi(x) dx - \underbrace{x \varphi(x)|_0^a}_{0} + \int_0^a 1 \varphi(x) dx\]
-
-\[= \int_{-a}^a sign(x) \varphi(x) dx = \tilde{sign}(\varphi)\]
+\begin{align*}
+F'(\varphi) 
+    &= -F(\varphi') 
+= - \int_{-a}^a \abs{x} \varphi'(x) \d x 
+= - \int_{-a}^0 -x \varphi'(x) \d x - \int_0^a x \varphi'(x) \d x
+= \int_{-a}^0 x \varphi'(x) \d x - \int_0^a x \varphi'(x) \d x  \\
+    &= \underbrace{x \varphi(x)|_{-a}^0}_{0} - \int_{-a}^0 1 \varphi(x) \d x - \underbrace{x \varphi(x)|_0^a}_{0} + \int_0^a 1 \varphi(x) \d x
+= \int_{-a}^a \sign(x) \varphi(x) \d x = \tilde{\sign}(\varphi), \quad \phi \in \D
+\end{align*}
 
 \begin{center}
     \begin{tikzpicture}
-        \draw (-0.4,0) node[left] {$sign(x)=$};
+        \draw (-0.4,0) node[left] {$\sign(x)=$};
         \draw (-0.2,0) -- (4.2,0);
         \draw (2,-1.3) -- (2,1.3);
         \draw[thick] (2,1) node[left]{\small $1$} -- (4,1);
         \draw[thick] (0,-1) -- (2,-1) node[right]{\small $-1$};
     \end{tikzpicture}
 \end{center}
+Also gilt $F'=\tilde{\sign}$.
 
-Also insgesamt $F'=\tilde{sign}$
-
-Nun leiten wir die $sign$ Funktion nocheinmal ab:
-
+Nun leiten wir die $\sign$ Funktion noch einmal ab:
 \begin{align*}
-    \tilde{sign}'(\varphi) =& -\tilde{sign}(\varphi') = - \int_\R sign(x) \varphi'(x) dx = - \int_{-a}^a sign(x) \varphi'(x) dx\\
-    =&- \int_{-a}^0 (-1) \varphi'(x) dx - \int_0^a 1 \varphi'(x)dx\\
-    =&\underbrace{\int_{-a}^0 \varphi'(x) dx}_{\varphi(0) - \varphi(-a)} - \underbrace{\int_0^a \varphi'(x)dx}_{-\varphi(a)+\varphi(0)} = 2 \varphi(0) = 2 \delta(\varphi)\\
-    \Rightarrow & \tilde{sign}'=2\delta
+    \tilde{\sign}'(\varphi) 
+    =& -\tilde{\sign}(\varphi') 
+    = - \int_\R \sign(x) \varphi'(x) \d x 
+    = - \int_{-a}^a \sign(x) \varphi'(x) \d x\\
+    =&- \int_{-a}^0 (-1) \varphi'(x) \d x - \int_0^a 1 \varphi'(x)\d x\\
+    =&\underbrace{\int_{-a}^0 \varphi'(x) \d x}_{\varphi(0) - \varphi(-a)} - \underbrace{\int_0^a \varphi'(x)\d x}_{-\varphi(a)+\varphi(0)} = 2 \varphi(0) = 2 \delta(\varphi)\\
+    \Rightarrow & \tilde{\sign}'=2\delta
 \end{align*}
 
-Diese Abbleitung ist jedoch nicht mehr mit einem Element in $\Ell^1_{\loc}$ identifizierbar.
+Diese Ableitung ist jedoch nicht mehr mit einem Element in $\Ell^1_{\loc}$ identifizierbar.
 Distributionen sind beliebig oft differenzierbar, somit folgt:
-
-\[F^{(k)}(\varphi) = (-1)^kF(\varphi^{(k)})\]
+\[F^{(k)}(\varphi) = (-1)^kF(\varphi^{(k)}).\]
 
 Ein anderes Beispiel in mehr Dimensionen:
 
-Hier ist die Abbleitung definiert über:
-
+Hier ist die Ableitung definiert über:
 \[(D^\alpha F)(\varphi) = (-1)^{\abs{\alpha}}F(D^{\alpha} \varphi), \quad \varphi \in \mathcal{D}, \alpha \in \N^d\]
-
 Für dieses Beispiel ist $d=2$ und $\alpha = \mat{2\\1}$, wobei $\abs{\alpha} = \alpha_1 + ... +\alpha_d$.
-
 \[\Rightarrow D^\alpha = \frac{\partial^{\alpha_1}}{(\partial x_1)^{\alpha_1}}\frac{\partial^{\alpha_2}}{(\partial x_2)^{\alpha_2}} = \frac{\partial^{2}}{(\partial x_1)^{2}} \frac{\partial}{\partial x_2}\]
-
 also
-
 \[(\underbrace{D^\alpha F}_{F_{x_1 x_1 x_2}})(\varphi) = (-1)^{3}F(\varphi_{x_1 x_1 x_2})\]
-
-$\abs{\alpha}=1 \Rightarrow $ eine partielle Abbleitung $\Rightarrow$ Gradient, also Vektor der $1.$ partiellen Abbleitungen.
+$\abs{\alpha}=1 \Rightarrow $ eine partielle Ableitung $\Rightarrow$ Gradient, also Vektor der $1.$ partiellen Ableitungen.
 
 \subsection{Verallgemeinerter Gradient und Totalvariation}
 
-Für $f:\R^d \to \R$ erwarten wir $\nabla f = \srmatrix{f_{x_1} \\ \vdots \\ f_{x_2}}$
-
+Für $f:\R^d \to \R$ erwarten wir $\nabla f = \srmatrix{f_{x_1} \\ \vdots \\ f_{x_2}}$ als Gradient.
 Nun fassen wir jede Komponente $f_{x_1}$ als Distribution auf:
-
-\[\tilde{\nabla f} \coloneqq \mat{\tilde{f_{x_1}}\\ \vdots \\ \tilde{f_{x_d}}}: \mat{\varphi_1 \\ \vdots \\ \varphi_d} \mapsto \underbrace{\tilde{f_{x_1}}(\varphi_1) + \hdots + \tilde{f_{x_1}}(\varphi_1)}_{\in \R}\]
-
+\[
+    \tilde{\nabla f} \coloneqq \mat{\tilde{f_{x_1}}\\ \vdots \\ \tilde{f_{x_d}}} \;\colon\; \mat{\varphi_1 \\ \vdots \\ \varphi_d} \mapsto \underbrace{\tilde{f_{x_1}}(\varphi_1) + \hdots + \tilde{f_{x_1}}(\varphi_1)}_{\in \R}.
+\]
 Mit \eqref{eq.11.2} ergibt sich:
-
 \begin{equation}\label{eq.11.3}
-    \nabla f(\varphi)=\sum_{k=1}^d \tilde{f_{x_k}}(\varphi_k) \overset{\eqref{eq.11.2}}{=} \sum_{k=1}^d - \tilde{f}\left(\frac{\partial}{\partial x_k} \varphi_k \right) = -\tilde{f} \left( \sum_{k=1}^d \frac{\partial}{\partial x_k} \varphi_k \right) = - \tilde f (div(\varphi)), \ \varphi \in \D^d
+    \nabla f(\varphi)
+    =\sum_{k=1}^d \tilde{f_{x_k}}(\varphi_k) 
+    \overset{\eqref{eq.11.2}}{=} \sum_{k=1}^d - \tilde{f}\left(\frac{\partial}{\partial x_k} \varphi_k \right) 
+    = -\tilde{f} \left( \sum_{k=1}^d \frac{\partial}{\partial x_k} \varphi_k \right) 
+    = - \tilde f (\div(\varphi)), \ \varphi \in \D^d
 \end{equation}
 
 genannt \mim{Distributioneller Gradient}. Das heißt $\tilde{\nabla f}$ ist eine lineare Abbildung von $\D^d \to \R$.
 
 Die Totalvariation von $f \in \Ell^1_{\loc}$ ist die Operatornorm dieses Funktionals $\tilde{\nabla f}:(\D^d,\norm{\cdot}_\infty) \to \R$
-
 \begin{equation}\label{eq.11.4}
-    TV(f) \coloneqq \underset{\varphi \in \D^d, \norm{\varphi}_\infty = 1}{sup} \bigl| \tilde{\nabla f}(\varphi)\bigr| \overset{\eqref{eq.11.3}}{=} TV(f) \coloneqq \underset{\varphi \in \D^d, \norm{\varphi}_\infty = 1}{sup} \tilde{f}(div(\varphi))
+    \TV(f) \coloneqq \underset{\varphi \in \D^d, \norm{\varphi}_\infty = 1}{\sup} \bigl| \tilde{\nabla f}(\varphi)\bigr| 
+    \overset{\eqref{eq.11.3}}{=} \TV(f) \coloneqq \underset{\varphi \in \D^d, \norm{\varphi}_\infty = 1}{\sup} \lvert \tilde{f}(\div(\varphi)) \rvert.
 \end{equation}
 
-Für folgende Spezialfälle wird  $TV(\varphi)$ etwas handlicher als in \eqref{eq.11.4}:
-
+Für folgende Spezialfälle wird  $\TV(\varphi)$ etwas handlicher als in \eqref{eq.11.4}:
 \begin{enumerate}
-    \item Sei $f \in \CC^1(\Omega)$, d.h. stetig differenzierbar auf $\Omega \subset \R^d$ und $r \in \R^d$ mit $\norm{r}=1$. Für die Richtungsabbleitung $\frac{\partial f}{\partial r}$ gilt:
-
-    \[\frac{\partial f}{\partial r} = \skprod{\nabla f(x)}{r} \leq \norm{\nabla f(x)} \C \underbrace{\norm{r}}_{1} = \norm{\nabla f(x)}\]
-
+    \item Sei $f \in \CC^1(\Omega)$, d.h. stetig differenzierbar auf $\Omega \subset \R^d$ und $r \in \R^d$ mit $\norm{r}=1$. 
+        Für die Richtungsableitung $\frac{\partial f}{\partial r}$ bezüglich $r$ gilt:
+        \[\frac{\partial f}{\partial r}(x)
+        = \skprod{\nabla f(x)}{r} \leq \norm{\nabla f(x)} \C \underbrace{\norm{r}}_{1} 
+        = \norm{\nabla f(x)}\]
     mit Gleichheit im Falle von $r = \frac{\nabla f(x)}{\norm{\nabla f(x)}}$.
-
     Es ergibt sich:
-
     \begin{align}\label{eq.11.5}
-        TV(f) &= \underset{\varphi \in \D^d, \norm{\varphi}_\infty = 1}{sup} \bigl(\tilde{f_{x_1}}(\varphi_1) + ... + \tilde{f_{x_d}}(\varphi_d)\bigr) \nonumber \\
-        &= \underset{\varphi \in \D^d, \norm{\varphi}_\infty = 1}{sup} \underbrace{\int_\Omega f_{x_1}\varphi_1(x) + ... + f_{x_d}(x)\varphi_d(x) dx}_{\skprod{\nabla f(x)}{\varphi(x)}} = \int_\Omega \norm{\nabla f(x)} dx
+        \TV(f) &= \underset{\varphi \in \D^d, \norm{\varphi}_\infty = 1}{\sup} \bigl(\tilde{f_{x_1}}(\varphi_1) + ... + \tilde{f_{x_d}}(\varphi_d)\bigr) \nonumber \\
+        &= \underset{\varphi \in \D^d, \norm{\varphi}_\infty = 1}{\sup} \underbrace{\int_\Omega f_{x_1}\varphi_1(x) + ... + f_{x_d}(x)\varphi_d(x) \d x}_{\skprod{\nabla f(x)}{\varphi(x)}} = \int_\Omega \norm{\nabla f(x)} \d x
     \end{align}
 
-    Dabei wird immer $\varphi(x) = \frac{\nabla f(x)}{\norm{\nabla f(x)}}$ gewählt, was zwar im Allgemeinen nicht in $\D^d$ liegt, sich aber beliebig gut approximieren lässt.
+    Dabei wird immer $\varphi(x) = \frac{\nabla f(x)}{\norm{\nabla f(x)}}$ gewählt, was zwar im Allgemeinen nicht in $\D^d$ liegt, sich aber beliebig gut durch Elemente aus $\D^d$ approximieren lässt.
 
-    \item Sei $f= \chi_D$ die charakteristische Funktion con $D \subset \Omega \subset \R^d$, wobei $D$ beschränkt sei und stückweise glatten Rand besitzt.
+    \item Sei $f= \chi_D$ die charakteristische Funktion von $D \subset \Omega \subset \R^d$, wobei $D$ beschränkt sei und stückweise glatten Rand besitzt.
     Dann gilt:
-
-    \[\tilde{\nabla f}(\varphi) \overset{\eqref{eq.11.3}}{=} - \int \chi_D div(\varphi(x)) dx \overset{\text{\small{Gaußscher Integralsatz}}}{=} -\int_{\partial D} \skprod{\varphi(x)}{n(x)} ds(x)\]
-
+    \[
+        \tilde{\nabla f}(\varphi) \overset{\eqref{eq.11.3}}{=} - \int \chi_D \div(\varphi(x)) \d x \overset{\text{\small{Gaußscher Integralsatz}}}{=} -\int_{\partial D} \skprod{\varphi(x)}{n(x)} \d s(x),
+    \]
     wobei $n(x)$ der Normalenvektor an $\partial D$ ist.
-
+        Damit ergibt sich
     \begin{align}
-        \Rightarrow TV(f) =& \underset{\varphi \in \D^d, \norm{\varphi}_\infty = 1}{sup} \int_{\partial D} \skprod{\varphi(x)}{n(x)} ds(x) \nonumber \\
-        =& \int_{\partial D}\underbrace{\norm{n(x)}}_{1} ds(x) = \int_{\partial D} 1 ds(x) = \text{Länge}(\partial D)
+        \TV(f) =& \underset{\varphi \in \D^d, \norm{\varphi}_\infty = 1}{\sup} \int_{\partial D} \skprod{\varphi(x)}{n(x)} ds(x) \nonumber \\
+        =& \int_{\partial D}\underbrace{\norm{n(x)}}_{1} ds(x) = \int_{\partial D} 1 ds(x) = \lvert \partial D \rvert.
     \end{align}
 \end{enumerate}
 
 \subsection{Existenz und Eindeutigkeit der Variationslösung}
-Wann ist ein Minimierungsproblem:
-
-\[J(u) \overset{u \in U}{\longrightarrow} min\]
-
+Wann ist ein Minimierungsproblem
+\[J(u) \overset{u \in U}{\longrightarrow} \min\]
 eindeutig lösbar?
 
 \begin{enumerate}[label= \alph*)]
@@ -255,7 +250,7 @@ eindeutig lösbar?
 
         \end{minipage}
         \begin{minipage}[c]{0.49\textwidth}
-        Nimmt sei Maximum \underline{nicht} an, da $U$ nicht kompakt ist, jedoch ist $f$ stetig.
+        Nimmt sein Maximum \underline{nicht} an, da $U$ nicht kompakt ist, jedoch ist $f$ stetig.
     \end{minipage}
 
 
@@ -275,34 +270,31 @@ eindeutig lösbar?
 
         \end{minipage}
         \begin{minipage}[c]{0.49\textwidth}
-        Nimmt sei Maximum \underline{nicht} an, da $f$ unstetig ist, jedoch ist $U$ kompakt.
+        Nimmt sein Maximum \underline{nicht} an, da $f$ unstetig ist, jedoch ist $U$ kompakt.
     \end{minipage}
 
-    Wir benötigen jedoch nur die Existenz des Minimums, nicht des Maximums, daher reicht im obigen Satz die \mim{Untere Halbstatigkeit}, diese ist für ein $u_0 \in U$ erfüllt falls:
-
-    \[\forall \epsilon > 0 \ \exists \delta: J(U_\delta(u_0)) \subset \left( J(u_0), \infty \right)\]
-
+    Wir benötigen jedoch nur die Existenz des Minimums, nicht des Maximums, daher reicht im obigen Satz die \mim{Untere Halbstetigkeit}, diese ist für ein $u_0 \in U$ erfüllt falls:
+    \[
+        \forall \varepsilon > 0 \ \exists \delta > 0: J(U_\delta(u_0)) \subset \left( J(u_0) - \varepsilon, \infty \right)
+    \]
     Im Vergleich zur gewöhnlichen Stetigkeit:
+    \[
+        \forall \varepsilon > 0 \ \exists \delta > 0 : J(U_\delta (u_0)) \subset U_\varepsilon (J(u_0))
+    \]
+    Aber auch die Kompaktheit von $U$ ist nicht oft erfüllt, deshalb definieren wir:
+    \[
+        S_\alpha  \coloneqq \{ u \in U : J(u) \leq \alpha \}, \quad \text{\mim{Sub-Niveaumenge} zu Niveau $\alpha$} 
+    \]
 
-    \[\forall \epsilon > 0 \ \exists \delta : J(U_\delta (u_0)) \subset U_\epsilon (J(u_0))\]
-
-    Aber auch die Kompaktheit vun $U$ ist nicht oft erfüllt, deshalb definieren wir:
-
-    \[S_\alpha  \coloneqq \{ u \in U : J(u) \leq \alpha \}, \quad \text{\mim{Sub-Niveaumenge} zu Niveu $\alpha$} \]
-
-    \textbf{Existenzsatz}: Sei $U$ ein metrischer Raum und
-
-    \[J:U \to \R\]
-    so dass:
-
+    \textbf{Existenzsatz}: Sei $U$ ein metrischer Raum und $J:U \to \R$ so, dass
     \begin{enumerate}[label= \roman*)]
-        \item $J$ unter-halbstetig
-        \item $\exists \alpha \in \R : S_\alpha \neq \emptyset$ und kompakt
+        \item $J$ unter-halbstetig.
+        \item $\exists \alpha \in \R : S_\alpha \neq \emptyset$ und kompakt.
     \end{enumerate}
-
-    Dann existiert ein Minimierer $u^* \in U$ mit:
-
-    \[J(u^*) \leq J(u) \quad \forall u \in U \]
+    Dann existiert ein Minimierer $u^* \in U$ mit
+    \[
+        J(u^*) \leq J(u) \quad \forall u \in U.
+    \]
 
     \item Eindeutigkeit
 
@@ -341,14 +333,9 @@ eindeutig lösbar?
     \textbf{Eindeutigkeitssatz}: Falls $J$ strengkonvex ist existiert höchstens ein Minimierer.
 
     \begin{proof}
-        Angenommen, $u^* \neq v^*$ seien Minimierer von $J$, d.h.
-
-        \[\alpha_{\text{min}} \coloneqq J(u^*) = J(v^*) \leq J(u) \quad \forall u \in U\]
-
-        \[\overset{\text{\small str. konvex}}{\Longrightarrow} \forall \alpha \in (0,1) : J(\alpha u^* + (1 - \alpha)v^*) < \alpha J(u^*) + (1-\alpha)J(v^*) = \alpha_{\text{min}} \ \lightning \]
-
+        Angenommen, $u^* \neq v^* \in U$ seien Minimierer von $J$, d.h.
+        \[J(u^*) = J(v^*) = \inf_{u \in U} J(u)\]
+        \[\overset{\text{\small str. konvex}}{\Longrightarrow} \forall \alpha \in (0,1) : J(\alpha u^* + (1 - \alpha)v^*) < \alpha J(u^*) + (1-\alpha)J(v^*) = \inf_{u \in U} J(u) \ \lightning \]
         Dieses ist jedoch ein Widerspruch zur Minimalität von $J(u^*)$ und $J(v^*)$.
     \end{proof}
-
 \end{enumerate}
-
