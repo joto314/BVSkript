@@ -1,6 +1,6 @@
 %\documentclass{report}
 \documentclass{article}
-\usepackage[DIV14]{typearea}
+\usepackage[DIV=14]{typearea}
 %\usepackage{lmodern}
 
 \usepackage[utf8]{inputenc}
@@ -68,21 +68,19 @@
 %\title{Mathematische Bildverarbeitung}
 %\author{Jonas Sattler}
 \pagestyle{empty}
-\adjustbox{valign=t}{
-    \begin{minipage}[t]{0.65\linewidth}
+%\adjustbox{valign=t}{
+    \begin{minipage}{0.65\textwidth}
+        \vspace{0pt}
     {\LARGE \bf Mathematische Bildverarbeitung}\\[1em]
     {\Large \bf Vorlesungsskript}
-    \end{minipage}
-}
-\hfill
-\adjustbox{valign=t}{
-    \begin{minipage}[t]{0.35\linewidth}
+    \end{minipage}\hfill\begin{minipage}{0.35\textwidth}
+        \vspace{0pt}
     \begin{flushright}
-    %\includegraphics[width=1.0\textwidth]{office_grau_de.pdf}
-    \includegraphics[width=1.0\textwidth]{office_rgb_de.pdf}
+%    \includegraphics[width=\textwidth]{office_grau_de.png}
+    \includegraphics[width=1.0\textwidth]{office_rgb_de.png}
     \end{flushright}
     \end{minipage}
-}
+%}
 
 \vspace{2em}
 \adjustbox{valign=t}{
@@ -113,13 +111,13 @@
 
 %\input{chap1}    
 %\input{chap2}    
-%\input{chap3}    
+\input{chap3}    
 %\input{chap4}    
 %\input{chap5}    
 %\input{chap6}    
 %\input{chap7}    
-%\input{chap08}    
-\input{chap9}    
+%\input{chap8}    
+%\input{chap9}    
 %\input{chap10}    
 %\input{chap11}    
 
