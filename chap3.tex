@@ -138,11 +138,12 @@
                     \tvnmark{7.5}{0}{...}
                 \end{tikzpicture}
             \end{center}
-        $T$ lässt sich auch alternativ ausdrücken durch:
-        \[ T(k)=\left[ \mathcal H_u(\{0,...,k\}) \right] \]
-        Und somit folgt dass für den kontinuierlichen Fall $T$ durch
+        $T$ lässt sich auch alternativ ausdrücken durch
+        \[ T(k)=\left[ \mathcal H_u(\{0,...,k\}) \right]. \]
+        Und somit folgt, dass für den kontinuierlichen Fall $T$ durch
         \[ T(k) = \frac{N}{\abs{\Omega}} \mathcal H_u((0,k))\]
-        definiert werden kann. Allgemein heißt der Prozess \mim{Histogramm - equalization}.
+        definiert werden kann. 
+        Allgemein heißt der Prozess \mim{Histogramm - equalization}.
     \subsection{Anwendung: SW-Konvertierung}
         Aufgabe: Graustufenbild $\to$ SW-Bild.\\
         Nützlich etwa bei Objekterkennung/Segmentierung.
@@ -160,14 +161,15 @@
             \end{tikzpicture}
         \end{center}
         Also setze nun für $t \in F$:
-        \[\text{schwarz} = \left\{k \in F | k \leq t \right\} \]
-        \[\text{weiß} = \left\{k \in F | k >t \right\}\]
-        Graustufenbild $u$ $\longrightarrow$ schwarz/weiß Bild $\tilde u$:
-
+    \begin{align*}
+    \text{schwarz} &= \left\{k \in F | k \leq t \right\} \\
+    \text{weiß} &= \left\{k \in F | k >t \right\}
+    \end{align*}
+     Graustufenbild $u$ $\longrightarrow$ schwarz/weiß Bild $\tilde u$:
         \[\tilde u(x) = \begin{cases}
             0, \ u(x) \in \text{schwarz}\\
             1, \ u(x) \in \text{weiß}
-        \end{cases} \Rightarrow \ \tilde F = \{0,1\}\]
+        \end{cases} \Rightarrow \, \tilde F = \{0,1\}.\]
 
         \pa{Methoden um diesen Schwellenwert zu wählen:}
 
@@ -190,17 +192,17 @@
             \item \mim{Otsu's Verfahren} (1979):\\
             Vorher einige Definitionen.\\
             Die \mim{Masse}:
-            \[m_{\text{schwarz}}  \coloneqq  \sum_{k \in \text{schwarz}} H_u(k)\]
-            \[m_{\text{weiß}}  \coloneqq  \sum_{k \in \text{weiß}} H_u(k)\]
+            \[m_{\text{schwarz}}  \coloneqq  \sum_{k \,\in\, \text{schwarz}} H_u(k)\]
+            \[m_{\text{weiß}}  \coloneqq  \sum_{k \,\in\, \text{weiß}} H_u(k)\]
             Der \mim{Mittelwert}:
-            \[\mu_{\text{schwarz}}  \coloneqq  \frac{\displaystyle \sum_{k_ \in \text{schwarz}} k \C H_u(k) }{\displaystyle \sum_{k_ \in \text{schwarz}}H_u(k)} = \frac{\displaystyle \sum_{k_ \in \text{schwarz}} k \C H_u(k) }{m_{\text{schwarz}}}\]
-            \[\mu_{\text{weiß}}  \coloneqq  \frac{\displaystyle \sum_{k_ \in \text{weiß}} k \C H_u(k) }{\displaystyle \sum_{k_ \in \text{weiß}}H_u(k)} = \frac{\displaystyle \sum_{k_ \in \text{weiß}} k \C H_u(k) }{m_{\text{weiß}}}\]
+            \[\mu_{\text{schwarz}}  \coloneqq  \frac{\displaystyle \sum_{k \in \text{schwarz}} k \C H_u(k) }{\displaystyle \sum_{k \in \text{schwarz}}H_u(k)} = \frac{\displaystyle \sum_{k \in \text{schwarz}} k \C H_u(k) }{m_{\text{schwarz}}}\]
+            \[\mu_{\text{weiß}}  \coloneqq  \frac{\displaystyle \sum_{k \in \text{weiß}} k \C H_u(k) }{\displaystyle \sum_{k \in \text{weiß}}H_u(k)} = \frac{\displaystyle \sum_{k \in \text{weiß}} k \C H_u(k) }{m_{\text{weiß}}}\]
             Die \mim{Varianz}:
             \[\sigma^2_{\text{schwarz}} = \sum_{k \in \text{schwarz}} (k - \mu_{\text{schwarz}})^2 \C H_u(k)\]
             \[\sigma^2_{\text{weiß}} = \sum_{k \in \text{weiß}} (k - \mu_{\text{weiß}})^2 \C H_u(k)\]
             Nun lautet Otsu's Methode: $\sigma^2_{\text{schwarz}} + \sigma^2_{\text{weiß}} \overset{t}{\rightarrow} \text{min}$.
             \item \mim{Median}:\\
-            Wähle $t$ so dass $m_{\text{schwarz}} = m_{\text{weiß}}$.
+            Wähle $t$ so, dass $m_{\text{schwarz}} = m_{\text{weiß}}$.
             \item \mim{Isodata Algorithmus} (1970s):\\
             Wähle t so, dass $\displaystyle t = \frac{\mu_{\text{schwarz}} + \mu_{\text{weiß}}}{2} =: f(t)$.\\
             Diese Gleichung ist bereits eine \mim{Fixpunktgleichung} und eine Lösung kann, etwa mit einer \mim{Fixpunktiteration} approximiert werden, das heißt $t_{n+1}  \coloneqq  f(t_n)$.
@@ -256,7 +258,7 @@ imshow(v);
             \item \pa{Median}:\\
             Zerteile $F$ in M Quantile gleicher Masse.
             \item \pa{Isodata}:\\
-            Hierzu existiert keine Bekannte Verallgemeinerung auf $M$ Farbklassen.
+            Hierzu existiert keine bekannte Verallgemeinerung auf $M$ Farbklassen.
         \end{enumerate}
 
         \pa{Matlab code}:\\
