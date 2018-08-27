@@ -18,14 +18,14 @@
 
     \subsection{Verknüpfungen von A und B}
         \[A+B  \coloneqq  \{a + b : a \in A, b \in B\}\]
-        Diese wird \mim{dilation} genannt.\\
+        Diese wird \mim{Dilation} genannt.
         Anschaulich wird an jeden schwarzen Punkt des Bildes $A$ das Struktur Element $B$ gelegt.
         \begin{center}
             \begin{tikzpicture}
                 \draw (0,0) node[left] {$A+B=$} node[right] {\includegraphics[scale = 0.2]{Bild1dil.png}};
             \end{tikzpicture}
         \end{center}
-        Bild erzeugt in Matlab durch:\\
+        Bild erzeugt in Matlab durch:
         \begin{lstlisting}
 I=imread('Bild1.png');
 se=strel('disk',40,8);
@@ -34,7 +34,7 @@ imshow(I2);
         \end{lstlisting}
 
         \[A-B  \coloneqq  \{a \in A: a + B \subset A\}\]
-        Diese wird \mim{erosion} genannt.\\
+        Diese wird \mim{Erosion} genannt.
         Anschaulich werden die schwarzen Bereiche des Bildes gesucht, in die das Strukturelement hinein passt.
         \begin{center}
             \begin{tikzpicture}
@@ -42,24 +42,22 @@ imshow(I2);
             \end{tikzpicture}
         \end{center}
 
-        Bild erzeugt in Matlab durch:\\
+        Bild erzeugt in Matlab durch:
         \begin{lstlisting}
 I=imread('Bild1.png');
 se=strel('disk',20,8);
 I2=imcomplement(imerode(imcomplement(I),se));
 imshow(I2);
         \end{lstlisting}
-
-        Es ist schnell zu erkennen das $A \neq (A+B)-B$, deshalb wird eine neue Operation eingeführt:
+        Es ist schnell zu erkennen, dass $A \neq (A+B)-B$ gilt, deshalb wird eine neue Operation eingeführt:
         \[A \bullet B  \coloneqq  (A+B)-B\]
-        Dieses wird \mim{schließen} genannt und wird etwa genutzt um Löcher, z.b. Rauschen, in einem Bild zu entfernen. Im Beispiel Bild ist zu sehen, dass das obere Fenster nicht mehr vorhanden ist.
+        Dieses wird \mim{Schließen} genannt und wird etwa genutzt um Löcher, z.b. Rauschen, in einem Bild zu entfernen. Im Beispiel Bild ist zu sehen, dass das obere Fenster nicht mehr vorhanden ist.
         \begin{center}
             \begin{tikzpicture}
                 \draw (0,0) node[left] {$A \bullet B=$} node[right] {\includegraphics[scale = 0.2]{Bild1close.png}};
             \end{tikzpicture}
         \end{center}
-
-        Bild erzeugt in Matlab durch:\\
+        Bild erzeugt in Matlab durch:
         \begin{lstlisting}
 I=imread('Bild1.png');
 se=strel('disk',20,8);
@@ -70,10 +68,9 @@ imshow(I3);
 
         Es existiert auch die Umgekehrt Operation:
         \[ A \circ B  \coloneqq  (A-B)+B\]
-        Diese wird \mim{öffnen} genannt.
+        Diese wird \mim{Öffnen} genannt.
 
         Diesmal mit einem neuen Beispiel:
-
         \begin{center}
             \begin{tikzpicture}
                 \draw (0,0) node[left] {$A=$} node[right] {\includegraphics[scale = 0.2]{Bild2.png}};
