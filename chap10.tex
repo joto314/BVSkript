@@ -39,7 +39,7 @@ Man unterscheidet zunächst in
 
 \subsection{Merkmalsbasierte Verfahren}
 
-Hierbei sollen endlich viele \mim{Landmarks}(\mim{Merkmale}) aus $u_0$ und $u$ paarweise in Einklang gebracht werden, hieraus erhält man endlich viele Gleichungen zur Schätzung von $d$. Diese Kontrollpunkte müssen jedoch vorher von Hand bestimmt werden und in den beiden gegebenen Bildern miteinander identifiziert werden, es ist nur schwer möglich dem Computer das Finden dieser Kontrollpunkte beizubringen.
+Hierbei sollen endlich viele \textbf{Landmarks}\index{Landmarks}(\textbf{Merkmale}\index{Merkmale}) aus $u_0$ und $u$ paarweise in Einklang gebracht werden, hieraus erhält man endlich viele Gleichungen zur Schätzung von $d$. Diese Kontrollpunkte müssen jedoch vorher von Hand bestimmt werden und in den beiden gegebenen Bildern miteinander identifiziert werden, es ist nur schwer möglich dem Computer das Finden dieser Kontrollpunkte beizubringen.
 
 Beispiel: $d:\R^2 \to \R^2$ linear + Translation, d.h.:
 \[ d:\underbrace{\mat{x_1 \\ x_2}}_{p} \mapsto \mat{a & b \\ c & d} \C \mat{x_1 \\ x_2}+ \mat{e\\f} \coloneqq \underbrace{\mat{y_1 \\ y_2}}_{q} = \mat{ax_1 + bx_2 +e\\ cx_1 + dx_2 + f} = \underbrace{\mat{x_1 & x_2 & 0 & 0 & 1 & 0\\ 0 & 0 & x_1 & x_2 & 0 & 1}}_{A_p}\C \mat{a\\b\\c\\d\\e\\f}\;.\]
@@ -103,7 +103,7 @@ Hierbei lautet das zu minimierende Funktional:
             Der sich ergebende Datenterm lautet:
             \[D(f,g)  \coloneqq  1 - \skprod{\frac{f - \bar{f}}{\norm{f-\bar{f}}_2}}{\frac{g - \bar{g}}{\norm{g-\bar{g}}_2}}\]
 
-            Diese Verfahren nennt sich \mim{Normalized Crosscorrelation} (NCC).
+            Diese Verfahren nennt sich \textbf{Normalized Crosscorrelation}\index{Normalized Crosscorrelation} (NCC).
             \item Punktweise Differenzen der Gradienten:
                 \[D(f,g)  \coloneqq  \norm{\nabla f - \nabla g}_2^2 = \int_\Omega \abs{\nabla f - \nabla g}^2 \d x\]
 

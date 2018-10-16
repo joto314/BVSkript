@@ -5,7 +5,7 @@
                 \item[Gesucht:] Version mit vielen erkennbaren Details
             \end{enumerate}
 
-            \subsection{\mim{Laplace-Schärfen}}
+            \subsection{{Laplace-Schärfen}\index{Laplace-Schärfen}}
                 Idee:
 
                 \begin{center}
@@ -86,7 +86,7 @@
                                     \draw (M-1-1) node[yshift =23] {$k=0$};
                                     \draw (M-1-2) node[yshift =23] {$k=1$};
                                     \draw (M-1-8) node[yshift =23] {$k=n$};
-                                    \draw[decorate,decoration={brace,amplitude=4pt,mirror}] (-3.3,-3) -- node[below] {\mim{Toeplitz-Matrix}} (3.5,-3);
+                                    \draw[decorate,decoration={brace,amplitude=4pt,mirror}] (-3.3,-3) -- node[below] {\textbf{Toeplitz-Matrix}\index{Toeplitz-Matrix}} (3.5,-3);
                                     \matrix [matrix of nodes, column sep=1mm, row sep=1mm,name=N,left delimiter={(},right delimiter={)},shift={(5,0)}]
                                     {
                                     {$f(0)$}\\
@@ -250,7 +250,7 @@
                     \begin{equation}
                         f(z) = \F^{-1}\left( \frac{\overline{\hat g(z)}}{(2\pi)^\frac{d}{2}|\hat g(z)|^2 + \lambda} \right) * u
                     \end{equation}
-                    Dieses Verfahren wird \mim{$L^2$ deblurring} genannt.
+                    Dieses Verfahren wird \textbf{$L^2$ deblurring}\index{$L^2$ deblurring} genannt.
                     Es gibt auch einen alternativen, algebraischen Zugang:
 
                     \[I(f) = \norm{g*f-u}_2^2 + \lambda \norm{f}_2^2 \overset{f}{\to} min\]
@@ -271,6 +271,6 @@
                         f=\F \left( \frac{\overline{\hat g(z)}}{(2\pi)^\frac{d}{2} \ |\hat g(z)|^2 + \lambda |z|^2} \right) * u
                     \end{equation}
                     $\Rightarrow$ Dämpfung höher wenn Frequenz höher.\\
-                    Dieses Verfahren nennt sich \mim{$H^1$ deblurring}.
+                    Dieses Verfahren nennt sich \textbf{$H^1$ deblurring}\index{$H^1$ deblurring}.
                 \end{enumerate}
 

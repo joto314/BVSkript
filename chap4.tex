@@ -1,11 +1,11 @@
-\section{Einfache \Index{Morphographische Operationen}}
+\section{Einfache morphologische Operationen\index{Morhpologische Operation}}
         S/W Bild:
         \begin{center}
             \begin{tikzpicture}
                 \draw (0,0) node[left] {$A=$} node[right] {\includegraphics[scale = 0.2]{Bild1.png}};
             \end{tikzpicture}
         \end{center}
-        \mim{Strukturelement}:
+        \textbf{Strukturelement}\index{Strukturelement}:
         \begin{center}
             \begin{tikzpicture}[scale = 2]
                     \draw[->] (0,-1) -- (0,0) node {\tiny \textbullet} -- (0,1);
@@ -18,8 +18,8 @@
 
     \subsection{Verknüpfungen von A und B}
         \[A+B  \coloneqq  \{a + b : a \in A, b \in B\}\]
-        Diese wird \mim{Dilation} genannt.
-        Anschaulich wird an jeden schwarzen Punkt des Bildes $A$ das Struktur Element $B$ gelegt.
+        Diese wird \textbf{Dilation}\index{Dilation} genannt.
+        Anschaulich wird an jeden schwarzen Punkt des Bildes $A$ das Strukturelement $B$ gelegt.
         \begin{center}
             \begin{tikzpicture}
                 \draw (0,0) node[left] {$A+B=$} node[right] {\includegraphics[scale = 0.2]{Bild1dil.png}};
@@ -34,7 +34,7 @@ imshow(I2);
         \end{lstlisting}
 
         \[A-B  \coloneqq  \{a \in A: a + B \subset A\}\]
-        Diese wird \mim{Erosion} genannt.
+        Diese wird \textbf{Erosion}\index{Erosion} genannt.
         Anschaulich werden die schwarzen Bereiche des Bildes gesucht, in die das Strukturelement hinein passt.
         \begin{center}
             \begin{tikzpicture}
@@ -51,7 +51,7 @@ imshow(I2);
         \end{lstlisting}
         Es ist schnell zu erkennen, dass $A \neq (A+B)-B$ gilt, deshalb wird eine neue Operation eingeführt:
         \[A \bullet B  \coloneqq  (A+B)-B\]
-        Dieses wird \mim{Schließen} genannt und wird etwa genutzt um Löcher, z.b. Rauschen, in einem Bild zu entfernen. Im Beispiel Bild ist zu sehen, dass das obere Fenster nicht mehr vorhanden ist.
+        Dieses wird \textbf{Schließen}\index{Schließen} genannt und wird etwa genutzt um Löcher in einem Bild zu entfernen. Im Beispiel Bild ist zu sehen, dass das obere Fenster nicht mehr vorhanden ist.
         \begin{center}
             \begin{tikzpicture}
                 \draw (0,0) node[left] {$A \bullet B=$} node[right] {\includegraphics[scale = 0.2]{Bild1close.png}};
@@ -66,11 +66,11 @@ I3=imcomplement(imerode(imcomplement(I2),se));
 imshow(I3);
         \end{lstlisting}
 
-        Es existiert auch die Umgekehrt Operation:
+        Es existiert auch die Umkehroperation:
         \[ A \circ B  \coloneqq  (A-B)+B\]
-        Diese wird \mim{Öffnen} genannt.
-
-        Diesmal mit einem neuen Beispiel:
+        Diese wird \textbf{Öffnen}\index{Öffnen} genannt. Damit werden kleine Strukturen entfernt. 
+        
+        Weitere Anwendungsbeispiele zu Dilattion und Erosion:
         \begin{center}
             \begin{tikzpicture}
                 \draw (0,0) node[left] {$A=$} node[right] {\includegraphics[scale = 0.2]{Bild2.png}};
@@ -101,3 +101,5 @@ I2=imcomplement(imerode(imcomplement(I),se));
 I3=imcomplement(imerode(imcomplement(I2),se));
 imshow(I3);
         \end{lstlisting}
+
+        Viel  mehr zum Thema morphologische Operationen finden Sie in Prof.\@ Grigats Vorlesung \emph{Digitale Bildanalyse} oder in Buch von Bredies/Lorenz.

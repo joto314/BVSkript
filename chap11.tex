@@ -76,7 +76,7 @@ Für jede Funktion $f \in \Ell^1_{\loc}(\R^d)$ bildet
 \end{equation}
 ein stetiges lineares Funktional auf $\D$.
 
-Sei nun $\D'$ die Menge aller stetigen linearen Funktionale auf $\D$, also der \mim{Dualraum}. Also ist für jedes $f \in \Ell^1_{\loc}$ das Funktional $\tilde f$ aus \eqref{eq.11.1} in $\D'$.
+Sei nun $\D'$ die Menge aller stetigen linearen Funktionale auf $\D$, also der \textbf{Dualraum}\index{Dualraum}. Also ist für jedes $f \in \Ell^1_{\loc}$ das Funktional $\tilde f$ aus \eqref{eq.11.1} in $\D'$.
 
 \begin{center}
     \begin{tikzpicture}
@@ -90,7 +90,7 @@ Sei nun $\D'$ die Menge aller stetigen linearen Funktionale auf $\D$, also der \
         \draw[->] (3.2,1) -- node[above]{\small \eqref{eq.11.1} \ \ \ \ \ } (6.5,0.8) node[right] {$\tilde f$};
         \draw (9,4) node[] {\Large $\D'$};
         \draw[<-] (7.5,1.3) -- (6,-2) node[below]{reguläre Distributionen};
-        \draw[<-] (8.5,3) -- (7,5.5) node[above]{\mim{Distributionen} oder verallgemeinerte Funktionen};
+        \draw[<-] (8.5,3) -- (7,5.5) node[above]{\textbf{Distributionen}\index{Distributionen} oder verallgemeinerte Funktionen};
         \draw (-1,-1.5) node[right] {\small $\delta:\varphi \in \D \mapsto \varphi(0) \in \R$ ist etwa in  aber nicht in};
         \draw[<-] (6.3,0.3) -- (5.5,-1.5);
         \draw[<-] (5.5,0.5) -- (3.7,-1.5);
@@ -184,7 +184,7 @@ Mit \eqref{eq.11.2} ergibt sich:
     = - \tilde f (\div(\varphi)), \ \varphi \in \D^d
 \end{equation}
 
-genannt \mim{Distributioneller Gradient}. Das heißt $\tilde{\nabla f}$ ist eine lineare Abbildung von $\D^d \to \R$.
+genannt \textbf{Distributioneller Gradient}\index{Distributioneller Gradient}. Das heißt $\tilde{\nabla f}$ ist eine lineare Abbildung von $\D^d \to \R$.
 
 Die Totalvariation von $f \in \Ell^1_{\loc}$ ist die Operatornorm dieses Funktionals $\tilde{\nabla f}:(\D^d,\norm{\cdot}_\infty) \to \R$
 \begin{equation}\label{eq.11.4}
@@ -273,7 +273,7 @@ eindeutig lösbar?
         Nimmt sein Maximum \underline{nicht} an, da $f$ unstetig ist, jedoch ist $U$ kompakt.
     \end{minipage}
 
-    Wir benötigen jedoch nur die Existenz des Minimums, nicht des Maximums, daher reicht im obigen Satz die \mim{Untere Halbstetigkeit}, diese ist für ein $u_0 \in U$ erfüllt falls:
+    Wir benötigen jedoch nur die Existenz des Minimums, nicht des Maximums, daher reicht im obigen Satz die \textbf{Untere Halbstetigkeit}\index{Untere Halbstetigkeit}, diese ist für ein $u_0 \in U$ erfüllt falls:
     \[
         \forall \varepsilon > 0 \ \exists \delta > 0: J(U_\delta(u_0)) \subset \left( J(u_0) - \varepsilon, \infty \right)
     \]
@@ -283,7 +283,7 @@ eindeutig lösbar?
     \]
     Aber auch die Kompaktheit von $U$ ist nicht oft erfüllt, deshalb definieren wir:
     \[
-        S_\alpha  \coloneqq \{ u \in U : J(u) \leq \alpha \}, \quad \text{\mim{Sub-Niveaumenge} zu Niveau $\alpha$} 
+        S_\alpha  \coloneqq \{ u \in U : J(u) \leq \alpha \}, \quad \text{\textbf{Sub-Niveaumenge}\index{Sub-Niveaumenge} zu Niveau $\alpha$} 
     \]
 
     \textbf{Existenzsatz}: Sei $U$ ein metrischer Raum und $J:U \to \R$ so, dass
@@ -325,7 +325,7 @@ eindeutig lösbar?
 
         \end{minipage}
         \begin{minipage}[c]{0.65\textwidth}
-        $J:U \to \R$ heißt \mim{strengkonvex} falls $\forall u,v \in U, \ \alpha \in (0,1)$:
+            $J:U \to \R$ heißt \textbf{strengkonvex}\index{strengkonvex} falls $\forall u,v \in U, \ \alpha \in (0,1)$:
 
         \[\underbrace{J(\alpha u + (1-\alpha)v)}_{\text{\textbullet}} < \underbrace{\alpha J(u) + (1-\alpha) J(v)}_{\color{red} \text{\textbullet}} \]
     \end{minipage}

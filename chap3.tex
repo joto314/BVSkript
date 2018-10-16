@@ -4,11 +4,11 @@
         Sei $u:\Omega \to F$ ein diskretes Bild, dann heißt die Abbildung
         \[H_u : F \to \N_0\]
         \[F \ni k \mapsto \# \{x \in \Omega \mid u(x) = k\}\]
-        \mim{Histogramm} des Bildes $u$. Dieses gibt an, wie oft die Farbe $k$ im Bild vorhanden ist.\\
+        \textbf{Histogramm}\index{Histogramm} des Bildes $u$. Dieses gibt an, wie oft der Helligkeitswert $k$ im Bild $u$ vorhanden ist.\\
         Damit gilt auch:
         \[\sum_{k \in F}H_u(k)=\abs{\Omega} \text{, also die Anzahl der Pixel}.\]
         \begin{bemerkung*}
-            Manchmal betrachtet man die relative Häufigkeit $\displaystyle \tilde H_u(k) = \frac{H_u(k)}{\abs{\Omega}}$.
+            Manchmal betrachtet man die relative Häufigkeit $\widetilde H_u(k) =\displaystyle  \frac{H_u(k)}{\abs{\Omega}}$.
         \end{bemerkung*}
 
         \pa{\large Beispiel:}
@@ -35,7 +35,7 @@
             \end{tikzpicture}
         \end{center}
 
-        Für kontinuierliche Bilder wird  das allgemeinere Konzept von einem \mim{Maß} benötigt:
+        Für kontinuierliche Bilder wird  das allgemeinere Konzept des \textbf{Maßes}\index{Maß} benötigt:
         \begin{center}
             \begin{tikzpicture}
                 \draw (0,0) node[left] {$A \subset F, \ \mathcal H_u(A)  \coloneqq  \abs{u^{-1}(A)}$};
@@ -45,7 +45,7 @@
         \end{center}
 
         Zusammenhang zum vorherigen: $\displaystyle \mathcal H_u(A) = \sum_{k \in A} H_u(k)$.
-        Man sagt dann, dass $H_u$ eine \mim{Dichte} zum Maß $\mathcal H_u$ sei. Diese kann auch im kontinuierlichen Sinne existieren:
+        Man sagt dann, dass $H_u$ eine \textbf{Dichte}\index{Dichte} zum Maß $\mathcal H_u$ sei. Diese kann auch im kontinuierlichen Sinne existieren:
         \begin{center}
             \begin{tikzpicture}
                \draw[->] (0,0) -- (8,0) node[right] {$F$};
@@ -56,6 +56,7 @@
 
     \subsection{Anwendung: Kontrastverbesserung}
         \pa{Problem \& Idee:} Falls das Bild nur einen kleinen Teil von $F$ nutzt, kann der Kontrast verbessert werden, indem man das Bild auf ganz $F$ verteilt.
+    Wir nehmen an, $F = \{0,1,\dots,N\}$ mit $N \in \mathbb{N}$ (z.B.\@ $N=255$).
         \begin{center}
             \begin{tikzpicture}
                \draw[->] (0,0) node[yshift=-4, xshift = -4] {0} -- (4.2,0) node[right] {$F$};
@@ -83,10 +84,10 @@
 
         \pa{1. Idee: Kontrastdehnung}\\
         $T$ \quo{lineare} Abbildung, so dass $T(k_{min})=0$ und $T(k_{max})=N$:
-        \[T(k) = \frac{k - k_{min}}{k_{max} - k_{min}} N \text{, Kontinuierlicher Farbraum}\]
-        \[T(k) = \left[\frac{k - k_{min}}{k_{max} - k_{min}} N \right] \text{, Diskreter Farbraum}\]
+        \[T(k) = \frac{k - k_{min}}{k_{max} - k_{min}} N \text{, kontinuierlicher Farbraum}\]
+        \[T(k) = \left[\frac{k - k_{min}}{k_{max} - k_{min}} N \right] \text{, diskreter Farbraum}\]
 
-        \underline{Beispiel:}
+        \underline{Beispiel:} $k_{\min} = 20$ und $k_{\max}=102$
 
         \begin{center}
             \begin{tikzpicture}
@@ -104,21 +105,21 @@
                 \draw[->, thick, text width = 2cm] (6.5,1.5) -- node[above] {\footnotesize Lineare Transformation $T$} (7.5,1.5);
                 \draw[->] (8,0) node[yshift=-4, xshift = -4] {0} -- (13,0) node[right] {$F$};
                 \draw[->] (8,0) -- (8,3);
-                \tlbar{8.25}{0}{1}{3}{4}
+                \tlbar{8}{0}{1}{}{4}% \tlbar{8.25}{0}{1}{3}{4}
                 \tvnmark{8.75}{0}{...}
                 \tlbar{9.25}{0}{1.75}{64}{6}
                 \tvnmark{9.75}{0}{...}
-                \tlbar{10.25}{0}{1.75}{243}{10}
-                \tlbar{10.75}{-0.3}{2.75}{246}{20}
-                \tlbar{11.25}{0}{2.25}{249}{15}
-                \tlbar{11.75}{-0.3}{1.125}{252}{5}
+                \tlbar{10.75}{0}{1.75}{246}{10}
+                \tlbar{11.25}{-0.3}{2.75}{249}{20}
+                \tlbar{11.75}{0}{2.25}{252}{15}
+                \tlbar{12.4}{0}{1.125}{}{5}
                 \tvmark{12.4}{0}{255}
                 \draw[] (1.5,2.25) node[] {$\abs{\Omega}=60$};
-                \draw (10.5,-0.8) node[below] {\footnotesize $k_{min} =19, \ k_{max}=103$};
+                \draw (10.5,-0.8) ;%node[below] {\footnotesize $k_{min} =19, \ k_{max}=103$};
             \end{tikzpicture}
         \end{center}
 
-        Dieses kann jedoch schiefgehen, falls das Histogramm bereits voll ausgedehnt ist, jedoch nur wenige Punkte an den Rändern liegen.
+        Dieses brint jedoch wenig, falls das Histogramm bereits voll ausgedehnt ist.
 
         \pa{2. Idee: Nicht-lineare Kontrastdehnung}\\
             Dieses mal setzen wir $\displaystyle T(k) =\left[ \frac{N}{\abs{\Omega}} \sum_{l=0}^{k}H_u(l) \right]$ für einen diskreten Farbraum und erhalten:
@@ -143,12 +144,12 @@
         Und somit folgt, dass für den kontinuierlichen Fall $T$ durch
         \[ T(k) = \frac{N}{\abs{\Omega}} \mathcal H_u((0,k))\]
         definiert werden kann. 
-        Allgemein heißt der Prozess \mim{Histogramm - equalization}.
+        Allgemein heißt der Prozess \textbf{Histogramm - equalization}\index{Histogramm - equalization}.
     \subsection{Anwendung: SW-Konvertierung}
         Aufgabe: Graustufenbild $\to$ SW-Bild.\\
         Nützlich etwa bei Objekterkennung/Segmentierung.
 
-        Idee: Das Histogramm an einem gewissen \mim{Schwellenwert} $t$ spalten:
+        Idee: Das Histogramm an einem gewissen \textbf{Schwellenwert}\index{Schwellenwert} $t$ spalten:
 
         \begin{center}
             \begin{tikzpicture}
@@ -162,8 +163,8 @@
         \end{center}
         Also setze nun für $t \in F$:
     \begin{align*}
-    \text{schwarz} &= \left\{k \in F | k \leq t \right\} \\
-    \text{weiß} &= \left\{k \in F | k >t \right\}
+    \text{schwarz} &= \left\{k \in F \mid k \leq t \right\} \\
+    \text{weiß} &= \left\{k \in F \mid k >t \right\}
     \end{align*}
      Graustufenbild $u$ $\longrightarrow$ schwarz/weiß Bild $\tilde u$:
         \[\tilde u(x) = \begin{cases}
@@ -171,11 +172,11 @@
             1, \ u(x) \in \text{weiß}
         \end{cases} \Rightarrow \, \tilde F = \{0,1\}.\]
 
-        \pa{Methoden um diesen Schwellenwert zu wählen:}
+        \pa{Methoden um diesen Schwellenwert $t$ zu wählen:}
 
         \begin{enumerate}
-            \item \mim{Shape based Methods}:\\
-            Falls das Histogramm von $u$ \mim{bimodal} ist, also die Form:
+            \item \textbf{Shape based Methods}\index{Shape based Methods}:\\
+                Falls das Histogramm von $u$ \textbf{bimodal}\index{bimodal} ist, also die Form:
             \begin{center}
                 \begin{tikzpicture}
                     \draw[->] (0,0) -- (4,0) node[right] {$F$};
@@ -189,23 +190,23 @@
             hat, dann wähle:
             \[t \coloneqq k_{min}\]
             \[\text{oder} \ t \coloneqq  \frac{k_{max 1} + k_{max 2}}{2}\]
-            \item \mim{Otsu's Verfahren} (1979):\\
+        \item \textbf{Otsu's Verfahren}\index{Otsu's Verfahren} (1979):\\
             Vorher einige Definitionen.\\
-            Die \mim{Masse}:
+            Die \textbf{Masse}\index{Masse}:
             \[m_{\text{schwarz}}  \coloneqq  \sum_{k \,\in\, \text{schwarz}} H_u(k)\]
             \[m_{\text{weiß}}  \coloneqq  \sum_{k \,\in\, \text{weiß}} H_u(k)\]
-            Der \mim{Mittelwert}:
+            Der \textbf{Mittelwert}\index{Mittelwert}:
             \[\mu_{\text{schwarz}}  \coloneqq  \frac{\displaystyle \sum_{k \in \text{schwarz}} k \C H_u(k) }{\displaystyle \sum_{k \in \text{schwarz}}H_u(k)} = \frac{\displaystyle \sum_{k \in \text{schwarz}} k \C H_u(k) }{m_{\text{schwarz}}}\]
             \[\mu_{\text{weiß}}  \coloneqq  \frac{\displaystyle \sum_{k \in \text{weiß}} k \C H_u(k) }{\displaystyle \sum_{k \in \text{weiß}}H_u(k)} = \frac{\displaystyle \sum_{k \in \text{weiß}} k \C H_u(k) }{m_{\text{weiß}}}\]
-            Die \mim{Varianz}:
+            Die \textbf{Varianz}\index{Varianz}:
             \[\sigma^2_{\text{schwarz}} = \sum_{k \in \text{schwarz}} (k - \mu_{\text{schwarz}})^2 \C H_u(k)\]
             \[\sigma^2_{\text{weiß}} = \sum_{k \in \text{weiß}} (k - \mu_{\text{weiß}})^2 \C H_u(k)\]
             Nun lautet Otsu's Methode: $\sigma^2_{\text{schwarz}} + \sigma^2_{\text{weiß}} \overset{t}{\rightarrow} \text{min}$.
-            \item \mim{Median}:\\
+        \item \textbf{Median}\index{Median}:\\
             Wähle $t$ so, dass $m_{\text{schwarz}} = m_{\text{weiß}}$.
-            \item \mim{Isodata Algorithmus} (1970s):\\
+        \item \textbf{Isodata Algorithmus}\index{Isodata Algorithmus} (1970s):\\
             Wähle t so, dass $\displaystyle t = \frac{\mu_{\text{schwarz}} + \mu_{\text{weiß}}}{2} =: f(t)$.\\
-            Diese Gleichung ist bereits eine \mim{Fixpunktgleichung} und eine Lösung kann, etwa mit einer \mim{Fixpunktiteration} approximiert werden, das heißt $t_{n+1}  \coloneqq  f(t_n)$.
+            Diese Gleichung ist bereits eine \textbf{Fixpunktgleichung}\index{Fixpunktgleichung} und eine Lösung kann, etwa mit einer \mim{Fixpunktiteration} approximiert werden, das heißt $t_{n+1}  \coloneqq  f(t_n)$.
             \begin{center}
                 \begin{tikzpicture}%TODO fixpunkt iteration in Grafik?
                     \draw[->] (0,0) node[below] {0} -- (0,5) node[above] {y};
@@ -224,7 +225,7 @@
             \end{center}
         \end{enumerate}
 
-        \pa{Matlab code}:\\
+        \pa{Matlab Beispiel}:\\
         \begin{lstlisting}
 u=imread('liftingbody.png');
 t=greythresh(u);%uses Otsu's method

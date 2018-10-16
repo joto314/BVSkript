@@ -78,7 +78,8 @@
 \newcommand{\Index}[1]{#1\index{#1}}
 
 \newcommand{\mim}[1] {
-\underline{\textbf{#1\index{#1}}}
+%\underline{\textbf{#1\index{#1}}}
+#1\index{#1}
 }
 
 \newcommand{\C}[0]{
@@ -161,8 +162,12 @@ tabsize=3}
 %sonstige Operatoren
 \newcommand{\TV}{\operatorname{TV}}% Total Variation
 \newcommand{\loc}{\mathrm{loc}} %für Ell^1_\loc
-\newcommand{\sign}{\operatorname{sign}} %für Ell^1_\loc
-\newcommand{\supp}{\operatorname{supp}} %für Ell^1_\loc
+\newcommand{\sign}{\operatorname{sign}} %für signum
+\newcommand{\sinc}{\operatorname{sinc}} %für sinc Funktion
+\newcommand{\supp}{\operatorname{supp}} %Support
+\newcommand{\var}{\operatorname{Var}} %Varianz
+\newcommand{\Ew}{\operatorname{E}} %Erwartungswert
+\renewcommand{\epsilon}{\varepsilon} 
 
 %Konstanten 
 \newcommand{\ii}{\mathrm{i}} %imaginäre Einheit

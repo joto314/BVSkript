@@ -1,11 +1,11 @@
 \section{Entrauschen: Filter \& Co.}
     \subsection{Rauschen}
-        \mim{Rauschen}: Ungewollte Störungen in einem Bild
+    \textbf{Rauschen}\index{Rauschen}: Ungewollte Störungen in einem Bild
         \begin{enumerate}[label = \textbullet]
             \item punktweise
             \item zufällig
             \item unabhängig
-            \item additiv (bei multiplikativem Rauschen $log$ anwenden)
+            \item additiv (bei multiplikativem Rauschen $\log$ anwenden)
         \end{enumerate}
 
         Notation:
@@ -28,18 +28,18 @@
         Wie gut das entrauschte Bild $u$ das saubere Bild $f_0$ beschreibt wird durch Normen gemessen.
 	    \begin{align*}
         &\norm{f-f_0}, \text{Rauschen}\\
-        &\norm{u-f_0}, \text{\mim{Absoluter Fehler}}\\
-        &\frac{\norm{u-f_0}}{\norm{f-f_0}}, \text{\mim{Relativer Fehler} im Vergleich zum Rauschen}\\
+        &\norm{u-f_0}, \text{\textbf{Absoluter Fehler}\index{Absoluter Fehler}}\\
+        &\frac{\norm{u-f_0}}{\norm{f-f_0}}, \text{\textbf{Relativer Fehler}\index{Relativer Fehler} im Vergleich zum Rauschen}\\
         &\frac{\norm{u-f_0}}{\norm{f_0}}, \text{Relativer Fehler im Vergleich zum Signal}
         \end{align*}
 
         Typischerweise ist die gewählte Norm:
-        \[\norm{f} = \norm{f}_2 = \sqrt{\int_{\Omega} \abs{f(x)}^2 dx}\]
+        \[\norm{f} = \norm{f}_2 = \sqrt{\int_{\Omega} \abs{f(x)}^2 \d x}\]
         oder im diskreten:
         \[\norm{f}_2=\sqrt{\sum_{x \in \Omega} \abs{f(x)}^2}\]
 
-        Eng verwandt ist die \mim{Signal to noise ratio} (SNR):
-        \[log\bigl(\underbrace{\frac{\norm{f_0}_2}{\norm{u-f_0}_2}}_{\in \ [1,\infty)}\bigr) \in [0,+\infty), \text{ wobei $0$ schlecht und $+\infty$ gut ist.}\]
+        Eng verwandt ist die \textbf{Signal to noise ratio}\index{Signal to noise ratio} (SNR):
+        \[\log\bigl(\underbrace{\frac{\norm{f_0}_2}{\norm{u-f_0}_2}}_{\in \ [1,\infty)}\bigr) \in [0,+\infty), \text{ wobei $0$ schlecht und $+\infty$ gut ist.}\]
     \subsection{Glättungsfilter}
         Grundidee: (zur Vereinfachung in 1D)
         \begin{center}
@@ -93,17 +93,17 @@
 
         \begin{center}
             \begin{tikzpicture}
-                \draw (0,-0.5) node[left] {\large f:};
+                \draw (0,-0.5) node[left] {\large $f$:};
                 \draw[thick] (0.5,0) grid (6.5,-1);
-                \draw (0.5,-0.5) node {\LARGE ...};
-                \draw (6.5,-0.5) node {\LARGE ...};
+                \draw (0.5,-0.5) node {\LARGE \dots};
+                \draw (6.5,-0.5) node {\LARGE \dots};
                 \draw (1.5,0) node[above] {\dots};
-                \draw (2.5,0) node[above] {k-1};
-                \draw (3.5,0) node[above] {k};
-                \draw (4.5,0) node[above] {k+1};
+                \draw (2.5,0) node[above] {$k-1$};
+                \draw (3.5,0) node[above] {$k$};
+                \draw (4.5,0) node[above] {$k+1$};
                 \draw (5.5,0) node[above] {\dots};
-                \draw (0.5,-2.5) node {\LARGE ...};
-                \draw (6.5,-2.5) node {\LARGE ...};
+                \draw (0.5,-2.5) node {\LARGE \dots};
+                \draw (6.5,-2.5) node {\LARGE \dots};
 
                 \draw[->,red] (1.6,-1.1) -- node[left] {\tiny $\alpha$} (2.4,-1.9);
                 \draw[->,red] (2.6,-1.1) -- node[left] {\tiny $\alpha$} (3.4,-1.9);
@@ -115,17 +115,17 @@
                 \draw[->,black!40!blue] (4.4,-1.1) -- node[right, pos = 0.75] {\tiny $\gamma$} (3.6,-1.9);
                 \draw[->,black!40!blue] (5.4,-1.1) -- node[right, pos = 0.75] {\tiny $\gamma$} (4.6,-1.9);
 
-                \draw (0,-2.5) node[left] {\large u:};
+                \draw (0,-2.5) node[left] {\large $u$:};
                 \draw[thick] (0.5,-2) grid (6.5,-3);
             \end{tikzpicture}
         \end{center}
 
         \begin{center}
             \begin{tikzpicture}
-                \draw (-0.6,-0.5) node {\LARGE ...};
-                \draw (1.6,-0.5) node {\LARGE ...};
-                \draw (-1.6,-2.5) node {\LARGE ...};
-                \draw (2.6,-2.5) node {\LARGE ...};
+                \draw (-0.6,-0.5) node {\LARGE \dots};
+                \draw (1.6,-0.5) node {\LARGE  \dots};
+                \draw (-1.6,-2.5) node {\LARGE \dots};
+                \draw (2.6,-2.5) node {\LARGE  \dots};
                 \draw (0.5,0) node[above] {k};
                 \draw[thick] (-0.6,0) grid (1.6,-1);
                 \draw[->,red] (0.4,-1.1) -- node[left] {$\alpha$} (-0.5,-1.9);
@@ -136,10 +136,10 @@
         \end{center}
 
         Durch \eqref{eq:5.1} ist eine Abbildung $f \mapsto u$ gegeben, wir schreiben kurz:
-        \[u = m \boxast f, \ \text{dieses wird \mim{Korrelation} genannt.}\]
+        \[u = m \boxast f, \ \text{dieses wird \textbf{Korrelation}\index{Korrelation} genannt.}\]
         mit:
         \begin{equation}\label{eq:5.3}
-            \framebox{$\displaystyle (m \boxast f)(k) = \sum_{i \in supp(m)} m(i) f(k+i)$}
+            \framebox{$\displaystyle (m \boxast f)(k) = \sum_{i \in \supp(m)} m(i) f(k+i)$}
         \end{equation}
         und:
         \begin{center}
@@ -156,20 +156,20 @@
                 \draw (2.5,1) node[above] {\large 0};
                 \draw (3.5,1) node[above] {\large 1};
                 \draw (4.5,1) node[above] {\large \dots};
-                \draw (5,0.5) node[right] {genannt \mim{Maske}.};
+                \draw (5,0.5) node[right] {genannt \textbf{Maske}\index{Maske}.};
             \end{tikzpicture}
         \end{center}
 
         Setzt man nun $j \coloneqq  k + i$ in \eqref{eq:5.1}, so ist $i=j-k$, d.h.
         \begin{equation}\label{eq:5.4}
-            \framebox{$\displaystyle (m \boxast f)(k) = \sum_{i \in supp(m)} m(j-k) f(j)$}
+            \framebox{$\displaystyle (m \boxast f)(k) = \sum_{i \in \supp(m)} m(j-k) f(j)$}
         \end{equation}
 
-        Um die Abbildung auf den Rand anzuwenden wird das Bild gespiegelt, in 1D:
+        Um die Abbildung auf den Rand anzuwenden, wird das Bild gespiegelt, in 1D:
         \begin{center}
             \begin{tikzpicture}
                 \draw[step = 0.5] (0,0) grid (2.2,-0.5);
-                \draw (2.5,-0.25) node {\large ...};
+                \draw (2.5,-0.25) node {\large \dots};
                 \draw[step = 0.5] (2.8,0) grid (5,-0.5);
                 \draw[thick] (0,0.1) -- (0,-0.6);
                 \draw[thick] (5,0.1) -- (5,-0.6);
@@ -180,7 +180,7 @@
                 \draw[] (4.75,0.1) edge[bend left = 60, ->] (5.25,0.1);
                 \draw[] (4.25,0.1) edge[bend left = 60, ->] node[above] {\small spiegeln} (5.75,0.1);
                 \draw[step = 0.5] (0,-1) grid (2.2,-1.5);
-                \draw (2.5,-1.25) node {\large ...};
+                \draw (2.5,-1.25) node {\large \dots};
                 \draw[step = 0.5] (2.8,-1) grid (5,-1.5);
                 \draw[->] (0.25,-0.55) -- (0.25,-0.95);
                 \draw[->] (-0.25,-0.55) -- (0.15,-0.95);
@@ -192,7 +192,6 @@
         \end{center}
 
         in 2D:
-
         \begin{center}
             \begin{tikzpicture}
                 \draw[step =2, thick] (0,0) grid (6,6);
@@ -208,13 +207,13 @@
             \end{tikzpicture}
         \end{center}
 
-        Formel \eqref{eq:5.4} erinnert an die Formel der \mim{Faltung}:
+        Formel \eqref{eq:5.4} erinnert an die Formel der \textbf{Faltung}\index{Faltung}:
         \begin{equation}\label{eq:5.5}
             \framebox{$\displaystyle (g * f)(k) = \sum_{j \in \Z} g(\underbrace{k-j}_{\text{Anders als \eqref{eq:5.4}}}) \cdot f(j)$}
         \end{equation}
 
         Setzt man also $g(i)  \coloneqq  m(-i) =: \tilde m(i)$, was einer Spieglung der Maske entspricht, dann ist
-        \[m \boxast f = g * f = \tilde m * f\]
+        \[m \boxast f = g * f = \tilde m * f.\]
 
         Eigenschaften der Faltung:
         \begin{enumerate}[label=\framebox{\arabic *}]
@@ -234,9 +233,9 @@
 	Man kann zeigen (Übung): $f,g \in \ell^1 \Rightarrow f * g \in \ell^1$ und $\norm{f * g}_1 \leq \norm{f}_1 \C \norm{g}_1$.
     Wobei oft die Gleichheit gilt.
 
-    Alles gilt auch in der Kontinuierlichen Version:
-    \[L^1(\R^d)  \coloneqq  \{f:\R^d \to \R : \underbrace{\int_{\R^d}\abs{f} dx}_{ \coloneqq \norm{f}_1} < \infty\}\]
-    \[f,g \in L^1(\R^d): (g*f)(x)=\int_{\R^d}g(x-y)f(y) dy, \ y,x \in \R^d\]
+    Alles gilt auch in der kontinuierlichen Version:
+    \[\Ell^1(\R^d)  \coloneqq  \{f:\R^d \to \R : \underbrace{\int_{\R^d}\abs{f} \d x}_{ \coloneqq \norm{f}_1} < \infty\}\]
+    \[f,g \in \Ell^1(\R^d): (g*f)(x)=\int_{\R^d}g(x-y)f(y) \d y, \ y,x \in \R^d\]
 
     Beispiel für den kontinuierlichen Fall:
     \begin{center}
@@ -248,7 +247,7 @@
             \draw (5.5,0) node[below] {\small $-a$};
         \end{tikzpicture}
     \end{center}
-    Hierbei gilt $\displaystyle \int_{\R} g(x) dx = 1$
+    Hierbei gilt $\displaystyle \int_{\R} g(x) \d x = 1$
 
     \begin{center}
         \begin{tikzpicture}
@@ -256,7 +255,7 @@
         \end{tikzpicture}
     \end{center}
 
-    $g \boxast f = $ \mim{gleitendes Mittel}.\\
+    $g \boxast f = $ \textbf{gleitendes Mittel}\index{gleitendes Mittel}.\\
 
         \begin{tikzpicture}
             \draw[dotted] (0,1) node[left] {$\frac{1}{2a}$} -- (8,1);
@@ -267,7 +266,7 @@
         \end{tikzpicture}
 
     Weitere Eigenschaften der Faltung:\\
-    Für alle $f,g \in L^1$ or $\ell ^1$
+    Für alle $f,g \in \Ell^1$ or $\ell ^1$
     \begin{equation*}
         \left.\begin{aligned}
             (g_1 + g_2) * f = (g_1 * f) + (g_2 * g)\\
@@ -278,15 +277,15 @@
     \[g \mapsto f * g\]
     ein linearer Operator.
 
-    Formt $\ell^1$ bzw. $L^1$ eine Algebra mit neutralem Element $\delta$?
+    Formt $\ell^1$ bzw. $\Ell^1$ eine Algebra mit neutralem Element $\delta$?
 
     $\ell^1$?:
     \begin{center}
         \begin{tikzpicture}
             \draw (0,-0.5) node[left] {\large $\delta$:};
             \draw[thick] (0.5,0) grid (6.5,-1);
-            \draw (0.5,-0.5) node {\LARGE ...};
-            \draw (6.5,-0.5) node {\LARGE ...};
+            \draw (0.5,-0.5) node {\LARGE \dots};
+            \draw (6.5,-0.5) node {\LARGE \dots};
             \draw (1.5,-0.5) node {\LARGE 0};
             \draw (2.5,-0.5) node {\LARGE 0};
             \draw (3.5,-0.5) node {\LARGE 1};
@@ -297,12 +296,12 @@
     \end{center}
     Ja!
 
-    $L^1$?:
+    $\Ell^1$?:
     Für ein solches Element muss gelten:\\
-    $\forall f \in L^1 : d * f = f$\\
-    $\forall x \in \R :\displaystyle \int_{\R^d} \underbrace{\delta(x-y)}_{=0 \forall x \neq y} f(y) dy = f(x)$
+    $\forall f \in \Ell^1 : d * f = f$\\
+    $\forall x \in \R :\displaystyle \int_{\R^d} \underbrace{\delta(x-y)}_{=0 \forall x \neq y} f(y) \d y = f(x)$
 
-    Diese Funktion wird \mim{Dirac-Impuls} genannt ist aber kein Element von $L^1$.
+    Diese Funktion wird \textbf{Dirac-Impuls}\index{Dirac-Impuls} genannt ist aber kein Element von $\Ell^1$.
 
     \pa{Nun zu Masken in 2D:}
 
@@ -319,7 +318,6 @@
     \end{equation*}
     wobei $\alpha + \beta +\gamma +\delta + \epsilon = 1$\\
     Kurzschreibweise: $u_{ij} \coloneqq u(x)$ wobei $x = \begin{pmatrix}i\\j\end{pmatrix} \in \Z^2$, analog für $f_{ij}$.
-
     \[\Rightarrow u_{ij} = \alpha f_{i-1,j} + \beta f_{i,j-i} + \gamma f_{ij} + \delta f_{i,j+1} + \epsilon f_{i+1,j}\]
 
     \begin{equation*}
@@ -368,19 +366,25 @@
             \end{tikzpicture}}
     \end{equation*}
 
-    Annahme: $f_{ij} = f_{ij} +r_{ij}$ mit $r_{ij} \sim N(0,\sigma^2)$ iid.
+    Wir nehmen an, dass $f_{ij} = f_{ij}^0 +\delta_{ij}$ gilt mit $\delta_{ij} \sim N(0,\sigma^2)$ iid (additives Gauß'sches Rauschen). 
 
-    z.z.: $Var(u_{ij}) \leq Var(f_{ij})$\\
-
-    \begin{equation*}
-        Var(f_{ij}) = E(\underbrace{f_{ij} - \overbrace{E f_{ij}}^{f^0_{ij}}}_{r_{ij}})^2 = \sigma^2
-    \end{equation*}
+    Wir wollen zeigen: $\var(u_{ij}) \leq \var(f_{ij})$
 
     \begin{align*}
-        Var(u_{ij}) &= E(u_{ij} - E u_{ij})^2 = E((1 - 4 \alpha) (\underbrace{f_{ij} - f^0_{ij}}_{r_{ij}}) + \alpha(\underbrace{(f_{i-1,j} - f^0_{i-1,j})}_{r_{i-1,j}} + ... + \underbrace{(f_{i+1,j} - f^0_{i+1,j})}_{r_{i+1,j}}))^2\\
-        &= E((1 - 4 \alpha)^2 r_{ij}^2 + \alpha^2(r_{i-1,j}^2 + r_{i,j-1}^2 +r_{i,j+1}^2 + r_{i+1,j}^2) + 2 (1 - 4 \alpha) \alpha r_{ij} r_{i-1,j}...)\\%TODO fix this mess
-        &= (1 - 4 \alpha)^2 \underbrace{E r_{i,j}^2}_{\sigma^2} + \alpha^2(E r_{i-1,j}^2 + ... + E r_{i+1,j}^2) + 2 (1 - 4 \alpha) \alpha \underbrace{E(r_{ij}r_{i-1,j})}_{\underbrace{E r_{ij} E r_{i-1,j}}_{0}} + \underbrace{...}_{0})\\
-        &=(1 - 4 \alpha)^2 \sigma^2 + \alpha^2 4 \sigma^2 = (1 - 8 \alpha + 16 \alpha ^2 + 4 \alpha^2) \sigma^2
+        \var(f_{ij}) 
+        &= \Ew(\underbrace{f_{ij} - \overbrace{E f_{ij}}^{f^0_{ij}}}_{r_{ij}})^2 
+        = \sigma^2 \\
+        %
+        \var(u_{ij}) 
+        &= \Ew(u_{ij} - \Ew u_{ij})^2  \\
+        &= \Ew\Big( (\Big( (1 - 4\alpha) (f_{ij} - \Ew f_{ij} ) \Big)  + \alpha \Big( ( f_{i - 1, j} - \Ew f_{i- 1, j}) + \cdots + (f_{i + 1, j} - \Ew f_{i + 1, j}) \Big) \Big)^2 \\
+        &= \Ew \Big( (1 - 4\alpha) \delta_{ij} + \alpha ( \delta_{i - 1, j} + \delta_{i, j - 1} + \delta_{i, j+ 1} + \delta_{i + 1, j}) \Big)^2 \\
+        &= (1 - 4\alpha)^2 \sigma^2 + 4 \alpha^2 \sigma^2 \\
+        &= (1 - 8\alpha + 20\alpha^2) \sigma^2.
+%        = \Ew((1 - 4 \alpha) (\underbrace{f_{ij} - f^0_{ij}}_{r_{ij}}) + \alpha(\underbrace{(f_{i-1,j} - f^0_{i-1,j})}_{r_{i-1,j}} + \cdots + \underbrace{(f_{i+1,j} - f^0_{i+1,j})}_{r_{i+1,j}}))^2\\
+%        &= \Ew((1 - 4 \alpha)^2 r_{ij}^2 + \alpha^2(r_{i-1,j}^2 + r_{i,j-1}^2 +r_{i,j+1}^2 + r_{i+1,j}^2) + 2 (1 - 4 \alpha) \alpha r_{ij} r_{i-1,j}\dots)\\%TODO fix this mess
+%        &= (1 - 4 \alpha)^2 \underbrace{\Ew r_{i,j}^2}_{\sigma^2} + \alpha^2(\Ew r_{i-1,j}^2 + \dots + \Ew r_{i+1,j}^2) + 2 (1 - 4 \alpha) \alpha \underbrace{\Ew(r_{ij}r_{i-1,j})}_{\underbrace{\Ew r_{ij} \Ew r_{i-1,j}}_{0}} + \underbrace{\dots}_{0})\\
+%        &=(1 - 4 \alpha)^2 \sigma^2 + \alpha^2 4 \sigma^2 = (1 - 8 \alpha + 16 \alpha ^2 + 4 \alpha^2) \sigma^2
     \end{align*}
 
     Da $0 \leq \alpha$ und $ 0 \leq 1 - 4 \alpha \Rightarrow 0 \leq \alpha \leq \frac{1}{4}$:
@@ -389,10 +393,9 @@
         (1 - 8 \alpha + 16 \alpha ^2 + 4 \alpha^2) \sigma^2 = \underbrace{1 + \underbrace{20 \alpha}_{\geq 0} (\underbrace{\alpha - \frac{2}{5}}_{< 0})}_{\leq 1}
     \end{equation*}
 
-    $\Rightarrow Var(u_{ij}) \leq Var(f_{ij})$ für $\alpha \in [0,\frac{1}{4}]$\\
+    $\Rightarrow \var(u_{ij}) \leq \var(f_{ij})$ für $\alpha \in [0,\frac{1}{4}]$\\
 
-    Dabei gilt: $Var(u_{ij}) \overset{\alpha}{\to} \text{min} \iff 1 - 8 \alpha + 20 \alpha^2 \overset{\alpha}{\to} \text{min} \iff -8 + 40 \alpha = 0 \iff \alpha = \frac{1}{5}$
-
+    Dabei gilt: $\var(u_{ij}) \overset{\alpha}{\to} \text{min} \iff 1 - 8 \alpha + 20 \alpha^2 \overset{\alpha}{\to} \text{min} \iff -8 + 40 \alpha = 0 \iff \alpha = \frac{1}{5}$
     \begin{equation*}
         \Rightarrow \text{bester Filter} : \ \raisebox{-0.9cm}{\begin{tikzpicture}[scale = 1.3]
                 \draw[step = 0.5] (0,0) grid (0.5,1.5);
@@ -407,8 +410,7 @@
 
     \subsection{Frequenzraum-filter}
         Ansatz: Rauschen = hochfrequente Anteile des Signals.\\
-        Diese können mittels der \mim{Fouriertransformation} $\mathcal F$ gezielt entfernt werden.
-
+        Diese können mittels der \textbf{Fouriertransformation}\index{Fouriertransformation} $\mathcal F$ gezielt entfernt werden.
         \begin{equation*}
             \begin{tikzpicture}[scale = 0.9]
                 \draw (0,0) rectangle (2,2);
@@ -435,39 +437,38 @@
                 \draw[thick] (12.7,0.8) -- (12.7,2.3);
                 \draw (16,1) node[] {\LARGE $u$};
                 \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (5.5,-1) -- node[below] {im Frequenzbereich} (14.5,-1);
-                \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (3,-1.5) -- node[below] {\mim{Frequenzraumfilter} (Tiefpass)} (17,-1.5);
+                \draw[decorate,decoration={brace,amplitude=2pt,mirror}] (3,-1.5) -- node[below] {\textbf{Frequenzraumfilter}\index{Frequenzraumfilter} (Tiefpass)} (17,-1.5);
             \end{tikzpicture}
     \end{equation*}
 
     Ein wichtiges Instrument ist hierbei die Fouriertransformation:
     \[\mathcal F : f \mapsto \hat f\]
     \begin{equation}
-        \boxed{\hat f(z) = \frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} f(x) e^{-i \skprod{z}{x}} dx}
+        \boxed{\hat f(z) = \frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} f(x) \e^{-\ii \skprod{z}{x}} \d x}
     \end{equation}
 
-    Wobei  $z \in \R^d, f \in L^1(\R^d)$.
+    Wobei  $z \in \R^d, f \in \Ell^1(\R^d)$.
 
-    Falls auch $\hat f \in L^1(\R^d)$ ist ,dann lässt sich $f$ wie folgt mittels der inversen Fouriertransformation aus $\hat f$ rekonstruieren:
-
+    Falls auch $\hat f \in \Ell^1(\R^d)$ ist ,dann lässt sich $f$ wie folgt mittels der inversen Fouriertransformation aus $\hat f$ rekonstruieren:
     \[\mathcal F^{-1} : \hat f \mapsto f\]
     \begin{equation}
-        \boxed{f(z) = \frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} \hat f(x) e^{i \skprod{z}{x}} dx}
+        \boxed{f(z) = \frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} \hat f(x) \e^{\ii \skprod{z}{x}} \d x}
     \end{equation}
     Wobei $x \in \R^d$.\\
 
     Man hat also $\mathcal F^{-1} \mathcal F f$, d.h.
+    \[f(x) = \frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} \left(\frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} f(y) \e^{-\ii \skprod{z}{y}} \d y\right) \e^{\ii \skprod{z}{x}} \d z\]
 
-    \[f(x) = \frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} \left(\frac{1}{(2 \pi)^\frac{d}{2}} \int_{\R^d} f(y) e^{-i \skprod{z}{y}} dy\right) e^{i \skprod{z}{x}} dz\]
-
-    Sei nun $e_z(x)  \coloneqq  e^{i \skprod{z}{x}}, \ x \in \R^d$ mit Parameter
+    Sei nun $e_z(x)  \coloneqq  \e^{\ii \skprod{z}{x}}, \ x \in \R^d$ mit Parameter
 $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
-    Also $e_z(x) = e^{i\skprod{\srmatrix{z_1\\z_2}}{\srmatrix{x_1\\x_2}}} = e^{i (z_1 x_1 +z_2 x_2)}$\\
+    Also $e_z(x) = \e^{\ii\skprod{\srmatrix{z_1\\z_2}}{\srmatrix{x_1\\x_2}}} 
+    = \e^{\ii (z_1 x_1 +z_2 x_2)}$\\
     Beispiele in $2D$:\\
     (Hier stellen die Linien, Punkte mit konstantem wert dar)
 
     \begin{minipage}[t]{0.49\linewidth}
         \begin{center}
-            $z = \srmatrix{1 \\ 0}, \  e_z(x)=e^{ix_1}$:\\
+            $z = \srmatrix{1 \\ 0}, \  \e_z(x)=\e^{\ii x_1}$:\\
             \begin{tikzpicture}
                 \draw[->] (-1.1,0) -- (4,0) node[right] {$x_1$};
                 \draw[->] (0,-1.1) -- (0,4) node[above] {$x_2$};
@@ -476,7 +477,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                 }
             \end{tikzpicture}
 
-            $z = \srmatrix{0 \\ 1}, \  e_z(x)=e^{ix_2}$:\\
+            $z = \srmatrix{0 \\ 1}, \  e_z(x)=\e^{\ii x_2}$:\\
             \begin{tikzpicture}
                 \draw[->] (-1.1,0) -- (4,0) node[right] {$x_1$};
                 \draw[->] (0,-1.1) -- (0,4) node[above] {$x_2$};
@@ -485,7 +486,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                 }
             \end{tikzpicture}
 
-            $z = \srmatrix{1 \\ 1}, \  e_z(x)=e^{i(x_1 + x_2}$:\\
+            $z = \srmatrix{1 \\ 1}, \  e_z(x)=\e^{\ii(x_1 + x_2}$:\\
             \begin{tikzpicture}
                 \draw[->] (-1.1,0) -- (4,0) node[right] {$x_1$};
                 \draw[->] (0,-1.1) -- (0,4) node[above] {$x_2$};
@@ -497,7 +498,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.49\linewidth}
-        $z = \srmatrix{2 \\ 0}, \ e_z(x)=e^{i2x_1}$:\\
+        $z = \srmatrix{2 \\ 0}, \ \e_z(x)=\e^{\ii 2x_1}$:\\
         \begin{tikzpicture}
             \draw[->] (-1.1,0) -- (4,0) node[right] {$x_1$};
             \draw[->] (0,-1.1) -- (0,4) node[above] {$x_2$};
@@ -506,7 +507,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             }
         \end{tikzpicture}
 
-        $z = \srmatrix{0 \\ 2}, \  e_z(x)=e^{i2x_2}$:\\
+        $z = \srmatrix{0 \\ 2}, \  \e_z(x)=\e^{\ii 2x_2}$:\\
         \begin{tikzpicture}
             \draw[->] (-1.1,0) -- (4,0) node[right] {$x_1$};
             \draw[->] (0,-1.1) -- (0,4) node[above] {$x_2$};
@@ -515,7 +516,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             }
         \end{tikzpicture}
 
-        $z = \srmatrix{-2 \\ 1}, \  e_z(x)=e^{i(-2x_1 + x_2)}$:\\
+        $z = \srmatrix{-2 \\ 1}, \  \e_z(x)=\e^{\ii(-2x_1 + x_2)}$:\\
         \begin{tikzpicture}
             \draw[->] (-1.1,0) -- (4,0) node[right] {$x_1$};
             \draw[->] (0,-1.1) -- (0,4) node[above] {$x_2$};
@@ -525,39 +526,38 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         \end{tikzpicture}
     \end{minipage}
 
-    $\displaystyle f \in L^2(\R^d) = \{f:\R^d \to \R | \int_{\R^d} \abs{f}^2 dx < \infty\}$ ist
+    $\displaystyle f \in \Ell^2(\R^d) = \{f:\R^d \to \R | \int_{\R^d} \abs{f}^2 \d x < \infty\}$ ist
     \begin{enumerate}[label = -]
-        \item ein normierter Raum mit $+$, $\alpha \cdot$ und $\displaystyle \norm{\cdot}_2  \coloneqq  \sqrt{\int_{\R^d} \abs{f(x)}^2 dx}$
-        \item ein Skalarproduktraum mit $\displaystyle \skprod{f}{g}  \coloneqq  \int_{\R^d} f \bar g \ dx$, wobei $\norm{f}_2^2=\skprod{f}{f}$
-        \item ein vollständiger metrischer Raum, also ein \mim{Banachraum}
+        \item ein normierter Raum mit $+$, $\alpha \cdot$ und $\displaystyle \norm{\cdot}_2  \coloneqq  \sqrt{\int_{\R^d} \abs{f(x)}^2 \d x}$
+        \item ein Skalarproduktraum mit $\displaystyle \skprod{f}{g}  \coloneqq  \int_{\R^d} f \bar g \ \d x$, wobei $\norm{f}_2^2=\skprod{f}{f}$
+        \item ein vollständiger metrischer Raum, also ein \textbf{Banachraum}\index{Banachraum}
     \end{enumerate}
-    Ein vollständiger normierter Banachraum mit Skalarprodukt heißt \mim{Hilbertraum}.
+    Ein vollständiger normierter Banachraum mit Skalarprodukt heißt \textbf{Hilbertraum}\index{Hilbertraum}.
 
-    $\mathcal F$ kann auch als Abbildung auf $L^2(\R^d)$ betrachtet werden. Dann gilt:\\
-    \[\hat f = \mathcal F f \in L^2(\R^d)\]
+    $\mathcal F$ kann auch als Abbildung auf $\Ell^2(\R^d)$ betrachtet werden. Dann gilt:\\
+    \[\hat f = \mathcal F f \in \Ell^2(\R^d)\]
     und
     \begin{equation}
-        \bigl|\bigl|{\hat f}\bigr|\bigr|_2 = \norm{f}_2
+        \| \hat f \|_2 = \norm{f}_2
     \end{equation}
     und sogar
     \begin{equation}
-        \bigl\langle{\hat f}{\hat g} \bigr\rangle_2 = \skprod{f}{g}_2
+        \skprod{\hat f}{\hat g}_2 = \skprod{f}{g}_2
     \end{equation}
-    für alle $f,g \in L^2(\R^d)$.
+    für alle $f,g \in \Ell^2(\R^d)$.
 
     Weitere Eigenschaften der Fouriertransformation:
-
     \begin{enumerate}[label = \roman *)]
-        \item $f \in L^1(\R^d) \Rightarrow \hat f$ stetig und $\underset{\abs{z} \to \infty}{lim} \hat f(z) = 0$
-        \item $\mathcal F: L^1(\R^d) \to C(\R^d)$ ist eine lineare Abbildung
-        \item $\mathcal F: L^1(\R^d) \to C(\R^d)$ ist eine beschränkte/stetige Abbildung
+        \item $f \in \Ell^1(\R^d) \Rightarrow \hat f$ stetig und $\underset{\abs{z} \to \infty}{\lim} \hat f(z) = 0$
+        \item $\mathcal F: \Ell^1(\R^d) \to \CC(\R^d)$ ist eine lineare Abbildung
+        \item $\mathcal F: \Ell^1(\R^d) \to \CC(\R^d)$ ist eine beschränkte/stetige Abbildung
         \item Verschiebung $\overset{\mathcal F}{\to}$ Modulation, d.h.
         \begin{equation*}
-            g(x) = f(x+a) \Rightarrow \hat g(z) = e^{i \skprod{a}{z}} \hat f(z)
+            g(x) = f(x+a) \Rightarrow \hat g(z) = \e^{\ii \skprod{a}{z}} \hat f(z)
         \end{equation*}
         \item Modulation $\overset{\mathcal F}{\to}$ Verschiebung, d.h.
         \begin{equation*}
-            g(x) = e^{i \skprod{x}{a}} f(x) \Rightarrow \hat g(z)= \hat f(z-a)
+            g(x) = \e^{\ii \skprod{x}{a}} f(x) \Rightarrow \hat g(z)= \hat f(z-a)
         \end{equation*}
         \item Skalierung $\overset{\mathcal F}{\to}$ inverse Skalierung, d.h.
         \begin{equation*}
@@ -567,8 +567,8 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         Folglich: $f$ reelwertig $\Rightarrow \hat f(z) = \overline{\hat f(-z)}$
         \item
         \begin{align*}
-            \text{Grundmode:} \ & \displaystyle \hat f(0) = \frac{1}{(2 \pi )^\frac{d}{2}} \int_{\R^d} f(x) dx\\
-            \text{Analog:} \ & \displaystyle f(0) = \frac{1}{(2 \pi )^\frac{d}{2}} \int_{\R^d} \hat f(x) dx
+            \text{Grundmode:} \ & \displaystyle \hat f(0) = \frac{1}{(2 \pi )^\frac{d}{2}} \int_{\R^d} f(x) \d x\\
+            \text{Analog:} \ & \displaystyle f(0) = \frac{1}{(2 \pi )^\frac{d}{2}} \int_{\R^d} \hat f(x) \d x
         \end{align*}
         \item Differentiation $\overset{\mathcal F}{\to}$ Multiplikation mit Potenzen von z, d.h.
         \begin{equation*}
@@ -626,12 +626,12 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \begin{center}
         \begin{tikzpicture}
             \draw[dotted] (-0.3,0) rectangle (-6,-7);
-            \draw (-2.5,0) node[above] {\mim{Zeitbereich}};
+            \draw (-2.5,0) node[above] {\textbf{Zeitbereich}\index{Zeitbereich}};
             \draw[dotted] (0.3,0) rectangle (6,-7);
-            \draw (2.5,0) node[above] {\mim{Frequenzbereich}};
+            \draw (2.5,0) node[above] {\textbf{Frequenzbereich}\index{Frequenzbereich}};
 
             \draw (-3,-1) node[] {$f$};
-            \draw (-2.8,-1) edge[bend right=-15,->] node[above, pos = 0.5] {$\mathcal F$} node[below, pos = 0.5] {\small $n \C log(n)$} (2.8,-1);
+            \draw (-2.8,-1) edge[bend right=-15,->] node[above, pos = 0.5] {$\mathcal F$} node[below, pos = 0.5] {\small $n \C \log(n)$} (2.8,-1);
             \draw (3,-1) node[] {$\hat f$};
             \draw[] (3,-1.5) edge[bend right=-15,->] node[right, pos = 0.5] {\small Mult. mit:} node[left, pos = 0.5] {\small $n$} (3,-5.5);
             \draw (4.05,-4) node[left] {\footnotesize $\hat g \coloneqq $};
@@ -641,12 +641,12 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                 $= \hat f \cdot \hat g \cdot (2 \pi)^{\frac{d}{2}}$\\
                 $= \widehat{f*g}$
             \end{tabular}};
-            \draw[] (2.5,-6) edge[bend right=-15,->] node[above, pos = 0.5] {\small $n \cdot log(n)$} node[below, pos = 0.5] {$\mathcal F^{-1}$} (-2.5,-6);
+            \draw[] (2.5,-6) edge[bend right=-15,->] node[above, pos = 0.5] {\small $n \cdot \log(n)$} node[below, pos = 0.5] {$\mathcal F^{-1}$} (-2.5,-6);
             \draw (-3,-6) node[] {$u$};
             \draw (-3,-6) node[left] {\small $f*g=$};
             \draw (-3,-1.5) edge[bend left=-15,->] node[right,pos = 0.5] {\small $n^2$} node[left, pos = 0.5] {\small Faltung, $*g$} (-3,-5.5);
             \draw [thick, name path = P2,->]plot [smooth, tension = 0.9]coordinates {(-2.5,-1.5) (1.5,-1.5) (1.5,-5) (-2.5,-5.5)};
-            \draw (2,-3.5) node[left] {\small $n \cdot log(n)$};
+            \draw (2,-3.5) node[left] {\small $n \cdot \log(n)$};
         \end{tikzpicture}
     \end{center}
 
@@ -661,40 +661,37 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \normalsize
     \begin{align*}
         g(x) = & \frac{1}{( 2 \pi)^{\frac{d}{2}}}(\mathcal F^{-1} \chi_{[-r,r]^d})(x)\\
-        = & \frac{1}{( 2 \pi)^{\frac{d}{2}}} \frac{1}{( 2 \pi)^{\frac{d}{2}}} \int_{\R^d} \chi_{[-r,r]^d}(z) e^{i \skprod{z}{x}} dz\\
-        (d=1) \to = & \frac{1}{2 \pi} \int_{-\infty}^{\infty} \chi_{[-r,r]}(z) e^{izx} dz = \frac{1}{2 \pi} \int_{r}^{-r} e^{izx} dz\\
-        = & \frac{1}{2 \pi}  \frac{e^{izx}}{ix} \Big|_{z=-r}^{r} = \frac{1}{2 \pi i x}\left( e^{irx} - e^{-irx} \right)\\
-        = & \frac{1}{\pi x} sin(rx) = sinc\left(\frac{rx}{\pi}\right) \cdot \frac{r}{\pi}
+        = & \frac{1}{( 2 \pi)^{\frac{d}{2}}} \frac{1}{( 2 \pi)^{\frac{d}{2}}} \int_{\R^d} \chi_{[-r,r]^d}(z) \e^{\ii \skprod{z}{x}} \d z\\
+        (d=1) \to = & \frac{1}{2 \pi} \int_{-\infty}^{\infty} \chi_{[-r,r]}(z) \e^{\ii zx} \d z = \frac{1}{2 \pi} \int_{r}^{-r} \e^{\ii zx} \d z\\
+        = & \frac{1}{2 \pi}  \frac{\e^{\ii zx}}{\ii x} \Big|_{z=-r}^{r} = \frac{1}{2 \pi \ii x}\left( \e^{\ii rx} - \e^{-\ii rx} \right)\\
+        = & \frac{1}{\pi x} \sin(rx) = \sinc\left(\frac{rx}{\pi}\right) \cdot \frac{r}{\pi}
     \end{align*}
 
-    \[\text{Wobei:\ } sinc(\varphi)=
+    \[\text{Wobei:\ } \sinc(\varphi)=
     \begin{cases}
-        \frac{sin(\pi \varphi)}{\pi \varphi} &, \varphi \neq 0\\
+        \frac{\sin(\pi \varphi)}{\pi \varphi} &, \varphi \neq 0\\
         1 &, \varphi = 0
     \end{cases}\]
 
     $g$ hat auch Masse $1$, denn mit den Eigenschaften der Fouriertransformation folgt:
-
-    \[\frac{1}{( 2 \pi)^{\frac{d}{2}}} = \hat g(0) = (\mathcal F g)(0) = \frac{1}{( 2 \pi)^{\frac{d}{2}}} \int_{R^d} g(x) \underbrace{e^{-\overbrace{\skprod{x}{0}}^0}}_1 dx = \frac{1}{( 2 \pi)^{\frac{d}{2}}} \int_{R^d} g(x) dx\]
-
-    \[\Rightarrow \int_{\R^d} g(x) dx = 1\]
+    \[\frac{1}{( 2 \pi)^{\frac{d}{2}}} = \hat g(0) = (\mathcal F g)(0) = \frac{1}{( 2 \pi)^{\frac{d}{2}}} \int_{R^d} g(x) \underbrace{\e^{-\overbrace{\skprod{x}{0}}^0}}_1 \d x = \frac{1}{( 2 \pi)^{\frac{d}{2}}} \int_{R^d} g(x) \d x\]
+    \[\Rightarrow \int_{\R^d} g(x) \d x = 1\]
 
     Für $d=2$ gilt:
-
     \begin{align*}
         g(x) = & \frac{1}{(2 \pi)^{1}}(\mathcal F^{-1} \chi_{[-r,r]^2})(x)\\
         = & \ \cdots \ (\text{Analog zu oben})\\
-        = & \frac{1}{(2 \pi)^{2}} \int_{-\infty}^\infty  \int_{-\infty}^\infty \chi_{[-r,r]^2}\left( \srmatrix{x_1\\x_2} \right) e^{i (z_1 x_1 + z_2 x_2)} dz_1 dz_2\\
-        = & \frac{1}{(2 \pi)^{2}} \int_{-r}^r \left( \int_{-r}^r e^{i z_1 x_1} e^{iz_2 x_2} dz_1 \right)dz_2\\
-        = & \underbrace{ \left(\frac{1}{2 \pi} \int_{-r}^r e^{i z_1 x_1} dz_1\right) }_{\frac{1}{\pi x_1} sin(\pi x_1)} \underbrace{ \left( \frac{1}{2 \pi} \int_{-r}^r e^{iz_2 x_2} dz_2 \right)}_{\frac{1}{\pi x_2} sin(\pi x_2)}\\
+        = & \frac{1}{(2 \pi)^{2}} \int_{-\infty}^\infty  \int_{-\infty}^\infty \chi_{[-r,r]^2}\left( \srmatrix{x_1\\x_2} \right) \e^{\ii (z_1 x_1 + z_2 x_2)} \d z_1 \d z_2\\
+        = & \frac{1}{(2 \pi)^{2}} \int_{-r}^r \left( \int_{-r}^r \e^{\ii z_1 x_1} \e^{\ii z_2 x_2} \d z_1 \right)\d z_2\\
+        = & \underbrace{ \left(\frac{1}{2 \pi} \int_{-r}^r \e^{\ii z_1 x_1} \d z_1\right) }_{\frac{1}{\pi x_1} sin(\pi x_1)} \underbrace{ \left( \frac{1}{2 \pi} \int_{-r}^r \e^{\ii z_2 x_2} \d z_2 \right)}_{\frac{1}{\pi x_2} sin(\pi x_2)}\\
     \end{align*}
 
     Es ist zu bemerken, dass $g$ eine Art Tensor Struktur besitzt, was in etwa bedeutet das sich die Funktion in beliebigen Dimensionen als Produkt der Funktion in einer Dimensionen darstellen lässt.
 
-    \mim{Gauß-Kern}:
+    \textbf{Gauß-Kern}\index{Gauß-Kern}:
     \begin{align*}
-        G(x) =& \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-\abs{x}^2}{2}} \Rightarrow G\left( \srmatrix{x_1\\\vdots\\x_d} \right) = \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-x_1^2-x_2^2 - \cdots - x_d^2}{2}}\\
-        =& \left( \frac{1}{(2 \pi)^\frac{1}{2}} e^{\frac{-x_1^2}{2}}\right) \cdot \ \cdots \ \cdot \left( \frac{1}{(2 \pi)^\frac{1}{2}} e^{\frac{-x_d^2}{2}}\right) = G(x_1) \cdot \ \cdots \ \cdot G(x_d)
+        G(x) =& \frac{1}{(2 \pi)^{\frac{d}{2}}} \e^{\frac{-\abs{x}^2}{2}} \Rightarrow G\left( \srmatrix{x_1\\\vdots\\x_d} \right) = \frac{1}{(2 \pi)^{\frac{d}{2}}} \e^{\frac{-x_1^2-x_2^2 - \cdots - x_d^2}{2}}\\
+        =& \left( \frac{1}{(2 \pi)^\frac{1}{2}} \e^{\frac{-x_1^2}{2}}\right) \cdot \ \cdots \ \cdot \left( \frac{1}{(2 \pi)^\frac{1}{2}} \e^{\frac{-x_d^2}{2}}\right) = G(x_1) \cdot \ \cdots \ \cdot G(x_d)
     \end{align*}
 
     \subsection{Filterbreite und Glättung}
@@ -714,7 +711,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         \end{tikzpicture}
     \end{center}
 
-    Im Kontinuierlichen: Sei $m \in L^1(\R^d)$ und $s > 0$.
+    Im Kontinuierlichen: Sei $m \in \Ell^1(\R^d)$ und $s > 0$.
     Setze
         \[m_s(x)  \coloneqq  \frac{1}{s^d} \ m \left(\frac{x}{s}\right), \quad x\in \R^d\]
 
@@ -739,11 +736,11 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         \end{tikzpicture}
     \end{center}
 
-    Bsp: Gauß-Kern $G(x) = \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-\abs{x}^2}{2}}$\\
+    Bsp: Gauß-Kern $G(x) = \frac{1}{(2 \pi)^{\frac{d}{2}}} \e^{\frac{-\abs{x}^2}{2}}$\\
     Skalierung mit Faktor $s > 0$
-    $$ \Rightarrow G_s(x) = \frac{1}{s^d} G\left( \frac {x} {s} \right) = \frac{1}{s^d} \frac{1}{(2 \pi)^{\frac{d}{2}}} e^{\frac{-\abs{x}}{2}} = \frac{1}{(2 \pi s^2)^{\frac{d}{2}}} e^{\frac{-\abs{x}^2}{2s^2}}$$
+    $$ \Rightarrow G_s(x) = \frac{1}{s^d} G\left( \frac {x} {s} \right) = \frac{1}{s^d} \frac{1}{(2 \pi)^{\frac{d}{2}}} \e^{\frac{-\abs{x}}{2}} = \frac{1}{(2 \pi s^2)^{\frac{d}{2}}} \e^{\frac{-\abs{x}^2}{2s^2}}$$
 
-    Skalierung $s \hat = $ Standardabweichung $\sigma$:
+    Skalierung $s$ $\hat{=}$ Standardabweichung $\sigma$:
 
     \begin{center}
         \begin{tikzpicture}
@@ -859,7 +856,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
         \hline
     \end{tabular}$.\\
     \ \\
-    \mim{Diskreter Laplace Operator}:
+    \textbf{Diskreter Laplace Operator}\index{Diskreter Laplace Operator}:
     \[\Delta = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} \widehat = \ \begin{tabular}{|c|c|c|}
         \hline
         1 & -2 & 1\\
@@ -905,7 +902,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             \draw[->] (3.1,0.5) -- node[above] {\small $m \boxast$}(3.9,0.5);
             \draw (4,0) rectangle (5,1);
             \draw (4.5,0.5) node {\small $u^{(2)}$};
-            \draw (5,0.5) node[right] {\LARGE ...};
+            \draw (5,0.5) node[right] {\LARGE \dots};
         \end{tikzpicture}
     \end{center}
     \begin{align*}
@@ -967,7 +964,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
     \begin{equation}\label{eq:5.12}
         \frac{\partial u}{\partial t} = \Delta u
     \end{equation}
-    Bekannt als \mim{Wärmegleichung} oder \mim{Diffusionsgleichung}.\\
+    Bekannt als \textbf{Wärmegleichung}\index{Wärmegleichung} oder \textbf{Diffusionsgleichung}\index{Diffusionsgleichung}.\\
     Zum Zeitpunkt $t=0$ möge die Anfangsbedingung
     \begin{equation}\label{eq:5.13}
         u(x,0)=u^{(0)}=f(x)
@@ -1011,7 +1008,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             \draw[shift={(2,0)}] (1,-4) rectangle (2,-5);
             \draw[shift={(2,0)}] (1.5,-4.5) node[] {\large $u^{(1)}$};
             \draw[->,shift={(2,0)}] (2.1,-4.5) -- node[above] {\small $m \boxast$} (2.9,-4.5);
-            \draw (6,-4.5) node[] {\LARGE ...};
+            \draw (6,-4.5) node[] {\LARGE \dots};
 
             \draw[shift={(7,0)}] (1,-4) rectangle (2,-5);
             \draw[shift={(7,0)}] (1.5,-4.5) node[] {\large $u^{(n)}$};
@@ -1031,17 +1028,14 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
       \end{cases}\]
 
       Diffusionsgleichung:
-
       \begin{equation}\label{eq.5.14}
-          \frac{\partial u}{\partial t} = \Delta u = \frac{\partial}{\partial x} \frac{\partial}{\partial x} u + \frac{\partial}{\partial y} \frac{\partial}{\partial y} u = \underbrace{\srmatrix{ \frac{\partial }{\partial x } \frac{\partial}{\partial y}}}_{div} \srmatrix{\frac{\partial}{\partial x} u \\ \frac{\partial}{\partial y} u} = div(\nabla u)
+          \frac{\partial u}{\partial t} = \Delta u = \frac{\partial}{\partial x} \frac{\partial}{\partial x} u + \frac{\partial}{\partial y} \frac{\partial}{\partial y} u = \underbrace{\srmatrix{ \frac{\partial }{\partial x } \frac{\partial}{\partial y}}}_{\div{}} \srmatrix{\frac{\partial}{\partial x} u = \frac{\partial}{\partial y} u} = \div(\nabla u)
       \end{equation}
 
-      Um diese Gleichung zu regulieren setzen wir einen \mim{Diffusionstensor} $M$ in die Gleichung \eqref{eq.5.14} in.
-
-      \[\Delta u = div(M \nabla u) = div(\srmatrix{* & * \\ * & *} \nabla u)\]
+      Um diese Gleichung zu regulieren setzen wir einen \textbf{Diffusionstensor}\index{Diffusionstensor} $M$ in die Gleichung \eqref{eq.5.14} in.
+      \[\Delta u = \div(M \nabla u) = \div(\srmatrix{* & * \\ * & *} \nabla u)\]
 
       Ansätze für $M$:
-
       \begin{enumerate}[label=\alph*)]
           \item $M=I=\srmatrix{1 & 0 \\ 0 & 1} \Rightarrow$ übliche Diffusion
           \item $M=g_{\kappa}(\norm{\nabla u(x,y)}) \C I$
@@ -1056,17 +1050,17 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
                   \draw[dotted] (0,0.75) node[left] {\small $\frac{1}{2}$} -- (1.5,0.75);
               \end{tikzpicture}
           \end{center}
-          Diese Methode geht zurück auf Perona \& Malik.
+          Diese Methode geht zurück auf Perona \& Malik (\textbf{Perona-Malik-Filter}\index{Perona-Malik-Filter} ).
           \begin{enumerate}[label=\textbullet]
               \item Kanten mit $\norm{\nabla u} < \kappa$ werden mehr geglättet
               \item Kanten mit $\norm{\nabla u} \geq \kappa$ werden weniger geglättet
           \end{enumerate}
-          Diese Art der Glättung ist \mim{Isotrop} $\widehat = $ in alle Richtungen gleich starker Fluss.
+          Diese Art der Glättung ist \textbf{Isotrop}\index{Isotrop} $\widehat = $ in alle Richtungen gleich starker Fluss.
           \item $M= \begin{pmatrix}
               g\bigl(|\frac{\partial u}{\partial x}(x,y)|\bigr) & 0 \\
               0 & g\bigl(|\frac{\partial u}{\partial y}(x,y)|\bigr)
           \end{pmatrix}$\\
-          Diese Art der Diffusionstensoren ist \mim{anisoptrop} also richtungsabhängig.\\
+          Diese Art der Diffusionstensoren ist \textbf{anisoptrop}\index{anisoptrop} also richtungsabhängig.\\
           \ \\
           Für $\x \in \Z^2$ und $\x_W = \x + \srmatrix{-1 \\ 0}$ usw.\\
           \begin{center}
@@ -1089,7 +1083,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
             0 & c_2(\x)
         \end{pmatrix} \ \text{gilt:}\]
 
-        \begin{align*}div(M \cdot \nabla u(\x)) =& \begin{pmatrix}
+        \begin{align*}\div(M \cdot \nabla u(\x)) =& \begin{pmatrix}
             \frac{\partial}{\partial x} & \frac{\partial}{\partial y}
         \end{pmatrix}
         \left[ \begin{pmatrix}
@@ -1133,21 +1127,20 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
       \end{enumerate}
 
       \[u(\x) = \frac{1}{w(\x)} \int_\Omega \underbrace{g(\x - \y)}_{a)} \underbrace{h(f(\x) - f(\y))}_{\text{neu }b)} f(\y) d\y\]
-      Heißt \mim{Bilateraler Filter}, wobei
-
+      Heißt \textbf{Bilateraler Filter}\index{Bilateraler Filter}, wobei
       \[w(\x) = \int_\Omega g(\x - \y) h(f(\x) - f(\y)) d\y\]
 
       \begin{enumerate}
           \item[Oft:] $g,h$ Gauß-Kerne ($\Rightarrow$ nichtlineare Gaußfilter)
           \item[Manchmal:] $g,h$ charakteristische Funktionen ($\Rightarrow$ SUSAN-Filter)
           \begin{enumerate}
-              \item[Effekt] Falls Höhe der Kante $>$ Filterradius $\Rightarrow$ Kante bleibt
+              \item[Effekt:] Falls Höhe der Kante $>$ Filterradius $\Rightarrow$ Kante bleibt
           \end{enumerate}
-          \item[Manchmal:] $f \overset{log}{\mapsto} log \ f \overset{\small \text{Bil. Filter}}{\mapsto} log \ u \overset{exp}{\mapsto} u$
+          \item[Manchmal:] $f \overset{\log}{\mapsto} \log \ f \overset{\small \text{Bil. Filter}}{\mapsto} \log \ u \overset{exp}{\mapsto} u$
       \end{enumerate}
       Diese Verfahren ist jedoch sehr aufwendig, denn
       \begin{enumerate}[label=\textbullet]
-          \item keine Reine Filterung ($\Rightarrow$ keine FFT-Implementierung möglich)
+          \item keine reine Filterung ($\Rightarrow$ keine FFT-Implementierung möglich)
           \item Normalisierung $w(\x)$ in jedem Punkt berechnen
       \end{enumerate}
 
@@ -1171,18 +1164,18 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
 
       Mathematische Umsetzung der Wünsche:
       \begin{enumerate}
-          \item $\displaystyle \norm{u-f}_2 = \sqrt{\int_\Omega \abs{u(\x) - f(\x)}^2 dx}$ sei klein
-          \item $\displaystyle \norm{\nabla u}_2 = \sqrt{\int_\Omega \abs{\nabla u(\x)}^2 dx} = \sqrt{\int_\Omega \left( \frac{\partial u}{\partial x} (\x) \right)^2 + \left( \frac{\partial u}{\partial y} (\x) \right)^2 d\x} $ sei klein
+          \item $\displaystyle \norm{u-f}_2 = \sqrt{\int_\Omega \abs{u(\x) - f(\x)}^2 \d x}$ sei klein
+          \item $\displaystyle \norm{\nabla u}_2 = \sqrt{\int_\Omega \abs{\nabla u(\x)}^2 \d x} = \sqrt{\int_\Omega \left( \frac{\partial u}{\partial x} (\x) \right)^2 + \left( \frac{\partial u}{\partial y} (\x) \right)^2 d\x} $ sei klein
       \end{enumerate}
 
       Kombination:
       \begin{equation}\label{eq:5.15}
           J(u)  \coloneqq  \norm{u-f}_2^2 + \lambda \norm{\nabla u}_2^2 \overset{u \in U}{\rightarrow} \text{min}
       \end{equation}
-      Für einen geeigneten Funktionen Raum $U$ und \mim{Kopplungskonstante} $\lambda > 0$.\\
+      Für einen geeigneten Funktionen Raum $U$ und \textbf{Kopplungskonstante}\index{Kopplungskonstante} $\lambda > 0$.\\
       In diesem Beispiel empfiehlt sich als Suchraum:
       \[U=\{ u : \norm{u}_2 < \infty, \ \nabla u \text{ existiert }, \ \norm{\nabla u}_2<\infty  \}=W^{1,2}\]
-      ein so genannter \mim{Sobolev-Räume}. Diese Suchproblem is jedoch $\infty$-dimensional und somit schwer zu lösen.\\
+      ein so genannter \textbf{Sobolev-Räume}\index{Sobolev-Räume}. Diese Suchproblem is jedoch $\infty$-dimensional und somit schwer zu lösen.\\
       Im obigen Ansatz \eqref{eq:5.15} stellt man fest, dass der Regularitätsterm
       \[\norm{\nabla u}_2^2 = \int_\Omega \abs{\nabla u(\x)}^2 d\x =
       \int_\Omega \left( \frac{\partial u}{\partial x} (\x) \right)^2 + \left( \frac{\partial u}{\partial y} (\x) \right)^2 d\x \]
@@ -1193,7 +1186,7 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
       \begin{equation}\label{eq:5.16}
         J(u) \coloneqq  \norm{u-f}_2^2 + \lambda \norm{\nabla u}_1 \to \ \text{min}
       \end{equation}
-      Genannt \mim{Rudin–Osher–Fatemi-Funktional} (ROF)
+      Genannt \textbf{Rudin–Osher–Fatemi-Funktional}\index{Rudin–Osher–Fatemi-Funktional} (ROF)
 
       \textbf{Allgemeiner Ansatz bei Variationsproblemen:}
 
@@ -1201,20 +1194,17 @@ $z = \srmatrix{z_1 \\ \vdots \\ z_d}$.\\
 
       Notwendiges Kriterium:\\
       Falls $J:U \to \R$ in $u \in U$ ein lokales Minimum besitzt, dann gilt für jede Richtung $v \in U$:
-
       \begin{equation}\label{eq:5.17}
-        \underset{\epsilon \nearrow 0}{lim} \frac{J(u+\epsilon v) - J(u)}{\epsilon}=0
+        \underset{\epsilon \nearrow 0}{\lim} \frac{J(u+\epsilon v) - J(u)}{\epsilon}=0
       \end{equation}
       Dies ist die Verallgemeinerte Richtungsableitung (Gateux-Ableitung).\\
 
       Häufig ist $J$ in Integralform gegeben, z.b.:
+      \[J(u)= \int_\Omega g(x,u(x),\nabla(x)) \d x.\]
+      Dann führt Bedingung \eqref{eq:5.17} auf Gleichungen für bestimmte partielle Ableitungen von $g$ und $u$, die sogenannte \textbf{Euler-Lagrange-Gleichung}\index{Euler-Lagrange-Gleichung} für \eqref{eq:5.17}.\\
+      $\Rightarrow$ partielle Differentialgleichung für $u$.
 
-      \[J(u)= \int_\Omega g(x,u(x),\nabla(x)) dx\]
-
-      Dann führt Bedingung \eqref{eq:5.17} auf Gleichungen für bestimmte partielle Ableitungen von $g$ und $u$, die sogenannte \mim{Euler-Lagrange-Gleichung} für \eqref{eq:5.17}.\\
-      $\Rightarrow$ partielle Differentialgleichung $u$.
       Fazit:
-
       \begin{center}
           \begin{tikzpicture}
               \draw (0,0) rectangle node[] {Filter} (2,1);

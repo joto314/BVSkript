@@ -1,7 +1,7 @@
     \section{Segmentierung}
 
 Dieses ist die Zerlegung eines Bildes in verschiedene Objekt.\\
-Eine einfache Methode hierfür ist das \mim{Histogramm thresholding}:
+Eine einfache Methode hierfür ist das \textbf{Histogramm thresholding}\index{Histogramm thresholding}:
 \begin{center}
   \begin{tikzpicture}
     \draw (1,0) -- (2,0) -- (2,1) -- (3,1) -- (3,0) -- (4,0) -- (4,1) -- (5.5,1) -- (5.5,0) -- (7,0);
@@ -18,7 +18,7 @@ Hierbei können jedoch diverse Probleme auftreten, die vor der Zerlegung durch p
 \begin{enumerate}
   \item[-] Entrauschen $\nearrow$ 5.7
   \item[-] Farbraum optimal ausnutzen $\nearrow$ 3.2
-  \item[-] \mim{Beleuchtungsausgleich}
+  \item[-] \textbf{Beleuchtungsausgleich}\index{Beleuchtungsausgleich}
 \end{enumerate}
 Dieser Beleuchtungsausgleich wurde noch nicht vorher besprochen, das Problem:
 
@@ -73,9 +73,9 @@ Gilt $f = u \cdot v$ (multiplikative Verknüpfung) so erhält man den obigen Fal
 \end{enumerate}
 
 \begin{enumerate}[label = \alph*)]
-  \item \mim{Lineare Regression}: \\
+    \item \textbf{Lineare Regression}\index{Lineare Regression}: \\
   \begin{minipage}[c]{0.6\linewidth}
-          \item[] Wir unterstellen, dass der Verlauf \mim{affin-linear} ist, d.h.:
+  \item[] Wir unterstellen, dass der Verlauf \textbf{affin-linear}\index{affin-linear} ist, d.h.:
           \[v(x,y) = a x + b y + c\]
           Diese Parameter $a$, $b$, $c$ gilt es nun so zu schätzen.
     \end{minipage}
@@ -105,13 +105,13 @@ Gilt $f = u \cdot v$ (multiplikative Verknüpfung) so erhält man den obigen Fal
     In Matrix Form ergibt sich:
     \[\underbrace{\mat{x_1 & y_1 & 1 \\ \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots \\ \vdots & \vdots & \vdots \\ x_n & y_n & 1}}_{A} \underbrace{\mat{a \\ b \\ c}}_{w} \approx \underbrace{\mat{f(x_1,y_1) \\ \vdots \\ \vdots \\ \vdots \\ f(x_n,y_n)}}_{z}\]
     Wir erhalten also ein lineares Ausgleichsproblem (überbestimmtes Gleichungssystem).
-    Die optimale Lösung dieses Problems kann über die \mim{Normalengleichung} berechnet werden:
+    Die optimale Lösung dieses Problems kann über die \textbf{Normalengleichung}\index{Normalengleichung} berechnet werden:
     \[A^T A w = A^T z.\]
     Daraus erhält man $w$, somit auch $a$, $b$, $c$ und schlussendlich $v \Rightarrow u = f-v$.\\
     Eventuell wird durch die Subtraktion bei $u$ der Farbraum verlassen.
     Anschließend wird daher noch ein Histogramm stretching durchgeführt, um das finale Bild zu erhalten.
 
-    \item \mim{Polynomiale Regression}:
+\item \textbf{Polynomiale Regression}\index{Polynomiale Regression}:
     Ähnlich zur linearen Regression wird hierbei keine affin-lineare Funktion, sondern ein Polynom genutzt. Für ein Polynom zweiten Grades kann etwa die Funktion
     \[v(x,y) = ax^2 by^2 cxy+ dx +ey +f\]
     gewählt werden. Wieder entsteht ein Gleichungssystem:
@@ -125,7 +125,7 @@ Gilt $f = u \cdot v$ (multiplikative Verknüpfung) so erhält man den obigen Fal
     \mat{a \\ b \\ c \\ d \\e \\ f}}_{w} 
 \approx \underbrace{\mat{f(x_1,y_1) \\ \vdots \\ \vdots \\ \vdots \\ f(x_n,y_n)}}_{z}\]
 
-  \item \mim{Trigonometrisches Polynom}:
+  \item \textbf{Trigonometrisches Polynom}\index{Trigonometrisches Polynom}:
       Hierbei wird $v$ in den niedrigfrequenten Anteilen von $f$ (großflächiger Verlauf, keine Details) gesucht.
 
   \begin{center}
@@ -236,7 +236,7 @@ Dazu sei
 \TV(v) \coloneqq \int_\Omega \abs{\nabla v(x)} \d x
 \end{equation}
 
-die sogennate \mim{Totalvariation} einer Funktion $v$ auf $\Omega$.
+die sogennate \textbf{Totalvariation}\index{Totalvariation} einer Funktion $v$ auf $\Omega$.
 
 Illustration in 1D:
 \begin{center}
@@ -335,7 +335,7 @@ Wie im letzten Abschnitt \ref{eq.9.2} soll nun noch die Segmentierung sehr klein
 \widetilde J(v,\Gamma)  \coloneqq  \norm{u-v}_{2,\Gamma}^2 + \lambda \norm{\nabla v}_{2,\Omega \backslash \Gamma}^2 + \mu \ \text{Länge}(\Gamma) \to \min
 \end{equation*}
 
-Dieses wird \mim{Mumford-Shah-Funktional} (1989) genannt.
+Dieses wird \textbf{Mumford-Shah-Funktional}\index{Mumford-Shah-Funktional} (1989) genannt.
 \begin{enumerate}
 \item[$\lambda$] bestimmt die \quo{Flachheit} von $v$ auf $\Omega \backslash \Gamma$
 \item[$\mu$] ist proportional zur Größe der kleinsten zu segmentierenden Struktur.

@@ -37,7 +37,7 @@
                     \end{tabular}$};
                     \draw[->] (6.7,1.7) -- node[below] {Differenzieren} (8.7,1.7);
                     \draw[<->] (8.8,3.2) -- node[right] {Glättung} (8.8,1.7);
-                    \draw (7.7,3.2) node[above] {\mim{Prewitt-Filter}:};
+                    \draw (7.7,3.2) node[above] {\textbf{Prewitt-Filter}\index{Prewitt-Filter}:};
                 \end{tikzpicture}
             \end{center}
 
@@ -58,7 +58,7 @@
             \hline
             -1 & 0 & 1\\
             \hline
-            \end{tabular}=:D_x$, genannt \mim{Sobel-Filter}.
+        \end{tabular}=:D_x$, genannt \textbf{Sobel-Filter}\index{Sobel-Filter}.
             Eine stärkere Glättung kann mittels anderer vertikaler Filter mit Binomialkoeffizienten erzielt werden.\\
 
             Entsprechen wird $\frac{\partial }{\partial y} D_y \coloneqq D_x^T$ definiert.\\
@@ -72,7 +72,7 @@
             Ein typischer Algorithmus kann etwa folgende Form annehmen:
             \begin{enumerate}
                 \item Gradienten mittels Prewitt oder Sobel approximieren und Richtung auf Vielfache von $45^\circ$ runden.
-                \item \mim{Non-maximum suppression} (edge thinning). Da es potentiell viele Punkte mit hoher Steigung gibt kann es dazu kommen, dass Kanten sehr breit werden, dieses wird durch das edge thinning verhindert.
+                \item \textbf{Non-maximum suppression}\index{Non-maximum suppression} (edge thinning). Da es potentiell viele Punkte mit hoher Steigung gibt kann es dazu kommen, dass Kanten sehr breit werden, dieses wird durch das edge thinning verhindert.
 
             \begin{center}
                 \begin{tikzpicture}
@@ -101,10 +101,10 @@
             \end{center}
             wobei $t_1, \ t_2$ thresholds sind.\\
             $\x$ ist also ein Kantenpunkt, falls $\abs{\nabla u(\x)} \geq t_2$ oder $\left( \abs{\nabla u(\x)} \in [t_1,t_2] \text{ und $\x$ ist Nachbar eines Kantenpunktes}  \right)$.
-            Dieses wird \mim{hysteresis thresholding} genannt und verhindert \mim{Abreißen} von Kantenzügen.
+            Dieses wird \textbf{hysteresis thresholding}\index{hysteresis thresholding} genannt und verhindert \textbf{Abreißen}\index{Abreißen} von Kantenzügen.
             \end{enumerate}
 
-            Die am häufigsten verbreitete Version von 1) -3) ist der \mim{Canny-Algorithmus} (1986).
+            Die am häufigsten verbreitete Version von 1) -3) ist der \textbf{Canny-Algorithmus}\index{Canny-Algorithmus} (1986).
 
             Matlab:
             \begin{lstlisting}
@@ -184,7 +184,7 @@
                 \end{tikzpicture}
             \end{center}
 
-            Dieses wird \mim{Laplacian of Gaußian method} genannt.\\
+            Dieses wird \textbf{Laplacian of Gaußian method}\index{Laplacian of Gaußian method} genannt.\\
             Matlab:
             \begin{lstlisting}
                 BWimg=edge(u,'log',thresh,sigma);

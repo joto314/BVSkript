@@ -1,7 +1,7 @@
 \section{Was ist ein Bild?}
     \subsection{Definition}
         \begin{minipage}[t]{0.45\linewidth}
-            \mtitle{\underline{Digitale/diskrete Sicht}}
+            \mtitle{\underline{digitale/diskrete Sicht}}
             \begin{center}
                 \begin{tikzpicture}
                     \fill[black!30!white] (1,2) rectangle (1.5,2.5);
@@ -14,7 +14,7 @@
         \end{minipage}
         \hfill\vrule\hfill
         \begin{minipage}[t]{0.45\linewidth}
-            \mtitle{\underline{Kontinuierlich/analoge Sicht}}
+            \mtitle{\underline{kontinuierlich/analoge Sicht}}
             \begin{center}
                 \begin{tikzpicture}
                     \draw[thick,->] (0,0) -- (3,0) ;%node[anchor=west] {X};
@@ -44,12 +44,12 @@
         \end{minipage}
 
         \begin{definition*}
-            Ein \mim{Bild} ist eine Funktion $u: \Omega \to F$, wobei $\Omega \subset \mathbb Z^d$ (im diskreten Fall) oder $\Omega \subset \mathbb R^d$ (im kontinuierlichen Fall).
+            Ein \textbf{Bild}\index{Bild} ist eine Funktion $u: \Omega \to F$, wobei $\Omega \subset \mathbb Z^d$ (im diskreten Fall) oder $\Omega \subset \mathbb R^d$ (im kontinuierlichen Fall).
             \begin{enumerate}
                 \item[$d=2$:] Typisches 2D Bild
                 \item[$d=3$:] 3D-Bild bzw. "Körper" \ \underline{oder} Video: 2D Ort + Zeit
             \end{enumerate}
-            F ist der \mim{Farbraum}, Beispiele:
+            F ist der \textbf{Farbraum}\index{Farbraum}, Beispiele:
             \begin{enumerate}[label=\textbullet]
                 \item F$=[0,1]$ oder F=$\{0,1,..., 255\}$, Graustufen
                 \item F$=\{0,1\}$ schwarz/weiß
@@ -58,7 +58,7 @@
         \end{definition*}
     \subsection{Umwandlung}
 
-        \pa{Kontinuierlich $\to$ Diskret:}\\
+        \pa{kontinuierlich $\to$ diskret:}\\
             \begin{minipage}[t]{0.4\linewidth}
                 \
                 \begin{center}
@@ -118,7 +118,7 @@
                     \begin{center}
                         \begin{enumerate}
                             \item[1.] Idee: Jeder Punkt der Box $B_i$ erhält den Funktionswert von $B_i$ als Farbwert\\
-                            $\Rightarrow$ \mim{Nearest neighbour Interpolation}.
+                                $\Rightarrow$ \textbf{Nearest neighbour Interpolation}\index{Nearest neighbour Interpolation}.
                             \item[2.] Idee: Mittelpunkt von Box $B_i$ erhält den Wert von Pixel $B_i$ sonst wird interpoliert.\\
                             Grauwert $g \coloneqq $ Gewichtetes Mittel aus Grauwerten $a,b,c,d$.\\
                         \end{enumerate}
@@ -148,7 +148,7 @@
                             \end{center}
 
                             \small{$g=(1-\alpha)  (1-\beta)  a + \alpha  (1- \beta)  b + (1-\alpha)  \beta  c + \alpha  \beta  d$}\\
-                            Dieses wird \mim{Bilineare Interpolation} genannt.
+                            Dieses wird \textbf{Bilineare Interpolation}\index{Bilineare Interpolation} genannt.
                     \end{center}
                 \end{minipage}
 
@@ -156,7 +156,7 @@
         \begin{center}
             \begin{tikzpicture}%TODO redo
                 \draw (0,0.1) -- node[anchor=center] {\tiny \textbullet} node[anchor=north] {\tiny $0$} (3,0.1);
-                \draw  (4,0.1) node  {$\overset{\text{\footnotesize um $\alpha$ drehen}}{\Rightarrow}$};
+                \draw  (4,0.1) node  {$\overset{\text{\footnotesize um $\alpha$ drehen}}{\implies}$};
                 \draw (6.5,0.1) -- ++(30:1.5);
                 \draw (6.5,0.1) node[anchor=center] {\tiny \textbullet} node[anchor=north] {\tiny $0$} -- ++(210:1.5);
                 \draw[dotted] (5,0.1) -- (8,0.1);
@@ -165,14 +165,14 @@
         \end{center}
 
         \pa{1. Fall, kontinuierliches Bild}\\
-            Sei $u$ das alte Bild und $v$ das neue Bild, dann ist die Drehung gegeben durch eine \mim{Drehmatrix}:
+        Sei $u$ das alte Bild und $v$ das neue Bild, dann ist die Drehung gegeben durch eine \textbf{Drehmatrix}\index{Drehmatrix}:
 
-            \[D_\varphi \in \R^{d \times d}, D_\varphi=\mat{\cos(\varphi) \ -\sin(\varphi) \\ \sin(\varphi) \ \cos(\varphi)}\]
+            \[D_\varphi \in \R^{2 \times 2}, D_\varphi=\mat{\cos(\varphi) \ -\sin(\varphi) \\ \sin(\varphi) \ \cos(\varphi)}\]
 
-            Damit folgt, dass $D(u)= D_\varphi \Omega$ und $v(x)=u(\underbrace{D_\varphi^{-1}x}_{\in \Omega}) = u(D_{-\varphi}x)$. ($D(u)$ ist die \mim{Domain} von $u$)
+            Damit folgt, dass $D(u)= D_\varphi \Omega$ und $v(x)=u(\underbrace{D_\varphi^{-1}x}_{\in \Omega}) = u(D_{-\varphi}x)$. ($D(u)$ ist die \textbf{Domain}\index{Domain} von $u$)
 
         \pa{2. Fall, diskretes Bild}\\
-            Dieses ist problematisch, denn i.A. $x \in \Z^d$, aber $D_\varphi x \not \in \Z^d$.
+        Dieses ist problematisch, denn i.A.\@ $D_{-\varphi} x \not \in \Z^2$ für $x \in \Z^2$.
 
             \begin{center}
                 \begin{tikzpicture}
@@ -203,7 +203,7 @@
                 \end{tikzpicture}
             \end{center}
 
-            Weiterhin ist $v(x)=u(D_\varphi^{-1} x)$, wobei der konkrete Wert durch Interpolation bestimmt wird.
+            In beiden Fällen: Lasse $x$ durch die Domain von $v$ laufen und setze $v(x) \coloneqq u(D_\varphi^{-1} x)$, wobei der konkrete Wert durch Interpolation bestimmt wird.
 
             \begin{center}
                 \begin{tikzpicture}
